@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SqlSettings>
+  <Sql serverip="192.168.1.100" dataname="TDSdb" userid="sa" password="377820AEEF795E7CBA8058774F57A425">
+  </Sql>
+</SqlSettings>

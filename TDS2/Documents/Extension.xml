@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Extension>
+  <Dst app="C:\Program Files (x86)\Dstviewer\Dstviewer v4.0.exe" relation="true"></Dst>
+  <Emb app="C:\Program Files\WILCOM E3.0 TS\BIN\TrueSizer.EXE" relation="true"></Emb>
+  <Jpg app="C:\Program Files (x86)\ACD Systems\ACDSee\12.0\ACDSee12.exe" relation="true"></Jpg>
+  <Ai app="C:\Program Files\Adobe\Adobe Illustrator CC 2019\Support Files\Contents\Windows\Illustrator.exe" relation="true"></Ai>
+</Extension>
