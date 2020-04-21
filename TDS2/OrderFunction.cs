@@ -13,92 +13,360 @@ namespace TDS2
         public static Order Row2Order(DataRow oldDataRow)
         {
             Order order = new Order();
+
+            ///
+
             order.OrderName = Convert.ToString(oldDataRow["sTape"]);// 订单号
+
+            ///
+
             try { order.OrderInTime = Convert.ToDateTime(oldDataRow["T_in_time"]); }// 接单时间（TB）,,,,,,有些InTime有年月日有些没有
             catch { order.OrderInTime = null; }
+
+            ///
+
             order.OrderInYear = Convert.ToString(oldDataRow["sYear"]);// 接单年
+
+            ///
+
             order.OrderInMonth = Convert.ToString(oldDataRow["sMonth"]);// 接单月
+
+            ///
+
             order.OrderInDay = Convert.ToString(oldDataRow["sDate"]);// 接单日
+
+            ///
+
             order.OrderCustomer = Convert.ToString(oldDataRow["Code"]);// 客户
-            string OrderClass = Convert.ToString(oldDataRow["Mode"]);// 订单类型
-            if (OrderClass == "O") order.OrderClass = "新带";
-            else if (OrderClass == "E") order.OrderClass = "收费改带";
-            else if (OrderClass == "F") order.OrderClass = "免费改带";
-            else if (OrderClass == "Q") order.OrderClass = "估针";
-            else if (OrderClass == "T") order.OrderClass = "试打版";
-            else if (OrderClass == "C") order.OrderClass = "已取消";
-            else if (OrderClass == "W") order.OrderClass = "等回复";
-            else if (OrderClass == "AO") order.OrderClass = "矢量新图";
-            else if (OrderClass == "AQ") order.OrderClass = "矢量报价";
-            string OrderUrgency = Convert.ToString(oldDataRow["Urgency"]);// 度急度
-            if (OrderUrgency == "Rush Editing") order.OrderUrgency = "0.5小时内";// 订单类型 急改带
-            else if (OrderUrgency == "Editing") order.OrderUrgency = "1小时内";// 订单类型 改带
-            else if (OrderUrgency == "Quote") order.OrderUrgency = "1小时内";// 订单类型 估针
-            else if (OrderUrgency == "Super Rush") order.OrderUrgency = "1小时内";// 订单类型 特急带
-            else if (OrderUrgency == "Rush") order.OrderUrgency = "5小时内";// 订单类型 急带
-            else if (OrderUrgency == "5PM") order.OrderUrgency = "17:00时前";// 订单类型 一般
-            else if (OrderUrgency == "24 hours") order.OrderUrgency = "24小时内";// 订单类型 正常
+
+            ///
+
+            switch (Convert.ToString(oldDataRow["Mode"])) // 订单类型
+            {
+                case "O":
+                    {
+                        order.OrderClass = "新带";
+                        break;
+                    }
+                case "E":
+                    {
+                        order.OrderClass = "收费改带";
+                        break;
+                    }
+                case "F":
+                    {
+                        order.OrderClass = "免费改带";
+                        break;
+                    }
+                case "Q":
+                    {
+                        order.OrderClass = "估针";
+                        break;
+                    }
+                case "T":
+                    {
+                        order.OrderClass = "试打版";
+                        break;
+                    }
+                case "C":
+                    {
+                        order.OrderClass = "已取消";
+                        break;
+                    }
+                case "W":
+                    {
+                        order.OrderClass = "等回复";
+                        break;
+                    }
+                case "AO":
+                    {
+                        order.OrderClass = "矢量新图";
+                        break;
+                    }
+                case "AQ":
+                    {
+                        order.OrderClass = "矢量报价";
+                        break;
+                    }
+                default:
+                    {
+                        order.OrderClass = "订单类型字段错误";
+                        break;
+                    }
+            }
+
+            ///
+
+            switch (Convert.ToString(oldDataRow["Urgency"]))// 紧急度
+            {
+                case "Rush Editing":// 订单类型 急改带
+                    {
+                        order.OrderUrgency = "0.5小时内";
+                        break;
+                    }
+                case "Editing":// 订单类型 改带
+                    {
+                        order.OrderUrgency = "1小时内";
+                        break;
+                    }
+                case "Quote":// 订单类型 估针
+                    {
+                        order.OrderUrgency = "1小时内";
+                        break;
+                    }
+                case "Super Rush":// 订单类型 特急带
+                    {
+                        order.OrderUrgency = "1小时内";
+                        break;
+                    }
+                case "Rush":// 订单类型 急带
+                    {
+                        order.OrderUrgency = "5小时内";
+                        break;
+                    }
+                case "5PM":// 订单类型 一般
+                    {
+                        order.OrderUrgency = "17:00时前";
+                        break;
+                    }
+                case "24 hours":// 订单类型 正常
+                    {
+                        order.OrderUrgency = "24小时内";
+                        break;
+                    }
+                default:
+                    {
+                        order.OrderUrgency = "紧急度字段错误";
+                        break;
+                    }
+            }
+
+            ///
+
             try { order.OrderLatestReturnTime = Convert.ToDateTime(oldDataRow["RNT"]); }// 订单在此时间内返回
             catch { order.OrderLatestReturnTime = null; }
+
+            ///
+
             order.OrderComputer = Convert.ToString(oldDataRow["Mark_pc"]).Replace("_Computer", "");// 订单电脑区域
+
+            ///
+
             order.OrderDifficulty = Convert.ToString(oldDataRow["Class"]);// 打版难度
+
+            ///
+
             order.OrderReturnFormat = Convert.ToString(oldDataRow["DS"]);// 返回文件格式
+
+            ///
+
             try { order.OrderLastModiTime = Convert.ToDateTime(oldDataRow["Last_modi_time"]); }// 订单最后修改时间
             catch { order.OrderLastModiTime = null; }
+
+            ///
+
             try { order.OrderTimeSpent = Convert.ToDouble(oldDataRow["TimeSpent"]); }// 订单接发总用时
             catch { order.OrderTimeSpent = 0; }
+
+            ///
+
             try { order.OrderQuantity = Convert.ToInt32(oldDataRow["Quantity"]); }// 订单包含的版带数量
             catch { order.OrderQuantity = 1; }
+
+            ///
+
             order.OrderDescription = Convert.ToString(oldDataRow["Description"]);// 订单描述
+
+            ///
+
             order.NrInQC = Convert.ToString(oldDataRow["InQC"]).ToUpper();// 接带人员
-            string NrInShift = Convert.ToString(oldDataRow["In_Shift"]).ToUpper();// 接带班次
-            if (NrInShift == "A") order.NrInShift = "中";
-            else if (NrInShift == "M") order.NrInShift = "早";
-            else if (NrInShift == "E") order.NrInShift = "晚";
-            else order.NrInShift = "";
+
+            ///
+
+            switch (Convert.ToString(oldDataRow["In_Shift"]).ToUpper())// 接带班次
+            {
+                case "A":
+                    {
+                        order.NrInShift = "中";
+                        break;
+                    }
+                case "M":
+                    {
+                        order.NrInShift = "早";
+                        break;
+                    }
+                case "E":
+                    {
+                        order.NrInShift = "晚";
+                        break;
+                    }
+                default:
+                    {
+                        order.NrInShift = "班次字段错误";
+                        break;
+                    }
+            }
+
+            ///
+
             order.NrInComputer = Convert.ToString(oldDataRow["CD"]);// 接带计算机
+
+            ///
+
             order.NrInTime = Convert.ToDateTime(oldDataRow["Record_in_time"]);// 接带时间
+
+            ///
+
             order.EmbManager = Convert.ToString(oldDataRow["Manager"]).ToUpper();// 分带人员
+
+            ///
+
             order.EmbClass = Convert.ToString(oldDataRow["OrderType"]);// 图案风格
+
+            ///
+
             order.EmbVersion = Convert.ToString(oldDataRow["V"]);// 版带版本
+
+            ///
+
             order.EmbEditVersion = Convert.ToString(oldDataRow["Editfrom"]);// 改带利用版本
+
+            ///
+
             order.EmbZ = Convert.ToString(oldDataRow["Z"]).ToUpper();// 打版人员
-            if(order.EmbZ=="空") order.EmbZ="";
+            if (order.EmbZ=="空") order.EmbZ="";
+
+            ///
+
             order.EmbOriginalZ = Convert.ToString(oldDataRow["OZ"]).ToUpper();// 原打版人员
-            string EmbZShift = Convert.ToString(oldDataRow["Z_Shift"]).ToUpper();// 打版班次
-            if (EmbZShift == "A") order.EmbZShift = "中";
-            else if (EmbZShift == "M") order.EmbZShift = "早";
-            else if (EmbZShift == "E") order.EmbZShift = "晚";
-            else order.EmbZShift = "";
+            if (order.EmbOriginalZ == "空") order.EmbOriginalZ = "";
+
+            ///
+
+            switch (Convert.ToString(oldDataRow["Z_Shift"]).ToUpper())// 接带班次
+            {
+                case "A":
+                    {
+                        order.EmbZShift = "中";
+                        break;
+                    }
+                case "M":
+                    {
+                        order.EmbZShift = "早";
+                        break;
+                    }
+                case "E":
+                    {
+                        order.EmbZShift = "晚";
+                        break;
+                    }
+                default:
+                    {
+                        order.EmbZShift = "班次字段错误";
+                        break;
+                    }
+            }
+            
+            ///
+
             try { order.EmbZStartTime = Convert.ToDateTime(oldDataRow["Z_time1"]); }// 打版开始时间
             catch { order.EmbZStartTime = null; }
+
+            ///
+
             try { order.EmbZEndTime = Convert.ToDateTime(oldDataRow["Z_time2"]); }// 打版完成时间
             catch { order.EmbZEndTime = null; }
+
+            ///
+
             try { order.EmbZCount = Convert.ToInt32(oldDataRow["ZS_H"]); }// 打版师针数
             catch { order.EmbZCount = 0; }
+
+            ///
+
             try { order.EmbCount = Convert.ToInt32(oldDataRow["RealS_W"]); }// 总针数
             catch { order.EmbCount = 0; }
+
+            ///
+
             try { order.EmbChargesCount = Convert.ToInt32(oldDataRow["ChargeS"]); }// 收费针数
             catch { order.EmbChargesCount = 0; }
-            if (Convert.ToString(oldDataRow["Sewout"]) == "yes") order.EmbSewout = true; else order.EmbSewout = false;// 是否车版
+
+            ///
+
+            order.EmbSewout = Convert.ToString(oldDataRow["Sewout"]) == "yes";// 是否车版
+
+            ///
+
             order.EmbE = Convert.ToString(oldDataRow["E"]).ToUpper();// 车版人员
+
+            ///
+
             try { order.EmbEEndTime = Convert.ToDateTime(oldDataRow["E_time"]); }// 车版完成时间
             catch { order.EmbEEndTime = null; }
+
+            ///
+
             order.EmbSewingMachine = Convert.ToString(oldDataRow["EM"]);// 车版机器编号
+
+            ///
+
             order.EmbQi = Convert.ToString(oldDataRow["QI"]).ToUpper();// 质检人员
+
+            ///
+
             order.EmbQualityLevel = Convert.ToString(oldDataRow["QualityProblemLevel"]);// 打版质量问题等级
+
+            ///
+
             order.EmbReSewoutCount = Convert.ToInt16(oldDataRow["RevisionCount"]);// 重新车版次数
+
+            ///
+
             order.EmbScaner = Convert.ToString(oldDataRow["OA"]).ToUpper();// 扫描人员
+
+            ///
+
             try { order.EmbScanerTime = Convert.ToDateTime(oldDataRow["OA_time"]); }// 扫描完成时间
             catch { order.EmbScanerTime = null; }
+
+            ///
+
             order.NrOutQc = Convert.ToString(oldDataRow["OutQC"]).ToUpper();// 发带人员
-            string NrOutShift = Convert.ToString(oldDataRow["Out_shift"]).ToUpper();// 发带班次
-            if (NrOutShift == "A") order.NrOutShift = "中";
-            else if (NrOutShift == "M") order.NrOutShift = "早";
-            else if (NrOutShift == "E") order.NrOutShift = "晚";
-            else order.NrOutShift = "";
+
+            ///
+            
+            switch (Convert.ToString(oldDataRow["Out_shift"]).ToUpper())// 接带班次
+            {
+                case "A":
+                    {
+                        order.NrOutShift = "中";
+                        break;
+                    }
+                case "M":
+                    {
+                        order.NrOutShift = "早";
+                        break;
+                    }
+                case "E":
+                    {
+                        order.NrOutShift = "晚";
+                        break;
+                    }
+                default:
+                    {
+                        order.NrOutShift = "班次字段错误";
+                        break;
+                    }
+            }
+
+            ///
+
             try { order.NrOutTime = Convert.ToDateTime(oldDataRow["Record_out_time"]); }// 发带时间
             catch { order.NrOutTime = null; }
+
+            ///
+
             return order;
         }
 

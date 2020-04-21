@@ -7,19 +7,41 @@ using System.Xml;
 
 namespace TDS2
 {
-    /// <summary>
-    /// 程序更新
-    /// </summary>
-    static class AppUpdata
-    {
+    class AppSettings
+    { 
         /// <summary>
-        /// 获取Url
+       /// 更新地址
+       /// </summary>
+        private string updataUrl;
+        /// <summary>
+        /// 更新地址
         /// </summary>
-        public static string GetUrl()
+        public string UpdataUrl
+        {
+            get { return updataUrl; }
+            set { updataUrl = value; }
+        }
+
+        /// <summary>
+        /// 是否自动更新
+        /// </summary>
+        private bool updataAuto;
+        /// <summary>
+        /// 是否自动更新
+        /// </summary>
+        public bool UpdataAuto
+        {
+            get { return updataAuto; }
+            set { updataAuto = value; }
+        }
+
+        /// <summary>
+        /// 获取AppSettings对象
+        /// </summary>
+        public AppSettings()
         {
             try
             {
-                string url;
                 XmlDocument xml = new XmlDocument();
                 xml.Load(@"Documents\Settings.xml");
                 XmlNode xmlnode = xml.DocumentElement;// 获得根节点
@@ -27,38 +49,39 @@ namespace TDS2
                 {
                     foreach (XmlNode node in xmlnode.ChildNodes)
                     {
-                        if (node.Name == "AppUpdata")// 在根节点中寻找节点
+                        switch (node.Name)
                         {
-                            url = node.Attributes["url"].Value;
-                            return url;
+                            case "AppUpdata":// 在根节点中寻找节点
+                                {
+                                    updataUrl = node.Attributes["url"].Value;
+                                    updataAuto = Convert.ToBoolean(node.Attributes["auto"].Value);
+                                    break;
+                                }
+                            default:
+                                break;
                         }
                     }
-                    return null;
                 }
                 else
                 {
                     MessageBox.Show("文件夹配置文件格式错误，程序将自动退出", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Environment.Exit(0);
-                    return null;
                 }
             }
             catch (UnauthorizedAccessException ex)
             {
                 MessageBox.Show("无权限访问文件夹配置文件，请尝试使用管理员权限运行本程序，程序将自动退出，描述如下\r\n\r\n" + ex, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
-                return null;
             }
             catch (FileNotFoundException ex)
             {
                 MessageBox.Show("文件夹配置文件不存在，程序将自动退出，描述如下\r\n\r\n" + ex, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
-                return null;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("访问文件夹配置文件时发生错误，程序将自动退出，描述如下\r\n\r\n" + ex, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
-                return null;
             }
         }
 
@@ -67,11 +90,11 @@ namespace TDS2
         /// </summary>
         /// <param name="upURL">更新地址</param>
         /// <param name="showWindows">结果是否弹窗</param>
-        public static void GoUpdata(bool showWindows)
+        public void GoUpdata(bool showWindows)
         {
-            if (!Directory.Exists(GetUrl()))// 地址检测
+            if (!Directory.Exists(updataUrl))// 地址检测
             {
-                if (MessageBox.Show("程序更新地址 " + GetUrl() + " 无效，是否重新设置？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK) return;// 新版本更新选择窗口
+                if (MessageBox.Show("程序更新地址 " + updataUrl + " 无效，是否重新设置？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK) return;// 新版本更新选择窗口
                 else
                 {
                     AppSettingsForm settingsForm = new AppSettingsForm();
@@ -83,7 +106,7 @@ namespace TDS2
 
             try
             {
-                DirectoryInfo directoryInfo = new DirectoryInfo(GetUrl());
+                DirectoryInfo directoryInfo = new DirectoryInfo(updataUrl);
                 FileInfo[] files = directoryInfo.GetFiles(@"TDS2*.exe", SearchOption.TopDirectoryOnly);// 扫描TDS2开头命名的exe文件
                 if (files.Length == 0)// 没有发现TDS2开头命名的exe文件
                 {
@@ -121,4 +144,4 @@ namespace TDS2
             }
         }
     }
-    }
+}

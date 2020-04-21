@@ -1,14 +1,14 @@
 ﻿
 namespace TDS2
 {
-   public class Disk
+    public class Editor
     {
         /// <summary>
-        /// 名称
+        /// 名字
         /// </summary>
         private string name;
         /// <summary>
-        /// 名称
+        /// 名字
         /// </summary>
         public string Name
         {
@@ -17,29 +17,30 @@ namespace TDS2
         }
 
         /// <summary>
-        /// 网络路径
+        /// Emb文件夹
         /// </summary>
-        private string netPath;
+        private string embPath;
         /// <summary>
-        /// 网络路径
+        /// Emb文件夹
         /// </summary>
-        public string NetPath
+        public string EmbPath
         {
-            get { return netPath; }
-            set { netPath = value; }
+            get { return embPath; }
+            set { embPath = value; }
         }
 
         /// <summary>
-        /// 本地路径
+        /// Jpg文件夹
         /// </summary>
-        private string localPath;
+        private string jpgPath;
         /// <summary>
-        /// 本地路径
+        /// Jpg文件夹
         /// </summary>
-        public string LocalPath
+        public string JpgPath
         {
-            get { return localPath; }
-            set { localPath = value; }
+            get { return jpgPath; }
+            set { jpgPath = value; }
         }
+
     }
 }

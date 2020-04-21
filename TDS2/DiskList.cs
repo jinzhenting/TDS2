@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 
 namespace TDS2
 {
-    public class Disks
+    public class DiskList
     {
-        public Disks()
+        public DiskList()
         {
             try
             {
@@ -21,67 +19,77 @@ namespace TDS2
                 {
                     foreach (XmlNode node in xmlnode.ChildNodes)// 在根节点中寻找节点
                     {
-                        if (node.Name == "ZFile")
+                        switch (node.Name)
                         {
-                            zFlie.Name = "ZFile";
-                            zFlie.NetPath = node.Attributes["netPath"].Value;
-                            zFlie.LocalPath = node.Attributes["localPath"].Value;
-                        }
-
-                        if (node.Name == "NewData")
-                        {
-                            newData.Name = "NewData";
-                            newData.NetPath = node.Attributes["netPath"].Value;
-                            newData.LocalPath = node.Attributes["localPath"].Value;
-                        }
-
-                        if (node.Name == "HistoryData")
-                        {
-                            historyData.Name = "HistoryData";
-                            historyData.NetPath = node.Attributes["netPath"].Value;
-                            historyData.LocalPath = node.Attributes["localPath"].Value;
-                        }
-
-                        if (node.Name == "OldData")
-                        {
-                            oldData.Name = "OldData";
-                            oldData.NetPath = node.Attributes["netPath"].Value;
-                            oldData.LocalPath = node.Attributes["localPath"].Value;
-                        }
-
-                        if (node.Name == "MyAttach")
-                        {
-                            myAttach.Name = "MyAttach";
-                            myAttach.NetPath = node.Attributes["netPath"].Value;
-                            myAttach.LocalPath = node.Attributes["localPath"].Value;
-                        }
-
-                        if (node.Name == "DST")
-                        {
-                            dst.Name = "DST";
-                            dst.NetPath = node.Attributes["netPath"].Value;
-                            dst.LocalPath = node.Attributes["localPath"].Value;
-                        }
-
-                        if (node.Name == "Ta")
-                        {
-                            ta.Name = "Ta";
-                            ta.NetPath = node.Attributes["netPath"].Value;
-                            ta.LocalPath = node.Attributes["localPath"].Value;
-                        }
-
-                        if (node.Name == "Temp")
-                        {
-                            temp.Name = "Temp";
-                            temp.NetPath = node.Attributes["netPath"].Value;
-                            temp.LocalPath = node.Attributes["localPath"].Value;
-                        }
-                        
-                        if (node.Name == "Vector")
-                        {
-                            vector.Name = "Vector";
-                            vector.NetPath = node.Attributes["netPath"].Value;
-                            vector.LocalPath = node.Attributes["localPath"].Value;
+                            case "ZFile":
+                                {
+                                    zFlie.Name = "ZFile";
+                                    zFlie.NetPath = node.Attributes["netPath"].Value;
+                                    zFlie.LocalPath = node.Attributes["localPath"].Value;
+                                    break;
+                                }
+                            case "NewData":
+                                {
+                                    newData.Name = "NewData";
+                                    newData.NetPath = node.Attributes["netPath"].Value;
+                                    newData.LocalPath = node.Attributes["localPath"].Value;
+                                    break;
+                                }
+                            case "HistoryData":
+                                {
+                                    historyData.Name = "HistoryData";
+                                    historyData.NetPath = node.Attributes["netPath"].Value;
+                                    historyData.LocalPath = node.Attributes["localPath"].Value;
+                                    break;
+                                }
+                            case "OldData":
+                                {
+                                    oldData.Name = "OldData";
+                                    oldData.NetPath = node.Attributes["netPath"].Value;
+                                    oldData.LocalPath = node.Attributes["localPath"].Value;
+                                    break;
+                                }
+                            case "MyAttach":
+                                {
+                                    myAttach.Name = "MyAttach";
+                                    myAttach.NetPath = node.Attributes["netPath"].Value;
+                                    myAttach.LocalPath = node.Attributes["localPath"].Value;
+                                    break;
+                                }
+                            case "DST":
+                                {
+                                    dst.Name = "DST";
+                                    dst.NetPath = node.Attributes["netPath"].Value;
+                                    dst.LocalPath = node.Attributes["localPath"].Value;
+                                    break;
+                                }
+                            case "Ta":
+                                {
+                                    ta.Name = "Ta";
+                                    ta.NetPath = node.Attributes["netPath"].Value;
+                                    ta.LocalPath = node.Attributes["localPath"].Value;
+                                    break;
+                                }
+                            case "Temp":
+                                {
+                                    temp.Name = "Temp";
+                                    temp.NetPath = node.Attributes["netPath"].Value;
+                                    temp.LocalPath = node.Attributes["localPath"].Value;
+                                    break;
+                                }
+                            case "Vector":
+                                {
+                                    vector.Name = "Vector";
+                                    vector.NetPath = node.Attributes["netPath"].Value;
+                                    vector.LocalPath = node.Attributes["localPath"].Value;
+                                    break;
+                                }
+                            default:
+                                {
+                                    MessageBox.Show("文件夹配置文件节点命名错误，程序将自动退出", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    Environment.Exit(0);
+                                    return;
+                                }
                         }
                     }
                 }
@@ -137,7 +145,8 @@ namespace TDS2
         /// <summary>
         /// 获取3个Data文件夹共12个子文件夹列表
         /// </summary>
-        public List<string> Datas {
+        public List<string> Datas
+        {
             get { return datas; }
             set { datas = value; }
         }

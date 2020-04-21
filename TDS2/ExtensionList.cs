@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 
 namespace TDS2
 {
-    public class Extensions
+    public class ExtensionList
     {
-        public Extensions()
+        public ExtensionList()
         {
-
             try
             {
                 XmlDocument xml = new XmlDocument();
@@ -22,32 +18,42 @@ namespace TDS2
                 {
                     foreach (XmlNode node in xmlnode.ChildNodes)// 在根节点中寻找节点
                     {
-                        if (node.Name == "Dst")
+                        switch (node.Name)
                         {
-                            dst.Name = "Dst";
-                            dst.App = node.Attributes["app"].Value;
-                            dst.Relation = Convert.ToBoolean(node.Attributes["relation"].Value);
-                        }
-
-                        if (node.Name == "Emb")
-                        {
-                            emb.Name = "Emb";
-                            emb.App = node.Attributes["app"].Value;
-                            emb.Relation = Convert.ToBoolean(node.Attributes["relation"].Value);
-                        }
-
-                        if (node.Name == "Jpg")
-                        {
-                            jpg.Name = "Jpg";
-                            jpg.App = node.Attributes["app"].Value;
-                            jpg.Relation = Convert.ToBoolean(node.Attributes["relation"].Value);
-                        }
-
-                        if (node.Name == "Ai")
-                        {
-                            ai.Name = "Ai";
-                            ai.App = node.Attributes["app"].Value;
-                            ai.Relation = Convert.ToBoolean(node.Attributes["relation"].Value);
+                            case "Dst":
+                                {
+                                    dst.Name = "Dst";
+                                    dst.App = node.Attributes["app"].Value;
+                                    dst.Relation = Convert.ToBoolean(node.Attributes["relation"].Value);
+                                    break;
+                                }
+                            case "Emb":
+                                {
+                                    emb.Name = "Emb";
+                                    emb.App = node.Attributes["app"].Value;
+                                    emb.Relation = Convert.ToBoolean(node.Attributes["relation"].Value);
+                                    break;
+                                }
+                            case "Jpg":
+                                {
+                                    jpg.Name = "Jpg";
+                                    jpg.App = node.Attributes["app"].Value;
+                                    jpg.Relation = Convert.ToBoolean(node.Attributes["relation"].Value);
+                                    break;
+                                }
+                            case "Ai":
+                                {
+                                    ai.Name = "Ai";
+                                    ai.App = node.Attributes["app"].Value;
+                                    ai.Relation = Convert.ToBoolean(node.Attributes["relation"].Value);
+                                    break;
+                                }
+                            default:
+                                {
+                                    MessageBox.Show("文件夹配置文件节点命名错误，程序将自动退出", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    Environment.Exit(0);
+                                    return;
+                                }
                         }
                     }
                 }

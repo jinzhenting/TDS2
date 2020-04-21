@@ -64,6 +64,8 @@
             this.orderListView = new System.Windows.Forms.ListView();
             this.homeTabControl = new System.Windows.Forms.TabControl();
             this.orderTabPage = new System.Windows.Forms.TabPage();
+            this.orderZButton = new System.Windows.Forms.Button();
+            this.orderEButton = new System.Windows.Forms.Button();
             this.orderListTrackBar = new System.Windows.Forms.TrackBar();
             this.thumbnailComboBox = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -71,9 +73,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.orderClassComboBox = new System.Windows.Forms.ComboBox();
             this.orderProgressComboBox = new System.Windows.Forms.ComboBox();
-            this.orderDateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.orderStartDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.orderEndComboBox = new System.Windows.Forms.ComboBox();
-            this.orderDateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.orderEndDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.orderTimeLabel2 = new System.Windows.Forms.Label();
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.orderSesrchButton = new System.Windows.Forms.Button();
@@ -94,10 +96,8 @@
             this.diskMappingButton = new System.Windows.Forms.Button();
             this.filesSortButton = new System.Windows.Forms.Button();
             this.messageFormButton = new System.Windows.Forms.Button();
-            this.homeBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.searchBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.orderEButton = new System.Windows.Forms.Button();
-            this.orderZButton = new System.Windows.Forms.Button();
             this.orderContextMenuStrip.SuspendLayout();
             this.homeStatusStrip.SuspendLayout();
             this.homeMenuStrip.SuspendLayout();
@@ -371,7 +371,7 @@
             this.orderListView.SelectedIndexChanged += new System.EventHandler(this.orderListView_SelectedIndexChanged);
             this.orderListView.DoubleClick += new System.EventHandler(this.orderListView_DoubleClick);
             this.orderListView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.orderListView_KeyDown);
-            this.orderListView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.orderListView_MouseMove);
+            this.orderListView.MouseHover += new System.EventHandler(this.orderListView_MouseHover);
             // 
             // homeTabControl
             // 
@@ -397,9 +397,9 @@
             this.orderTabPage.Controls.Add(this.panel1);
             this.orderTabPage.Controls.Add(this.orderClassComboBox);
             this.orderTabPage.Controls.Add(this.orderProgressComboBox);
-            this.orderTabPage.Controls.Add(this.orderDateTimePicker1);
+            this.orderTabPage.Controls.Add(this.orderStartDateTimePicker);
             this.orderTabPage.Controls.Add(this.orderEndComboBox);
-            this.orderTabPage.Controls.Add(this.orderDateTimePicker2);
+            this.orderTabPage.Controls.Add(this.orderEndDateTimePicker);
             this.orderTabPage.Controls.Add(this.orderTimeLabel2);
             this.orderTabPage.Controls.Add(this.searchTextBox);
             this.orderTabPage.Controls.Add(this.orderSesrchButton);
@@ -420,6 +420,28 @@
             this.orderTabPage.TabIndex = 0;
             this.orderTabPage.Text = " 订单页  ";
             this.orderTabPage.UseVisualStyleBackColor = true;
+            // 
+            // orderZButton
+            // 
+            this.orderZButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.orderZButton.Location = new System.Drawing.Point(791, 552);
+            this.orderZButton.Name = "orderZButton";
+            this.orderZButton.Size = new System.Drawing.Size(60, 23);
+            this.orderZButton.TabIndex = 53;
+            this.orderZButton.Text = "打版";
+            this.orderZButton.UseVisualStyleBackColor = true;
+            this.orderZButton.Click += new System.EventHandler(this.orderZButton_Click);
+            // 
+            // orderEButton
+            // 
+            this.orderEButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.orderEButton.Location = new System.Drawing.Point(857, 552);
+            this.orderEButton.Name = "orderEButton";
+            this.orderEButton.Size = new System.Drawing.Size(60, 23);
+            this.orderEButton.TabIndex = 52;
+            this.orderEButton.Text = "车版";
+            this.orderEButton.UseVisualStyleBackColor = true;
+            this.orderEButton.Click += new System.EventHandler(this.orderEButton_Click);
             // 
             // orderListTrackBar
             // 
@@ -509,13 +531,13 @@
             this.orderProgressComboBox.Size = new System.Drawing.Size(80, 25);
             this.orderProgressComboBox.TabIndex = 46;
             // 
-            // orderDateTimePicker1
+            // orderStartDateTimePicker
             // 
-            this.orderDateTimePicker1.Location = new System.Drawing.Point(63, 6);
-            this.orderDateTimePicker1.Name = "orderDateTimePicker1";
-            this.orderDateTimePicker1.Size = new System.Drawing.Size(135, 23);
-            this.orderDateTimePicker1.TabIndex = 11;
-            this.orderDateTimePicker1.CloseUp += new System.EventHandler(this.orderDateTimePicker1_CloseUp);
+            this.orderStartDateTimePicker.Location = new System.Drawing.Point(63, 6);
+            this.orderStartDateTimePicker.Name = "orderStartDateTimePicker";
+            this.orderStartDateTimePicker.Size = new System.Drawing.Size(135, 23);
+            this.orderStartDateTimePicker.TabIndex = 11;
+            this.orderStartDateTimePicker.CloseUp += new System.EventHandler(this.orderStartDateTimePicker_CloseUp);
             // 
             // orderEndComboBox
             // 
@@ -535,14 +557,14 @@
             this.orderEndComboBox.Size = new System.Drawing.Size(120, 25);
             this.orderEndComboBox.TabIndex = 45;
             // 
-            // orderDateTimePicker2
+            // orderEndDateTimePicker
             // 
-            this.orderDateTimePicker2.Checked = false;
-            this.orderDateTimePicker2.Location = new System.Drawing.Point(226, 6);
-            this.orderDateTimePicker2.Name = "orderDateTimePicker2";
-            this.orderDateTimePicker2.Size = new System.Drawing.Size(135, 23);
-            this.orderDateTimePicker2.TabIndex = 12;
-            this.orderDateTimePicker2.CloseUp += new System.EventHandler(this.orderDateTimePicker2_CloseUp);
+            this.orderEndDateTimePicker.Checked = false;
+            this.orderEndDateTimePicker.Location = new System.Drawing.Point(226, 6);
+            this.orderEndDateTimePicker.Name = "orderEndDateTimePicker";
+            this.orderEndDateTimePicker.Size = new System.Drawing.Size(135, 23);
+            this.orderEndDateTimePicker.TabIndex = 12;
+            this.orderEndDateTimePicker.CloseUp += new System.EventHandler(this.orderEndDateTimePicker_CloseUp);
             // 
             // orderTimeLabel2
             // 
@@ -757,39 +779,19 @@
             this.messageFormButton.UseVisualStyleBackColor = true;
             this.messageFormButton.Click += new System.EventHandler(this.messageFormButton_Click);
             // 
-            // homeBackgroundWorker
+            // searchBackgroundWorker
             // 
-            this.homeBackgroundWorker.WorkerReportsProgress = true;
-            this.homeBackgroundWorker.WorkerSupportsCancellation = true;
-            this.homeBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.homeBackgroundWorker_DoWork);
-            this.homeBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.homeBackgroundWorker_ProgressChanged);
-            this.homeBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.homeBackgroundWorker_RunWorkerCompleted);
+            this.searchBackgroundWorker.WorkerReportsProgress = true;
+            this.searchBackgroundWorker.WorkerSupportsCancellation = true;
+            this.searchBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.searchBackgroundWorker_DoWork);
+            this.searchBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.searchBackgroundWorker_ProgressChanged);
+            this.searchBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.searchBackgroundWorker_RunWorkerCompleted);
             // 
             // imageList
             // 
             this.imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.imageList.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // orderEButton
-            // 
-            this.orderEButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderEButton.Location = new System.Drawing.Point(857, 552);
-            this.orderEButton.Name = "orderEButton";
-            this.orderEButton.Size = new System.Drawing.Size(60, 23);
-            this.orderEButton.TabIndex = 52;
-            this.orderEButton.Text = "车版";
-            this.orderEButton.UseVisualStyleBackColor = true;
-            // 
-            // orderZButton
-            // 
-            this.orderZButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderZButton.Location = new System.Drawing.Point(791, 552);
-            this.orderZButton.Name = "orderZButton";
-            this.orderZButton.Size = new System.Drawing.Size(60, 23);
-            this.orderZButton.TabIndex = 53;
-            this.orderZButton.Text = "打版";
-            this.orderZButton.UseVisualStyleBackColor = true;
             // 
             // HomeForm
             // 
@@ -850,10 +852,10 @@
         private System.Windows.Forms.ToolStripMenuItem appAboutMenuItem;
         private System.Windows.Forms.ToolStripProgressBar homeProgressBar;
         private System.Windows.Forms.ToolStripStatusLabel homeStatusLabel;
-        private System.Windows.Forms.DateTimePicker orderDateTimePicker1;
+        private System.Windows.Forms.DateTimePicker orderStartDateTimePicker;
         private System.Windows.Forms.Label orderTimeLabel2;
         private System.Windows.Forms.Label orderTimeLabel1;
-        private System.Windows.Forms.DateTimePicker orderDateTimePicker2;
+        private System.Windows.Forms.DateTimePicker orderEndDateTimePicker;
         private System.Windows.Forms.TextBox searchTextBox;
         private System.Windows.Forms.Button orderSesrchButton;
         private System.Windows.Forms.Button appHelpButton;
@@ -885,7 +887,7 @@
         private System.Windows.Forms.TabPage searchTabPage;
         private System.Windows.Forms.ToolStripMenuItem orderModifyMenuItem;
         private System.Windows.Forms.ToolStripMenuItem orderCancelMenuItem;
-        private System.ComponentModel.BackgroundWorker homeBackgroundWorker;
+        private System.ComponentModel.BackgroundWorker searchBackgroundWorker;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.Label orderEndLabel;
         private System.Windows.Forms.ComboBox orderClassComboBox;

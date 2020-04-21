@@ -34,6 +34,10 @@
             this.appUpButton = new System.Windows.Forms.Button();
             this.appAutoUpCheckBox = new System.Windows.Forms.CheckBox();
             this.filesOpenTabPage = new System.Windows.Forms.TabPage();
+            this.aiFileCheckBox = new System.Windows.Forms.CheckBox();
+            this.jpgFileCheckBox = new System.Windows.Forms.CheckBox();
+            this.embFileCheckBox = new System.Windows.Forms.CheckBox();
+            this.dstFileCheckBox = new System.Windows.Forms.CheckBox();
             this.aiFileButton = new System.Windows.Forms.Button();
             this.aiFileLabel = new System.Windows.Forms.Label();
             this.aiFileTextBox = new System.Windows.Forms.TextBox();
@@ -41,12 +45,20 @@
             this.embFileButton = new System.Windows.Forms.Button();
             this.dstFileButton = new System.Windows.Forms.Button();
             this.jpgFileLabel = new System.Windows.Forms.Label();
-            this.dstFileextBox = new System.Windows.Forms.TextBox();
+            this.dstFileTextBox = new System.Windows.Forms.TextBox();
             this.jpgFileTextBox = new System.Windows.Forms.TextBox();
             this.embFileTextBox = new System.Windows.Forms.TextBox();
             this.dstFileLabel = new System.Windows.Forms.Label();
             this.embFileLabel = new System.Windows.Forms.Label();
             this.disksTabPage = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.tempComboBox = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.taComboBox = new System.Windows.Forms.ComboBox();
@@ -89,31 +101,19 @@
             this.taLabel = new System.Windows.Forms.Label();
             this.settingsTabControl = new System.Windows.Forms.TabControl();
             this.sqlTabPage = new System.Windows.Forms.TabPage();
-            this.sqlIPTextBox = new System.Windows.Forms.TextBox();
+            this.sqlServerIPTextBox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.sqlDataTextBox = new System.Windows.Forms.TextBox();
-            this.sqlUserTextBox = new System.Windows.Forms.TextBox();
+            this.sqlDataNameTextBox = new System.Windows.Forms.TextBox();
+            this.sqlUserIDTextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.sqlTableTextBox = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.sqlPasswordTextBox = new System.Windows.Forms.TextBox();
             this.autoTabPage = new System.Windows.Forms.TabPage();
             this.disksCancelButton = new System.Windows.Forms.Button();
             this.disksSaveButton = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.appUpTabPage.SuspendLayout();
             this.filesOpenTabPage.SuspendLayout();
             this.disksTabPage.SuspendLayout();
@@ -178,10 +178,10 @@
             // 
             // filesOpenTabPage
             // 
-            this.filesOpenTabPage.Controls.Add(this.checkBox3);
-            this.filesOpenTabPage.Controls.Add(this.checkBox4);
-            this.filesOpenTabPage.Controls.Add(this.checkBox2);
-            this.filesOpenTabPage.Controls.Add(this.checkBox1);
+            this.filesOpenTabPage.Controls.Add(this.aiFileCheckBox);
+            this.filesOpenTabPage.Controls.Add(this.jpgFileCheckBox);
+            this.filesOpenTabPage.Controls.Add(this.embFileCheckBox);
+            this.filesOpenTabPage.Controls.Add(this.dstFileCheckBox);
             this.filesOpenTabPage.Controls.Add(this.aiFileButton);
             this.filesOpenTabPage.Controls.Add(this.aiFileLabel);
             this.filesOpenTabPage.Controls.Add(this.aiFileTextBox);
@@ -189,7 +189,7 @@
             this.filesOpenTabPage.Controls.Add(this.embFileButton);
             this.filesOpenTabPage.Controls.Add(this.dstFileButton);
             this.filesOpenTabPage.Controls.Add(this.jpgFileLabel);
-            this.filesOpenTabPage.Controls.Add(this.dstFileextBox);
+            this.filesOpenTabPage.Controls.Add(this.dstFileTextBox);
             this.filesOpenTabPage.Controls.Add(this.jpgFileTextBox);
             this.filesOpenTabPage.Controls.Add(this.embFileTextBox);
             this.filesOpenTabPage.Controls.Add(this.dstFileLabel);
@@ -202,6 +202,50 @@
             this.filesOpenTabPage.Text = " 文件类型关联程序";
             this.filesOpenTabPage.UseVisualStyleBackColor = true;
             // 
+            // aiFileCheckBox
+            // 
+            this.aiFileCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.aiFileCheckBox.AutoSize = true;
+            this.aiFileCheckBox.Location = new System.Drawing.Point(557, 103);
+            this.aiFileCheckBox.Name = "aiFileCheckBox";
+            this.aiFileCheckBox.Size = new System.Drawing.Size(75, 21);
+            this.aiFileCheckBox.TabIndex = 25;
+            this.aiFileCheckBox.Text = "是否关联";
+            this.aiFileCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // jpgFileCheckBox
+            // 
+            this.jpgFileCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.jpgFileCheckBox.AutoSize = true;
+            this.jpgFileCheckBox.Location = new System.Drawing.Point(557, 72);
+            this.jpgFileCheckBox.Name = "jpgFileCheckBox";
+            this.jpgFileCheckBox.Size = new System.Drawing.Size(75, 21);
+            this.jpgFileCheckBox.TabIndex = 24;
+            this.jpgFileCheckBox.Text = "是否关联";
+            this.jpgFileCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // embFileCheckBox
+            // 
+            this.embFileCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.embFileCheckBox.AutoSize = true;
+            this.embFileCheckBox.Location = new System.Drawing.Point(557, 41);
+            this.embFileCheckBox.Name = "embFileCheckBox";
+            this.embFileCheckBox.Size = new System.Drawing.Size(75, 21);
+            this.embFileCheckBox.TabIndex = 23;
+            this.embFileCheckBox.Text = "是否关联";
+            this.embFileCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // dstFileCheckBox
+            // 
+            this.dstFileCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dstFileCheckBox.AutoSize = true;
+            this.dstFileCheckBox.Location = new System.Drawing.Point(557, 10);
+            this.dstFileCheckBox.Name = "dstFileCheckBox";
+            this.dstFileCheckBox.Size = new System.Drawing.Size(75, 21);
+            this.dstFileCheckBox.TabIndex = 22;
+            this.dstFileCheckBox.Text = "是否关联";
+            this.dstFileCheckBox.UseVisualStyleBackColor = true;
+            // 
             // aiFileButton
             // 
             this.aiFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -211,6 +255,7 @@
             this.aiFileButton.TabIndex = 21;
             this.aiFileButton.Text = "浏览";
             this.aiFileButton.UseVisualStyleBackColor = true;
+            this.aiFileButton.Click += new System.EventHandler(this.aiFileButton_Click);
             // 
             // aiFileLabel
             // 
@@ -240,6 +285,7 @@
             this.jpgFileButton.TabIndex = 18;
             this.jpgFileButton.Text = "浏览";
             this.jpgFileButton.UseVisualStyleBackColor = true;
+            this.jpgFileButton.Click += new System.EventHandler(this.jpgFileButton_Click);
             // 
             // embFileButton
             // 
@@ -250,6 +296,7 @@
             this.embFileButton.TabIndex = 17;
             this.embFileButton.Text = "浏览";
             this.embFileButton.UseVisualStyleBackColor = true;
+            this.embFileButton.Click += new System.EventHandler(this.embFileButton_Click);
             // 
             // dstFileButton
             // 
@@ -260,6 +307,7 @@
             this.dstFileButton.TabIndex = 16;
             this.dstFileButton.Text = "浏览";
             this.dstFileButton.UseVisualStyleBackColor = true;
+            this.dstFileButton.Click += new System.EventHandler(this.dstFileButton_Click);
             // 
             // jpgFileLabel
             // 
@@ -271,14 +319,14 @@
             this.jpgFileLabel.Text = "文件类型 *jpg 程序路径";
             this.jpgFileLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // dstFileextBox
+            // dstFileTextBox
             // 
-            this.dstFileextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dstFileTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dstFileextBox.Location = new System.Drawing.Point(161, 9);
-            this.dstFileextBox.Name = "dstFileextBox";
-            this.dstFileextBox.Size = new System.Drawing.Size(324, 23);
-            this.dstFileextBox.TabIndex = 0;
+            this.dstFileTextBox.Location = new System.Drawing.Point(161, 9);
+            this.dstFileTextBox.Name = "dstFileTextBox";
+            this.dstFileTextBox.Size = new System.Drawing.Size(324, 23);
+            this.dstFileTextBox.TabIndex = 0;
             // 
             // jpgFileTextBox
             // 
@@ -376,567 +424,6 @@
             this.disksTabPage.Text = " 文件夹设定 ";
             this.disksTabPage.UseVisualStyleBackColor = true;
             // 
-            // tempComboBox
-            // 
-            this.tempComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tempComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.tempComboBox.FormattingEnabled = true;
-            this.tempComboBox.Location = new System.Drawing.Point(523, 226);
-            this.tempComboBox.Name = "tempComboBox";
-            this.tempComboBox.Size = new System.Drawing.Size(80, 25);
-            this.tempComboBox.TabIndex = 42;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(473, 229);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 17);
-            this.label5.TabIndex = 41;
-            this.label5.Text = "映射为";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // taComboBox
-            // 
-            this.taComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.taComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.taComboBox.FormattingEnabled = true;
-            this.taComboBox.Location = new System.Drawing.Point(523, 195);
-            this.taComboBox.Name = "taComboBox";
-            this.taComboBox.Size = new System.Drawing.Size(80, 25);
-            this.taComboBox.TabIndex = 40;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(473, 198);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 17);
-            this.label6.TabIndex = 39;
-            this.label6.Text = "映射为";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dstComboBox
-            // 
-            this.dstComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dstComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dstComboBox.FormattingEnabled = true;
-            this.dstComboBox.Location = new System.Drawing.Point(523, 164);
-            this.dstComboBox.Name = "dstComboBox";
-            this.dstComboBox.Size = new System.Drawing.Size(80, 25);
-            this.dstComboBox.TabIndex = 38;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(473, 167);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 17);
-            this.label7.TabIndex = 37;
-            this.label7.Text = "映射为";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // myAttachComboBox
-            // 
-            this.myAttachComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.myAttachComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.myAttachComboBox.FormattingEnabled = true;
-            this.myAttachComboBox.Location = new System.Drawing.Point(523, 133);
-            this.myAttachComboBox.Name = "myAttachComboBox";
-            this.myAttachComboBox.Size = new System.Drawing.Size(80, 25);
-            this.myAttachComboBox.TabIndex = 36;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(473, 136);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(44, 17);
-            this.label8.TabIndex = 35;
-            this.label8.Text = "映射为";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // oldDataComboBox
-            // 
-            this.oldDataComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.oldDataComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.oldDataComboBox.FormattingEnabled = true;
-            this.oldDataComboBox.Location = new System.Drawing.Point(523, 102);
-            this.oldDataComboBox.Name = "oldDataComboBox";
-            this.oldDataComboBox.Size = new System.Drawing.Size(80, 25);
-            this.oldDataComboBox.TabIndex = 34;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(473, 105);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 17);
-            this.label3.TabIndex = 33;
-            this.label3.Text = "映射为";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // historyDataComboBox
-            // 
-            this.historyDataComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.historyDataComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.historyDataComboBox.FormattingEnabled = true;
-            this.historyDataComboBox.Location = new System.Drawing.Point(523, 71);
-            this.historyDataComboBox.Name = "historyDataComboBox";
-            this.historyDataComboBox.Size = new System.Drawing.Size(80, 25);
-            this.historyDataComboBox.TabIndex = 32;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(473, 74);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 17);
-            this.label4.TabIndex = 31;
-            this.label4.Text = "映射为";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // newDataComboBox
-            // 
-            this.newDataComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.newDataComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.newDataComboBox.FormattingEnabled = true;
-            this.newDataComboBox.Location = new System.Drawing.Point(523, 40);
-            this.newDataComboBox.Name = "newDataComboBox";
-            this.newDataComboBox.Size = new System.Drawing.Size(80, 25);
-            this.newDataComboBox.TabIndex = 30;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(473, 43);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 17);
-            this.label1.TabIndex = 29;
-            this.label1.Text = "映射为";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // zFileComboBox
-            // 
-            this.zFileComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.zFileComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.zFileComboBox.FormattingEnabled = true;
-            this.zFileComboBox.Location = new System.Drawing.Point(523, 9);
-            this.zFileComboBox.Name = "zFileComboBox";
-            this.zFileComboBox.Size = new System.Drawing.Size(80, 25);
-            this.zFileComboBox.TabIndex = 28;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(473, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 17);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "映射为";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // tempButton
-            // 
-            this.tempButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tempButton.Location = new System.Drawing.Point(407, 226);
-            this.tempButton.Name = "tempButton";
-            this.tempButton.Size = new System.Drawing.Size(60, 23);
-            this.tempButton.TabIndex = 23;
-            this.tempButton.Text = "浏览";
-            this.tempButton.UseVisualStyleBackColor = true;
-            // 
-            // taButton
-            // 
-            this.taButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.taButton.Location = new System.Drawing.Point(407, 195);
-            this.taButton.Name = "taButton";
-            this.taButton.Size = new System.Drawing.Size(60, 23);
-            this.taButton.TabIndex = 22;
-            this.taButton.Text = "浏览";
-            this.taButton.UseVisualStyleBackColor = true;
-            // 
-            // dstButton
-            // 
-            this.dstButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dstButton.Location = new System.Drawing.Point(407, 164);
-            this.dstButton.Name = "dstButton";
-            this.dstButton.Size = new System.Drawing.Size(60, 23);
-            this.dstButton.TabIndex = 21;
-            this.dstButton.Text = "浏览";
-            this.dstButton.UseVisualStyleBackColor = true;
-            // 
-            // myAttachTextBox
-            // 
-            this.myAttachTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.myAttachTextBox.Location = new System.Drawing.Point(145, 133);
-            this.myAttachTextBox.Name = "myAttachTextBox";
-            this.myAttachTextBox.Size = new System.Drawing.Size(256, 23);
-            this.myAttachTextBox.TabIndex = 8;
-            // 
-            // oldDataTextBox
-            // 
-            this.oldDataTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.oldDataTextBox.Location = new System.Drawing.Point(145, 102);
-            this.oldDataTextBox.Name = "oldDataTextBox";
-            this.oldDataTextBox.Size = new System.Drawing.Size(256, 23);
-            this.oldDataTextBox.TabIndex = 6;
-            // 
-            // dstTextBox
-            // 
-            this.dstTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dstTextBox.Location = new System.Drawing.Point(145, 164);
-            this.dstTextBox.Name = "dstTextBox";
-            this.dstTextBox.Size = new System.Drawing.Size(256, 23);
-            this.dstTextBox.TabIndex = 10;
-            // 
-            // zFileTextBox
-            // 
-            this.zFileTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.zFileTextBox.Location = new System.Drawing.Point(145, 9);
-            this.zFileTextBox.Name = "zFileTextBox";
-            this.zFileTextBox.Size = new System.Drawing.Size(256, 23);
-            this.zFileTextBox.TabIndex = 0;
-            // 
-            // historyDataTextBox
-            // 
-            this.historyDataTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.historyDataTextBox.Location = new System.Drawing.Point(145, 71);
-            this.historyDataTextBox.Name = "historyDataTextBox";
-            this.historyDataTextBox.Size = new System.Drawing.Size(256, 23);
-            this.historyDataTextBox.TabIndex = 4;
-            // 
-            // taTextBox
-            // 
-            this.taTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.taTextBox.Location = new System.Drawing.Point(145, 195);
-            this.taTextBox.Name = "taTextBox";
-            this.taTextBox.Size = new System.Drawing.Size(256, 23);
-            this.taTextBox.TabIndex = 12;
-            // 
-            // tempTextBox
-            // 
-            this.tempTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tempTextBox.Location = new System.Drawing.Point(145, 226);
-            this.tempTextBox.Name = "tempTextBox";
-            this.tempTextBox.Size = new System.Drawing.Size(256, 23);
-            this.tempTextBox.TabIndex = 14;
-            // 
-            // newDataTextBox
-            // 
-            this.newDataTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.newDataTextBox.Location = new System.Drawing.Point(145, 40);
-            this.newDataTextBox.Name = "newDataTextBox";
-            this.newDataTextBox.Size = new System.Drawing.Size(256, 23);
-            this.newDataTextBox.TabIndex = 2;
-            // 
-            // myAttachButton
-            // 
-            this.myAttachButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.myAttachButton.Location = new System.Drawing.Point(407, 133);
-            this.myAttachButton.Name = "myAttachButton";
-            this.myAttachButton.Size = new System.Drawing.Size(60, 23);
-            this.myAttachButton.TabIndex = 20;
-            this.myAttachButton.Text = "浏览";
-            this.myAttachButton.UseVisualStyleBackColor = true;
-            // 
-            // oldDataLabel
-            // 
-            this.oldDataLabel.AutoSize = true;
-            this.oldDataLabel.Location = new System.Drawing.Point(27, 105);
-            this.oldDataLabel.Name = "oldDataLabel";
-            this.oldDataLabel.Size = new System.Drawing.Size(112, 17);
-            this.oldDataLabel.TabIndex = 7;
-            this.oldDataLabel.Text = "网络磁盘 Old Data";
-            this.oldDataLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // oldDataButton
-            // 
-            this.oldDataButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.oldDataButton.Location = new System.Drawing.Point(407, 102);
-            this.oldDataButton.Name = "oldDataButton";
-            this.oldDataButton.Size = new System.Drawing.Size(60, 23);
-            this.oldDataButton.TabIndex = 19;
-            this.oldDataButton.Text = "浏览";
-            this.oldDataButton.UseVisualStyleBackColor = true;
-            // 
-            // myAttachLabel
-            // 
-            this.myAttachLabel.AutoSize = true;
-            this.myAttachLabel.Location = new System.Drawing.Point(21, 136);
-            this.myAttachLabel.Name = "myAttachLabel";
-            this.myAttachLabel.Size = new System.Drawing.Size(118, 17);
-            this.myAttachLabel.TabIndex = 9;
-            this.myAttachLabel.Text = "网络磁盘 My Attach";
-            this.myAttachLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // historyDataButton
-            // 
-            this.historyDataButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.historyDataButton.Location = new System.Drawing.Point(407, 71);
-            this.historyDataButton.Name = "historyDataButton";
-            this.historyDataButton.Size = new System.Drawing.Size(60, 23);
-            this.historyDataButton.TabIndex = 18;
-            this.historyDataButton.Text = "浏览";
-            this.historyDataButton.UseVisualStyleBackColor = true;
-            // 
-            // newDataButton
-            // 
-            this.newDataButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.newDataButton.Location = new System.Drawing.Point(407, 40);
-            this.newDataButton.Name = "newDataButton";
-            this.newDataButton.Size = new System.Drawing.Size(60, 23);
-            this.newDataButton.TabIndex = 17;
-            this.newDataButton.Text = "浏览";
-            this.newDataButton.UseVisualStyleBackColor = true;
-            // 
-            // zFileButton
-            // 
-            this.zFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.zFileButton.Location = new System.Drawing.Point(407, 9);
-            this.zFileButton.Name = "zFileButton";
-            this.zFileButton.Size = new System.Drawing.Size(60, 23);
-            this.zFileButton.TabIndex = 16;
-            this.zFileButton.Text = "浏览";
-            this.zFileButton.UseVisualStyleBackColor = true;
-            // 
-            // historyDataLabel
-            // 
-            this.historyDataLabel.AutoSize = true;
-            this.historyDataLabel.Location = new System.Drawing.Point(7, 74);
-            this.historyDataLabel.Name = "historyDataLabel";
-            this.historyDataLabel.Size = new System.Drawing.Size(132, 17);
-            this.historyDataLabel.TabIndex = 5;
-            this.historyDataLabel.Text = "网络磁盘 History Data";
-            this.historyDataLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dstLabel
-            // 
-            this.dstLabel.AutoSize = true;
-            this.dstLabel.Location = new System.Drawing.Point(60, 167);
-            this.dstLabel.Name = "dstLabel";
-            this.dstLabel.Size = new System.Drawing.Size(79, 17);
-            this.dstLabel.TabIndex = 11;
-            this.dstLabel.Text = "网络磁盘 Dst";
-            this.dstLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // tempLabel
-            // 
-            this.tempLabel.AutoSize = true;
-            this.tempLabel.Location = new System.Drawing.Point(46, 229);
-            this.tempLabel.Name = "tempLabel";
-            this.tempLabel.Size = new System.Drawing.Size(93, 17);
-            this.tempLabel.TabIndex = 15;
-            this.tempLabel.Text = "网络磁盘 Temp";
-            this.tempLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // zFileLabel
-            // 
-            this.zFileLabel.AutoSize = true;
-            this.zFileLabel.Location = new System.Drawing.Point(53, 12);
-            this.zFileLabel.Name = "zFileLabel";
-            this.zFileLabel.Size = new System.Drawing.Size(86, 17);
-            this.zFileLabel.TabIndex = 1;
-            this.zFileLabel.Text = "网络磁盘 ZFile";
-            this.zFileLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // newDataLabel
-            // 
-            this.newDataLabel.AutoSize = true;
-            this.newDataLabel.Location = new System.Drawing.Point(22, 43);
-            this.newDataLabel.Name = "newDataLabel";
-            this.newDataLabel.Size = new System.Drawing.Size(117, 17);
-            this.newDataLabel.TabIndex = 3;
-            this.newDataLabel.Text = "网络磁盘 New Data";
-            this.newDataLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // taLabel
-            // 
-            this.taLabel.AutoSize = true;
-            this.taLabel.Location = new System.Drawing.Point(65, 198);
-            this.taLabel.Name = "taLabel";
-            this.taLabel.Size = new System.Drawing.Size(74, 17);
-            this.taLabel.TabIndex = 13;
-            this.taLabel.Text = "网络磁盘 Ta";
-            this.taLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // settingsTabControl
-            // 
-            this.settingsTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.settingsTabControl.Controls.Add(this.disksTabPage);
-            this.settingsTabControl.Controls.Add(this.filesOpenTabPage);
-            this.settingsTabControl.Controls.Add(this.appUpTabPage);
-            this.settingsTabControl.Controls.Add(this.sqlTabPage);
-            this.settingsTabControl.Controls.Add(this.autoTabPage);
-            this.settingsTabControl.Location = new System.Drawing.Point(-1, 5);
-            this.settingsTabControl.Multiline = true;
-            this.settingsTabControl.Name = "settingsTabControl";
-            this.settingsTabControl.SelectedIndex = 0;
-            this.settingsTabControl.Size = new System.Drawing.Size(646, 321);
-            this.settingsTabControl.TabIndex = 0;
-            // 
-            // sqlTabPage
-            // 
-            this.sqlTabPage.Controls.Add(this.sqlIPTextBox);
-            this.sqlTabPage.Controls.Add(this.label9);
-            this.sqlTabPage.Controls.Add(this.sqlDataTextBox);
-            this.sqlTabPage.Controls.Add(this.sqlUserTextBox);
-            this.sqlTabPage.Controls.Add(this.label10);
-            this.sqlTabPage.Controls.Add(this.label14);
-            this.sqlTabPage.Controls.Add(this.sqlTableTextBox);
-            this.sqlTabPage.Controls.Add(this.label13);
-            this.sqlTabPage.Controls.Add(this.label12);
-            this.sqlTabPage.Controls.Add(this.sqlPasswordTextBox);
-            this.sqlTabPage.Location = new System.Drawing.Point(4, 26);
-            this.sqlTabPage.Name = "sqlTabPage";
-            this.sqlTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.sqlTabPage.Size = new System.Drawing.Size(638, 291);
-            this.sqlTabPage.TabIndex = 3;
-            this.sqlTabPage.Text = "数据库";
-            this.sqlTabPage.UseVisualStyleBackColor = true;
-            // 
-            // sqlIPTextBox
-            // 
-            this.sqlIPTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sqlIPTextBox.Location = new System.Drawing.Point(56, 9);
-            this.sqlIPTextBox.Name = "sqlIPTextBox";
-            this.sqlIPTextBox.Size = new System.Drawing.Size(572, 23);
-            this.sqlIPTextBox.TabIndex = 1;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(19, 12);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(32, 17);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "地址";
-            // 
-            // sqlDataTextBox
-            // 
-            this.sqlDataTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sqlDataTextBox.Location = new System.Drawing.Point(56, 40);
-            this.sqlDataTextBox.Name = "sqlDataTextBox";
-            this.sqlDataTextBox.Size = new System.Drawing.Size(572, 23);
-            this.sqlDataTextBox.TabIndex = 3;
-            // 
-            // sqlUserTextBox
-            // 
-            this.sqlUserTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sqlUserTextBox.Location = new System.Drawing.Point(56, 71);
-            this.sqlUserTextBox.Name = "sqlUserTextBox";
-            this.sqlUserTextBox.Size = new System.Drawing.Size(572, 23);
-            this.sqlUserTextBox.TabIndex = 7;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(7, 43);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(44, 17);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "数据库";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(19, 74);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(32, 17);
-            this.label14.TabIndex = 6;
-            this.label14.Text = "用户";
-            // 
-            // sqlTableTextBox
-            // 
-            this.sqlTableTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sqlTableTextBox.Location = new System.Drawing.Point(56, 102);
-            this.sqlTableTextBox.Name = "sqlTableTextBox";
-            this.sqlTableTextBox.Size = new System.Drawing.Size(572, 23);
-            this.sqlTableTextBox.TabIndex = 5;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(20, 136);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(32, 17);
-            this.label13.TabIndex = 8;
-            this.label13.Text = "密码";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(8, 105);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(44, 17);
-            this.label12.TabIndex = 4;
-            this.label12.Text = "数据表";
-            // 
-            // sqlPasswordTextBox
-            // 
-            this.sqlPasswordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sqlPasswordTextBox.Location = new System.Drawing.Point(56, 133);
-            this.sqlPasswordTextBox.Name = "sqlPasswordTextBox";
-            this.sqlPasswordTextBox.Size = new System.Drawing.Size(572, 23);
-            this.sqlPasswordTextBox.TabIndex = 9;
-            this.sqlPasswordTextBox.UseSystemPasswordChar = true;
-            // 
-            // autoTabPage
-            // 
-            this.autoTabPage.Location = new System.Drawing.Point(4, 26);
-            this.autoTabPage.Name = "autoTabPage";
-            this.autoTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.autoTabPage.Size = new System.Drawing.Size(583, 291);
-            this.autoTabPage.TabIndex = 4;
-            this.autoTabPage.Text = "后台自动化";
-            this.autoTabPage.UseVisualStyleBackColor = true;
-            // 
-            // disksCancelButton
-            // 
-            this.disksCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.disksCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.disksCancelButton.Location = new System.Drawing.Point(555, 331);
-            this.disksCancelButton.Name = "disksCancelButton";
-            this.disksCancelButton.Size = new System.Drawing.Size(80, 23);
-            this.disksCancelButton.TabIndex = 24;
-            this.disksCancelButton.Text = "取消";
-            this.disksCancelButton.UseVisualStyleBackColor = true;
-            this.disksCancelButton.Click += new System.EventHandler(this.disksCancelButton_Click);
-            // 
-            // disksSaveButton
-            // 
-            this.disksSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.disksSaveButton.Location = new System.Drawing.Point(469, 331);
-            this.disksSaveButton.Name = "disksSaveButton";
-            this.disksSaveButton.Size = new System.Drawing.Size(80, 23);
-            this.disksSaveButton.TabIndex = 25;
-            this.disksSaveButton.Text = "保存";
-            this.disksSaveButton.UseVisualStyleBackColor = true;
-            this.disksSaveButton.Click += new System.EventHandler(this.disksSaveButton_Click);
-            // 
             // label11
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1025,49 +512,559 @@
             this.label21.Text = "盘";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // checkBox1
+            // tempComboBox
             // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(557, 10);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(75, 21);
-            this.checkBox1.TabIndex = 22;
-            this.checkBox1.Text = "是否关联";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.tempComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tempComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tempComboBox.FormattingEnabled = true;
+            this.tempComboBox.Location = new System.Drawing.Point(553, 226);
+            this.tempComboBox.Name = "tempComboBox";
+            this.tempComboBox.Size = new System.Drawing.Size(50, 25);
+            this.tempComboBox.TabIndex = 42;
             // 
-            // checkBox2
+            // label5
             // 
-            this.checkBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(557, 41);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(75, 21);
-            this.checkBox2.TabIndex = 23;
-            this.checkBox2.Text = "是否关联";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(502, 229);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 17);
+            this.label5.TabIndex = 41;
+            this.label5.Text = "映射为";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // checkBox3
+            // taComboBox
             // 
-            this.checkBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(557, 103);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(75, 21);
-            this.checkBox3.TabIndex = 25;
-            this.checkBox3.Text = "是否关联";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.taComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.taComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.taComboBox.FormattingEnabled = true;
+            this.taComboBox.Location = new System.Drawing.Point(553, 195);
+            this.taComboBox.Name = "taComboBox";
+            this.taComboBox.Size = new System.Drawing.Size(50, 25);
+            this.taComboBox.TabIndex = 40;
             // 
-            // checkBox4
+            // label6
             // 
-            this.checkBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(557, 72);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(75, 21);
-            this.checkBox4.TabIndex = 24;
-            this.checkBox4.Text = "是否关联";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(502, 198);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 17);
+            this.label6.TabIndex = 39;
+            this.label6.Text = "映射为";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dstComboBox
+            // 
+            this.dstComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dstComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dstComboBox.FormattingEnabled = true;
+            this.dstComboBox.Location = new System.Drawing.Point(553, 164);
+            this.dstComboBox.Name = "dstComboBox";
+            this.dstComboBox.Size = new System.Drawing.Size(50, 25);
+            this.dstComboBox.TabIndex = 38;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(502, 167);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 17);
+            this.label7.TabIndex = 37;
+            this.label7.Text = "映射为";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // myAttachComboBox
+            // 
+            this.myAttachComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.myAttachComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.myAttachComboBox.FormattingEnabled = true;
+            this.myAttachComboBox.Location = new System.Drawing.Point(553, 133);
+            this.myAttachComboBox.Name = "myAttachComboBox";
+            this.myAttachComboBox.Size = new System.Drawing.Size(50, 25);
+            this.myAttachComboBox.TabIndex = 36;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(502, 136);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(44, 17);
+            this.label8.TabIndex = 35;
+            this.label8.Text = "映射为";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // oldDataComboBox
+            // 
+            this.oldDataComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.oldDataComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.oldDataComboBox.FormattingEnabled = true;
+            this.oldDataComboBox.Location = new System.Drawing.Point(553, 102);
+            this.oldDataComboBox.Name = "oldDataComboBox";
+            this.oldDataComboBox.Size = new System.Drawing.Size(50, 25);
+            this.oldDataComboBox.TabIndex = 34;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(502, 105);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 17);
+            this.label3.TabIndex = 33;
+            this.label3.Text = "映射为";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // historyDataComboBox
+            // 
+            this.historyDataComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.historyDataComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.historyDataComboBox.FormattingEnabled = true;
+            this.historyDataComboBox.Location = new System.Drawing.Point(553, 71);
+            this.historyDataComboBox.Name = "historyDataComboBox";
+            this.historyDataComboBox.Size = new System.Drawing.Size(50, 25);
+            this.historyDataComboBox.TabIndex = 32;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(502, 74);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(44, 17);
+            this.label4.TabIndex = 31;
+            this.label4.Text = "映射为";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // newDataComboBox
+            // 
+            this.newDataComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.newDataComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.newDataComboBox.FormattingEnabled = true;
+            this.newDataComboBox.Location = new System.Drawing.Point(553, 40);
+            this.newDataComboBox.Name = "newDataComboBox";
+            this.newDataComboBox.Size = new System.Drawing.Size(50, 25);
+            this.newDataComboBox.TabIndex = 30;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(502, 43);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 17);
+            this.label1.TabIndex = 29;
+            this.label1.Text = "映射为";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // zFileComboBox
+            // 
+            this.zFileComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.zFileComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.zFileComboBox.FormattingEnabled = true;
+            this.zFileComboBox.Location = new System.Drawing.Point(553, 9);
+            this.zFileComboBox.Name = "zFileComboBox";
+            this.zFileComboBox.Size = new System.Drawing.Size(50, 25);
+            this.zFileComboBox.TabIndex = 28;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(502, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 17);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "映射为";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // tempButton
+            // 
+            this.tempButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tempButton.Location = new System.Drawing.Point(436, 226);
+            this.tempButton.Name = "tempButton";
+            this.tempButton.Size = new System.Drawing.Size(60, 23);
+            this.tempButton.TabIndex = 23;
+            this.tempButton.Text = "浏览";
+            this.tempButton.UseVisualStyleBackColor = true;
+            this.tempButton.Click += new System.EventHandler(this.tempButton_Click);
+            // 
+            // taButton
+            // 
+            this.taButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.taButton.Location = new System.Drawing.Point(436, 195);
+            this.taButton.Name = "taButton";
+            this.taButton.Size = new System.Drawing.Size(60, 23);
+            this.taButton.TabIndex = 22;
+            this.taButton.Text = "浏览";
+            this.taButton.UseVisualStyleBackColor = true;
+            this.taButton.Click += new System.EventHandler(this.taButton_Click);
+            // 
+            // dstButton
+            // 
+            this.dstButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dstButton.Location = new System.Drawing.Point(436, 164);
+            this.dstButton.Name = "dstButton";
+            this.dstButton.Size = new System.Drawing.Size(60, 23);
+            this.dstButton.TabIndex = 21;
+            this.dstButton.Text = "浏览";
+            this.dstButton.UseVisualStyleBackColor = true;
+            this.dstButton.Click += new System.EventHandler(this.dstButton_Click);
+            // 
+            // myAttachTextBox
+            // 
+            this.myAttachTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.myAttachTextBox.Location = new System.Drawing.Point(145, 133);
+            this.myAttachTextBox.Name = "myAttachTextBox";
+            this.myAttachTextBox.Size = new System.Drawing.Size(285, 23);
+            this.myAttachTextBox.TabIndex = 8;
+            // 
+            // oldDataTextBox
+            // 
+            this.oldDataTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.oldDataTextBox.Location = new System.Drawing.Point(145, 102);
+            this.oldDataTextBox.Name = "oldDataTextBox";
+            this.oldDataTextBox.Size = new System.Drawing.Size(285, 23);
+            this.oldDataTextBox.TabIndex = 6;
+            // 
+            // dstTextBox
+            // 
+            this.dstTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dstTextBox.Location = new System.Drawing.Point(145, 164);
+            this.dstTextBox.Name = "dstTextBox";
+            this.dstTextBox.Size = new System.Drawing.Size(285, 23);
+            this.dstTextBox.TabIndex = 10;
+            // 
+            // zFileTextBox
+            // 
+            this.zFileTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.zFileTextBox.Location = new System.Drawing.Point(145, 9);
+            this.zFileTextBox.Name = "zFileTextBox";
+            this.zFileTextBox.Size = new System.Drawing.Size(285, 23);
+            this.zFileTextBox.TabIndex = 0;
+            // 
+            // historyDataTextBox
+            // 
+            this.historyDataTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.historyDataTextBox.Location = new System.Drawing.Point(145, 71);
+            this.historyDataTextBox.Name = "historyDataTextBox";
+            this.historyDataTextBox.Size = new System.Drawing.Size(285, 23);
+            this.historyDataTextBox.TabIndex = 4;
+            // 
+            // taTextBox
+            // 
+            this.taTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.taTextBox.Location = new System.Drawing.Point(145, 195);
+            this.taTextBox.Name = "taTextBox";
+            this.taTextBox.Size = new System.Drawing.Size(285, 23);
+            this.taTextBox.TabIndex = 12;
+            // 
+            // tempTextBox
+            // 
+            this.tempTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tempTextBox.Location = new System.Drawing.Point(145, 226);
+            this.tempTextBox.Name = "tempTextBox";
+            this.tempTextBox.Size = new System.Drawing.Size(285, 23);
+            this.tempTextBox.TabIndex = 14;
+            // 
+            // newDataTextBox
+            // 
+            this.newDataTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.newDataTextBox.Location = new System.Drawing.Point(145, 40);
+            this.newDataTextBox.Name = "newDataTextBox";
+            this.newDataTextBox.Size = new System.Drawing.Size(285, 23);
+            this.newDataTextBox.TabIndex = 2;
+            // 
+            // myAttachButton
+            // 
+            this.myAttachButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.myAttachButton.Location = new System.Drawing.Point(436, 133);
+            this.myAttachButton.Name = "myAttachButton";
+            this.myAttachButton.Size = new System.Drawing.Size(60, 23);
+            this.myAttachButton.TabIndex = 20;
+            this.myAttachButton.Text = "浏览";
+            this.myAttachButton.UseVisualStyleBackColor = true;
+            this.myAttachButton.Click += new System.EventHandler(this.myAttachButton_Click);
+            // 
+            // oldDataLabel
+            // 
+            this.oldDataLabel.AutoSize = true;
+            this.oldDataLabel.Location = new System.Drawing.Point(27, 105);
+            this.oldDataLabel.Name = "oldDataLabel";
+            this.oldDataLabel.Size = new System.Drawing.Size(112, 17);
+            this.oldDataLabel.TabIndex = 7;
+            this.oldDataLabel.Text = "网络磁盘 Old Data";
+            this.oldDataLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // oldDataButton
+            // 
+            this.oldDataButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.oldDataButton.Location = new System.Drawing.Point(436, 102);
+            this.oldDataButton.Name = "oldDataButton";
+            this.oldDataButton.Size = new System.Drawing.Size(60, 23);
+            this.oldDataButton.TabIndex = 19;
+            this.oldDataButton.Text = "浏览";
+            this.oldDataButton.UseVisualStyleBackColor = true;
+            this.oldDataButton.Click += new System.EventHandler(this.oldDataButton_Click);
+            // 
+            // myAttachLabel
+            // 
+            this.myAttachLabel.AutoSize = true;
+            this.myAttachLabel.Location = new System.Drawing.Point(21, 136);
+            this.myAttachLabel.Name = "myAttachLabel";
+            this.myAttachLabel.Size = new System.Drawing.Size(118, 17);
+            this.myAttachLabel.TabIndex = 9;
+            this.myAttachLabel.Text = "网络磁盘 My Attach";
+            this.myAttachLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // historyDataButton
+            // 
+            this.historyDataButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.historyDataButton.Location = new System.Drawing.Point(436, 71);
+            this.historyDataButton.Name = "historyDataButton";
+            this.historyDataButton.Size = new System.Drawing.Size(60, 23);
+            this.historyDataButton.TabIndex = 18;
+            this.historyDataButton.Text = "浏览";
+            this.historyDataButton.UseVisualStyleBackColor = true;
+            this.historyDataButton.Click += new System.EventHandler(this.historyDataButton_Click);
+            // 
+            // newDataButton
+            // 
+            this.newDataButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.newDataButton.Location = new System.Drawing.Point(436, 40);
+            this.newDataButton.Name = "newDataButton";
+            this.newDataButton.Size = new System.Drawing.Size(60, 23);
+            this.newDataButton.TabIndex = 17;
+            this.newDataButton.Text = "浏览";
+            this.newDataButton.UseVisualStyleBackColor = true;
+            this.newDataButton.Click += new System.EventHandler(this.newDataButton_Click);
+            // 
+            // zFileButton
+            // 
+            this.zFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.zFileButton.Location = new System.Drawing.Point(436, 9);
+            this.zFileButton.Name = "zFileButton";
+            this.zFileButton.Size = new System.Drawing.Size(60, 23);
+            this.zFileButton.TabIndex = 16;
+            this.zFileButton.Text = "浏览";
+            this.zFileButton.UseVisualStyleBackColor = true;
+            this.zFileButton.Click += new System.EventHandler(this.zFileButton_Click);
+            // 
+            // historyDataLabel
+            // 
+            this.historyDataLabel.AutoSize = true;
+            this.historyDataLabel.Location = new System.Drawing.Point(7, 74);
+            this.historyDataLabel.Name = "historyDataLabel";
+            this.historyDataLabel.Size = new System.Drawing.Size(132, 17);
+            this.historyDataLabel.TabIndex = 5;
+            this.historyDataLabel.Text = "网络磁盘 History Data";
+            this.historyDataLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dstLabel
+            // 
+            this.dstLabel.AutoSize = true;
+            this.dstLabel.Location = new System.Drawing.Point(60, 167);
+            this.dstLabel.Name = "dstLabel";
+            this.dstLabel.Size = new System.Drawing.Size(79, 17);
+            this.dstLabel.TabIndex = 11;
+            this.dstLabel.Text = "网络磁盘 Dst";
+            this.dstLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // tempLabel
+            // 
+            this.tempLabel.AutoSize = true;
+            this.tempLabel.Location = new System.Drawing.Point(46, 229);
+            this.tempLabel.Name = "tempLabel";
+            this.tempLabel.Size = new System.Drawing.Size(93, 17);
+            this.tempLabel.TabIndex = 15;
+            this.tempLabel.Text = "网络磁盘 Temp";
+            this.tempLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // zFileLabel
+            // 
+            this.zFileLabel.AutoSize = true;
+            this.zFileLabel.Location = new System.Drawing.Point(53, 12);
+            this.zFileLabel.Name = "zFileLabel";
+            this.zFileLabel.Size = new System.Drawing.Size(86, 17);
+            this.zFileLabel.TabIndex = 1;
+            this.zFileLabel.Text = "网络磁盘 ZFile";
+            this.zFileLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // newDataLabel
+            // 
+            this.newDataLabel.AutoSize = true;
+            this.newDataLabel.Location = new System.Drawing.Point(22, 43);
+            this.newDataLabel.Name = "newDataLabel";
+            this.newDataLabel.Size = new System.Drawing.Size(117, 17);
+            this.newDataLabel.TabIndex = 3;
+            this.newDataLabel.Text = "网络磁盘 New Data";
+            this.newDataLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // taLabel
+            // 
+            this.taLabel.AutoSize = true;
+            this.taLabel.Location = new System.Drawing.Point(65, 198);
+            this.taLabel.Name = "taLabel";
+            this.taLabel.Size = new System.Drawing.Size(74, 17);
+            this.taLabel.TabIndex = 13;
+            this.taLabel.Text = "网络磁盘 Ta";
+            this.taLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // settingsTabControl
+            // 
+            this.settingsTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.settingsTabControl.Controls.Add(this.disksTabPage);
+            this.settingsTabControl.Controls.Add(this.filesOpenTabPage);
+            this.settingsTabControl.Controls.Add(this.appUpTabPage);
+            this.settingsTabControl.Controls.Add(this.sqlTabPage);
+            this.settingsTabControl.Controls.Add(this.autoTabPage);
+            this.settingsTabControl.Location = new System.Drawing.Point(-1, 5);
+            this.settingsTabControl.Multiline = true;
+            this.settingsTabControl.Name = "settingsTabControl";
+            this.settingsTabControl.SelectedIndex = 0;
+            this.settingsTabControl.Size = new System.Drawing.Size(646, 321);
+            this.settingsTabControl.TabIndex = 0;
+            // 
+            // sqlTabPage
+            // 
+            this.sqlTabPage.Controls.Add(this.sqlServerIPTextBox);
+            this.sqlTabPage.Controls.Add(this.label9);
+            this.sqlTabPage.Controls.Add(this.sqlDataNameTextBox);
+            this.sqlTabPage.Controls.Add(this.sqlUserIDTextBox);
+            this.sqlTabPage.Controls.Add(this.label10);
+            this.sqlTabPage.Controls.Add(this.label14);
+            this.sqlTabPage.Controls.Add(this.label13);
+            this.sqlTabPage.Controls.Add(this.sqlPasswordTextBox);
+            this.sqlTabPage.Location = new System.Drawing.Point(4, 26);
+            this.sqlTabPage.Name = "sqlTabPage";
+            this.sqlTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.sqlTabPage.Size = new System.Drawing.Size(638, 291);
+            this.sqlTabPage.TabIndex = 3;
+            this.sqlTabPage.Text = "数据库";
+            this.sqlTabPage.UseVisualStyleBackColor = true;
+            // 
+            // sqlServerIPTextBox
+            // 
+            this.sqlServerIPTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sqlServerIPTextBox.Location = new System.Drawing.Point(56, 9);
+            this.sqlServerIPTextBox.Name = "sqlServerIPTextBox";
+            this.sqlServerIPTextBox.Size = new System.Drawing.Size(572, 23);
+            this.sqlServerIPTextBox.TabIndex = 1;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(19, 12);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(32, 17);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "地址";
+            // 
+            // sqlDataNameTextBox
+            // 
+            this.sqlDataNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sqlDataNameTextBox.Location = new System.Drawing.Point(56, 40);
+            this.sqlDataNameTextBox.Name = "sqlDataNameTextBox";
+            this.sqlDataNameTextBox.Size = new System.Drawing.Size(572, 23);
+            this.sqlDataNameTextBox.TabIndex = 3;
+            // 
+            // sqlUserIDTextBox
+            // 
+            this.sqlUserIDTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sqlUserIDTextBox.Location = new System.Drawing.Point(56, 71);
+            this.sqlUserIDTextBox.Name = "sqlUserIDTextBox";
+            this.sqlUserIDTextBox.Size = new System.Drawing.Size(572, 23);
+            this.sqlUserIDTextBox.TabIndex = 7;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(7, 43);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(44, 17);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "数据库";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(19, 74);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(32, 17);
+            this.label14.TabIndex = 6;
+            this.label14.Text = "用户";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(20, 105);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(32, 17);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "密码";
+            // 
+            // sqlPasswordTextBox
+            // 
+            this.sqlPasswordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sqlPasswordTextBox.Location = new System.Drawing.Point(56, 102);
+            this.sqlPasswordTextBox.Name = "sqlPasswordTextBox";
+            this.sqlPasswordTextBox.Size = new System.Drawing.Size(572, 23);
+            this.sqlPasswordTextBox.TabIndex = 9;
+            this.sqlPasswordTextBox.UseSystemPasswordChar = true;
+            // 
+            // autoTabPage
+            // 
+            this.autoTabPage.Location = new System.Drawing.Point(4, 26);
+            this.autoTabPage.Name = "autoTabPage";
+            this.autoTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.autoTabPage.Size = new System.Drawing.Size(638, 291);
+            this.autoTabPage.TabIndex = 4;
+            this.autoTabPage.Text = "后台自动化";
+            this.autoTabPage.UseVisualStyleBackColor = true;
+            // 
+            // disksCancelButton
+            // 
+            this.disksCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.disksCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.disksCancelButton.Location = new System.Drawing.Point(555, 331);
+            this.disksCancelButton.Name = "disksCancelButton";
+            this.disksCancelButton.Size = new System.Drawing.Size(80, 23);
+            this.disksCancelButton.TabIndex = 24;
+            this.disksCancelButton.Text = "取消";
+            this.disksCancelButton.UseVisualStyleBackColor = true;
+            this.disksCancelButton.Click += new System.EventHandler(this.disksCancelButton_Click);
+            // 
+            // disksSaveButton
+            // 
+            this.disksSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.disksSaveButton.Location = new System.Drawing.Point(469, 331);
+            this.disksSaveButton.Name = "disksSaveButton";
+            this.disksSaveButton.Size = new System.Drawing.Size(80, 23);
+            this.disksSaveButton.TabIndex = 25;
+            this.disksSaveButton.Text = "保存";
+            this.disksSaveButton.UseVisualStyleBackColor = true;
+            this.disksSaveButton.Click += new System.EventHandler(this.disksSaveButton_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            this.openFileDialog.Filter = "应用程序|*.exe";
             // 
             // AppSettingsForm
             // 
@@ -1106,7 +1103,7 @@
         private System.Windows.Forms.Button embFileButton;
         private System.Windows.Forms.Button dstFileButton;
         private System.Windows.Forms.Label jpgFileLabel;
-        private System.Windows.Forms.TextBox dstFileextBox;
+        private System.Windows.Forms.TextBox dstFileTextBox;
         private System.Windows.Forms.TextBox jpgFileTextBox;
         private System.Windows.Forms.TextBox embFileTextBox;
         private System.Windows.Forms.Label dstFileLabel;
@@ -1145,15 +1142,13 @@
         private System.Windows.Forms.CheckBox appAutoUpCheckBox;
         private System.Windows.Forms.Button disksSaveButton;
         private System.Windows.Forms.Button disksCancelButton;
-        private System.Windows.Forms.TextBox sqlIPTextBox;
+        private System.Windows.Forms.TextBox sqlServerIPTextBox;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox sqlDataTextBox;
-        private System.Windows.Forms.TextBox sqlUserTextBox;
+        private System.Windows.Forms.TextBox sqlDataNameTextBox;
+        private System.Windows.Forms.TextBox sqlUserIDTextBox;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox sqlTableTextBox;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox sqlPasswordTextBox;
         private System.Windows.Forms.Button aiFileButton;
         private System.Windows.Forms.Label aiFileLabel;
@@ -1182,9 +1177,11 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox aiFileCheckBox;
+        private System.Windows.Forms.CheckBox jpgFileCheckBox;
+        private System.Windows.Forms.CheckBox embFileCheckBox;
+        private System.Windows.Forms.CheckBox dstFileCheckBox;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }

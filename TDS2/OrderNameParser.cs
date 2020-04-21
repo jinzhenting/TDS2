@@ -60,15 +60,37 @@ namespace TDS2
         {
             if (Parser(inOrderName))
             {
-                if (inOrderClass == "Dst") return Path.Combine(Customer.Substring(0, 1), Customer, "In_Out", Year + Month, inOrderName + ".dst");// Dst模式
-                else if (inOrderClass == "Emb") return Path.Combine(Customer.Substring(0, 1), Customer, "Emb", Year + Month, inOrderName + ".emb");// Emb模式
-                else if (inOrderClass == "Vector") return Path.Combine("VcetorData", Year + Month, Customer);// Vector模式
+                switch (inOrderClass)
+                {
+                    case "Dst":// Dst模式
+                        {
+                            return Path.Combine(Customer.Substring(0, 1), Customer, "In_Out", Year + Month, inOrderName + ".dst");
+                        }
+                    case "Emb":// Emb模式
+                        {
+                            return Path.Combine(Customer.Substring(0, 1), Customer, "Emb", Year + Month, inOrderName + ".emb");
+                        }
+                    case "Vector":// Vector模式
+                        {
+                            return Path.Combine("VcetorData", Year + Month, Customer);
+                        }
+                    default:
+                        {
+                            MessageBox.Show("不支持 " + inOrderClass + " 订单类型的解析", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            return inOrderName;
+                        }
+                }
             }
             MessageBox.Show("传入解析器的订单号 " + inOrderName + " 错误", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             return inOrderName;
         }
 
-        private static bool Parser(string str)// 检测
+        /// <summary>
+        /// 检测是否为订单号
+        /// </summary>
+        /// <param name="str">订单号</param>
+        /// <returns></returns>
+        private static bool Parser(string str)
         {
             return (New(str) || Old(str));// 如果New订单检测成功，返回true，否则返回Old的检测结果
         }
