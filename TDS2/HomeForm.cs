@@ -189,11 +189,25 @@ namespace TDS2
                         itemOpen.Text = Path.GetFileName(files);
                         itemOpen.Click += new EventHandler(Open_ItemClick);
                         orderOpenMenuItem.DropDownItems.Add(itemOpen);
+                        ///
                         ToolStripMenuItem itemCopy = new ToolStripMenuItem();
                         itemCopy.Name = files;
                         itemCopy.Text = Path.GetFileName(files);
                         itemCopy.Click += new EventHandler(Copy_ItemClick);
                         orderCopyMenuItem.DropDownItems.Add(itemCopy);
+                        ///
+                        ToolStripMenuItem itemCopy2Z = new ToolStripMenuItem();
+                        itemCopy2Z.Name = "给打版师";
+                        itemCopy2Z.Text = "给打版师";
+                        itemCopy.DropDownItems.Add(itemCopy2Z);
+                        ///
+                        foreach (string str in editorList.EditorsName)
+                        {
+                            ToolStripMenuItem i = new ToolStripMenuItem();
+                            i.Name = str;
+                            i.Text = str;
+                            itemCopy2Z.DropDownItems.Add(i);
+                        }
                     }
                 }
                 else// 没有项目刚关闭菜单
@@ -328,6 +342,7 @@ namespace TDS2
         {
             ToolStripMenuItem item = (ToolStripMenuItem)sender;// 获取传过来的子菜单
             System.Diagnostics.Process.Start("explorer.exe", item.Name);// 添加事件
+
         }
 
         /// <summary>
@@ -340,6 +355,13 @@ namespace TDS2
             strcoll.Add(item.Name);
             Clipboard.SetFileDropList(strcoll);// 文件集合传入剪贴板
         }
+
+
+
+
+
+
+
 
         /// <summary>
         /// 打开列表菜单时
