@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Pathss>
-  <ZFile netPath="\\nrl\Z_file" localPath="L:\"></ZFile>
+  <ZFile netPath="\\nrl\Z_file" localPath="L:"></ZFile>
   <NewData netPath="\\nr\New_data" localPath="V:"></NewData>
-  <HistoryData netPath="\\nrl\History_data" localPath="O:\"></HistoryData>
-  <OldData netPath="\\nrl\Old_data" localPath="P:\"></OldData>
+  <HistoryData netPath="\\nrl\History_data" localPath="O:"></HistoryData>
+  <OldData netPath="\\nrl\Old_data" localPath="P:"></OldData>
   <MyAttach netPath="\\nr\My_attach" localPath="X:"></MyAttach>
   <DST netPath="\\nrl\DST" localPath="S:"></DST>
   <Ta netPath="\\nrl\Ta" localPath="U:"></Ta>
