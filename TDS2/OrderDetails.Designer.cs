@@ -122,6 +122,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "订单详细";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.orderPictureBox)).EndInit();
             this.picturePanel.ResumeLayout(false);
             this.ResumeLayout(false);

@@ -101,42 +101,52 @@ namespace TDS2
             {
                 case "Rush Editing":// 订单类型 急改带
                     {
-                        order.OrderUrgency = "0.5小时内";
+                        order.OrderUrgency = "急改 - 30分钟内";
                         break;
                     }
                 case "Editing":// 订单类型 改带
                     {
-                        order.OrderUrgency = "1小时内";
+                        order.OrderUrgency = "改带 - 1小时内";
                         break;
                     }
                 case "Quote":// 订单类型 估针
                     {
-                        order.OrderUrgency = "1小时内";
+                        order.OrderUrgency = "估针 - 1小时内";
                         break;
                     }
                 case "Super Rush":// 订单类型 特急带
                     {
-                        order.OrderUrgency = "1小时内";
+                        order.OrderUrgency = "特急 - 1小时内";
                         break;
                     }
                 case "Rush":// 订单类型 急带
                     {
-                        order.OrderUrgency = "5小时内";
+                        order.OrderUrgency = "紧急 - 5小时内";
                         break;
                     }
                 case "5PM":// 订单类型 一般
                     {
-                        order.OrderUrgency = "17:00时前";
+                        order.OrderUrgency = "一般 - 17:00时前";
                         break;
                     }
                 case "24 hours":// 订单类型 正常
                     {
-                        order.OrderUrgency = "24小时内";
+                        order.OrderUrgency = "正常 - 24小时内";
+                        break;
+                    }
+                case "2-3 days":// 订单类型 长时
+                    {
+                        order.OrderUrgency = "长时 - 2至3天";
+                        break;
+                    }
+                case "4-6 days":// 订单类型 超长时
+                    {
+                        order.OrderUrgency = "超长时 - 4至6天";
                         break;
                     }
                 default:
                     {
-                        order.OrderUrgency = "紧急度字段错误";
+                        order.OrderUrgency = "";
                         break;
                     }
             }
@@ -202,7 +212,7 @@ namespace TDS2
                     }
                 default:
                     {
-                        order.NrInShift = "班次字段错误";
+                        order.NrInShift = "";
                         break;
                     }
             }
@@ -262,7 +272,7 @@ namespace TDS2
                     }
                 default:
                     {
-                        order.EmbZShift = "班次字段错误";
+                        order.EmbZShift = "";
                         break;
                     }
             }
@@ -355,7 +365,7 @@ namespace TDS2
                     }
                 default:
                     {
-                        order.NrOutShift = "班次字段错误";
+                        order.NrOutShift = "";
                         break;
                     }
             }

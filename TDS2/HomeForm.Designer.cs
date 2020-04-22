@@ -31,8 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.orderContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.orderRefreshMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.orderOpenMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.orderFilesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderCopyMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.orderAddMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,6 +97,7 @@
             this.messageFormButton = new System.Windows.Forms.Button();
             this.searchBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.orderContextMenuStrip.SuspendLayout();
             this.homeStatusStrip.SuspendLayout();
             this.homeMenuStrip.SuspendLayout();
@@ -110,8 +110,6 @@
             // 
             this.orderContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.orderRefreshMenuItem,
-            this.toolStripSeparator1,
-            this.orderOpenMenuItem,
             this.orderCopyMenuItem,
             this.toolStripSeparator2,
             this.orderAddMenuItem,
@@ -122,9 +120,11 @@
             this.orderModifyMenuItem,
             this.orderCancelMenuItem,
             this.orderDeleteMenuItem,
+            this.toolStripSeparator1,
+            this.orderFilesMenuItem,
             this.orderDetailsMenuItem});
             this.orderContextMenuStrip.Name = "orderContextMenuStrip";
-            this.orderContextMenuStrip.Size = new System.Drawing.Size(191, 264);
+            this.orderContextMenuStrip.Size = new System.Drawing.Size(191, 286);
             this.orderContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.orderContextMenuStrip_Opening);
             // 
             // orderRefreshMenuItem
@@ -134,22 +134,18 @@
             this.orderRefreshMenuItem.Text = "刷新列表 (F5)";
             this.orderRefreshMenuItem.Click += new System.EventHandler(this.orderRefreshMenuItem_Click);
             // 
-            // toolStripSeparator1
+            // orderFilesMenuItem
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(187, 6);
-            // 
-            // orderOpenMenuItem
-            // 
-            this.orderOpenMenuItem.Name = "orderOpenMenuItem";
-            this.orderOpenMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.orderOpenMenuItem.Text = "打开";
+            this.orderFilesMenuItem.Name = "orderFilesMenuItem";
+            this.orderFilesMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.orderFilesMenuItem.Text = "订单文件";
             // 
             // orderCopyMenuItem
             // 
             this.orderCopyMenuItem.Name = "orderCopyMenuItem";
             this.orderCopyMenuItem.Size = new System.Drawing.Size(190, 22);
             this.orderCopyMenuItem.Text = "复制";
+            this.orderCopyMenuItem.Click += new System.EventHandler(this.orderCopyMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -174,7 +170,7 @@
             // 
             this.orderCheckMenuItem.Name = "orderCheckMenuItem";
             this.orderCheckMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.orderCheckMenuItem.Text = "检查";
+            this.orderCheckMenuItem.Text = "检查 (Ctrl+Enter)";
             this.orderCheckMenuItem.Click += new System.EventHandler(this.orderCheckMenuItem_Click);
             // 
             // orderReturnMenuItem
@@ -222,9 +218,9 @@
             this.homeStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.homeProgressBar,
             this.homeStatusLabel});
-            this.homeStatusStrip.Location = new System.Drawing.Point(0, 707);
+            this.homeStatusStrip.Location = new System.Drawing.Point(0, 739);
             this.homeStatusStrip.Name = "homeStatusStrip";
-            this.homeStatusStrip.Size = new System.Drawing.Size(1064, 22);
+            this.homeStatusStrip.Size = new System.Drawing.Size(1184, 22);
             this.homeStatusStrip.TabIndex = 1;
             this.homeStatusStrip.Text = "homeStatusStrip";
             // 
@@ -248,7 +244,7 @@
             this.appHelpMenuItem});
             this.homeMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.homeMenuStrip.Name = "homeMenuStrip";
-            this.homeMenuStrip.Size = new System.Drawing.Size(1064, 25);
+            this.homeMenuStrip.Size = new System.Drawing.Size(1184, 25);
             this.homeMenuStrip.TabIndex = 2;
             this.homeMenuStrip.Text = "homeMenuStrip";
             // 
@@ -364,7 +360,7 @@
             this.orderListView.Location = new System.Drawing.Point(-4, 35);
             this.orderListView.MultiSelect = false;
             this.orderListView.Name = "orderListView";
-            this.orderListView.Size = new System.Drawing.Size(1066, 511);
+            this.orderListView.Size = new System.Drawing.Size(1186, 543);
             this.orderListView.TabIndex = 4;
             this.orderListView.UseCompatibleStateImageBehavior = false;
             this.orderListView.ItemMouseHover += new System.Windows.Forms.ListViewItemMouseHoverEventHandler(this.orderListView_ItemMouseHover);
@@ -383,7 +379,7 @@
             this.homeTabControl.Location = new System.Drawing.Point(-1, 97);
             this.homeTabControl.Name = "homeTabControl";
             this.homeTabControl.SelectedIndex = 0;
-            this.homeTabControl.Size = new System.Drawing.Size(1067, 612);
+            this.homeTabControl.Size = new System.Drawing.Size(1187, 644);
             this.homeTabControl.TabIndex = 5;
             // 
             // orderTabPage
@@ -416,7 +412,7 @@
             this.orderTabPage.Location = new System.Drawing.Point(4, 26);
             this.orderTabPage.Name = "orderTabPage";
             this.orderTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.orderTabPage.Size = new System.Drawing.Size(1059, 582);
+            this.orderTabPage.Size = new System.Drawing.Size(1179, 614);
             this.orderTabPage.TabIndex = 0;
             this.orderTabPage.Text = " 订单页  ";
             this.orderTabPage.UseVisualStyleBackColor = true;
@@ -424,7 +420,7 @@
             // orderZButton
             // 
             this.orderZButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderZButton.Location = new System.Drawing.Point(791, 552);
+            this.orderZButton.Location = new System.Drawing.Point(911, 584);
             this.orderZButton.Name = "orderZButton";
             this.orderZButton.Size = new System.Drawing.Size(60, 23);
             this.orderZButton.TabIndex = 53;
@@ -435,7 +431,7 @@
             // orderEButton
             // 
             this.orderEButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderEButton.Location = new System.Drawing.Point(857, 552);
+            this.orderEButton.Location = new System.Drawing.Point(977, 584);
             this.orderEButton.Name = "orderEButton";
             this.orderEButton.Size = new System.Drawing.Size(60, 23);
             this.orderEButton.TabIndex = 52;
@@ -447,7 +443,7 @@
             // 
             this.orderListTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.orderListTrackBar.BackColor = System.Drawing.SystemColors.Window;
-            this.orderListTrackBar.Location = new System.Drawing.Point(89, 552);
+            this.orderListTrackBar.Location = new System.Drawing.Point(89, 584);
             this.orderListTrackBar.Maximum = 7;
             this.orderListTrackBar.Name = "orderListTrackBar";
             this.orderListTrackBar.Size = new System.Drawing.Size(104, 45);
@@ -464,7 +460,7 @@
             this.thumbnailComboBox.Items.AddRange(new object[] {
             "缩略图",
             "表格"});
-            this.thumbnailComboBox.Location = new System.Drawing.Point(6, 551);
+            this.thumbnailComboBox.Location = new System.Drawing.Point(6, 583);
             this.thumbnailComboBox.Name = "thumbnailComboBox";
             this.thumbnailComboBox.Size = new System.Drawing.Size(80, 25);
             this.thumbnailComboBox.TabIndex = 51;
@@ -545,13 +541,15 @@
             this.orderEndComboBox.FormattingEnabled = true;
             this.orderEndComboBox.Items.AddRange(new object[] {
             "全部",
-            "急改带 - 0.5小时内",
+            "急改 - 30分钟内",
             "估针 - 1小时内",
             "改带 - 1小时内",
             "特急 - 1小时内",
             "紧急 - 5小时内",
             "一般 - 17:00前",
-            "正常 - 24小时内"});
+            "正常 - 24小时内",
+            "长时 - 2至3天",
+            "超长时 - 4至6天"});
             this.orderEndComboBox.Location = new System.Drawing.Point(775, 5);
             this.orderEndComboBox.Name = "orderEndComboBox";
             this.orderEndComboBox.Size = new System.Drawing.Size(120, 25);
@@ -578,7 +576,7 @@
             // searchTextBox
             // 
             this.searchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.searchTextBox.Location = new System.Drawing.Point(304, 552);
+            this.searchTextBox.Location = new System.Drawing.Point(304, 584);
             this.searchTextBox.Name = "searchTextBox";
             this.searchTextBox.Size = new System.Drawing.Size(120, 23);
             this.searchTextBox.TabIndex = 16;
@@ -587,7 +585,7 @@
             // orderSesrchButton
             // 
             this.orderSesrchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.orderSesrchButton.Location = new System.Drawing.Point(430, 553);
+            this.orderSesrchButton.Location = new System.Drawing.Point(430, 585);
             this.orderSesrchButton.Name = "orderSesrchButton";
             this.orderSesrchButton.Size = new System.Drawing.Size(60, 23);
             this.orderSesrchButton.TabIndex = 15;
@@ -634,7 +632,7 @@
             // orderAddButton
             // 
             this.orderAddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderAddButton.Location = new System.Drawing.Point(659, 552);
+            this.orderAddButton.Location = new System.Drawing.Point(779, 584);
             this.orderAddButton.Name = "orderAddButton";
             this.orderAddButton.Size = new System.Drawing.Size(60, 23);
             this.orderAddButton.TabIndex = 31;
@@ -645,7 +643,7 @@
             // orderRefreshButton
             // 
             this.orderRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.orderRefreshButton.Location = new System.Drawing.Point(198, 552);
+            this.orderRefreshButton.Location = new System.Drawing.Point(198, 584);
             this.orderRefreshButton.Name = "orderRefreshButton";
             this.orderRefreshButton.Size = new System.Drawing.Size(100, 23);
             this.orderRefreshButton.TabIndex = 30;
@@ -656,7 +654,7 @@
             // orderDeliverButton
             // 
             this.orderDeliverButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderDeliverButton.Location = new System.Drawing.Point(725, 552);
+            this.orderDeliverButton.Location = new System.Drawing.Point(845, 584);
             this.orderDeliverButton.Name = "orderDeliverButton";
             this.orderDeliverButton.Size = new System.Drawing.Size(60, 23);
             this.orderDeliverButton.TabIndex = 21;
@@ -667,7 +665,7 @@
             // orderReturnButton
             // 
             this.orderReturnButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderReturnButton.Location = new System.Drawing.Point(989, 552);
+            this.orderReturnButton.Location = new System.Drawing.Point(1109, 584);
             this.orderReturnButton.Name = "orderReturnButton";
             this.orderReturnButton.Size = new System.Drawing.Size(60, 23);
             this.orderReturnButton.TabIndex = 22;
@@ -678,7 +676,7 @@
             // orderCheckButton
             // 
             this.orderCheckButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderCheckButton.Location = new System.Drawing.Point(923, 552);
+            this.orderCheckButton.Location = new System.Drawing.Point(1043, 584);
             this.orderCheckButton.Name = "orderCheckButton";
             this.orderCheckButton.Size = new System.Drawing.Size(60, 23);
             this.orderCheckButton.TabIndex = 23;
@@ -691,7 +689,7 @@
             this.searchTabPage.Location = new System.Drawing.Point(4, 26);
             this.searchTabPage.Name = "searchTabPage";
             this.searchTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.searchTabPage.Size = new System.Drawing.Size(1059, 582);
+            this.searchTabPage.Size = new System.Drawing.Size(1179, 614);
             this.searchTabPage.TabIndex = 1;
             this.searchTabPage.Text = " 高级搜索   ";
             this.searchTabPage.UseVisualStyleBackColor = true;
@@ -715,7 +713,7 @@
             this.homeMenuPanel.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.homeMenuPanel.Location = new System.Drawing.Point(-5, 24);
             this.homeMenuPanel.Name = "homeMenuPanel";
-            this.homeMenuPanel.Size = new System.Drawing.Size(1080, 1);
+            this.homeMenuPanel.Size = new System.Drawing.Size(1200, 1);
             this.homeMenuPanel.TabIndex = 25;
             // 
             // sqlUpDataButton
@@ -770,7 +768,7 @@
             // 
             this.messageFormButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.messageFormButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.messageFormButton.Location = new System.Drawing.Point(998, 31);
+            this.messageFormButton.Location = new System.Drawing.Point(1118, 31);
             this.messageFormButton.Name = "messageFormButton";
             this.messageFormButton.Size = new System.Drawing.Size(60, 60);
             this.messageFormButton.TabIndex = 35;
@@ -793,11 +791,16 @@
             this.imageList.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(187, 6);
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1064, 729);
+            this.ClientSize = new System.Drawing.Size(1184, 761);
             this.Controls.Add(this.messageFormButton);
             this.Controls.Add(this.appSettingsButton);
             this.Controls.Add(this.diskMappingButton);
@@ -873,9 +876,7 @@
         private System.Windows.Forms.Button diskMappingButton;
         private System.Windows.Forms.Button filesSortButton;
         private System.Windows.Forms.Button messageFormButton;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem orderOpenMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem orderCopyMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem orderFilesMenuItem;
         private System.Windows.Forms.ToolStripMenuItem orderDeleteMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem orderAddMenuItem;
@@ -902,5 +903,7 @@
         private System.Windows.Forms.MenuStrip homeMenuStrip;
         private System.Windows.Forms.Button orderEButton;
         private System.Windows.Forms.Button orderZButton;
+        private System.Windows.Forms.ToolStripMenuItem orderCopyMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

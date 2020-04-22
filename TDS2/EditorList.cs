@@ -31,6 +31,28 @@ namespace TDS2
         }
 
         /// <summary>
+        /// 通过版师编号获取图片文件夹
+        /// </summary>
+        /// <param name="editor">版师编号</param>
+        /// <returns></returns>
+        public static string GetJpgFolder(string editor)
+        {
+            DiskList diskList = new DiskList();
+            return Path.Combine(diskList.ZFlie.NetPath, editor, "Jpg_Dst");
+        }
+
+        /// <summary>
+        /// 通过版师编号获取内部格式文件夹
+        /// </summary>
+        /// <param name="editor">版师编号</param>
+        /// <returns></returns>
+        public static string GetEmbFolder(string editor)
+        {
+            DiskList diskList = new DiskList();
+            return Path.Combine(diskList.ZFlie.NetPath, editor, "Emb");
+        }
+
+        /// <summary>
         /// 打版师列表
         /// </summary>
         private List<Editor> editors = new List<Editor>();
