@@ -24,6 +24,11 @@ namespace TDS2
         private List<Order> orders = new List<Order>();
 
         /// <summary>
+        /// 选中的订单
+        /// </summary>
+        private Order selectedOrder;
+
+        /// <summary>
         /// 网盘集
         /// </summary>
         private DiskList disks = new DiskList();
@@ -93,6 +98,7 @@ namespace TDS2
             try// 图标
             {
                 Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Icon.ico"));
+                ///
                 sqlUpDataButton.Image = Image.FromFile(@"Image\Data.png");
                 filesSortButton.Image = Image.FromFile(@"Image\Sort.png");
                 diskMappingButton.Image = Image.FromFile(@"Image\Disk.png");
@@ -143,8 +149,7 @@ namespace TDS2
         private void MenuPermission(string dept)
         {
             bool noSearch = !searchBackgroundWorker.IsBusy;// 后台没有在查询
-            bool isSelected = orderListView.SelectedItems.Count > 0;// 选中了项目
-
+            bool isSelected = selectedOrder != null;// 选中了项目
             ///
 
             orderStartDateTimePicker.Enabled = noSearch;// 列表按钮 开始时间
@@ -157,13 +162,13 @@ namespace TDS2
 
             thumbnailComboBox.Enabled = noSearch;// 列表按钮 列表显示方式
             orderListTrackBar.Enabled = noSearch;// 列表按钮 调整缩略图大小
-            orderRefreshButton.Text = noSearch ? "刷新列表 (F5)" : "停止载入(Esc)";// 列表按钮 刷新
+            orderRefreshButton.Text = noSearch ? "重新载入 (F5)" : "停止载入(Esc)";// 列表按钮 刷新
             searchTextBox.Enabled = noSearch;// 列表搜索框
             orderSesrchButton.Enabled = noSearch;// 列表按钮 搜索
 
             ///
 
-            orderAddButton.Enabled = noSearch && isSelected && dept == "OA";// 列表按钮 接带
+            orderAddButton.Enabled = noSearch && isSelected && dept == "OA" && selectedOrder.OrderClass != "等回复" && selectedOrder.OrderClass != "矢量新图" && selectedOrder.OrderClass != "矢量报价";// 列表按钮 接带
             orderDeliverButton.Enabled = noSearch && isSelected && (dept == "OA" || dept == "A");// 列表按钮 分带
             orderZButton.Enabled = noSearch && isSelected && dept == "Z";// 列表按钮 打版
             orderEButton.Enabled = noSearch && isSelected && dept == "E";// 列表按钮 车版
@@ -172,23 +177,46 @@ namespace TDS2
 
             ///
 
-            orderRefreshMenuItem.Text = noSearch ? "刷新列表 (F5)" : "停止载入(Esc)";// 列表菜单 刷新
-            orderFilesMenuItem.Enabled = noSearch && isSelected;// 列表菜单 订单文件
-            if (orderCopyMenuItem.DropDownItems.Count > 0) orderCopyMenuItem.DropDownItems.Clear();// 清空列表菜单 订单文件
-            if (orderFilesMenuItem.DropDownItems.Count > 0) orderFilesMenuItem.DropDownItems.Clear();// 清空列表菜单 订单文件
-            if (isSelected)// 如果选中项目，动态生成{打开菜单}和{复制菜单}的子菜单
+            orderRefreshMenuItem.Text = noSearch ? "重新载入 (F5)" : "停止载入(Esc)";// 列表菜单 刷新
+            
+            ///
+
+            orderDeliverMenuItem.Enabled = noSearch && isSelected && (dept == "OA" || dept == "A") && selectedOrder.OrderClass != "等回复" && selectedOrder.OrderClass != "矢量新图" && selectedOrder.OrderClass != "矢量报价";// 列表菜单 分带
+            if (orderDeliverMenuItem.DropDownItems.Count == 0)
             {
-                List<string> orderFiles = orders[orderListView.SelectedItems[0].Index].FilesPath;// 获取订单关联文件的列表
-                if (orderFiles.Count > 0)// 遍历项目
+                ToolStripMenuItem distribution2Editors = new ToolStripMenuItem();// 在 {分带} 菜单下生成一个 {到打版师} 的子菜单
+                distribution2Editors.Name = "distribution2Editors";
+                distribution2Editors.Text = "到打版师";
+                orderDeliverMenuItem.DropDownItems.Add(distribution2Editors);
+                foreach (Editor editors in editorList.Editors)
                 {
-                    foreach (string fileName in orderFiles)// 遍历搜索到的相关文件，动态生成菜单
+                    ToolStripMenuItem editor = new ToolStripMenuItem();// 为每个 {版师} 菜单生成一个 {内部格式文件夹}子菜单
+                    editor.Name = editors.Name;
+                    editor.Text = editors.Name;
+                    //editor.Click += new EventHandler(Copy2EditorEmb_ItemClick);
+                    distribution2Editors.DropDownItems.Add(editor);
+                }
+            }
+
+            ///
+
+            orderCheckMenuItem.Enabled = noSearch && isSelected && (dept == "OA" || dept == "QI" || dept == "E");// 列表菜单 检查
+            orderReturnMenuItem.Enabled = noSearch && isSelected && dept == "OA";// 列表菜单 发带
+            orderModifyMenuItem.Enabled = noSearch && isSelected && dept == "OA";// 列表菜单 修改订单
+            orderCancelMenuItem.Enabled = noSearch && isSelected && dept == "OA";// 列表菜单 取消订单
+            orderDeleteMenuItem.Enabled = noSearch && isSelected && dept == "S";// 列表菜单 删除订单
+
+            ///
+
+            orderFilesMenuItem.Enabled = noSearch && isSelected;// 列表菜单 订单文件
+            if (orderFilesMenuItem.DropDownItems.Count > 0) orderFilesMenuItem.DropDownItems.Clear();// 清空 {订单文件} 的子菜单
+            if (isSelected)// 如果选中项目，动态生成 {订单文件} 的子菜单
+            {
+                List<string> orderFiles = selectedOrder.FilesPath;// 获取订单关联文件的列表
+                if (orderFiles.Count > 0)
+                {
+                    foreach (string fileName in orderFiles)
                     {
-                        ToolStripMenuItem copy = new ToolStripMenuItem();// 在 {复制} 菜单下，生成 {订单号} 子菜单
-                        copy.Name = fileName;
-                        copy.Text = "订单号 (Crtl + C)";
-                        copy.Click += new EventHandler(CopyOrderName_ItemClick);
-                        orderCopyMenuItem.DropDownItems.Add(copy);
-                        ///
                         ToolStripMenuItem files = new ToolStripMenuItem();// 在 {订单文件} 菜单下，每个文件生成一个以文件命名的子菜单
                         files.Name = fileName;
                         files.Text = Path.GetFileName(fileName);
@@ -196,31 +224,31 @@ namespace TDS2
                         ///
                         ToolStripMenuItem open = new ToolStripMenuItem();// 在每个文件命名的菜单下生成一个 {打开} 的子菜单
                         open.Name = fileName;
-                        open.Text = "打开";
+                        open.Text = "打开 - 在默认程序中";
                         open.Click += new EventHandler(OpenOrderFile_ItemClick);
                         files.DropDownItems.Add(open);
                         ///
                         ToolStripMenuItem openFolder = new ToolStripMenuItem();// 在 {打开} 菜单下生成版师列表的子菜单
                         openFolder.Name = fileName;
-                        openFolder.Text = "打开文件夹";
+                        openFolder.Text = "打开 - 所在文件夹";
                         openFolder.Click += new EventHandler(OpenOrderFolder_ItemClick);
                         files.DropDownItems.Add(openFolder);
                         ///
                         ToolStripMenuItem copyFile = new ToolStripMenuItem();// 在每个文件命名的菜单下生成一个 {复制} 的子菜单
                         copyFile.Name = fileName;
-                        copyFile.Text = "复制";
+                        copyFile.Text = "复制 - 到剪贴板";
                         copyFile.Click += new EventHandler(CopyOrderFile_ItemClick);
                         files.DropDownItems.Add(copyFile);
                         ///
                         ToolStripMenuItem copy2Folder = new ToolStripMenuItem();// 在每个文件命名的菜单下生成一个 {复制} 的子菜单
                         copy2Folder.Name = fileName;
-                        copy2Folder.Text = "复制到选择的位置";
+                        copy2Folder.Text = "复制 - 到选择的位置";
                         copy2Folder.Click += new EventHandler(Copy2Folder_ItemClick);
                         files.DropDownItems.Add(copy2Folder);
                         ///
                         ToolStripMenuItem copy2Editor = new ToolStripMenuItem();// 在 {复制} 菜单下生成 {到打版师} 的子菜单
                         copy2Editor.Name = fileName;
-                        copy2Editor.Text = "复制到打版师";
+                        copy2Editor.Text = "复制 - 到打版师";
                         files.DropDownItems.Add(copy2Editor);
                         ///
                         foreach (Editor editors in editorList.Editors)
@@ -244,34 +272,17 @@ namespace TDS2
                         }
                     }
                 }
-                else// 没有项目刚关闭菜单
+                else// 文件数=0时
                 {
-                    orderFilesMenuItem.Enabled = false;
+                    orderFilesMenuItem.Enabled = false;// 关闭 {订单文件} 菜单
+                    orderCheckMenuItem.Enabled = false;// 关闭 {检查} 菜单
                 }
             }
             orderCopyMenuItem.Enabled = noSearch && isSelected;// 列表菜单 复制订单号
             orderAddMenuItem.Enabled = noSearch && dept == "OA";// 列表菜单 接带
-            orderDeliverMenuItem.Enabled = noSearch && isSelected && (dept == "OA" || dept == "A");// 列表菜单 分带
-            if (orderDeliverMenuItem.DropDownItems.Count == 0)// 在 {分带} 菜单下
-            {
-                ToolStripMenuItem distribution2Editors = new ToolStripMenuItem();// 在 {复制} 菜单下生成一个 {到打版师} 的子菜单
-                distribution2Editors.Name = "distribution2Editors";
-                distribution2Editors.Text = "到打版师";
-                orderDeliverMenuItem.DropDownItems.Add(distribution2Editors);
-                foreach (Editor editors in editorList.Editors)
-                {
-                    ToolStripMenuItem editor = new ToolStripMenuItem();// 为每个 {版师} 菜单生成一个 {内部格式文件夹}子菜单
-                    editor.Name = editors.Name;
-                    editor.Text = editors.Name;
-                    //editor.Click += new EventHandler(Copy2EditorEmb_ItemClick);
-                    distribution2Editors.DropDownItems.Add(editor);
-                }
-            }
-            orderCheckMenuItem.Enabled = noSearch && isSelected && (dept == "OA" || dept == "QI" || dept == "E");// 列表菜单 检查
-            orderReturnMenuItem.Enabled = noSearch && isSelected && dept == "OA";// 列表菜单 发带
-            orderModifyMenuItem.Enabled = noSearch && isSelected && dept == "OA";// 列表菜单 修改订单
-            orderCancelMenuItem.Enabled = noSearch && isSelected && dept == "OA";// 列表菜单 取消订单
-            orderDeleteMenuItem.Enabled = noSearch && isSelected && dept == "S";// 列表菜单 删除订单
+
+            ///
+
             orderDetailsMenuItem.Enabled = noSearch && isSelected;// 列表菜单 订单详细信息
         }
 
@@ -334,15 +345,16 @@ namespace TDS2
         }
 
         /// <summary>
-        /// 列表回车查看订单详细
+        /// 列表快捷键
         /// </summary>
         private void orderListView_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.Enter:
+                case Keys.Space:
                     {
-                        if (e.Control) OrderCheck();
+                        if (e.Control) { if (selectedOrder != null) OrderCheck(); }
                         else OpenOrderDetails();
                         break;
                     }
@@ -358,7 +370,7 @@ namespace TDS2
                     }
                 case Keys.C:
                     {
-                        if (e.Control) Clipboard.SetText(orders[orderListView.SelectedItems[0].Index].OrderName);
+                        if (e.Control) Clipboard.SetText(selectedOrder.OrderName);
                         break;
                     }
                 default:
@@ -367,14 +379,17 @@ namespace TDS2
         }
 
         /// <summary>
-        /// 核查功能
+        /// 检查功能
         /// </summary>
         private void OrderCheck()
         {
-            if (orderListView.SelectedItems.Count > 0)
+            if (selectedOrder.FilesPath.Count == 0)
             {
-                MessageBox.Show("核查功能未完成", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                MessageBox.Show("该订单不包含任何文件", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+            OrderCheckForm orderCheckForm = new OrderCheckForm(selectedOrder);
+            orderCheckForm.ShowDialog();
         }
 
         /// <summary>
@@ -384,7 +399,7 @@ namespace TDS2
         {
             if (orderListView.SelectedItems.Count > 0)
             {
-                OrderDetails orderDetails = new OrderDetails(orders[orderListView.SelectedItems[0].Index]);
+                OrderDetails orderDetails = new OrderDetails(selectedOrder);
                 orderDetails.ShowDialog();
             }
         }
@@ -413,6 +428,22 @@ namespace TDS2
         {
             if (!orderListView.Focused) orderListView.Focus();
         }
+        
+        /// <summary>
+        /// 失去焦点时
+        /// </summary>
+        private void orderListView_Leave(object sender, EventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// 选中项目变更时
+        /// </summary>
+        private void orderListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (orderListView.SelectedItems.Count == 0) selectedOrder = null;// 如果没有选中
+            else selectedOrder = orders[orderListView.SelectedItems[0].Index];
+        }
 
         #endregion 列表操作
 
@@ -433,25 +464,21 @@ namespace TDS2
         private void OpenOrderFolder_ItemClick(object sender, EventArgs e)
         {
             ToolStripMenuItem item = (ToolStripMenuItem)sender;// 获取传过来的子菜单
-            if (File.Exists(item.Name))// 打开
+            try
             {
                 System.Diagnostics.ProcessStartInfo processStartInfo = new System.Diagnostics.ProcessStartInfo("Explorer.exe");
                 processStartInfo.Arguments = "/e,/select," + item.Name;// 选中文件
                 System.Diagnostics.Process.Start(processStartInfo);
             }
-            else MessageBox.Show("文件不存在", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        
-        /// <summary>
-        /// {复制订单号}事件
-        /// </summary>
-        private void CopyOrderName_ItemClick(object sender, EventArgs e)
-        {
-            Clipboard.SetText(orders[orderListView.SelectedItems[0].Index].OrderName);
+            catch (Exception ex)
+            {
+                MessageBox.Show("打开文件夹时出现错误，描述如下：\r\n\r\n" + ex, "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                return;
+            }
         }
 
         /// <summary>
-        /// {复制}事件
+        /// {复制} 菜单事件
         /// </summary>
         private void CopyOrderFile_ItemClick(object sender, EventArgs e)
         {
@@ -530,20 +557,28 @@ namespace TDS2
         }
 
         /// <summary>
-        /// 复制订单号菜单
-        /// </summary>
-        private void orderCopyMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        /// <summary>
         /// 刷新菜单
         /// </summary>
         private void orderRefreshMenuItem_Click(object sender, EventArgs e)
         {
             if (searchBackgroundWorker.IsBusy) searchBackgroundWorker.CancelAsync();
             else OrderSearch("Load");
+        }
+
+        /// <summary>
+        /// 复制订单号菜单
+        /// </summary>
+        private void orderCopyNameMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(selectedOrder.OrderName);
+        }
+
+        /// <summary>
+        /// 复制客户编号菜单
+        /// </summary>
+        private void orderCopyCustomerMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(selectedOrder.OrderCustomer);
         }
 
         /// <summary>
@@ -559,7 +594,7 @@ namespace TDS2
         /// </summary>
         private void orderCheckMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("功能未完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            OrderCheck();
         }
 
         /// <summary>
@@ -751,7 +786,7 @@ namespace TDS2
         }
 
         /// <summary>
-        /// 刷新列表或停止载入按钮
+        /// 重新载入或停止载入按钮
         /// </summary>
         private void orderRefreshButton_Click(object sender, EventArgs e)
         {
@@ -819,7 +854,7 @@ namespace TDS2
         /// </summary>
         private void orderCheckButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("功能未完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            OrderCheck();
         }
 
         /// <summary>
@@ -1072,19 +1107,21 @@ namespace TDS2
                         FileInfo[] fileInfos = new DirectoryInfo(searchPath).GetFiles(orderName + "*.*");
                         foreach (FileInfo fileInfo in fileInfos) if (fileInfo.Extension.ToLower() != ".dst") orders[i].FilesPath.Add(fileInfo.FullName);// 排除Dst格式
                     }
-                }
 
-                /// O，E，F，Q，T，W，未分带时 // 在 myAttach 中查找图片
-                if ((orderClass == "新带" || orderClass == "收费改带" || orderClass == "免费改带" || orderClass == "估针" || orderClass == "试打版" || orderClass == "等回复") && orders[i].EmbManager == "" && orders[i].NrOutQc == "")
-                {
-                    FileInfo[] fileInfos = new DirectoryInfo(Path.Combine(disks.MyAttach.NetPath, "Attach_in")).GetFiles(orderName + "*.*");
-                    foreach (FileInfo fileInfo in fileInfos) orders[i].FilesPath.Add(fileInfo.FullName);
+                    /// 在 myAttachIn 中查找图片
+                    FileInfo[] myAttachIn = new DirectoryInfo(Path.Combine(disks.MyAttach.LocalPath, "Attach_In")).GetFiles(orderName + "*.*");
+                    foreach (FileInfo fileInfo in myAttachIn) orders[i].FilesPath.Add(fileInfo.FullName);
+
+                    /// 在 myAttachOut 中查找图片
+                    FileInfo[] myAttachOut = new DirectoryInfo(Path.Combine(disks.MyAttach.LocalPath, "Attach_Out")).GetFiles(orderName + "*.*");
+                    foreach (FileInfo fileInfo in myAttachOut) orders[i].FilesPath.Add(fileInfo.FullName);
                 }
 
                 /// O，E，F，Q，T，打版中
                 if ((orderClass == "新带" || orderClass == "收费改带" || orderClass == "免费改带" || orderClass == "估针" || orderClass == "试打版") && orders[i].NrOutQc == "" && orders[i].EmbZ != "")
                 {
-                    string zFlie = Path.Combine(disks.ZFlie.NetPath, orders[i].EmbZ, "Jpg_Dst");// 在打版师文件夹中查找图片
+                    /// 在 打版师文件夹 中查找图片
+                    string zFlie = Path.Combine(disks.ZFlie.LocalPath, orders[i].EmbZ, "Jpg_Dst");// 在打版师文件夹中查找图片
                     if (Directory.Exists(zFlie))
                     {
                         FileInfo[] fileInfos = new DirectoryInfo(zFlie).GetFiles(orderName + "*.*");
@@ -1095,11 +1132,11 @@ namespace TDS2
                 /// AQ，AO，W
                 if (orderClass == "矢量新图" || orderClass == "矢量报价" || orderClass == "等回复")// 等回复的带子是没有图片的，但有可能做过效果图，尝试查找IT做图文件夹
                 {
-                    searchPath = Path.Combine(disks.Vector.NetPath, "Today");// Vector\Today中查找
+                    searchPath = Path.Combine(disks.Vector.LocalPath, "Today");// Vector\Today中查找
                     FileInfo[] today = new DirectoryInfo(searchPath).GetFiles(orderName + "*.*");
                     foreach (FileInfo fileInfo in today) orders[i].FilesPath.Add(fileInfo.FullName);
                     ///
-                    searchPath = Path.Combine(disks.Vector.NetPath, OrderNameParser.GetFilePath(orderName, "Vector"));// Vector\VcetorData中查找
+                    searchPath = Path.Combine(disks.Vector.LocalPath, OrderNameParser.GetFilePath(orderName, "Vector"));// Vector\VcetorData中查找
                     if (Directory.Exists(searchPath))
                     {
                         FileInfo[] vcetorData = new DirectoryInfo(searchPath).GetFiles(orderName + "*.*");
@@ -1119,7 +1156,7 @@ namespace TDS2
                         break;
                     }
                 }
-                if (unImage) images.Add(Image.FromFile(@"Image\UnImage.jpg"));// 如果没有匹配到图片，加载缺失图片
+                if (unImage) images.Add(ImageZoom.Zoom(Image.FromFile(@"Image\UnImage.jpg"), 256, 256));// 如果没有匹配到图片，加载缺失图片
                 #endregion 加载缩略图
 
                 searchBackgroundWorker.ReportProgress(Percents.Get(i, orders.Count), "缩略图载入中...");// 进度传出

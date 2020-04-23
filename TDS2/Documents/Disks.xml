@@ -8,5 +8,5 @@
   <DST netPath="\\nrl\DST" localPath="S:"></DST>
   <Ta netPath="\\nrl\Ta" localPath="U:"></Ta>
   <Temp netPath="\\nrl\dg_temp" localPath="U:"></Temp>
-  <Vector netPath="\\nrl\Vector" localPath="E:"></Vector>
+  <Vector netPath="\\nrl\Vector" localPath="H:"></Vector>
 </Pathss>

@@ -31,8 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.orderContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.orderRefreshMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.orderFilesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderCopyMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.orderCopyNameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.orderCopyCustomerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.orderAddMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderDeliverMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +43,8 @@
             this.orderModifyMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderCancelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderDeleteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.orderFilesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderDetailsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.homeStatusStrip = new System.Windows.Forms.StatusStrip();
             this.homeProgressBar = new System.Windows.Forms.ToolStripProgressBar();
@@ -97,7 +100,6 @@
             this.messageFormButton = new System.Windows.Forms.Button();
             this.searchBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.orderContextMenuStrip.SuspendLayout();
             this.homeStatusStrip.SuspendLayout();
             this.homeMenuStrip.SuspendLayout();
@@ -124,28 +126,38 @@
             this.orderFilesMenuItem,
             this.orderDetailsMenuItem});
             this.orderContextMenuStrip.Name = "orderContextMenuStrip";
-            this.orderContextMenuStrip.Size = new System.Drawing.Size(191, 286);
+            this.orderContextMenuStrip.Size = new System.Drawing.Size(191, 264);
             this.orderContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.orderContextMenuStrip_Opening);
             // 
             // orderRefreshMenuItem
             // 
             this.orderRefreshMenuItem.Name = "orderRefreshMenuItem";
             this.orderRefreshMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.orderRefreshMenuItem.Text = "刷新列表 (F5)";
+            this.orderRefreshMenuItem.Text = "重新载入 (F5)";
             this.orderRefreshMenuItem.Click += new System.EventHandler(this.orderRefreshMenuItem_Click);
-            // 
-            // orderFilesMenuItem
-            // 
-            this.orderFilesMenuItem.Name = "orderFilesMenuItem";
-            this.orderFilesMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.orderFilesMenuItem.Text = "订单文件";
             // 
             // orderCopyMenuItem
             // 
+            this.orderCopyMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.orderCopyNameMenuItem,
+            this.orderCopyCustomerMenuItem});
             this.orderCopyMenuItem.Name = "orderCopyMenuItem";
             this.orderCopyMenuItem.Size = new System.Drawing.Size(190, 22);
             this.orderCopyMenuItem.Text = "复制";
-            this.orderCopyMenuItem.Click += new System.EventHandler(this.orderCopyMenuItem_Click);
+            // 
+            // orderCopyNameMenuItem
+            // 
+            this.orderCopyNameMenuItem.Name = "orderCopyNameMenuItem";
+            this.orderCopyNameMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.orderCopyNameMenuItem.Text = "订单号 (Crtl + C)";
+            this.orderCopyNameMenuItem.Click += new System.EventHandler(this.orderCopyNameMenuItem_Click);
+            // 
+            // orderCopyCustomerMenuItem
+            // 
+            this.orderCopyCustomerMenuItem.Name = "orderCopyCustomerMenuItem";
+            this.orderCopyCustomerMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.orderCopyCustomerMenuItem.Text = "客户编号";
+            this.orderCopyCustomerMenuItem.Click += new System.EventHandler(this.orderCopyCustomerMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -205,6 +217,17 @@
             this.orderDeleteMenuItem.Size = new System.Drawing.Size(190, 22);
             this.orderDeleteMenuItem.Text = "删除订单";
             this.orderDeleteMenuItem.Click += new System.EventHandler(this.orderDeleteMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(187, 6);
+            // 
+            // orderFilesMenuItem
+            // 
+            this.orderFilesMenuItem.Name = "orderFilesMenuItem";
+            this.orderFilesMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.orderFilesMenuItem.Text = "订单文件";
             // 
             // orderDetailsMenuItem
             // 
@@ -364,9 +387,11 @@
             this.orderListView.TabIndex = 4;
             this.orderListView.UseCompatibleStateImageBehavior = false;
             this.orderListView.ItemMouseHover += new System.Windows.Forms.ListViewItemMouseHoverEventHandler(this.orderListView_ItemMouseHover);
+            this.orderListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.orderListView_ItemSelectionChanged);
             this.orderListView.SelectedIndexChanged += new System.EventHandler(this.orderListView_SelectedIndexChanged);
             this.orderListView.DoubleClick += new System.EventHandler(this.orderListView_DoubleClick);
             this.orderListView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.orderListView_KeyDown);
+            this.orderListView.Leave += new System.EventHandler(this.orderListView_Leave);
             this.orderListView.MouseHover += new System.EventHandler(this.orderListView_MouseHover);
             // 
             // homeTabControl
@@ -647,7 +672,7 @@
             this.orderRefreshButton.Name = "orderRefreshButton";
             this.orderRefreshButton.Size = new System.Drawing.Size(100, 23);
             this.orderRefreshButton.TabIndex = 30;
-            this.orderRefreshButton.Text = "刷新列表 (F5)";
+            this.orderRefreshButton.Text = "重新载入 (F5)";
             this.orderRefreshButton.UseVisualStyleBackColor = true;
             this.orderRefreshButton.Click += new System.EventHandler(this.orderRefreshButton_Click);
             // 
@@ -791,11 +816,6 @@
             this.imageList.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(187, 6);
-            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -905,5 +925,7 @@
         private System.Windows.Forms.Button orderZButton;
         private System.Windows.Forms.ToolStripMenuItem orderCopyMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem orderCopyNameMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem orderCopyCustomerMenuItem;
     }
 }
