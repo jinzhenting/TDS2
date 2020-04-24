@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -100,12 +101,12 @@ namespace TDS2
                         }
                     case ".dst":
                         {
-                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\UnImage.jpg"), 64, 64);
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\dst.png"), 64, 64);
                             break;
                         }
                     case ".emb":
                         {
-                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\UnImage.jpg"), 64, 64);
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\emb.png"), 64, 64);
                             break;
                         }
                     default:
@@ -160,7 +161,7 @@ namespace TDS2
                 {
                     try
                     {
-                        System.Diagnostics.Process.Start("explorer.exe", l.Text);// 添加事件
+                       Process.Start(l.Text);// 添加事件
                     }
                     catch (Exception ex)
                     {

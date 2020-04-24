@@ -45,42 +45,43 @@
             this.filesListView.CheckBoxes = true;
             this.filesListView.FullRowSelect = true;
             this.filesListView.GridLines = true;
-            this.filesListView.Location = new System.Drawing.Point(-2, 29);
+            this.filesListView.Location = new System.Drawing.Point(-2, 37);
             this.filesListView.MultiSelect = false;
             this.filesListView.Name = "filesListView";
-            this.filesListView.Size = new System.Drawing.Size(628, 376);
+            this.filesListView.Size = new System.Drawing.Size(628, 368);
             this.filesListView.TabIndex = 5;
             this.filesListView.UseCompatibleStateImageBehavior = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 7);
+            this.label1.Location = new System.Drawing.Point(12, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 17);
+            this.label1.Size = new System.Drawing.Size(164, 17);
             this.label1.TabIndex = 6;
-            this.label1.Text = "订单相关文件";
+            this.label1.Text = "在列表中勾选需要打开的文件";
             // 
             // checkButton
             // 
             this.checkButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.checkButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.checkButton.Location = new System.Drawing.Point(426, 411);
+            this.checkButton.Location = new System.Drawing.Point(431, 411);
             this.checkButton.Name = "checkButton";
-            this.checkButton.Size = new System.Drawing.Size(125, 23);
+            this.checkButton.Size = new System.Drawing.Size(100, 23);
             this.checkButton.TabIndex = 7;
-            this.checkButton.Text = "打开选中 （Enter）";
+            this.checkButton.Text = "打开 (Enter)";
             this.checkButton.UseVisualStyleBackColor = true;
             this.checkButton.Click += new System.EventHandler(this.checkButton_Click);
             // 
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.Location = new System.Drawing.Point(557, 411);
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelButton.Location = new System.Drawing.Point(537, 411);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(60, 23);
+            this.cancelButton.Size = new System.Drawing.Size(80, 23);
             this.cancelButton.TabIndex = 8;
-            this.cancelButton.Text = "退出";
+            this.cancelButton.Text = "退出 (Esc)";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
@@ -109,6 +110,7 @@
             this.Controls.Add(this.filesListView);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MinimumSize = new System.Drawing.Size(640, 480);
             this.Name = "OrderCheckForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

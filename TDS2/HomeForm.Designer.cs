@@ -148,14 +148,14 @@
             // orderCopyNameMenuItem
             // 
             this.orderCopyNameMenuItem.Name = "orderCopyNameMenuItem";
-            this.orderCopyNameMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.orderCopyNameMenuItem.Text = "订单号 (Crtl + C)";
+            this.orderCopyNameMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.orderCopyNameMenuItem.Text = "带号 (Crtl + C)";
             this.orderCopyNameMenuItem.Click += new System.EventHandler(this.orderCopyNameMenuItem_Click);
             // 
             // orderCopyCustomerMenuItem
             // 
             this.orderCopyCustomerMenuItem.Name = "orderCopyCustomerMenuItem";
-            this.orderCopyCustomerMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.orderCopyCustomerMenuItem.Size = new System.Drawing.Size(157, 22);
             this.orderCopyCustomerMenuItem.Text = "客户编号";
             this.orderCopyCustomerMenuItem.Click += new System.EventHandler(this.orderCopyCustomerMenuItem_Click);
             // 

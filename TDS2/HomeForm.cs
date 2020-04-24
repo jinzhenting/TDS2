@@ -61,7 +61,6 @@ namespace TDS2
             OptionInitialization(user.Dept);// 带子进度按钮、订单类型按钮、订单紧急度按钮 - 根据部门初始化
             ThemeInitialization();// 主题初始化
             ToolsPermission(user.Dept);// 程序工具栏按钮和程序菜单启停分配
-            MenuPermission(user.Dept);// 订单菜单和按钮启停分配
             orderProgressComboBox.SelectedIndexChanged += new EventHandler(orderProgressComboBox_SelectedIndexChanged);// 带子进度 添加选择事件
             orderClassComboBox.SelectedIndexChanged += new EventHandler(orderClassComboBox_SelectedIndexChanged);// 带子分类 添加选择事件
             orderEndComboBox.SelectedIndexChanged += new EventHandler(orderEndComboBox_SelectedIndexChanged);// 紧急度 添加选择事件
@@ -162,7 +161,7 @@ namespace TDS2
 
             thumbnailComboBox.Enabled = noSearch;// 列表按钮 列表显示方式
             orderListTrackBar.Enabled = noSearch;// 列表按钮 调整缩略图大小
-            orderRefreshButton.Text = noSearch ? "重新载入 (F5)" : "停止载入(Esc)";// 列表按钮 刷新
+            orderRefreshButton.Text = noSearch ? "重新载入 (F5)" : "停止载入 (Esc)";// 列表按钮 刷新
             searchTextBox.Enabled = noSearch;// 列表搜索框
             orderSesrchButton.Enabled = noSearch;// 列表按钮 搜索
 
@@ -177,7 +176,7 @@ namespace TDS2
 
             ///
 
-            orderRefreshMenuItem.Text = noSearch ? "重新载入 (F5)" : "停止载入(Esc)";// 列表菜单 刷新
+            orderRefreshMenuItem.Text = noSearch ? "重新载入 (F5)" : "停止载入 (Esc)";// 列表菜单 刷新
             
             ///
 
@@ -209,9 +208,9 @@ namespace TDS2
             ///
 
             orderFilesMenuItem.Enabled = noSearch && isSelected;// 列表菜单 订单文件
-            if (orderFilesMenuItem.DropDownItems.Count > 0) orderFilesMenuItem.DropDownItems.Clear();// 清空 {订单文件} 的子菜单
             if (isSelected)// 如果选中项目，动态生成 {订单文件} 的子菜单
             {
+                if (orderFilesMenuItem.DropDownItems.Count > 0) orderFilesMenuItem.DropDownItems.Clear();// 清空 {订单文件} 的子菜单
                 List<string> orderFiles = selectedOrder.FilesPath;// 获取订单关联文件的列表
                 if (orderFiles.Count > 0)
                 {
@@ -409,7 +408,6 @@ namespace TDS2
         /// </summary>
         private void orderListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MenuPermission(user.Dept);// 订单菜单和按钮启停分配
         }
 
         /// <summary>
@@ -923,7 +921,7 @@ namespace TDS2
                         }
                     case "待发带":
                         {
-                            sql += " AND Mode!='C' AND OutQC IS NULL";// 带子进度 待发带
+                            sql += " AND Mode!='C' AND Mode!='W' AND OutQC IS NULL";// 带子进度 待发带
                             break;
                         }
                     default:
@@ -982,7 +980,7 @@ namespace TDS2
 
                 switch (orderEndComboBox.Text)
                 {
-                    case "急改带 - 0.5小时内":// 紧急度 急改带
+                    case "急改 - 30分钟内":// 紧急度 急改
                         {
                             sql += " AND Urgency='Rush Editing'";
                             break;
@@ -1042,11 +1040,16 @@ namespace TDS2
             if (images != null) images.Clear();// 清空图片仓库
             if (imageList != null) imageList.Images.Clear();// 清空图片链
             if (orderListView != null) orderListView.Clear();// 清空列表
+            MenuPermission(user.Dept);// 订单菜单和按钮启停分配
 
             ///
 
-            if (!searchBackgroundWorker.IsBusy) searchBackgroundWorker.RunWorkerAsync(sql);
-            MenuPermission(user.Dept);// 订单菜单和按钮启停分配
+            if (!searchBackgroundWorker.IsBusy)// 后台是否进行中
+            {
+                searchBackgroundWorker.RunWorkerAsync(sql);
+                MenuPermission(user.Dept);// 订单菜单和按钮启停分配
+            }
+
         }
 
         /// <summary>
@@ -1177,55 +1180,61 @@ namespace TDS2
         /// </summary>
         private void searchBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            MenuPermission(user.Dept);// 订单菜单和按钮启停分配
-            if (e.Error != null)
+            if (e.Error != null)// 异步出错
             {
                 MessageBox.Show("列表载入错误如下\r\n\r\n" + e.Error.ToString(), "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 homeProgressBar.Value = 0;
                 homeStatusLabel.Text = "查找出错";
-                return;
             }
+
             ///
-            if (e.Cancelled)
+
+            else if (e.Cancelled)// 异步取消
             {
                 homeProgressBar.Value = 0;
                 homeStatusLabel.Text = "已取消查找";
-                return;
             }
+
             ///
-            if (orders.Count < 1 || orders == null)
+
+            else// 异步完成
             {
-                homeProgressBar.Value = 100;
-                homeStatusLabel.Text = "没有符合查找条件的结果";
-                return;
+                if (orders == null || orders.Count < 1)// 如果没有结果
+                {
+                    homeProgressBar.Value = 100;
+                    homeStatusLabel.Text = "没有符合查找条件的结果";
+                }
+                else
+                {
+                    for (int i = 0; i < orders.Count; i++)// 把项目名遍历到ListView
+                    {
+                        ListViewItem listViewItem = new ListViewItem();// 定义单个项目
+                        listViewItem.ImageIndex = i;
+                        listViewItem.Text = orders[i].OrderName;
+                        listViewItem.SubItems.Add(orders[i].OrderClass);
+                        listViewItem.SubItems.Add(orders[i].OrderUrgency);
+                        listViewItem.SubItems.Add(Convert.ToString(orders[i].OrderLatestReturnTime));
+                        listViewItem.SubItems.Add(orders[i].NrInQC);
+                        listViewItem.SubItems.Add(Convert.ToString(orders[i].NrInTime));
+                        listViewItem.SubItems.Add(orders[i].EmbManager);
+                        listViewItem.SubItems.Add(orders[i].EmbZ);
+                        listViewItem.SubItems.Add(orders[i].EmbE);
+                        listViewItem.SubItems.Add(orders[i].EmbQi);
+                        listViewItem.SubItems.Add(orders[i].EmbScaner.ToUpper());
+                        listViewItem.SubItems.Add(orders[i].NrOutQc);
+                        listViewItem.SubItems.Add(Convert.ToString(orders[i].NrOutTime));
+                        orderListView.Items.Add(listViewItem);
+                    }
+                    orderListReIcons();// 配置缩略图
+                    orderListColumnsInitialization();// 初始化表头和列宽
+                    homeProgressBar.Value = 100;
+                    homeStatusLabel.Text = "查找到" + orders.Count + "条结果";
+                }
             }
+
             ///
-            for (int i = 0; i < orders.Count; i++)// 把项目名遍历到ListView
-            {
-                ListViewItem listViewItem = new ListViewItem();// 定义单个项目
-                listViewItem.ImageIndex = i;
-                listViewItem.Text = orders[i].OrderName;
-                listViewItem.SubItems.Add(orders[i].OrderClass);
-                listViewItem.SubItems.Add(orders[i].OrderUrgency);
-                listViewItem.SubItems.Add(Convert.ToString(orders[i].OrderLatestReturnTime));
-                listViewItem.SubItems.Add(orders[i].NrInQC);
-                listViewItem.SubItems.Add(Convert.ToString(orders[i].NrInTime));
-                listViewItem.SubItems.Add(orders[i].EmbManager);
-                listViewItem.SubItems.Add(orders[i].EmbZ);
-                listViewItem.SubItems.Add(orders[i].EmbE);
-                listViewItem.SubItems.Add(orders[i].EmbQi);
-                listViewItem.SubItems.Add(orders[i].EmbScaner.ToUpper());
-                listViewItem.SubItems.Add(orders[i].NrOutQc);
-                listViewItem.SubItems.Add(Convert.ToString(orders[i].NrOutTime));
-                orderListView.Items.Add(listViewItem);
-            }
-            ///
-            orderListReIcons();// 配置缩略图
-            orderListColumnsInitialization();// 初始化表头和列宽
+
             MenuPermission(user.Dept);// 订单菜单和按钮启停分配
-            ///
-            homeProgressBar.Value = 100;
-            homeStatusLabel.Text = "查找到" + orders.Count + "条结果";
         }
         #endregion 异步查询
 

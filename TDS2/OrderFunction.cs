@@ -99,7 +99,7 @@ namespace TDS2
 
             switch (Convert.ToString(oldDataRow["Urgency"]))// 紧急度
             {
-                case "Rush Editing":// 订单类型 急改带
+                case "Rush Editing":// 订单类型 急改
                     {
                         order.OrderUrgency = "急改 - 30分钟内";
                         break;
