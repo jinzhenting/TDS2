@@ -118,8 +118,6 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(600, 480);
             this.Name = "OrderDetails";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "订单详细";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

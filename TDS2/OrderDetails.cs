@@ -10,8 +10,38 @@ namespace TDS2
         public OrderDetails(Order order)
         {
             InitializeComponent();
+
             ///
+
+            try// 图标
+            {
+                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\OrderDetails.ico"));
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("无权限加载窗口图标图标文件，请尝试使用管理员权限重新运行本程序", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(0);
+                return; 
+            }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("窗口图标图标文件不存在，程序将自动退出", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(0);
+                return;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("加载窗口图标图标时发生如下错误，程序将自动退出，描述如下\r\n\r\n" + ex.ToString(), "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(0);
+                return;
+            }
+
+            ///
+
             Text = "订单 - " + order.OrderName + " - 的详细信息";
+
+            ///
+            
             bool unImage = true;// 是否搜索到图片
             foreach (string str in order.FilesPath)// 加载缩略图
             {
@@ -25,9 +55,10 @@ namespace TDS2
                     break;
                 }
             }
-            if (unImage) orderPictureBox.Image = Image.FromFile(@"Image\UnImage.jpg");// 如果没有匹配到图片，加载缺失图片
+            if (unImage) orderPictureBox.Image = Image.FromFile(@"Image\UnImage.png");// 如果没有匹配到图片，加载缺失图片
 
             ///
+
             orderListView.Columns.Add("::");
             orderListView.Columns.Add("::");
             orderListView.Columns[0].Width = 90;

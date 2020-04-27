@@ -37,6 +37,8 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.orderAddMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderDeliverMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.orderZMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.orderEMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderCheckMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderReturnMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -66,6 +68,7 @@
             this.orderListView = new System.Windows.Forms.ListView();
             this.homeTabControl = new System.Windows.Forms.TabControl();
             this.orderTabPage = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
             this.orderZButton = new System.Windows.Forms.Button();
             this.orderEButton = new System.Windows.Forms.Button();
             this.orderListTrackBar = new System.Windows.Forms.TrackBar();
@@ -116,6 +119,8 @@
             this.toolStripSeparator2,
             this.orderAddMenuItem,
             this.orderDeliverMenuItem,
+            this.orderZMenuItem,
+            this.orderEMenuItem,
             this.orderCheckMenuItem,
             this.orderReturnMenuItem,
             this.toolStripSeparator3,
@@ -126,7 +131,7 @@
             this.orderFilesMenuItem,
             this.orderDetailsMenuItem});
             this.orderContextMenuStrip.Name = "orderContextMenuStrip";
-            this.orderContextMenuStrip.Size = new System.Drawing.Size(191, 264);
+            this.orderContextMenuStrip.Size = new System.Drawing.Size(191, 308);
             this.orderContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.orderContextMenuStrip_Opening);
             // 
             // orderRefreshMenuItem
@@ -177,6 +182,20 @@
             this.orderDeliverMenuItem.Size = new System.Drawing.Size(190, 22);
             this.orderDeliverMenuItem.Text = "分带";
             this.orderDeliverMenuItem.Click += new System.EventHandler(this.orderDeliverMenuItem_Click);
+            // 
+            // orderZMenuItem
+            // 
+            this.orderZMenuItem.Name = "orderZMenuItem";
+            this.orderZMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.orderZMenuItem.Text = "打版";
+            this.orderZMenuItem.Click += new System.EventHandler(this.orderZMenuItem_Click);
+            // 
+            // orderEMenuItem
+            // 
+            this.orderEMenuItem.Name = "orderEMenuItem";
+            this.orderEMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.orderEMenuItem.Text = "车版";
+            this.orderEMenuItem.Click += new System.EventHandler(this.orderEMenuItem_Click);
             // 
             // orderCheckMenuItem
             // 
@@ -409,6 +428,7 @@
             // 
             // orderTabPage
             // 
+            this.orderTabPage.Controls.Add(this.label1);
             this.orderTabPage.Controls.Add(this.orderZButton);
             this.orderTabPage.Controls.Add(this.orderEButton);
             this.orderTabPage.Controls.Add(this.orderListTrackBar);
@@ -441,6 +461,16 @@
             this.orderTabPage.TabIndex = 0;
             this.orderTabPage.Text = " 订单页  ";
             this.orderTabPage.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(319, 587);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 17);
+            this.label1.TabIndex = 54;
+            this.label1.Text = "输入带号";
             // 
             // orderZButton
             // 
@@ -539,14 +569,15 @@
             this.orderProgressComboBox.FormattingEnabled = true;
             this.orderProgressComboBox.Items.AddRange(new object[] {
             "全部",
-            "已发带",
-            "已取消",
             "待分带",
             "待打版",
             "待做图",
             "待车版",
             "待扫描",
-            "待发带"});
+            "待发带",
+            "未发带",
+            "已发带",
+            "已取消"});
             this.orderProgressComboBox.Location = new System.Drawing.Point(444, 5);
             this.orderProgressComboBox.Name = "orderProgressComboBox";
             this.orderProgressComboBox.Size = new System.Drawing.Size(80, 25);
@@ -601,7 +632,7 @@
             // searchTextBox
             // 
             this.searchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.searchTextBox.Location = new System.Drawing.Point(304, 584);
+            this.searchTextBox.Location = new System.Drawing.Point(381, 584);
             this.searchTextBox.Name = "searchTextBox";
             this.searchTextBox.Size = new System.Drawing.Size(120, 23);
             this.searchTextBox.TabIndex = 16;
@@ -610,7 +641,7 @@
             // orderSesrchButton
             // 
             this.orderSesrchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.orderSesrchButton.Location = new System.Drawing.Point(430, 585);
+            this.orderSesrchButton.Location = new System.Drawing.Point(507, 584);
             this.orderSesrchButton.Name = "orderSesrchButton";
             this.orderSesrchButton.Size = new System.Drawing.Size(60, 23);
             this.orderSesrchButton.TabIndex = 15;
@@ -927,5 +958,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem orderCopyNameMenuItem;
         private System.Windows.Forms.ToolStripMenuItem orderCopyCustomerMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem orderZMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem orderEMenuItem;
+        private System.Windows.Forms.Label label1;
     }
 }

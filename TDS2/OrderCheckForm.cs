@@ -109,8 +109,23 @@ namespace TDS2
                             icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\emb.png"), 64, 64);
                             break;
                         }
+                    case ".omf":
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\omf.png"), 64, 64);
+                            break;
+                        }
+                    case ".psf":
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\psf.png"), 64, 64);
+                            break;
+                        }
+                    case ".pxf":
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\pxf.png"), 64, 64);
+                            break;
+                        }
                     default:
-                        icon = ImageZoom.Zoom(Image.FromFile(@"Image\UnImage.jpg"), 64, 64);
+                        icon = ImageZoom.Zoom(Image.FromFile(@"Image\UnImage.png"), 64, 64);
                         break;
                 }
                 filesIconImageList.Images.Add(icon);
