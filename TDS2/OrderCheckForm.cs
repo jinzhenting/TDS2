@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -10,7 +11,7 @@ namespace TDS2
 {
     public partial class OrderCheckForm : Form
     {
-        public OrderCheckForm(Order order)
+        public OrderCheckForm(DataRow orderRow, DiskList diskList)
         {
             InitializeComponent();
 
@@ -41,12 +42,16 @@ namespace TDS2
 
             ///
 
+            List<string> files = OrderFiles.Get(orderRow, diskList);
+
+            ///
+
             filesListView.Columns.Add("::");
             filesListView.Columns[0].Width = 600;
-            for (int i = 0; i < order.FilesPath.Count; i++)
+            for (int i = 0; i < files.Count; i++)
             {
                 Image icon;
-                string extension = Path.GetExtension(order.FilesPath[i]).ToLower();
+                string extension = Path.GetExtension(files[i]).ToLower();
                 switch (extension)
                 {
                     case ".jpg":
@@ -56,7 +61,7 @@ namespace TDS2
                     case ".bmp":
                     case ".tif":
                         {
-                            icon = ImageZoom.Zoom(Image.FromFile(order.FilesPath[i]), 64, 64);
+                            icon = ImageZoom.Zoom(Image.FromFile(files[i]), 64, 64);
                             break;
                         }
                     case ".ai":
@@ -131,7 +136,7 @@ namespace TDS2
                 filesIconImageList.Images.Add(icon);
                 ListViewItem listViewItem = new ListViewItem();// 定义单个项目
                 listViewItem.ImageIndex = i;
-                listViewItem.Text = order.FilesPath[i];
+                listViewItem.Text = files[i];
                 filesListView.Items.Add(listViewItem);
             }
             filesListView.SmallImageList = filesIconImageList;

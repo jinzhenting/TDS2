@@ -70,7 +70,7 @@ namespace TDS2
 
             ///
 
-            Sql sql = new Sql();
+            SqlConnection sql = new SqlConnection();
             sqlServerIPTextBox.Text = sql.ServerIP;
             sqlDataNameTextBox.Text = sql.DataName;
             sqlUserIDTextBox.Text = sql.UserID;

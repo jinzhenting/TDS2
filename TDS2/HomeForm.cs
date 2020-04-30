@@ -7,6 +7,17 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
+/*
+ * 查询时直接转换表头和内容，只查询有用的字段，加快速度
+ * 打开详情页只传入订单号，再查询其他信息
+ * 列表模式不匹配关联文件，加快速度
+ * 
+ * 
+ * 
+ * 
+*/
+
+
 namespace TDS2
 {
     public partial class HomeForm : Form
@@ -19,19 +30,29 @@ namespace TDS2
         private User user;
 
         /// <summary>
-        /// 订单集
+        /// 订单表
         /// </summary>
-        private List<Order> orders = new List<Order>();
+        private DataTable orderTable = new DataTable();
 
         /// <summary>
-        /// 选中的订单
+        /// 选中的订单索引
         /// </summary>
-        private Order selectedOrder;
+        private int selectedIndex;
+
+        /// <summary>
+        /// 是否选中订单
+        /// </summary>
+        private bool selected;
+
+        /// <summary>
+        /// 选中的订单的文件列表
+        /// </summary>
+        private List<List<string>> filesList = new List<List<string>>();
 
         /// <summary>
         /// 网盘集
         /// </summary>
-        private DiskList disks = new DiskList();
+        private DiskList diskList = new DiskList();
 
         /// <summary>
         /// 订单列表原图容器
@@ -58,12 +79,12 @@ namespace TDS2
             aAppSettings.GoUpdata(false);// 程序升级
             user = inUser;// 获取用户资料表
             SearchTimeInitialization();// 查询时间初始化
-            OptionInitialization(user.Dept);// 带子进度按钮、订单类型按钮、订单紧急度按钮 - 根据部门初始化
+            OptionInitialization(user.Dept);// 带子进度按钮、订单类型按钮、订单紧急类别按钮 - 根据部门初始化
             ThemeInitialization();// 主题初始化
             ToolsPermission(user.Dept);// 程序工具栏按钮和程序菜单启停分配
             orderProgressComboBox.SelectedIndexChanged += new EventHandler(orderProgressComboBox_SelectedIndexChanged);// 带子进度 添加选择事件
             orderClassComboBox.SelectedIndexChanged += new EventHandler(orderClassComboBox_SelectedIndexChanged);// 带子分类 添加选择事件
-            orderEndComboBox.SelectedIndexChanged += new EventHandler(orderEndComboBox_SelectedIndexChanged);// 紧急度 添加选择事件
+            orderEndComboBox.SelectedIndexChanged += new EventHandler(orderEndComboBox_SelectedIndexChanged);// 紧急类别 添加选择事件
             thumbnailComboBox.SelectedIndexChanged += new EventHandler(thumbnailComboBox_SelectedIndexChanged);// 缩略图 添加选择事件
         }
 
@@ -72,7 +93,7 @@ namespace TDS2
         /// </summary>
         private void HomeForm_Shown(object sender, EventArgs e)
         {
-            OrderSearch("Load");// 查询一次
+            OrderSearch();// 查询一次
         }
 
         /// <summary>
@@ -148,79 +169,19 @@ namespace TDS2
         private void MenuPermission()
         {
             bool noSearch = !searchBackgroundWorker.IsBusy;// 后台没有在查询
-            bool isSelected = selectedOrder != null;// 选中了项目
-            bool noSearchAndSelected = (noSearch && isSelected);
-            ///
-
-            orderStartDateTimePicker.Enabled = noSearch;// 开始时间
-            orderEndDateTimePicker.Enabled = noSearch;// 结束时间
-            orderProgressComboBox.Enabled = noSearch;// 带子进度
-            orderClassComboBox.Enabled = noSearch;// 带子类型
-            orderEndComboBox.Enabled = noSearch;// 带子紧急度
-            thumbnailComboBox.Enabled = noSearch;// 列表显示方式
-            orderListTrackBar.Enabled = noSearch;// 调整缩略图大小
-            searchTextBox.Enabled = noSearch;// 搜索框
-            orderSesrchButton.Enabled = noSearch;// 搜索
-
-            ///
-
-            orderRefreshButton.Text = orderRefreshMenuItem.Text = noSearch ? "重新载入 (F5)" : "停止载入 (Esc)";// 刷新
-
-            ///
-
-            orderAddButton.Enabled = orderAddMenuItem.Enabled = noSearchAndSelected && user.Dept == "OA";// 接带
-
-            ///
-
-            orderDeliverButton.Enabled = orderDeliverMenuItem.Enabled = noSearchAndSelected && (user.Dept == "OA" || user.Dept == "A") && orderProgress(selectedOrder) == "待分带";// 分带
-            if (orderDeliverMenuItem.DropDownItems.Count == 0)
+            selected = orderListView.SelectedItems.Count > 0;// 选中了项目
+            string progress;// 带子类型
+            if (selected)
             {
-                ToolStripMenuItem distribution2Editors = new ToolStripMenuItem();// 在 {分带} 菜单下生成一个 {到打版师} 的子菜单
-                distribution2Editors.Name = "distribution2Editors";
-                distribution2Editors.Text = "到打版师";
-                orderDeliverMenuItem.DropDownItems.Add(distribution2Editors);
-                foreach (Editor editors in editorList.Editors)
-                {
-                    ToolStripMenuItem editor = new ToolStripMenuItem();// 为每个 {版师} 菜单生成一个 {内部格式文件夹}子菜单
-                    editor.Name = editors.Name;
-                    editor.Text = editors.Name;
-                    //editor.Click += new EventHandler(Copy2EditorEmb_ItemClick);
-                    distribution2Editors.DropDownItems.Add(editor);
-                }
-            }
+                selectedIndex = orderListView.SelectedItems[0].Index;
+                progress = OrderProgress.Get(orderTable.Rows[selectedIndex]);
 
-            ///
-
-            orderZButton.Enabled = orderZMenuItem.Enabled = noSearchAndSelected && user.Dept == "Z" && orderProgress(selectedOrder) == "待打版";// 打版
-
-            ///
-
-            orderEButton.Enabled = orderEMenuItem.Enabled = noSearchAndSelected && user.Dept == "E" && orderProgress(selectedOrder) == "待车版";// 车版
-
-            ///
-
-            orderCheckButton.Enabled = orderCheckMenuItem.Enabled = noSearchAndSelected && (user.Dept == "OA" || user.Dept == "QI" || user.Dept == "E");// 检查
-
-            ///
-
-            orderReturnButton.Enabled = orderReturnMenuItem.Enabled = noSearchAndSelected && user.Dept == "OA" && (orderProgress(selectedOrder) == "待分带" || orderProgress(selectedOrder) == "待打版" || orderProgress(selectedOrder) == "待做图" || orderProgress(selectedOrder) == "待车版" || orderProgress(selectedOrder) == "待扫描");// 发带
-         
-            ///
-
-            orderModifyMenuItem.Enabled = noSearchAndSelected && user.Dept == "OA";// 修改订单
-            orderCancelMenuItem.Enabled = noSearchAndSelected && user.Dept == "OA";// 取消订单
-            orderDeleteMenuItem.Enabled = noSearchAndSelected && user.Dept == "S";// 删除订单
-
-            ///
-
-            orderFilesMenuItem.Enabled = noSearchAndSelected;// 订单文件
-            if (isSelected)// 如果选中项目，动态生成 {订单文件} 的子菜单
-            {
+                /// 动态生成 {订单文件} 的子菜单
+             
                 if (orderFilesMenuItem.DropDownItems.Count > 0) orderFilesMenuItem.DropDownItems.Clear();// 清空 {订单文件} 的子菜单
-                List<string> orderFiles = selectedOrder.FilesPath;// 获取订单关联文件的列表
-                if (orderFiles.Count > 0)
+                if (filesList[selectedIndex].Count > 0)// 获取订单关联文件的列表
                 {
-                    foreach (string fileName in orderFiles)
+                    foreach (string fileName in filesList[selectedIndex])
                     {
                         ToolStripMenuItem files = new ToolStripMenuItem();// 在 {订单文件} 菜单下，每个文件生成一个以文件命名的子菜单
                         files.Name = fileName;
@@ -277,42 +238,90 @@ namespace TDS2
                         }
                     }
                 }
-                else// 文件数=0时
+            }
+            else
+            {
+                selectedIndex = -1;
+                progress = "";
+                ///
+                orderFilesMenuItem.Enabled = false;// 关闭 {订单文件} 菜单
+                orderCheckMenuItem.Enabled = false;// 关闭 {检查} 菜单
+            }
+            bool noSearchAndSelected = (noSearch && selected);
+            ///
+
+            orderStartDateTimePicker.Enabled = noSearch;// 开始时间
+            orderEndDateTimePicker.Enabled = noSearch;// 结束时间
+            orderProgressComboBox.Enabled = noSearch;// 带子进度
+            orderClassComboBox.Enabled = noSearch;// 带子类型
+            orderEndComboBox.Enabled = noSearch;// 带子紧急类别
+            thumbnailComboBox.Enabled = noSearch;// 列表显示方式
+            orderListTrackBar.Enabled = noSearch;// 调整缩略图大小
+            searchTextBox.Enabled = noSearch;// 搜索框
+            orderSesrchButton.Enabled = noSearch;// 搜索
+
+            ///
+
+            orderRefreshButton.Text = orderRefreshMenuItem.Text = noSearch ? "重新载入 (F5)" : "停止载入 (Esc)";// 刷新
+
+            ///
+
+            orderAddButton.Enabled = orderAddMenuItem.Enabled = noSearchAndSelected && user.Dept == "OA";// 接带
+
+            ///
+
+            orderDeliverButton.Enabled = orderDeliverMenuItem.Enabled = noSearchAndSelected && (user.Dept == "OA" || user.Dept == "A") && progress == "待分带";// 分带
+            if (orderDeliverMenuItem.DropDownItems.Count == 0)
+            {
+                ToolStripMenuItem distribution2Editors = new ToolStripMenuItem();// 在 {分带} 菜单下生成一个 {到打版师} 的子菜单
+                distribution2Editors.Name = "distribution2Editors";
+                distribution2Editors.Text = "到打版师";
+                orderDeliverMenuItem.DropDownItems.Add(distribution2Editors);
+                foreach (Editor editors in editorList.Editors)
                 {
-                    orderFilesMenuItem.Enabled = false;// 关闭 {订单文件} 菜单
-                    orderCheckMenuItem.Enabled = false;// 关闭 {检查} 菜单
+                    ToolStripMenuItem editor = new ToolStripMenuItem();// 为每个 {版师} 菜单生成一个 {内部格式文件夹}子菜单
+                    editor.Name = editors.Name;
+                    editor.Text = editors.Name;
+                    //editor.Click += new EventHandler(Copy2EditorEmb_ItemClick);
+                    distribution2Editors.DropDownItems.Add(editor);
                 }
             }
+
+            ///
+
+            orderZButton.Enabled = orderZMenuItem.Enabled = noSearchAndSelected && user.Dept == "Z" && progress == "待打版";// 打版
+
+            ///
+
+            orderEButton.Enabled = orderEMenuItem.Enabled = noSearchAndSelected && user.Dept == "E" && progress == "待车版";// 车版
+
+            ///
+
+            orderCheckButton.Enabled = orderCheckMenuItem.Enabled = noSearchAndSelected && (user.Dept == "OA" || user.Dept == "QI" || user.Dept == "E");// 检查
+
+            ///
+
+            orderReturnButton.Enabled = orderReturnMenuItem.Enabled = noSearchAndSelected && user.Dept == "OA" && (progress == "待分带" || progress == "待打版" || progress == "待做图" || progress == "待车版" || progress == "待扫描");// 发带
+         
+            ///
+
+            orderModifyMenuItem.Enabled = noSearchAndSelected && user.Dept == "OA";// 修改订单
+            orderCancelMenuItem.Enabled = noSearchAndSelected && user.Dept == "OA";// 取消订单
+            orderDeleteMenuItem.Enabled = noSearchAndSelected && user.Dept == "S";// 删除订单
+
+            ///
+
+            orderFilesMenuItem.Enabled = noSearchAndSelected;// 订单文件
+
+       ///
+
             orderCopyMenuItem.Enabled = noSearchAndSelected;// 复制
 
             ///
 
             orderDetailsMenuItem.Enabled = noSearchAndSelected;// 订单详细信息
         }
-
-        /// <summary>
-        /// 获取带子进度
-        /// </summary>
-        /// <param name="order">订单</param>
-        /// <returns></returns>
-        private string orderProgress(Order order)
-        {
-
-            ///////////////////// 以后改为检测DST和EMB是否存在 /////////////////////////////////////////////////////////////////////////////
-
-            if (order == null) return null;
-            if (order.NrOutQc != "") return "已发带";// 
-            if (order.OrderClass == "已取消") return "已取消";// 
-            if ((order.OrderClass == "矢量新图" || order.OrderClass == "矢量报价") && order.EmbZ != "" && order.NrOutQc == "") return "待做图";// 
-            if ((order.OrderClass == "新带" || order.OrderClass == "收费改带" || order.OrderClass == "免费改带" || order.OrderClass == "试打版") && (order.EmbE != "" || order.EmbQi != "") && order.NrOutQc == "") return "待扫描";// 
-            if ((order.OrderClass == "新带" || order.OrderClass == "收费改带" || order.OrderClass == "免费改带" || order.OrderClass == "试打版") && order.EmbManager != "" && order.EmbZ != "" && order.EmbSewout && order.EmbE == "" && order.EmbQi == "" && order.NrOutQc == "") return "待车版";// 
-            if ((order.OrderClass == "新带" || order.OrderClass == "收费改带" || order.OrderClass == "免费改带" || order.OrderClass == "估针" || order.OrderClass == "试打版") && order.EmbManager != "" && order.NrOutQc == "") return "待打版";// 
-            if ((order.OrderClass == "新带" || order.OrderClass == "收费改带" || order.OrderClass == "免费改带" || order.OrderClass == "估针" || order.OrderClass == "试打版") && order.EmbManager == "" && order.NrOutQc == "") return "待分带";// 
-            //if ((order.OrderClass == "新带" || order.OrderClass == "收费改带" || order.OrderClass == "免费改带" || order.OrderClass == "估针" || order.OrderClass == "试打版" || order.OrderClass == "矢量新图" || order.OrderClass == "矢量报价") && order.NrOutQc == "") return "待发带";// 以后改为
-            MessageBox.Show("带子进度异常", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return null;
-        }
-
+        
         /// <summary>
         /// 配置缩略图
         /// </summary>
@@ -334,8 +343,8 @@ namespace TDS2
         {
             if (orderListView.Columns.Count < 1 && orderListView.View == View.Details)// 如果列数是否大于1，即此前已经初始化，不再执行
             {
-                orderListView.Columns.Add("带号");
-                orderListView.Columns.Add("类型");
+                orderListView.Columns.Add("订单号");
+                orderListView.Columns.Add("订单类型");
                 orderListView.Columns.Add("紧急类别");
                 orderListView.Columns.Add("最迟返回时间");
                 orderListView.Columns.Add("接带人");
@@ -381,13 +390,16 @@ namespace TDS2
                 case Keys.Enter:
                 case Keys.Space:
                     {
-                        if (e.Control) { if (selectedOrder != null) OrderCheck(); }
+                        if (e.Control)
+                        {
+                            if (selectedIndex != null) OrderCheck();
+                        }
                         else OpenOrderDetails();
                         break;
                     }
                 case Keys.F5:
                     {
-                        OrderSearch("Load");
+                        OrderSearch();
                         break;
                     }
                 case Keys.Escape:
@@ -397,7 +409,10 @@ namespace TDS2
                     }
                 case Keys.C:
                     {
-                        if (e.Control) Clipboard.SetText(selectedOrder.OrderName);
+                        if (e.Control)
+                        {
+                            if (selected) Clipboard.SetText((string)orderTable.Rows[selectedIndex]["订单号"]);
+                        }
                         break;
                     }
                 default:
@@ -410,12 +425,12 @@ namespace TDS2
         /// </summary>
         private void OrderCheck()
         {
-            if (selectedOrder.FilesPath.Count == 0)
+            if (filesList[selectedIndex].Count == 0)
             {
                 MessageBox.Show("该订单不包含任何文件", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            OrderCheckForm orderCheckForm = new OrderCheckForm(selectedOrder);
+            OrderCheckForm orderCheckForm = new OrderCheckForm(orderTable.Rows[selectedIndex], diskList);
             orderCheckForm.ShowDialog();
         }
 
@@ -426,7 +441,7 @@ namespace TDS2
         {
             if (orderListView.SelectedItems.Count > 0)
             {
-                OrderDetails orderDetails = new OrderDetails(selectedOrder);
+                OrderDetails orderDetails = new OrderDetails(orderTable.Rows[selectedIndex],diskList);
                 orderDetails.ShowDialog();
             }
         }
@@ -467,8 +482,6 @@ namespace TDS2
         /// </summary>
         private void orderListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            if (orderListView.SelectedItems.Count == 0) selectedOrder = null;// 如果没有选中
-            else selectedOrder = orders[orderListView.SelectedItems[0].Index];
             MenuPermission();
         }
 
@@ -589,7 +602,7 @@ namespace TDS2
         private void orderRefreshMenuItem_Click(object sender, EventArgs e)
         {
             if (searchBackgroundWorker.IsBusy) searchBackgroundWorker.CancelAsync();
-            else OrderSearch("Load");
+            else OrderSearch();
         }
 
         /// <summary>
@@ -597,7 +610,7 @@ namespace TDS2
         /// </summary>
         private void orderCopyNameMenuItem_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(selectedOrder.OrderName);
+            Clipboard.SetText(orderTable.Rows[selectedIndex]["订单号"].ToString());
         }
 
         /// <summary>
@@ -605,7 +618,7 @@ namespace TDS2
         /// </summary>
         private void orderCopyCustomerMenuItem_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(selectedOrder.OrderCustomer);
+            Clipboard.SetText(orderTable.Rows[selectedIndex]["客户"].ToString());
         }
 
         /// <summary>
@@ -704,7 +717,7 @@ namespace TDS2
         /// </summary>
         private void orderStartDateTimePicker_CloseUp(object sender, EventArgs e)
         {
-            OrderSearch("Load");// 后台查询
+            OrderSearch();// 后台查询
         }
 
         /// <summary>
@@ -712,11 +725,11 @@ namespace TDS2
         /// </summary>
         private void orderEndDateTimePicker_CloseUp(object sender, EventArgs e)
         {
-            OrderSearch("Load");// 后台查询
+            OrderSearch();// 后台查询
         }
 
         /// <summary>
-        /// 带子进度按钮、订单类型按钮、订单紧急度按钮 - 根据部门初始化
+        /// 带子进度按钮、订单类型按钮、订单紧急类别按钮 - 根据部门初始化
         /// </summary>
         private void OptionInitialization(string dept)
         {
@@ -782,7 +795,7 @@ namespace TDS2
         /// </summary>
         private void orderProgressComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            OrderSearch("Load");
+            OrderSearch();
         }
 
         /// <summary>
@@ -790,15 +803,15 @@ namespace TDS2
         /// </summary>
         private void orderClassComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            OrderSearch("Load");
+            OrderSearch();
         }
 
         /// <summary>
-        /// 订单紧急度按钮
+        /// 订单紧急类别按钮
         /// </summary>
         private void orderEndComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            OrderSearch("Load");
+            OrderSearch();
         }
 
         /// <summary>
@@ -811,14 +824,14 @@ namespace TDS2
                 orderListView.View = View.LargeIcon;
                 orderListReIcons();// 配置缩略图
                 orderListTrackBar.Enabled = true;// 开放滑动调节按钮
-                OrderSearch("Load");
+                OrderSearch();
             }
             else if (thumbnailComboBox.Text == "表格" && orderListView.View != View.Details)
             {
                 orderListView.View = View.Details;
                 orderListColumnsInitialization();// 初始化表头和列宽
                 orderListTrackBar.Enabled = false;// 关闭滑动调节按钮
-                OrderSearch("Load");
+                OrderSearch();
             }
         }
 
@@ -836,11 +849,11 @@ namespace TDS2
         private void orderRefreshButton_Click(object sender, EventArgs e)
         {
             if (searchBackgroundWorker.IsBusy) searchBackgroundWorker.CancelAsync();
-            else OrderSearch("Load");
+            else OrderSearch();
         }
 
         /// <summary>
-        /// 搜索按钮
+        /// 带号搜索按钮
         /// </summary>
         private void orderSesrchButton_Click(object sender, EventArgs e)
         {
@@ -851,15 +864,15 @@ namespace TDS2
                 searchTextBox.SelectAll();
                 return;
             }
-            OrderSearch("Select");
+            TapeSelect();
         }
 
         /// <summary>
-        /// 回车开始搜索
+        /// 回车带号搜索
         /// </summary>
         private void searchTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) OrderSearch("Select");
+            if (e.KeyCode == Keys.Enter) TapeSelect();
         }
 
         /// <summary>
@@ -913,194 +926,53 @@ namespace TDS2
         #endregion 列表按钮
 
         #region 导步查询
-
+        
         /// <summary>
-        /// 订单列表数据查询
+        /// 带号搜索
         /// </summary>
-        private void OrderSearch(string mode)
+        private void TapeSelect()
         {
-            if (orderListView != null) orderListView.Clear();// 清空旧数据
-            ///
-            string sql = "SELECT * FROM TDS WHERE";
-            if (mode == "Select") sql += " sTape='" + searchTextBox.Text + "'";// 以带号查询
-            else if (mode == "Load")// 按条件查询
-            {
-                sql += " Record_in_time>='" + orderStartDateTimePicker.Value + "' and Record_in_time<='" + orderEndDateTimePicker.Value + "'";// 接带时间
-
-                ///
-
-                switch (orderProgressComboBox.Text)
-                {
-                    case "待分带":
-                        {
-                            sql += " AND (Mode='O' OR Mode='E' OR Mode='F' OR Mode='Q' OR Mode='T') AND Manager IS NULL AND Z IS NULL AND OutQC IS NULL";// 带子进度 待分带
-                            break;
-                        }
-                    case "待打版":
-                        {
-                            sql += " AND (Mode='O' OR Mode='E' OR Mode='F' OR Mode='Q' OR Mode='T') AND Manager IS NOT NULL AND Z IS NOT NULL AND OutQC IS NULL";// 带子进度 待打版
-                            break;
-                        }
-                    case "待做图":
-                        {
-                            sql += " AND (Mode='AQ' OR Mode='AO') AND OutQC IS NULL";// 带子进度 待做图
-                            break;
-                        }
-                    case "待车版":
-                        {
-                            sql += " AND (Mode='O' OR Mode='E' OR Mode='F' OR Mode='T') AND Manager IS NOT NULL AND Sewout='yes' AND E IS NULL AND QI IS NULL AND OutQC IS NULL";// 带子进度 待车版
-                            break;
-                        }
-                    case "待扫描":
-                        {
-                            sql += " AND (Mode='O' OR Mode='E' OR Mode='F' OR Mode='T') AND QI IS NOT NULL AND OutQC IS NULL";// 带子进度 待扫描
-                            break;
-                        }
-                    case "待发带":
-                        {
-                            sql += " AND (Mode='O' OR Mode='E' OR Mode='F' OR Mode='Q' OR Mode='T' OR Mode='AQ' OR Mode='AO') AND Manager IS NOT NULL AND Z IS NOT NULL AND OutQC IS NULL";// 带子进度 待发带
-                            break;
-                        }
-                    case "未发带":
-                        {
-                            sql += " AND (Mode='O' OR Mode='E' OR Mode='F' OR Mode='Q' OR Mode='T' OR Mode='AQ' OR Mode='AO') AND OutQC IS NULL";// 带子进度 未发带
-                            break;
-                        }
-                    case "已发带":
-                        {
-                            sql += " AND OutQC IS NOT NULL";// 带子进度 已发带
-                            break;
-                        }
-                    case "已取消":
-                        {
-                            sql += " AND Mode='C'";// 带子进度 已取消
-                            break;
-                        }
-                    default:
-                        break;
-                }
-
-                ///
-
-                switch (orderClassComboBox.Text)
-                {
-                    case "新带":// 带子分类 新带
-                        {
-                            sql += " AND Mode='O'";
-                            break;
-                        }
-                    case "收费改带":// 带子分类 收费改带
-                        {
-                            sql += " AND Mode='E'";
-                            break;
-                        }
-                    case "免费改带":// 带子分类 免费改带
-                        {
-                            sql += " AND Mode='F'";
-                            break;
-                        }
-                    case "估针":// 带子分类 估针
-                        {
-                            sql += " AND Mode='Q'";
-                            break;
-                        }
-                    case "试打版":// 带子分类 试打版
-                        {
-                            sql += " AND Mode='T'";
-                            break;
-                        }
-                    case "等回复":// 带子分类 等回复
-                        {
-                            sql += " AND Mode='W'";
-                            break;
-                        }
-                    case "矢量新图":// 带子分类 矢量图
-                        {
-                            sql += " AND Mode='AO'";
-                            break;
-                        }
-                    case "矢量报价":// 带子分类 矢量报价
-                        {
-                            sql += " AND Mode='AQ'";
-                            break;
-                        }
-                    default:
-                        break;
-                }
-
-                ///
-
-                switch (orderEndComboBox.Text)
-                {
-                    case "急改 - 30分钟内":// 紧急度 急改
-                        {
-                            sql += " AND Urgency='Rush Editing'";
-                            break;
-                        }
-                    case "改带 - 1小时内":// 紧急度 改带break;
-                        {
-                            sql += " AND Urgency='Editing'";
-                            break;
-                        }
-                    case "估针 - 1小时内":// 紧急度 估针
-                        {
-                            sql += " AND Urgency='Quote'";
-                            break;
-                        }
-                    case "特急 - 1小时内":// 紧急度 特急
-                        {
-                            sql += " AND Urgency='Super Rush'";
-                            break;
-                        }
-                    case "紧急 - 5小时内":// 紧急度 紧急
-                        {
-                            sql += " AND Urgency='Rush'";
-                            break;
-                        }
-                    case "一般 - 17:00前":// 紧急度 一般
-                        {
-                            sql += " AND Urgency='5PM'";
-                            break;
-                        }
-                    case "正常 - 24小时内":// 紧急度 正常
-                        {
-                            sql += " AND Urgency='24 hours'";
-                            break;
-                        }
-                    case "长时 - 2至3天":// 紧急度 长时
-                        {
-                            sql += " AND Urgency='2-3 days'";
-                            break;
-                        }
-                    case "超长时 - 4至6天":// 紧急度 超长时
-                        {
-                            sql += " AND Urgency='4-6 days'";
-                            break;
-                        }
-                    default:
-                        break;
-                }
-            }
+            if (searchBackgroundWorker.IsBusy) return;// 后台是否进行中
 
             ///
 
-            if (user.Dept == "Z") sql += " AND Z='" + user.UserName + "'";// 打版师只能查询自己的带子
+            string sql = SqlFunction.TapeSelect(user, searchTextBox.Text);
 
             ///
 
-            if (orders != null) orders.Clear();// 清空订单表
+            if (orderTable != null) orderTable.Clear();// 清空订单表
             if (images != null) images.Clear();// 清空图片仓库
             if (imageList != null) imageList.Images.Clear();// 清空图片链
             if (orderListView != null) orderListView.Clear();// 清空列表
 
             ///
 
-            if (!searchBackgroundWorker.IsBusy)// 后台是否进行中
-            {
-                searchBackgroundWorker.RunWorkerAsync(sql);
-                MenuPermission();// 订单菜单和按钮启停分配
-            }
+            searchBackgroundWorker.RunWorkerAsync(sql);
+            MenuPermission();// 菜单和按钮启停分配
+        }
 
+        /// <summary>
+        /// 订单列表数据查询
+        /// </summary>
+        private void OrderSearch()
+        {
+            if (searchBackgroundWorker.IsBusy) return;// 后台是否进行中
+
+            ///
+        
+            string sql = SqlFunction.ListSelect(user, orderStartDateTimePicker.Value.ToString(), orderEndDateTimePicker.Value.ToString(), orderProgressComboBox.Text, orderClassComboBox.Text, orderEndComboBox.Text);
+            searchTextBox.Text = sql;
+            ///
+
+            if (orderTable != null) orderTable.Clear();// 清空订单表
+            if (images != null) images.Clear();// 清空图片仓库
+            if (imageList != null) imageList.Images.Clear();// 清空图片链
+            if (orderListView != null) orderListView.Clear();// 清空列表
+
+            ///
+
+            searchBackgroundWorker.RunWorkerAsync(sql);
+            MenuPermission();// 菜单和按钮启停分配
         }
 
         /// <summary>
@@ -1109,17 +981,12 @@ namespace TDS2
         private void searchBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             searchBackgroundWorker.ReportProgress(1, "查找中...");// 进度传出
-            DataTable sqlDataTable = SqlFunction.Select(e.Argument as string);
-            if (sqlDataTable == null || sqlDataTable.Rows.Count == 0) return;
+            orderTable = SqlFunction.Select(e.Argument as string);
+            if (orderTable == null || orderTable.Rows.Count == 0) return;
+            searchBackgroundWorker.ReportProgress(Percents.Get(1, orderTable.Rows.Count), "数据处理中...");// 进度传出
+            SqlFunction.Table2Standard(this.orderTable);// 数据转换
             ///
-            for (int i = 0; i < sqlDataTable.Rows.Count; i++)// 遍历订单列表到订单库
-            {
-                if (searchBackgroundWorker.CancellationPending) { e.Cancel = true; return; }// 取消检测
-                orders.Add(OrderFunction.Row2Order(sqlDataTable.Rows[i]));// 数据转换
-                searchBackgroundWorker.ReportProgress(Percents.Get(i, sqlDataTable.Rows.Count), "数据处理中...");// 进度传出
-            }
-            ///
-            for (int i = 0; i < orders.Count; i++)// 遍历订单库
+            for (int i = 0; i < this.orderTable.Rows.Count; i++)// 遍历订单库
             {
                 #region 取消检测
                 if (searchBackgroundWorker.CancellationPending)
@@ -1130,79 +997,12 @@ namespace TDS2
                 #endregion 取消检测
 
                 #region 加载缩略图
-                string searchPath = null;// 搜索路径
-                string orderName = orders[i].OrderName.ToUpper();// 订单号，转换大写用于比对
-                string orderClass = orders[i].OrderClass.ToUpper();// 订单类型
-                string orderComputer = orders[i].OrderComputer;// 订单电脑
-                ///
-                if (orderClass != "矢量新图" && orderClass != "矢量报价")// 只要不是矢量图 先在Emb和Ds的绝对位置检测
-                {
-                    foreach (string dst in disks.Datas)// 3个Data文件夹共12个子文件夹列表// Dst文件路径 和Emb分开遍历，是避免Dst和Emb不储存在同一个Data当中
-                    {
-                        string dstPath = Path.Combine(dst, OrderNameParser.GetFilePath(orderName, "Dst"));
-                        if (File.Exists(dstPath))
-                        {
-                            orders[i].FilesPath.Add(dstPath);
-                            searchPath = Path.GetDirectoryName(dstPath);
-                            break;
-                        }
-                    }
-                    foreach (string emb in disks.Datas)// Emb文件路径 和Dst分开遍历，是避免Dst和Emb不储存在同一个Data当中
-                    {
-                        string embPath = Path.Combine(emb, OrderNameParser.GetFilePath(orderName, "Emb"));
-                        if (File.Exists(embPath))
-                        {
-                            orders[i].FilesPath.Add(embPath);
-                            break;
-                        }
-                    }
-                    if (searchPath != null)// 如果Data in_out文件夹中发现了Dst，将继续搜索in_out文件夹就否有其他格式相关文件
-                    {
-                        FileInfo[] fileInfos = new DirectoryInfo(searchPath).GetFiles(orderName + "*.*");
-                        foreach (FileInfo fileInfo in fileInfos) if (fileInfo.Extension.ToLower() != ".dst") orders[i].FilesPath.Add(fileInfo.FullName);// 排除Dst格式
-                    }
-
-                    /// 在 myAttachIn 中查找图片
-                    FileInfo[] myAttachIn = new DirectoryInfo(Path.Combine(disks.MyAttach.LocalPath, "Attach_In")).GetFiles(orderName + "*.*");
-                    foreach (FileInfo fileInfo in myAttachIn) orders[i].FilesPath.Add(fileInfo.FullName);
-
-                    /// 在 myAttachOut 中查找图片
-                    FileInfo[] myAttachOut = new DirectoryInfo(Path.Combine(disks.MyAttach.LocalPath, "Attach_Out")).GetFiles(orderName + "*.*");
-                    foreach (FileInfo fileInfo in myAttachOut) orders[i].FilesPath.Add(fileInfo.FullName);
-                }
-
-                /// O，E，F，Q，T，打版中
-                if ((orderClass == "新带" || orderClass == "收费改带" || orderClass == "免费改带" || orderClass == "估针" || orderClass == "试打版") && orders[i].NrOutQc == "" && orders[i].EmbZ != "")
-                {
-                    /// 在 打版师文件夹 中查找图片
-                    string zFlie = Path.Combine(disks.ZFlie.LocalPath, orders[i].EmbZ, "Jpg_Dst");// 在打版师文件夹中查找图片
-                    if (Directory.Exists(zFlie))
-                    {
-                        FileInfo[] fileInfos = new DirectoryInfo(zFlie).GetFiles(orderName + "*.*");
-                        foreach (FileInfo fileInfo in fileInfos) orders[i].FilesPath.Add(fileInfo.FullName);
-                    }
-                }
-
-                /// AQ，AO，W
-                if (orderClass == "矢量新图" || orderClass == "矢量报价" || orderClass == "等回复")// 等回复的带子是没有图片的，但有可能做过效果图，尝试查找IT做图文件夹
-                {
-                    searchPath = Path.Combine(disks.Vector.LocalPath, "Today");// Vector\Today中查找
-                    FileInfo[] today = new DirectoryInfo(searchPath).GetFiles(orderName + "*.*");
-                    foreach (FileInfo fileInfo in today) orders[i].FilesPath.Add(fileInfo.FullName);
-                    ///
-                    searchPath = Path.Combine(disks.Vector.LocalPath, OrderNameParser.GetFilePath(orderName, "Vector"));// Vector\VcetorData中查找
-                    if (Directory.Exists(searchPath))
-                    {
-                        FileInfo[] vcetorData = new DirectoryInfo(searchPath).GetFiles(orderName + "*.*");
-                        foreach (FileInfo fileInfo in vcetorData) orders[i].FilesPath.Add(fileInfo.FullName);
-                    }
-                }
-                ///
-                orders[i].FilesPath.Reverse();// 文件列表倒序，遍历时从新到旧
                 if (orderListView.View == View.LargeIcon)
                 {
+                    List<string> files = OrderFiles.Get(this.orderTable.Rows[i],diskList);
+                    filesList.Add(files);
                     bool unImage = true;// 是否搜索到图片
-                    foreach (string str in orders[i].FilesPath)// 加载缩略图
+                    foreach (string str in files)// 加载缩略图
                     {
                         string extension = Path.GetExtension(str).ToLower();
                         if (extension == ".jpg" || extension == ".jpeg" || extension == ".png" || extension == ".bmp" || extension == ".gif" || extension == ".tif")
@@ -1224,7 +1024,7 @@ namespace TDS2
                 }
                 #endregion 加载缩略图
 
-                searchBackgroundWorker.ReportProgress(Percents.Get(i, orders.Count), "数据载入中...");// 进度传出
+                searchBackgroundWorker.ReportProgress(Percents.Get(i, this.orderTable.Rows.Count), "数据载入中...");// 进度传出
             }
         }
 
@@ -1261,36 +1061,36 @@ namespace TDS2
 
             else// 异步完成
             {
-                if (orders == null || orders.Count < 1)// 如果没有结果
+                if (orderTable == null || orderTable.Rows.Count ==0)// 如果没有结果
                 {
                     homeProgressBar.Value = 100;
                     homeStatusLabel.Text = "没有符合查找条件的结果";
                 }
                 else
                 {
-                    for (int i = 0; i < orders.Count; i++)// 把项目名遍历到ListView
+                    for (int i = 0; i < orderTable.Rows.Count; i++)// 把项目名遍历到ListView
                     {
                         ListViewItem listViewItem = new ListViewItem();// 定义单个项目
                         listViewItem.ImageIndex = i;
-                        listViewItem.Text = orders[i].OrderName;
-                        listViewItem.SubItems.Add(orders[i].OrderClass);
-                        listViewItem.SubItems.Add(orders[i].OrderUrgency);
-                        listViewItem.SubItems.Add(Convert.ToString(orders[i].OrderLatestReturnTime));
-                        listViewItem.SubItems.Add(orders[i].NrInQC);
-                        listViewItem.SubItems.Add(Convert.ToString(orders[i].NrInTime));
-                        listViewItem.SubItems.Add(orders[i].EmbManager);
-                        listViewItem.SubItems.Add(orders[i].EmbZ);
-                        listViewItem.SubItems.Add(orders[i].EmbE);
-                        listViewItem.SubItems.Add(orders[i].EmbQi);
-                        listViewItem.SubItems.Add(orders[i].EmbScaner.ToUpper());
-                        listViewItem.SubItems.Add(orders[i].NrOutQc);
-                        listViewItem.SubItems.Add(Convert.ToString(orders[i].NrOutTime));
+                        listViewItem.Text = orderTable.Rows[i]["订单号"].ToString();
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["订单类型"].ToString());
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["紧急类别"].ToString());
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["最迟返回时间"].ToString());
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["接带人"].ToString());
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["接带时间"].ToString());
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["分带人"].ToString());
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["打版师"].ToString());
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["车版师"].ToString());
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["质检员"].ToString());
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["扫描人"].ToString());
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["发带人"].ToString());
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["发带时间"].ToString());
                         orderListView.Items.Add(listViewItem);
                     }
                     orderListReIcons();// 配置缩略图
                     orderListColumnsInitialization();// 初始化表头和列宽
                     homeProgressBar.Value = 100;
-                    homeStatusLabel.Text = "查找到" + orders.Count + "条结果";
+                    homeStatusLabel.Text = "查找到" + orderTable.Rows.Count + "条结果";
                 }
             }
 

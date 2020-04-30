@@ -5,9 +5,9 @@ using System.Xml;
 
 namespace TDS2
 {
-    class Sql
+    class SqlConnection
     {
-        public Sql()
+        public SqlConnection()
         {
             try
             {

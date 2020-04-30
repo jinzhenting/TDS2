@@ -656,7 +656,7 @@
             this.orderEndLabel.Name = "orderEndLabel";
             this.orderEndLabel.Size = new System.Drawing.Size(44, 17);
             this.orderEndLabel.TabIndex = 26;
-            this.orderEndLabel.Text = "紧急度";
+            this.orderEndLabel.Text = "紧急类别";
             // 
             // orderTimeLabel1
             // 
