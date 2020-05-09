@@ -44,7 +44,7 @@ namespace TDS2
 
             ///
             
-            List<string> files = OrderFiles.Get(orderRow, diskList);
+            List<string> files = OrderFiles.Get(orderRow);
             bool unImage = true;// 是否搜索到图片
             foreach (string str in files)// 加载缩略图
             {

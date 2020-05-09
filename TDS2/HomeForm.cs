@@ -392,7 +392,7 @@ namespace TDS2
                     {
                         if (e.Control)
                         {
-                            if (selectedIndex != null) OrderCheck();
+                            if (selectedIndex != -1) OrderCheck();
                         }
                         else OpenOrderDetails();
                         break;
@@ -986,7 +986,7 @@ namespace TDS2
             searchBackgroundWorker.ReportProgress(Percents.Get(1, orderTable.Rows.Count), "数据处理中...");// 进度传出
             SqlFunction.Table2Standard(this.orderTable);// 数据转换
             ///
-            for (int i = 0; i < this.orderTable.Rows.Count; i++)// 遍历订单库
+            for (int i = 0; i < orderTable.Rows.Count; i++)// 遍历订单库
             {
                 #region 取消检测
                 if (searchBackgroundWorker.CancellationPending)
@@ -999,8 +999,8 @@ namespace TDS2
                 #region 加载缩略图
                 if (orderListView.View == View.LargeIcon)
                 {
-                    List<string> files = OrderFiles.Get(this.orderTable.Rows[i],diskList);
-                    filesList.Add(files);
+                    List<string> files = OrderFiles.Get(orderTable.Rows[i]);// 获取订单文件列表
+                    filesList.Add(files);// 订单文件列表装入到集合
                     bool unImage = true;// 是否搜索到图片
                     foreach (string str in files)// 加载缩略图
                     {
@@ -1024,7 +1024,7 @@ namespace TDS2
                 }
                 #endregion 加载缩略图
 
-                searchBackgroundWorker.ReportProgress(Percents.Get(i, this.orderTable.Rows.Count), "数据载入中...");// 进度传出
+                searchBackgroundWorker.ReportProgress(Percents.Get(i, orderTable.Rows.Count), "数据载入中...");// 进度传出
             }
         }
 

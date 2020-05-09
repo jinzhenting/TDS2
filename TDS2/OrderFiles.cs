@@ -17,9 +17,21 @@ namespace TDS2
         /// </summary>
         /// <param name="orderRow"></param>
         /// <returns></returns>
-        public static List<string> Get(DataRow orderRow, DiskList diskList)
+        public static List<string> Get(DataRow orderRow)
         {
-            List<string> fileList = new List<string>();
+
+
+            //////////////////
+            //////////////////
+            //////////////////
+            //////////////////
+            //////////////////
+            //////////////////
+            ///// 非矢量图搜索不出来 
+
+
+            DiskList diskList = new DiskList();// 获取网络盘
+            List<string> fileList = new List<string>();// 订单文件列表
             string searchPath = null;// 搜索路径
             string orderName = orderRow["订单号"].ToString().ToUpper();// 订单号，转换大写用于比对
             string orderClass = orderRow["订单类型"].ToString().ToUpper();// 订单类型
@@ -34,8 +46,18 @@ namespace TDS2
                 foreach (string dst in diskList.Datas)// 3个Data文件夹共12个子文件夹列表// Dst文件路径 和Emb分开遍历，是避免Dst和Emb不储存在同一个Data当中
                 {
                     string dstPath = Path.Combine(dst, OrderNameParser.GetFilePath(orderName, "Dst"));
+
+
+                    //////////////////////
+                   // System.Windows.Forms.MessageBox.Show(dstPath);
+
+
                     if (File.Exists(dstPath))
                     {
+                        //////////////////////
+                       // System.Windows.Forms.MessageBox.Show(dstPath);
+
+
                         fileList.Add(dstPath);
                         searchPath = Path.GetDirectoryName(dstPath);
                         break;
@@ -46,6 +68,11 @@ namespace TDS2
                     string embPath = Path.Combine(emb, OrderNameParser.GetFilePath(orderName, "Emb"));
                     if (File.Exists(embPath))
                     {
+                        //////////////////////
+                       // System.Windows.Forms.MessageBox.Show(embPath);
+
+
+
                         fileList.Add(embPath);
                         break;
                     }
@@ -65,8 +92,9 @@ namespace TDS2
                 foreach (FileInfo fileInfo in myAttachOut) fileList.Add(fileInfo.FullName);
             }
 
-            /// O，E，F，Q，T，打版中
-            if ((orderClass == "新带" || orderClass == "收费改带" || orderClass == "免费改带" || orderClass == "估针" || orderClass == "试打版") && nrOutQc == "" && embZ != "")
+            ///
+
+            if ((orderClass == "新带" || orderClass == "收费改带" || orderClass == "免费改带" || orderClass == "估针" || orderClass == "试打版") && nrOutQc == "" && embZ != "")// O，E，F，Q，T，打版中
             {
                 /// 在 打版师文件夹 中查找图片
                 string zFlie = Path.Combine(diskList.ZFlie.LocalPath, embZ, "Jpg_Dst");// 在打版师文件夹中查找图片
@@ -77,8 +105,9 @@ namespace TDS2
                 }
             }
 
-            /// AQ，AO，W
-            if (orderClass == "矢量新图" || orderClass == "矢量报价" || orderClass == "等回复")// 等回复的带子是没有图片的，但有可能做过效果图，尝试查找IT做图文件夹
+            ///
+            
+            if (orderClass == "矢量新图" || orderClass == "矢量报价" || orderClass == "等回复")// AQ，AO，W等回复的带子是没有图片的，但有可能做过效果图，尝试查找IT做图文件夹
             {
                 searchPath = Path.Combine(diskList.Vector.LocalPath, "Today");// Vector\Today中查找
                 FileInfo[] today = new DirectoryInfo(searchPath).GetFiles(orderName + "*.*");
@@ -95,6 +124,7 @@ namespace TDS2
             ///
 
             fileList.Reverse();// 文件列表倒序，遍历时从新到旧
+
             return fileList;
         }
     }

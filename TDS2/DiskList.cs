@@ -99,18 +99,18 @@ namespace TDS2
                     Environment.Exit(0);
                 }
                 ///
-                datas.Add(Path.Combine(newData.LocalPath, "Pc_A_Data"));
-                datas.Add(Path.Combine(newData.LocalPath, "Pc_B_Data"));
-                datas.Add(Path.Combine(newData.LocalPath, "Pc_C_Data"));
-                datas.Add(Path.Combine(newData.LocalPath, "Pc_O_Data"));
-                datas.Add(Path.Combine(oldData.LocalPath, "Pc_A_Old"));
-                datas.Add(Path.Combine(oldData.LocalPath, "Pc_B_Old"));
-                datas.Add(Path.Combine(oldData.LocalPath, "Pc_C_Old"));
-                datas.Add(Path.Combine(oldData.LocalPath, "Pc_O_Old"));
-                datas.Add(Path.Combine(historyData.LocalPath, "Pc_A_History"));
-                datas.Add(Path.Combine(historyData.LocalPath, "Pc_B_History"));
-                datas.Add(Path.Combine(historyData.LocalPath, "Pc_C_History"));
-                datas.Add(Path.Combine(historyData.LocalPath, "Pc_O_History"));
+                datas.Add(Path.Combine(newData.NetPath, "Pc_A_Data"));
+                datas.Add(Path.Combine(newData.NetPath, "Pc_B_Data"));
+                datas.Add(Path.Combine(newData.NetPath, "Pc_C_Data"));
+                datas.Add(Path.Combine(newData.NetPath, "Pc_O_Data"));
+                datas.Add(Path.Combine(oldData.NetPath, "Pc_A_Old"));
+                datas.Add(Path.Combine(oldData.NetPath, "Pc_B_Old"));
+                datas.Add(Path.Combine(oldData.NetPath, "Pc_C_Old"));
+                datas.Add(Path.Combine(oldData.NetPath, "Pc_O_Old"));
+                datas.Add(Path.Combine(historyData.NetPath, "Pc_A_History"));
+                datas.Add(Path.Combine(historyData.NetPath, "Pc_B_History"));
+                datas.Add(Path.Combine(historyData.NetPath, "Pc_C_History"));
+                datas.Add(Path.Combine(historyData.NetPath, "Pc_O_History"));
             }
             catch (UnauthorizedAccessException ex)
             {

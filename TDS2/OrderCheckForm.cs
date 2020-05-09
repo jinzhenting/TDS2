@@ -42,7 +42,7 @@ namespace TDS2
 
             ///
 
-            List<string> files = OrderFiles.Get(orderRow, diskList);
+            List<string> files = OrderFiles.Get(orderRow);
 
             ///
 
