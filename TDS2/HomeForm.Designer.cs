@@ -65,7 +65,7 @@
             this.developerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.appUpMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.appAboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.orderListView = new System.Windows.Forms.ListView();
+            this.orderListView = new DoubleBufferListView();
             this.homeTabControl = new System.Windows.Forms.TabControl();
             this.orderTabPage = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
@@ -890,7 +890,7 @@
         private System.Windows.Forms.ContextMenuStrip orderContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem orderRefreshMenuItem;
         private System.Windows.Forms.StatusStrip homeStatusStrip;
-        private System.Windows.Forms.ListView orderListView;
+        private DoubleBufferListView orderListView;
         private System.Windows.Forms.TabControl homeTabControl;
         private System.Windows.Forms.TabPage orderTabPage;
         private System.Windows.Forms.ToolStripMenuItem userMenuItem;

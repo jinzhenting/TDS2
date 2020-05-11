@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.filesListView = new System.Windows.Forms.ListView();
+            this.filesListView = new DoubleBufferListView();
             this.label1 = new System.Windows.Forms.Label();
             this.checkButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
@@ -121,7 +121,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView filesListView;
+        private DoubleBufferListView filesListView;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button checkButton;
         private System.Windows.Forms.Button cancelButton;

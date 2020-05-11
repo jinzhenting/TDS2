@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.orderPictureBox = new System.Windows.Forms.PictureBox();
-            this.orderListView = new System.Windows.Forms.ListView();
-            this.otherListView = new System.Windows.Forms.ListView();
+            this.orderListView = new DoubleBufferListView();
+            this.otherListView = new DoubleBufferListView();
             this.picturePanel = new System.Windows.Forms.Panel();
             this.cancelButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.orderPictureBox)).BeginInit();
@@ -130,8 +130,8 @@
         #endregion
 
         private System.Windows.Forms.PictureBox orderPictureBox;
-        private System.Windows.Forms.ListView orderListView;
-        private System.Windows.Forms.ListView otherListView;
+        private DoubleBufferListView orderListView;
+        private DoubleBufferListView otherListView;
         private System.Windows.Forms.Panel picturePanel;
         private System.Windows.Forms.Button cancelButton;
     }

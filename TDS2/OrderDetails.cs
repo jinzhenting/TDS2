@@ -9,7 +9,7 @@ namespace TDS2
 {
     public partial class OrderDetails : Form
     {
-        public OrderDetails(DataRow orderRow, DiskList diskList, List<string> files)
+        public OrderDetails(DataRow orderRow, DiskList diskList)
         {
             InitializeComponent();
 
@@ -44,6 +44,7 @@ namespace TDS2
 
             ///
             
+            List<string> files = OrderFiles.Get(orderRow);// 重新查找文件是因为主页是列表模式时没有搜索过文件
             bool unImage = true;// 是否搜索到图片
             foreach (string str in files)// 加载缩略图
             {

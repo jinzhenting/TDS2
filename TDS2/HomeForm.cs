@@ -441,7 +441,7 @@ namespace TDS2
         {
             if (orderListView.SelectedItems.Count > 0)
             {
-                OrderDetails orderDetails = new OrderDetails(orderTable.Rows[selectedItemIndex], diskList, filesList[selectedItemIndex]);
+                OrderDetails orderDetails = new OrderDetails(orderTable.Rows[selectedItemIndex], diskList);
                 orderDetails.ShowDialog();
             }
         }
@@ -997,13 +997,13 @@ namespace TDS2
                     return;
                 }
                 #endregion 取消检测
-
-                List<string> files = OrderFiles.Get(orderTable.Rows[i]);// 把订单行传送到方法，获取该订单相关的文件列表
-                filesList.Add(files);// 订单文件列表装入到集合
-
                 #region 加载缩略图
                 if (orderListView.View == View.LargeIcon)
                 {
+
+                    List<string> files = OrderFiles.Get(orderTable.Rows[i]);// 把订单行传送到方法，获取该订单相关的文件列表 //只在缩略图模式时搜索文件
+                    filesList.Add(files);// 订单文件列表装入到集合
+
                     bool unImage = true;// 是否搜索到图片
                     foreach (string str in files)// 加载缩略图
                     {
@@ -1071,6 +1071,7 @@ namespace TDS2
                 }
                 else
                 {
+                    orderListView.Visible = false;
                     for (int i = 0; i < orderTable.Rows.Count; i++)// 把项目名遍历到ListView
                     {
                         ListViewItem listViewItem = new ListViewItem();// 定义单个项目
@@ -1093,6 +1094,7 @@ namespace TDS2
                     orderListReIcons();// 配置缩略图
                     orderListColumnsInitialization();// 初始化表头和列宽
                     homeProgressBar.Value = 100;
+                    orderListView.Visible = true;
                     homeStatusLabel.Text = "查找到" + orderTable.Rows.Count + "条结果";
                 }
             }
