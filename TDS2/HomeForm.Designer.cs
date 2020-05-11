@@ -606,7 +606,7 @@
             "正常 - 24小时内",
             "长时 - 2至3天",
             "超长时 - 4至6天"});
-            this.orderEndComboBox.Location = new System.Drawing.Point(775, 5);
+            this.orderEndComboBox.Location = new System.Drawing.Point(785, 5);
             this.orderEndComboBox.Name = "orderEndComboBox";
             this.orderEndComboBox.Size = new System.Drawing.Size(120, 25);
             this.orderEndComboBox.TabIndex = 45;
@@ -654,7 +654,7 @@
             this.orderEndLabel.AutoSize = true;
             this.orderEndLabel.Location = new System.Drawing.Point(728, 9);
             this.orderEndLabel.Name = "orderEndLabel";
-            this.orderEndLabel.Size = new System.Drawing.Size(44, 17);
+            this.orderEndLabel.Size = new System.Drawing.Size(56, 17);
             this.orderEndLabel.TabIndex = 26;
             this.orderEndLabel.Text = "紧急类别";
             // 

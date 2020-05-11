@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace TDS2
 {
+    /// <summary>
+    /// 带子进度
+    /// </summary>
     public static class OrderProgress
     {
         /// <summary>

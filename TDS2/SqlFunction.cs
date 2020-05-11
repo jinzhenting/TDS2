@@ -33,10 +33,10 @@ namespace TDS2
             sql += " Class 打版难度,";
             sql += " UPPER(DS) 返回文件格式,";// 转大写
             sql += " Remind_time 订单重新提醒时间,";
-            sql += " Last_modi_time 订单最后修改时间,";
+            sql += " Last_modi_time 订单修改时间,";
             sql += " TimeSpent 订单接发总用时,";
-            sql += " Quantity 订单包含的版带数量,";
-            sql += " Description 订单描述,";
+            sql += " Quantity 订单含版带数,";
+            sql += " Description 订单说明,";
             sql += " UPPER(InQC) 接带人,";// 转大写
             sql += " UPPER(In_Shift) 接带班次,";// 转大写
             sql += " CD 接带计算机,";
@@ -46,7 +46,7 @@ namespace TDS2
             sql += " UPPER(V) 版带版本,";// 转大写
             sql += " UPPER(Editfrom) 改带利用版本,";// 转大写
             sql += " UPPER(Z) 打版师,";// 转大写
-            sql += " UPPER(OZ) 原打版师,";// 转大写
+            sql += " UPPER(OZ) 原版打版师,";// 转大写
             sql += " CPZClass 打版师级别,";
             sql += " PointedZ 优秀打版师,";
             sql += " UPPER(Z_Shift) 打版班次,";// 转大写
@@ -113,10 +113,10 @@ namespace TDS2
             sql += " Class 打版难度,";
             sql += " UPPER(DS) 返回文件格式,";// 转大写
             sql += " Remind_time 订单重新提醒时间,";
-            sql += " Last_modi_time 订单最后修改时间,";
+            sql += " Last_modi_time 订单修改时间,";
             sql += " TimeSpent 订单接发总用时,";
-            sql += " Quantity 订单包含的版带数量,";
-            sql += " Description 订单描述,";
+            sql += " Quantity 订单含版带数,";
+            sql += " Description 订单说明,";
             sql += " UPPER(InQC) 接带人,";// 转大写
             sql += " UPPER(In_Shift) 接带班次,";// 转大写
             sql += " CD 接带计算机,";
@@ -126,7 +126,7 @@ namespace TDS2
             sql += " UPPER(V) 版带版本,";// 转大写
             sql += " UPPER(Editfrom) 改带利用版本,";// 转大写
             sql += " UPPER(Z) 打版师,";// 转大写
-            sql += " UPPER(OZ) 原打版师,";// 转大写
+            sql += " UPPER(OZ) 原版打版师,";// 转大写
             sql += " CPZClass 打版师级别,";
             sql += " PointedZ 优秀打版师,";
             sql += " UPPER(Z_Shift) 打版班次,";// 转大写
@@ -440,7 +440,7 @@ namespace TDS2
 
                 ///
 
-                if (row["订单包含的版带数量"].ToString() == "") row["订单包含的版带数量"] = "1";
+                if (row["订单含版带数"].ToString() == "N" || row["订单含版带数"].ToString() == "") row["订单含版带数"] = "1";
 
                 ///
 
@@ -474,7 +474,7 @@ namespace TDS2
 
                 ///
                 
-                if (Convert.ToString(row["原打版师"]) == "空") row["原打版师"] = "";
+                if (Convert.ToString(row["原版打版师"]) == "空") row["原版打版师"] = "";
 
                 ///
 
