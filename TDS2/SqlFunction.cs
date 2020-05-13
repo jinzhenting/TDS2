@@ -13,7 +13,7 @@ namespace TDS2
         /// </summary>
         /// <param name="tape">带号</param>
         /// <returns></returns>
-        public static string TapeSelect(User user, string tape)
+        public static string TapeSelect(User user, string tape, string sqlDataTable)
         {
             string sql = "SELECT";
 
@@ -70,7 +70,8 @@ namespace TDS2
 
             ///
 
-            sql += " FROM TDS WHERE";
+            if (sqlDataTable == "新数据") sql += " FROM TDS WHERE";
+            else sql += " FROM TDS_H WHERE";
 
             ///
 
@@ -93,7 +94,7 @@ namespace TDS2
         /// <param name="class_">带子类型</param>
         /// <param name="end">带子紧急类别</param>
         /// <returns>Sql语句</returns>
-        public static string ListSelect(User user, string timeStatr, string timeEnd, string progress, string class_, string end)
+        public static string ListSelect(User user, string timeStatr, string timeEnd, string progress, string class_, string end, string sqlDataTable)
         {
             string sql = "SELECT";
 
@@ -150,7 +151,8 @@ namespace TDS2
 
             ///
 
-            sql += " FROM TDS WHERE";
+            if (sqlDataTable == "新数据") sql += " FROM TDS WHERE";
+            else sql += " FROM TDS_H WHERE";
 
             ///
 

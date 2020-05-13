@@ -47,8 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppHelpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AppHelpForm.Designer.cs">
+      <DependentUpon>AppHelpForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AppSettings.cs" />
     <Compile Include="Disk.cs" />
+    <Compile Include="DiskMappingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DiskMappingForm.Designer.cs">
+      <DependentUpon>DiskMappingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DoubleBufferListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -56,11 +68,29 @@
     <Compile Include="Editor.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="ExtensionList.cs" />
+    <Compile Include="FilesSortForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FilesSortForm.Designer.cs">
+      <DependentUpon>FilesSortForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MessageForm.Designer.cs">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OrderCheckForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="OrderCheckForm.Designer.cs">
       <DependentUpon>OrderCheckForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrderEForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrderEForm.Designer.cs">
+      <DependentUpon>OrderEForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OrderProgress.cs" />
     <Compile Include="SyetemDiskList.cs" />
@@ -98,8 +128,23 @@
     <Compile Include="SqlConnection.cs" />
     <Compile Include="SqlFunction.cs" />
     <Compile Include="OrderFiles.cs" />
+    <Compile Include="UpDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpDataForm.Designer.cs">
+      <DependentUpon>UpDataForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
     <Compile Include="ThumbnailProvider.cs" />
+    <EmbeddedResource Include="AppHelpForm.resx">
+      <DependentUpon>AppHelpForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DiskMappingForm.resx">
+      <DependentUpon>DiskMappingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FilesSortForm.resx">
+      <DependentUpon>FilesSortForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -107,11 +152,17 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MessageForm.resx">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OrderCheckForm.resx">
       <DependentUpon>OrderCheckForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrderDetails.resx">
       <DependentUpon>OrderDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrderEForm.resx">
+      <DependentUpon>OrderEForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -124,6 +175,9 @@
     </Compile>
     <EmbeddedResource Include="AppSettingsForm.resx">
       <DependentUpon>AppSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpDataForm.resx">
+      <DependentUpon>UpDataForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

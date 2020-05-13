@@ -65,14 +65,9 @@
             this.developerMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.appUpMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.appAboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.orderListView = new DoubleBufferListView();
             this.homeTabControl = new System.Windows.Forms.TabControl();
             this.orderTabPage = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.orderZButton = new System.Windows.Forms.Button();
-            this.orderEButton = new System.Windows.Forms.Button();
-            this.orderListTrackBar = new System.Windows.Forms.TrackBar();
-            this.thumbnailComboBox = new System.Windows.Forms.ComboBox();
+            this.sqlComboBox = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -82,12 +77,18 @@
             this.orderEndComboBox = new System.Windows.Forms.ComboBox();
             this.orderEndDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.orderTimeLabel2 = new System.Windows.Forms.Label();
-            this.searchTextBox = new System.Windows.Forms.TextBox();
-            this.orderSesrchButton = new System.Windows.Forms.Button();
             this.orderEndLabel = new System.Windows.Forms.Label();
             this.orderTimeLabel1 = new System.Windows.Forms.Label();
             this.orderClassLabel = new System.Windows.Forms.Label();
             this.orderTimeLabel = new System.Windows.Forms.Label();
+            this.orderListView = new System.Windows.Forms.ListView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.orderZButton = new System.Windows.Forms.Button();
+            this.orderEButton = new System.Windows.Forms.Button();
+            this.orderListTrackBar = new System.Windows.Forms.TrackBar();
+            this.thumbnailComboBox = new System.Windows.Forms.ComboBox();
+            this.searchTextBox = new System.Windows.Forms.TextBox();
+            this.orderSesrchButton = new System.Windows.Forms.Button();
             this.orderAddButton = new System.Windows.Forms.Button();
             this.orderRefreshButton = new System.Windows.Forms.Button();
             this.orderDeliverButton = new System.Windows.Forms.Button();
@@ -103,6 +104,7 @@
             this.messageFormButton = new System.Windows.Forms.Button();
             this.searchBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.sqlUpDataMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderContextMenuStrip.SuspendLayout();
             this.homeStatusStrip.SuspendLayout();
             this.homeMenuStrip.SuspendLayout();
@@ -316,8 +318,9 @@
             // toolsMenuItem
             // 
             this.toolsMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.diskMappingMenuItem,
+            this.sqlUpDataMenuItem,
             this.filesSortMenuItem,
+            this.diskMappingMenuItem,
             this.userManageMenuItem,
             this.appSettingsMenuItem});
             this.toolsMenuItem.Name = "toolsMenuItem";
@@ -327,28 +330,28 @@
             // diskMappingMenuItem
             // 
             this.diskMappingMenuItem.Name = "diskMappingMenuItem";
-            this.diskMappingMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.diskMappingMenuItem.Text = "磁盘映射助手";
+            this.diskMappingMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.diskMappingMenuItem.Text = "磁盘映射";
             this.diskMappingMenuItem.Click += new System.EventHandler(this.diskMappingMenuItem_Click);
             // 
             // filesSortMenuItem
             // 
             this.filesSortMenuItem.Name = "filesSortMenuItem";
-            this.filesSortMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.filesSortMenuItem.Size = new System.Drawing.Size(152, 22);
             this.filesSortMenuItem.Text = "文件整理(F)";
             this.filesSortMenuItem.Click += new System.EventHandler(this.filesSortMenuItem_Click);
             // 
             // userManageMenuItem
             // 
             this.userManageMenuItem.Name = "userManageMenuItem";
-            this.userManageMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.userManageMenuItem.Size = new System.Drawing.Size(152, 22);
             this.userManageMenuItem.Text = "用户管理(U)";
             this.userManageMenuItem.Click += new System.EventHandler(this.userManageMenuItem_Click);
             // 
             // appSettingsMenuItem
             // 
             this.appSettingsMenuItem.Name = "appSettingsMenuItem";
-            this.appSettingsMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.appSettingsMenuItem.Size = new System.Drawing.Size(152, 22);
             this.appSettingsMenuItem.Text = "选项(S)";
             this.appSettingsMenuItem.Click += new System.EventHandler(this.appSettingsMenuItem_Click);
             // 
@@ -391,28 +394,6 @@
             this.appAboutMenuItem.Text = "关于TDS2(A)";
             this.appAboutMenuItem.Click += new System.EventHandler(this.appAboutMenuItem_Click);
             // 
-            // orderListView
-            // 
-            this.orderListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderListView.ContextMenuStrip = this.orderContextMenuStrip;
-            this.orderListView.FullRowSelect = true;
-            this.orderListView.GridLines = true;
-            this.orderListView.Location = new System.Drawing.Point(-4, 35);
-            this.orderListView.MultiSelect = false;
-            this.orderListView.Name = "orderListView";
-            this.orderListView.Size = new System.Drawing.Size(1186, 543);
-            this.orderListView.TabIndex = 4;
-            this.orderListView.UseCompatibleStateImageBehavior = false;
-            this.orderListView.ItemMouseHover += new System.Windows.Forms.ListViewItemMouseHoverEventHandler(this.orderListView_ItemMouseHover);
-            this.orderListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.orderListView_ItemSelectionChanged);
-            this.orderListView.SelectedIndexChanged += new System.EventHandler(this.orderListView_SelectedIndexChanged);
-            this.orderListView.DoubleClick += new System.EventHandler(this.orderListView_DoubleClick);
-            this.orderListView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.orderListView_KeyDown);
-            this.orderListView.Leave += new System.EventHandler(this.orderListView_Leave);
-            this.orderListView.MouseHover += new System.EventHandler(this.orderListView_MouseHover);
-            // 
             // homeTabControl
             // 
             this.homeTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -423,16 +404,12 @@
             this.homeTabControl.Location = new System.Drawing.Point(-1, 97);
             this.homeTabControl.Name = "homeTabControl";
             this.homeTabControl.SelectedIndex = 0;
-            this.homeTabControl.Size = new System.Drawing.Size(1187, 644);
+            this.homeTabControl.Size = new System.Drawing.Size(1187, 645);
             this.homeTabControl.TabIndex = 5;
             // 
             // orderTabPage
             // 
-            this.orderTabPage.Controls.Add(this.label1);
-            this.orderTabPage.Controls.Add(this.orderZButton);
-            this.orderTabPage.Controls.Add(this.orderEButton);
-            this.orderTabPage.Controls.Add(this.orderListTrackBar);
-            this.orderTabPage.Controls.Add(this.thumbnailComboBox);
+            this.orderTabPage.Controls.Add(this.sqlComboBox);
             this.orderTabPage.Controls.Add(this.panel3);
             this.orderTabPage.Controls.Add(this.panel2);
             this.orderTabPage.Controls.Add(this.panel1);
@@ -442,88 +419,48 @@
             this.orderTabPage.Controls.Add(this.orderEndComboBox);
             this.orderTabPage.Controls.Add(this.orderEndDateTimePicker);
             this.orderTabPage.Controls.Add(this.orderTimeLabel2);
-            this.orderTabPage.Controls.Add(this.searchTextBox);
-            this.orderTabPage.Controls.Add(this.orderSesrchButton);
             this.orderTabPage.Controls.Add(this.orderEndLabel);
             this.orderTabPage.Controls.Add(this.orderTimeLabel1);
             this.orderTabPage.Controls.Add(this.orderClassLabel);
             this.orderTabPage.Controls.Add(this.orderTimeLabel);
+            this.orderTabPage.Controls.Add(this.orderListView);
+            this.orderTabPage.Controls.Add(this.label1);
+            this.orderTabPage.Controls.Add(this.orderZButton);
+            this.orderTabPage.Controls.Add(this.orderEButton);
+            this.orderTabPage.Controls.Add(this.orderListTrackBar);
+            this.orderTabPage.Controls.Add(this.thumbnailComboBox);
+            this.orderTabPage.Controls.Add(this.searchTextBox);
+            this.orderTabPage.Controls.Add(this.orderSesrchButton);
             this.orderTabPage.Controls.Add(this.orderAddButton);
             this.orderTabPage.Controls.Add(this.orderRefreshButton);
-            this.orderTabPage.Controls.Add(this.orderListView);
             this.orderTabPage.Controls.Add(this.orderDeliverButton);
             this.orderTabPage.Controls.Add(this.orderReturnButton);
             this.orderTabPage.Controls.Add(this.orderCheckButton);
             this.orderTabPage.Location = new System.Drawing.Point(4, 26);
             this.orderTabPage.Name = "orderTabPage";
             this.orderTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.orderTabPage.Size = new System.Drawing.Size(1179, 614);
+            this.orderTabPage.Size = new System.Drawing.Size(1179, 615);
             this.orderTabPage.TabIndex = 0;
-            this.orderTabPage.Text = " 订单页  ";
+            this.orderTabPage.Text = " 订单页      ";
             this.orderTabPage.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // sqlComboBox
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(319, 587);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 17);
-            this.label1.TabIndex = 54;
-            this.label1.Text = "输入带号";
-            // 
-            // orderZButton
-            // 
-            this.orderZButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderZButton.Location = new System.Drawing.Point(911, 584);
-            this.orderZButton.Name = "orderZButton";
-            this.orderZButton.Size = new System.Drawing.Size(60, 23);
-            this.orderZButton.TabIndex = 53;
-            this.orderZButton.Text = "打版";
-            this.orderZButton.UseVisualStyleBackColor = true;
-            this.orderZButton.Click += new System.EventHandler(this.orderZButton_Click);
-            // 
-            // orderEButton
-            // 
-            this.orderEButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderEButton.Location = new System.Drawing.Point(977, 584);
-            this.orderEButton.Name = "orderEButton";
-            this.orderEButton.Size = new System.Drawing.Size(60, 23);
-            this.orderEButton.TabIndex = 52;
-            this.orderEButton.Text = "车版";
-            this.orderEButton.UseVisualStyleBackColor = true;
-            this.orderEButton.Click += new System.EventHandler(this.orderEButton_Click);
-            // 
-            // orderListTrackBar
-            // 
-            this.orderListTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.orderListTrackBar.BackColor = System.Drawing.SystemColors.Window;
-            this.orderListTrackBar.Location = new System.Drawing.Point(89, 584);
-            this.orderListTrackBar.Maximum = 7;
-            this.orderListTrackBar.Name = "orderListTrackBar";
-            this.orderListTrackBar.Size = new System.Drawing.Size(104, 45);
-            this.orderListTrackBar.TabIndex = 36;
-            this.orderListTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.orderListTrackBar.Value = 2;
-            this.orderListTrackBar.Scroll += new System.EventHandler(this.orderListTrackBar_Scroll);
-            // 
-            // thumbnailComboBox
-            // 
-            this.thumbnailComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.thumbnailComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.thumbnailComboBox.FormattingEnabled = true;
-            this.thumbnailComboBox.Items.AddRange(new object[] {
-            "缩略图",
-            "表格"});
-            this.thumbnailComboBox.Location = new System.Drawing.Point(6, 583);
-            this.thumbnailComboBox.Name = "thumbnailComboBox";
-            this.thumbnailComboBox.Size = new System.Drawing.Size(80, 25);
-            this.thumbnailComboBox.TabIndex = 51;
+            this.sqlComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.sqlComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sqlComboBox.FormattingEnabled = true;
+            this.sqlComboBox.Items.AddRange(new object[] {
+            "新数据",
+            "旧数据"});
+            this.sqlComboBox.Location = new System.Drawing.Point(1093, 6);
+            this.sqlComboBox.Name = "sqlComboBox";
+            this.sqlComboBox.Size = new System.Drawing.Size(80, 25);
+            this.sqlComboBox.TabIndex = 55;
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel3.Location = new System.Drawing.Point(719, 6);
+            this.panel3.Location = new System.Drawing.Point(720, 7);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1, 23);
             this.panel3.TabIndex = 50;
@@ -531,7 +468,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel2.Location = new System.Drawing.Point(537, 6);
+            this.panel2.Location = new System.Drawing.Point(538, 7);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1, 23);
             this.panel2.TabIndex = 49;
@@ -539,7 +476,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel1.Location = new System.Drawing.Point(375, 6);
+            this.panel1.Location = new System.Drawing.Point(376, 7);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1, 23);
             this.panel1.TabIndex = 48;
@@ -558,7 +495,7 @@
             "等回复",
             "矢量新图",
             "矢量报价"});
-            this.orderClassComboBox.Location = new System.Drawing.Point(606, 5);
+            this.orderClassComboBox.Location = new System.Drawing.Point(607, 6);
             this.orderClassComboBox.Name = "orderClassComboBox";
             this.orderClassComboBox.Size = new System.Drawing.Size(100, 25);
             this.orderClassComboBox.TabIndex = 47;
@@ -578,14 +515,14 @@
             "未发带",
             "已发带",
             "已取消"});
-            this.orderProgressComboBox.Location = new System.Drawing.Point(444, 5);
+            this.orderProgressComboBox.Location = new System.Drawing.Point(445, 6);
             this.orderProgressComboBox.Name = "orderProgressComboBox";
             this.orderProgressComboBox.Size = new System.Drawing.Size(80, 25);
             this.orderProgressComboBox.TabIndex = 46;
             // 
             // orderStartDateTimePicker
             // 
-            this.orderStartDateTimePicker.Location = new System.Drawing.Point(63, 6);
+            this.orderStartDateTimePicker.Location = new System.Drawing.Point(64, 7);
             this.orderStartDateTimePicker.Name = "orderStartDateTimePicker";
             this.orderStartDateTimePicker.Size = new System.Drawing.Size(135, 23);
             this.orderStartDateTimePicker.TabIndex = 11;
@@ -606,7 +543,7 @@
             "正常 - 24小时内",
             "长时 - 2至3天",
             "超长时 - 4至6天"});
-            this.orderEndComboBox.Location = new System.Drawing.Point(785, 5);
+            this.orderEndComboBox.Location = new System.Drawing.Point(786, 6);
             this.orderEndComboBox.Name = "orderEndComboBox";
             this.orderEndComboBox.Size = new System.Drawing.Size(120, 25);
             this.orderEndComboBox.TabIndex = 45;
@@ -614,7 +551,7 @@
             // orderEndDateTimePicker
             // 
             this.orderEndDateTimePicker.Checked = false;
-            this.orderEndDateTimePicker.Location = new System.Drawing.Point(226, 6);
+            this.orderEndDateTimePicker.Location = new System.Drawing.Point(227, 7);
             this.orderEndDateTimePicker.Name = "orderEndDateTimePicker";
             this.orderEndDateTimePicker.Size = new System.Drawing.Size(135, 23);
             this.orderEndDateTimePicker.TabIndex = 12;
@@ -623,36 +560,16 @@
             // orderTimeLabel2
             // 
             this.orderTimeLabel2.AutoSize = true;
-            this.orderTimeLabel2.Location = new System.Drawing.Point(202, 9);
+            this.orderTimeLabel2.Location = new System.Drawing.Point(203, 10);
             this.orderTimeLabel2.Name = "orderTimeLabel2";
             this.orderTimeLabel2.Size = new System.Drawing.Size(20, 17);
             this.orderTimeLabel2.TabIndex = 14;
             this.orderTimeLabel2.Text = "到";
             // 
-            // searchTextBox
-            // 
-            this.searchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.searchTextBox.Location = new System.Drawing.Point(381, 584);
-            this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(120, 23);
-            this.searchTextBox.TabIndex = 16;
-            this.searchTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchTextBox_KeyDown);
-            // 
-            // orderSesrchButton
-            // 
-            this.orderSesrchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.orderSesrchButton.Location = new System.Drawing.Point(507, 584);
-            this.orderSesrchButton.Name = "orderSesrchButton";
-            this.orderSesrchButton.Size = new System.Drawing.Size(60, 23);
-            this.orderSesrchButton.TabIndex = 15;
-            this.orderSesrchButton.Text = "搜索";
-            this.orderSesrchButton.UseVisualStyleBackColor = true;
-            this.orderSesrchButton.Click += new System.EventHandler(this.orderSesrchButton_Click);
-            // 
             // orderEndLabel
             // 
             this.orderEndLabel.AutoSize = true;
-            this.orderEndLabel.Location = new System.Drawing.Point(728, 9);
+            this.orderEndLabel.Location = new System.Drawing.Point(729, 10);
             this.orderEndLabel.Name = "orderEndLabel";
             this.orderEndLabel.Size = new System.Drawing.Size(56, 17);
             this.orderEndLabel.TabIndex = 26;
@@ -661,7 +578,7 @@
             // orderTimeLabel1
             // 
             this.orderTimeLabel1.AutoSize = true;
-            this.orderTimeLabel1.Location = new System.Drawing.Point(4, 9);
+            this.orderTimeLabel1.Location = new System.Drawing.Point(5, 10);
             this.orderTimeLabel1.Name = "orderTimeLabel1";
             this.orderTimeLabel1.Size = new System.Drawing.Size(56, 17);
             this.orderTimeLabel1.TabIndex = 13;
@@ -670,7 +587,7 @@
             // orderClassLabel
             // 
             this.orderClassLabel.AutoSize = true;
-            this.orderClassLabel.Location = new System.Drawing.Point(547, 9);
+            this.orderClassLabel.Location = new System.Drawing.Point(548, 10);
             this.orderClassLabel.Name = "orderClassLabel";
             this.orderClassLabel.Size = new System.Drawing.Size(56, 17);
             this.orderClassLabel.TabIndex = 26;
@@ -679,16 +596,116 @@
             // orderTimeLabel
             // 
             this.orderTimeLabel.AutoSize = true;
-            this.orderTimeLabel.Location = new System.Drawing.Point(385, 9);
+            this.orderTimeLabel.Location = new System.Drawing.Point(386, 10);
             this.orderTimeLabel.Name = "orderTimeLabel";
             this.orderTimeLabel.Size = new System.Drawing.Size(56, 17);
             this.orderTimeLabel.TabIndex = 36;
             this.orderTimeLabel.Text = "带子进度";
             // 
+            // orderListView
+            // 
+            this.orderListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.orderListView.ContextMenuStrip = this.orderContextMenuStrip;
+            this.orderListView.FullRowSelect = true;
+            this.orderListView.GridLines = true;
+            this.orderListView.Location = new System.Drawing.Point(-4, 37);
+            this.orderListView.MultiSelect = false;
+            this.orderListView.Name = "orderListView";
+            this.orderListView.Size = new System.Drawing.Size(1186, 543);
+            this.orderListView.TabIndex = 4;
+            this.orderListView.UseCompatibleStateImageBehavior = false;
+            this.orderListView.ItemMouseHover += new System.Windows.Forms.ListViewItemMouseHoverEventHandler(this.orderListView_ItemMouseHover);
+            this.orderListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.orderListView_ItemSelectionChanged);
+            this.orderListView.SelectedIndexChanged += new System.EventHandler(this.orderListView_SelectedIndexChanged);
+            this.orderListView.DoubleClick += new System.EventHandler(this.orderListView_DoubleClick);
+            this.orderListView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.orderListView_KeyDown);
+            this.orderListView.Leave += new System.EventHandler(this.orderListView_Leave);
+            this.orderListView.MouseHover += new System.EventHandler(this.orderListView_MouseHover);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(387, 589);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 17);
+            this.label1.TabIndex = 54;
+            this.label1.Text = "输入带号";
+            // 
+            // orderZButton
+            // 
+            this.orderZButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.orderZButton.Location = new System.Drawing.Point(916, 586);
+            this.orderZButton.Name = "orderZButton";
+            this.orderZButton.Size = new System.Drawing.Size(60, 23);
+            this.orderZButton.TabIndex = 53;
+            this.orderZButton.Text = "打版";
+            this.orderZButton.UseVisualStyleBackColor = true;
+            this.orderZButton.Click += new System.EventHandler(this.orderZButton_Click);
+            // 
+            // orderEButton
+            // 
+            this.orderEButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.orderEButton.Location = new System.Drawing.Point(982, 586);
+            this.orderEButton.Name = "orderEButton";
+            this.orderEButton.Size = new System.Drawing.Size(60, 23);
+            this.orderEButton.TabIndex = 52;
+            this.orderEButton.Text = "车版";
+            this.orderEButton.UseVisualStyleBackColor = true;
+            this.orderEButton.Click += new System.EventHandler(this.orderEButton_Click);
+            // 
+            // orderListTrackBar
+            // 
+            this.orderListTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.orderListTrackBar.BackColor = System.Drawing.SystemColors.Window;
+            this.orderListTrackBar.Location = new System.Drawing.Point(89, 586);
+            this.orderListTrackBar.Maximum = 7;
+            this.orderListTrackBar.Name = "orderListTrackBar";
+            this.orderListTrackBar.Size = new System.Drawing.Size(104, 45);
+            this.orderListTrackBar.TabIndex = 36;
+            this.orderListTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.orderListTrackBar.Value = 2;
+            this.orderListTrackBar.Scroll += new System.EventHandler(this.orderListTrackBar_Scroll);
+            // 
+            // thumbnailComboBox
+            // 
+            this.thumbnailComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.thumbnailComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.thumbnailComboBox.FormattingEnabled = true;
+            this.thumbnailComboBox.Items.AddRange(new object[] {
+            "缩略图",
+            "表格"});
+            this.thumbnailComboBox.Location = new System.Drawing.Point(6, 585);
+            this.thumbnailComboBox.Name = "thumbnailComboBox";
+            this.thumbnailComboBox.Size = new System.Drawing.Size(80, 25);
+            this.thumbnailComboBox.TabIndex = 51;
+            // 
+            // searchTextBox
+            // 
+            this.searchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.searchTextBox.Location = new System.Drawing.Point(446, 586);
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.Size = new System.Drawing.Size(120, 23);
+            this.searchTextBox.TabIndex = 16;
+            this.searchTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchTextBox_KeyDown);
+            // 
+            // orderSesrchButton
+            // 
+            this.orderSesrchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.orderSesrchButton.Location = new System.Drawing.Point(572, 586);
+            this.orderSesrchButton.Name = "orderSesrchButton";
+            this.orderSesrchButton.Size = new System.Drawing.Size(60, 23);
+            this.orderSesrchButton.TabIndex = 15;
+            this.orderSesrchButton.Text = "搜索";
+            this.orderSesrchButton.UseVisualStyleBackColor = true;
+            this.orderSesrchButton.Click += new System.EventHandler(this.orderSesrchButton_Click);
+            // 
             // orderAddButton
             // 
             this.orderAddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderAddButton.Location = new System.Drawing.Point(779, 584);
+            this.orderAddButton.Location = new System.Drawing.Point(784, 586);
             this.orderAddButton.Name = "orderAddButton";
             this.orderAddButton.Size = new System.Drawing.Size(60, 23);
             this.orderAddButton.TabIndex = 31;
@@ -699,7 +716,7 @@
             // orderRefreshButton
             // 
             this.orderRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.orderRefreshButton.Location = new System.Drawing.Point(198, 584);
+            this.orderRefreshButton.Location = new System.Drawing.Point(198, 586);
             this.orderRefreshButton.Name = "orderRefreshButton";
             this.orderRefreshButton.Size = new System.Drawing.Size(100, 23);
             this.orderRefreshButton.TabIndex = 30;
@@ -710,7 +727,7 @@
             // orderDeliverButton
             // 
             this.orderDeliverButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderDeliverButton.Location = new System.Drawing.Point(845, 584);
+            this.orderDeliverButton.Location = new System.Drawing.Point(850, 586);
             this.orderDeliverButton.Name = "orderDeliverButton";
             this.orderDeliverButton.Size = new System.Drawing.Size(60, 23);
             this.orderDeliverButton.TabIndex = 21;
@@ -721,7 +738,7 @@
             // orderReturnButton
             // 
             this.orderReturnButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderReturnButton.Location = new System.Drawing.Point(1109, 584);
+            this.orderReturnButton.Location = new System.Drawing.Point(1114, 586);
             this.orderReturnButton.Name = "orderReturnButton";
             this.orderReturnButton.Size = new System.Drawing.Size(60, 23);
             this.orderReturnButton.TabIndex = 22;
@@ -732,7 +749,7 @@
             // orderCheckButton
             // 
             this.orderCheckButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.orderCheckButton.Location = new System.Drawing.Point(1043, 584);
+            this.orderCheckButton.Location = new System.Drawing.Point(1048, 586);
             this.orderCheckButton.Name = "orderCheckButton";
             this.orderCheckButton.Size = new System.Drawing.Size(60, 23);
             this.orderCheckButton.TabIndex = 23;
@@ -745,9 +762,9 @@
             this.searchTabPage.Location = new System.Drawing.Point(4, 26);
             this.searchTabPage.Name = "searchTabPage";
             this.searchTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.searchTabPage.Size = new System.Drawing.Size(1179, 614);
+            this.searchTabPage.Size = new System.Drawing.Size(1179, 615);
             this.searchTabPage.TabIndex = 1;
-            this.searchTabPage.Text = " 高级搜索   ";
+            this.searchTabPage.Text = " 高级搜索        ";
             this.searchTabPage.UseVisualStyleBackColor = true;
             // 
             // appHelpButton
@@ -847,6 +864,13 @@
             this.imageList.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // sqlUpDataMenuItem
+            // 
+            this.sqlUpDataMenuItem.Name = "sqlUpDataMenuItem";
+            this.sqlUpDataMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sqlUpDataMenuItem.Text = "更新数据";
+            this.sqlUpDataMenuItem.Click += new System.EventHandler(this.sqlUpDataMenuItem_Click);
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -890,7 +914,7 @@
         private System.Windows.Forms.ContextMenuStrip orderContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem orderRefreshMenuItem;
         private System.Windows.Forms.StatusStrip homeStatusStrip;
-        private DoubleBufferListView orderListView;
+        private System.Windows.Forms.ListView orderListView;
         private System.Windows.Forms.TabControl homeTabControl;
         private System.Windows.Forms.TabPage orderTabPage;
         private System.Windows.Forms.ToolStripMenuItem userMenuItem;
@@ -961,5 +985,7 @@
         private System.Windows.Forms.ToolStripMenuItem orderZMenuItem;
         private System.Windows.Forms.ToolStripMenuItem orderEMenuItem;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox sqlComboBox;
+        private System.Windows.Forms.ToolStripMenuItem sqlUpDataMenuItem;
     }
 }
