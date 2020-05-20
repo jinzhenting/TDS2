@@ -56,8 +56,9 @@
             this.userProfileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.appExitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.diskMappingMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sqlUpDataMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filesSortMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.diskMappingMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userManageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.appSettingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.appHelpMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -104,7 +105,7 @@
             this.messageFormButton = new System.Windows.Forms.Button();
             this.searchBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.sqlUpDataMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.userProfileButton = new System.Windows.Forms.Button();
             this.orderContextMenuStrip.SuspendLayout();
             this.homeStatusStrip.SuspendLayout();
             this.homeMenuStrip.SuspendLayout();
@@ -304,14 +305,14 @@
             // userProfileMenuItem
             // 
             this.userProfileMenuItem.Name = "userProfileMenuItem";
-            this.userProfileMenuItem.Size = new System.Drawing.Size(139, 22);
-            this.userProfileMenuItem.Text = "个人资料(P)";
+            this.userProfileMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.userProfileMenuItem.Text = "用户资料(P)";
             this.userProfileMenuItem.Click += new System.EventHandler(this.userProfileMenuItem_Click);
             // 
             // appExitMenuItem
             // 
             this.appExitMenuItem.Name = "appExitMenuItem";
-            this.appExitMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.appExitMenuItem.Size = new System.Drawing.Size(152, 22);
             this.appExitMenuItem.Text = "退出(E)";
             this.appExitMenuItem.Click += new System.EventHandler(this.appExitMenuItem_Click);
             // 
@@ -327,31 +328,38 @@
             this.toolsMenuItem.Size = new System.Drawing.Size(59, 21);
             this.toolsMenuItem.Text = "工具(T)";
             // 
-            // diskMappingMenuItem
+            // sqlUpDataMenuItem
             // 
-            this.diskMappingMenuItem.Name = "diskMappingMenuItem";
-            this.diskMappingMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.diskMappingMenuItem.Text = "磁盘映射";
-            this.diskMappingMenuItem.Click += new System.EventHandler(this.diskMappingMenuItem_Click);
+            this.sqlUpDataMenuItem.Name = "sqlUpDataMenuItem";
+            this.sqlUpDataMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.sqlUpDataMenuItem.Text = "更新数据";
+            this.sqlUpDataMenuItem.Click += new System.EventHandler(this.sqlUpDataMenuItem_Click);
             // 
             // filesSortMenuItem
             // 
             this.filesSortMenuItem.Name = "filesSortMenuItem";
-            this.filesSortMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.filesSortMenuItem.Size = new System.Drawing.Size(141, 22);
             this.filesSortMenuItem.Text = "文件整理(F)";
             this.filesSortMenuItem.Click += new System.EventHandler(this.filesSortMenuItem_Click);
+            // 
+            // diskMappingMenuItem
+            // 
+            this.diskMappingMenuItem.Name = "diskMappingMenuItem";
+            this.diskMappingMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.diskMappingMenuItem.Text = "磁盘映射";
+            this.diskMappingMenuItem.Click += new System.EventHandler(this.diskMappingMenuItem_Click);
             // 
             // userManageMenuItem
             // 
             this.userManageMenuItem.Name = "userManageMenuItem";
-            this.userManageMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.userManageMenuItem.Size = new System.Drawing.Size(141, 22);
             this.userManageMenuItem.Text = "用户管理(U)";
             this.userManageMenuItem.Click += new System.EventHandler(this.userManageMenuItem_Click);
             // 
             // appSettingsMenuItem
             // 
             this.appSettingsMenuItem.Name = "appSettingsMenuItem";
-            this.appSettingsMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.appSettingsMenuItem.Size = new System.Drawing.Size(141, 22);
             this.appSettingsMenuItem.Text = "选项(S)";
             this.appSettingsMenuItem.Click += new System.EventHandler(this.appSettingsMenuItem_Click);
             // 
@@ -770,7 +778,7 @@
             // appHelpButton
             // 
             this.appHelpButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.appHelpButton.Location = new System.Drawing.Point(297, 31);
+            this.appHelpButton.Location = new System.Drawing.Point(372, 31);
             this.appHelpButton.Name = "appHelpButton";
             this.appHelpButton.Size = new System.Drawing.Size(60, 60);
             this.appHelpButton.TabIndex = 25;
@@ -864,18 +872,24 @@
             this.imageList.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // sqlUpDataMenuItem
+            // userProfileButton
             // 
-            this.sqlUpDataMenuItem.Name = "sqlUpDataMenuItem";
-            this.sqlUpDataMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.sqlUpDataMenuItem.Text = "更新数据";
-            this.sqlUpDataMenuItem.Click += new System.EventHandler(this.sqlUpDataMenuItem_Click);
+            this.userProfileButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.userProfileButton.Location = new System.Drawing.Point(297, 31);
+            this.userProfileButton.Name = "userProfileButton";
+            this.userProfileButton.Size = new System.Drawing.Size(70, 60);
+            this.userProfileButton.TabIndex = 36;
+            this.userProfileButton.Text = "用户资料";
+            this.userProfileButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.userProfileButton.UseVisualStyleBackColor = true;
+            this.userProfileButton.Click += new System.EventHandler(this.userProfileButton_Click);
             // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 761);
+            this.Controls.Add(this.userProfileButton);
             this.Controls.Add(this.messageFormButton);
             this.Controls.Add(this.appSettingsButton);
             this.Controls.Add(this.diskMappingButton);
@@ -987,5 +1001,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox sqlComboBox;
         private System.Windows.Forms.ToolStripMenuItem sqlUpDataMenuItem;
+        private System.Windows.Forms.Button userProfileButton;
     }
 }

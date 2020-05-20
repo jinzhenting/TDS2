@@ -122,6 +122,7 @@ namespace TDS2
                 filesSortButton.Image = Image.FromFile(@"Image\FilesSort.png");
                 diskMappingButton.Image = Image.FromFile(@"Image\DiskMapping.png");
                 appSettingsButton.Image = Image.FromFile(@"Image\AppSettings.png");
+                userProfileButton.Image = Image.FromFile(@"Image\User.png");
                 appHelpButton.Image = Image.FromFile(@"Image\AppHelp.png");
                 messageFormButton.Image = Image.FromFile(@"Image\Message.png");
             }
@@ -1192,6 +1193,13 @@ namespace TDS2
         private void appSettingsButton_Click(object sender, EventArgs e) { AappSettings(); }
 
         /// <summary>
+        /// 用户资料
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void userProfileButton_Click(object sender, EventArgs e) { UserProfile(); }
+
+        /// <summary>
         /// 帮助
         /// </summary>
         private void appHelpButton_Click(object sender, EventArgs e) { AppViewHelp(); }
@@ -1233,7 +1241,8 @@ namespace TDS2
         /// </summary>
         private void UserProfile()
         {
-            MessageBox.Show("功能未完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            UserProfileForm userProfileForm = new UserProfileForm();
+            userProfileForm.ShowDialog();
         }
 
         /// <summary>

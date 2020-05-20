@@ -185,7 +185,7 @@ namespace TDS2
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("复制文件出现错误，描述如下：\r\n\r\n" + ex, "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                        MessageBox.Show("打开文件出现错误，描述如下：\r\n\r\n" + ex, "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                         return;
                     }
                 }
