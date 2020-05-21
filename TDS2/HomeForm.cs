@@ -17,7 +17,7 @@ namespace TDS2
 {
     public partial class HomeForm : Form
     {
-        
+
         #region 全局变量
 
         /// <summary>
@@ -59,6 +59,11 @@ namespace TDS2
         /// 打版师集
         /// </summary>
         private EditorList editorList = new EditorList();
+
+        /// <summary>
+        /// 磁盘映射窗口
+        /// </summary>
+        DiskMappingForm diskMappingForm = new DiskMappingForm();
 
         #endregion 全局变量
 
@@ -434,7 +439,7 @@ namespace TDS2
         /// 结束时间
         /// </summary>
         private void orderEndDateTimePicker_CloseUp(object sender, EventArgs e) { OrderSearch(); }
-        
+
         /// <summary>
         /// 带子进度按钮
         /// </summary>
@@ -605,7 +610,7 @@ namespace TDS2
                     }
             }
         }
-        
+
         /// <summary>
         /// 订单菜单和按钮启停分配
         /// </summary>
@@ -1107,6 +1112,39 @@ namespace TDS2
 
         #region 程序菜单
 
+        private void homeMenuStrip_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            switch (e.KeyChar)
+            {
+                case 'u':
+                case 'U':
+                    {
+                        userMenuItem.Select();
+                        userMenuItem.ShowDropDown();
+                        homeMenuStrip.Focus();
+                        break;
+                    }
+                case 't':
+                case 'T':
+                    {
+                        toolsMenuItem.Select();
+                        toolsMenuItem.ShowDropDown();
+                        homeMenuStrip.Focus();
+                        break;
+                    }
+                case 'h':
+                case 'H':
+                    {
+                        appHelpMenuItem.Select();
+                        appHelpMenuItem.ShowDropDown();
+                        homeMenuStrip.Focus();
+                        break;
+                    }
+                default:
+                    return;
+            }
+        }
+
         /// <summary>
         /// 选项菜单
         /// </summary>
@@ -1163,13 +1201,13 @@ namespace TDS2
         /// 关于
         /// </summary>
         private void appAboutMenuItem_Click(object sender, EventArgs e) { MessageBox.Show("TDS2\r\n当前版本：" + Application.ProductVersion + "\r\n版权所有：清远市卓华电子商务有限公司", "关于", MessageBoxButtons.OK, MessageBoxIcon.Asterisk); }
-      
+
         #endregion 程序菜单
 
 
 
 
-        
+
         #region 程序工具栏
 
         /// <summary>
@@ -1250,7 +1288,6 @@ namespace TDS2
         /// </summary>
         private void DiskMapping()
         {
-            DiskMappingForm diskMappingForm = new DiskMappingForm();
             diskMappingForm.ShowDialog();
         }
 

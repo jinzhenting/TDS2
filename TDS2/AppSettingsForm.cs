@@ -13,45 +13,6 @@ namespace TDS2
 
             ///
 
-            DiskList disks = new DiskList();// 获取文件系统
-            zFileTextBox.Text = disks.ZFlie.NetPath;// 文件系统赋值
-            zFileComboBox.Items.Add(disks.ZFlie.LocalPath);
-            zFileComboBox.Text = disks.ZFlie.LocalPath;
-            newDataTextBox.Text = disks.NewData.NetPath;
-            newDataComboBox.Items.Add(disks.NewData.LocalPath);
-            newDataComboBox.Text = disks.NewData.LocalPath;
-            historyDataTextBox.Text = disks.HistoryData.NetPath;
-            historyDataComboBox.Items.Add(disks.HistoryData.LocalPath);
-            historyDataComboBox.Text = disks.HistoryData.LocalPath;
-            oldDataTextBox.Text = disks.OldData.NetPath;
-            oldDataComboBox.Items.Add(disks.OldData.LocalPath);
-            oldDataComboBox.Text = disks.OldData.LocalPath;
-            myAttachTextBox.Text = disks.MyAttach.NetPath;
-            myAttachComboBox.Items.Add(disks.MyAttach.LocalPath);
-            myAttachComboBox.Text = disks.MyAttach.LocalPath;
-            dstTextBox.Text = disks.DST.NetPath;
-            dstComboBox.Items.Add(disks.DST.LocalPath);
-            dstComboBox.Text = disks.DST.LocalPath;
-            taTextBox.Text = disks.Ta.NetPath;
-            taComboBox.Items.Add(disks.Ta.LocalPath);
-            taComboBox.Text = disks.Ta.LocalPath;
-            tempTextBox.Text = disks.Temp.NetPath;
-            tempComboBox.Items.Add(disks.Temp.LocalPath);
-            tempComboBox.Text = disks.Temp.LocalPath;
-            foreach (string str in SyetemDiskList.GetFree())
-            {
-                zFileComboBox.Items.Add(str);
-                newDataComboBox.Items.Add(str);
-                historyDataComboBox.Items.Add(str);
-                oldDataComboBox.Items.Add(str);
-                myAttachComboBox.Items.Add(str);
-                dstComboBox.Items.Add(str);
-                taComboBox.Items.Add(str);
-                tempComboBox.Items.Add(str);
-            }
-
-            ///
-
             ExtensionList extensions = new ExtensionList();
             dstFileTextBox.Text = extensions.Dst.App;
             dstFileCheckBox.Checked = extensions.Dst.Relation;
@@ -128,48 +89,6 @@ namespace TDS2
                 Environment.Exit(0);
                 return;
             }
-        }
-
-        /// 
-
-        private void zFileButton_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK) zFileTextBox.Text = folderBrowserDialog.SelectedPath;
-        }
-
-        private void newDataButton_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK) newDataTextBox.Text = folderBrowserDialog.SelectedPath;
-        }
-
-        private void historyDataButton_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK) historyDataTextBox.Text = folderBrowserDialog.SelectedPath;
-        }
-
-        private void oldDataButton_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK) oldDataTextBox.Text = folderBrowserDialog.SelectedPath;
-        }
-
-        private void myAttachButton_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK) myAttachTextBox.Text = folderBrowserDialog.SelectedPath;
-        }
-
-        private void dstButton_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK) dstTextBox.Text = folderBrowserDialog.SelectedPath;
-        }
-
-        private void taButton_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK) taTextBox.Text = folderBrowserDialog.SelectedPath;
-        }
-
-        private void tempButton_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK) tempTextBox.Text = folderBrowserDialog.SelectedPath;
         }
 
         ///

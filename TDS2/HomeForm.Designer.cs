@@ -289,9 +289,12 @@
             this.appHelpMenuItem});
             this.homeMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.homeMenuStrip.Name = "homeMenuStrip";
+            this.homeMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.homeMenuStrip.Size = new System.Drawing.Size(1184, 25);
             this.homeMenuStrip.TabIndex = 2;
+            this.homeMenuStrip.TabStop = true;
             this.homeMenuStrip.Text = "homeMenuStrip";
+            this.homeMenuStrip.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.homeMenuStrip_KeyPress);
             // 
             // userMenuItem
             // 
@@ -306,14 +309,15 @@
             // 
             this.userProfileMenuItem.Name = "userProfileMenuItem";
             this.userProfileMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.userProfileMenuItem.Text = "用户资料(P)";
+            this.userProfileMenuItem.Text = "用户资料";
             this.userProfileMenuItem.Click += new System.EventHandler(this.userProfileMenuItem_Click);
             // 
             // appExitMenuItem
             // 
             this.appExitMenuItem.Name = "appExitMenuItem";
+            this.appExitMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
             this.appExitMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.appExitMenuItem.Text = "退出(E)";
+            this.appExitMenuItem.Text = "退出";
             this.appExitMenuItem.Click += new System.EventHandler(this.appExitMenuItem_Click);
             // 
             // toolsMenuItem
@@ -331,35 +335,37 @@
             // sqlUpDataMenuItem
             // 
             this.sqlUpDataMenuItem.Name = "sqlUpDataMenuItem";
-            this.sqlUpDataMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.sqlUpDataMenuItem.Size = new System.Drawing.Size(170, 22);
             this.sqlUpDataMenuItem.Text = "更新数据";
             this.sqlUpDataMenuItem.Click += new System.EventHandler(this.sqlUpDataMenuItem_Click);
             // 
             // filesSortMenuItem
             // 
             this.filesSortMenuItem.Name = "filesSortMenuItem";
-            this.filesSortMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.filesSortMenuItem.Text = "文件整理(F)";
+            this.filesSortMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.filesSortMenuItem.Text = "文件整理";
             this.filesSortMenuItem.Click += new System.EventHandler(this.filesSortMenuItem_Click);
             // 
             // diskMappingMenuItem
             // 
             this.diskMappingMenuItem.Name = "diskMappingMenuItem";
-            this.diskMappingMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.diskMappingMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.diskMappingMenuItem.Size = new System.Drawing.Size(170, 22);
             this.diskMappingMenuItem.Text = "磁盘映射";
             this.diskMappingMenuItem.Click += new System.EventHandler(this.diskMappingMenuItem_Click);
             // 
             // userManageMenuItem
             // 
             this.userManageMenuItem.Name = "userManageMenuItem";
-            this.userManageMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.userManageMenuItem.Text = "用户管理(U)";
+            this.userManageMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.userManageMenuItem.Text = "用户管理";
             this.userManageMenuItem.Click += new System.EventHandler(this.userManageMenuItem_Click);
             // 
             // appSettingsMenuItem
             // 
             this.appSettingsMenuItem.Name = "appSettingsMenuItem";
-            this.appSettingsMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.appSettingsMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.appSettingsMenuItem.Size = new System.Drawing.Size(170, 22);
             this.appSettingsMenuItem.Text = "选项(S)";
             this.appSettingsMenuItem.Click += new System.EventHandler(this.appSettingsMenuItem_Click);
             // 
@@ -377,29 +383,31 @@
             // appViewHelpMenuItem
             // 
             this.appViewHelpMenuItem.Name = "appViewHelpMenuItem";
-            this.appViewHelpMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.appViewHelpMenuItem.Text = "查看帮助(V)";
+            this.appViewHelpMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.appViewHelpMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.appViewHelpMenuItem.Text = "查看帮助";
             this.appViewHelpMenuItem.Click += new System.EventHandler(this.appViewHelpMenuItem_Click);
             // 
             // developerMenuItem
             // 
             this.developerMenuItem.Name = "developerMenuItem";
-            this.developerMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.developerMenuItem.Text = "技术支持(T)";
+            this.developerMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.developerMenuItem.Text = "技术支持";
             this.developerMenuItem.Click += new System.EventHandler(this.developerMenuItem_Click);
             // 
             // appUpMenuItem
             // 
             this.appUpMenuItem.Name = "appUpMenuItem";
-            this.appUpMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.appUpMenuItem.Text = "获取新版本(U)";
+            this.appUpMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
+            this.appUpMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.appUpMenuItem.Text = "获取新版本";
             this.appUpMenuItem.Click += new System.EventHandler(this.appUpMenuItem_Click);
             // 
             // appAboutMenuItem
             // 
             this.appAboutMenuItem.Name = "appAboutMenuItem";
-            this.appAboutMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.appAboutMenuItem.Text = "关于TDS2(A)";
+            this.appAboutMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.appAboutMenuItem.Text = "关于 TDS2";
             this.appAboutMenuItem.Click += new System.EventHandler(this.appAboutMenuItem_Click);
             // 
             // homeTabControl
@@ -906,7 +914,7 @@
             this.MinimumSize = new System.Drawing.Size(1080, 768);
             this.Name = "HomeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "HomeForm";
+            this.Text = " ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HomeForm_FormClosing);
             this.Shown += new System.EventHandler(this.HomeForm_Shown);
             this.orderContextMenuStrip.ResumeLayout(false);

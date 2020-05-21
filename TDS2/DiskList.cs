@@ -26,6 +26,12 @@ namespace TDS2
                                     zFlie.Name = "ZFile";
                                     zFlie.NetPath = node.Attributes["netPath"].Value;
                                     zFlie.LocalPath = node.Attributes["localPath"].Value;
+                                    zFlie.AutoMapping = node.Attributes["autoMapping"].Value == "true" ? "是" : "否";
+                                    zFlie.WindowsAccount = node.Attributes["windowsAccount"].Value == "true" ? "Winsows凭据" : "用户名与密码";
+                                    zFlie.Forever = node.Attributes["forever"].Value == "true" ? "是" : "否";
+                                    zFlie.AutoCheck = node.Attributes["autoCheck"].Value == "true" ? "是" : "否";
+                                    zFlie.UserName = node.Attributes["userName"].Value;
+                                    zFlie.Password = node.Attributes["password"].Value;
                                     break;
                                 }
                             case "NewData":
@@ -33,6 +39,12 @@ namespace TDS2
                                     newData.Name = "NewData";
                                     newData.NetPath = node.Attributes["netPath"].Value;
                                     newData.LocalPath = node.Attributes["localPath"].Value;
+                                    newData.AutoMapping = node.Attributes["autoMapping"].Value == "true" ? "是" : "否";
+                                    newData.WindowsAccount = node.Attributes["windowsAccount"].Value == "true" ? "Winsows凭据" : "用户名与密码";
+                                    newData.Forever = node.Attributes["forever"].Value == "true" ? "是" : "否";
+                                    newData.AutoCheck = node.Attributes["autoCheck"].Value == "true" ? "是" : "否";
+                                    newData.UserName = node.Attributes["userName"].Value;
+                                    newData.Password = node.Attributes["password"].Value;
                                     break;
                                 }
                             case "HistoryData":
@@ -40,6 +52,12 @@ namespace TDS2
                                     historyData.Name = "HistoryData";
                                     historyData.NetPath = node.Attributes["netPath"].Value;
                                     historyData.LocalPath = node.Attributes["localPath"].Value;
+                                    historyData.AutoMapping = node.Attributes["autoMapping"].Value == "true" ? "是" : "否";
+                                    historyData.WindowsAccount = node.Attributes["windowsAccount"].Value == "true" ? "Winsows凭据" : "用户名与密码";
+                                    historyData.Forever = node.Attributes["forever"].Value == "true" ? "是" : "否";
+                                    historyData.AutoCheck = node.Attributes["autoCheck"].Value == "true" ? "是" : "否";
+                                    historyData.UserName = node.Attributes["userName"].Value;
+                                    historyData.Password = node.Attributes["password"].Value;
                                     break;
                                 }
                             case "OldData":
@@ -47,6 +65,12 @@ namespace TDS2
                                     oldData.Name = "OldData";
                                     oldData.NetPath = node.Attributes["netPath"].Value;
                                     oldData.LocalPath = node.Attributes["localPath"].Value;
+                                    oldData.AutoMapping = node.Attributes["autoMapping"].Value == "true" ? "是" : "否";
+                                    oldData.WindowsAccount = node.Attributes["windowsAccount"].Value == "true" ? "Winsows凭据" : "用户名与密码";
+                                    oldData.Forever = node.Attributes["forever"].Value == "true" ? "是" : "否";
+                                    oldData.AutoCheck = node.Attributes["autoCheck"].Value == "true" ? "是" : "否";
+                                    oldData.UserName = node.Attributes["userName"].Value;
+                                    oldData.Password = node.Attributes["password"].Value;
                                     break;
                                 }
                             case "MyAttach":
@@ -54,6 +78,12 @@ namespace TDS2
                                     myAttach.Name = "MyAttach";
                                     myAttach.NetPath = node.Attributes["netPath"].Value;
                                     myAttach.LocalPath = node.Attributes["localPath"].Value;
+                                    myAttach.AutoMapping = node.Attributes["autoMapping"].Value == "true" ? "是" : "否";
+                                    myAttach.WindowsAccount = node.Attributes["windowsAccount"].Value == "true" ? "Winsows凭据" : "用户名与密码";
+                                    myAttach.Forever = node.Attributes["forever"].Value == "true" ? "是" : "否";
+                                    myAttach.AutoCheck = node.Attributes["autoCheck"].Value == "true" ? "是" : "否";
+                                    myAttach.UserName = node.Attributes["userName"].Value;
+                                    myAttach.Password = node.Attributes["password"].Value;
                                     break;
                                 }
                             case "DST":
@@ -61,6 +91,12 @@ namespace TDS2
                                     dst.Name = "DST";
                                     dst.NetPath = node.Attributes["netPath"].Value;
                                     dst.LocalPath = node.Attributes["localPath"].Value;
+                                    dst.AutoMapping = node.Attributes["autoMapping"].Value == "true" ? "是" : "否";
+                                    dst.WindowsAccount = node.Attributes["windowsAccount"].Value == "true" ? "Winsows凭据" : "用户名与密码";
+                                    dst.Forever = node.Attributes["forever"].Value == "true" ? "是" : "否";
+                                    dst.AutoCheck = node.Attributes["autoCheck"].Value == "true" ? "是" : "否";
+                                    dst.UserName = node.Attributes["userName"].Value;
+                                    dst.Password = node.Attributes["password"].Value;
                                     break;
                                 }
                             case "Ta":
@@ -68,6 +104,12 @@ namespace TDS2
                                     ta.Name = "Ta";
                                     ta.NetPath = node.Attributes["netPath"].Value;
                                     ta.LocalPath = node.Attributes["localPath"].Value;
+                                    ta.AutoMapping = node.Attributes["autoMapping"].Value == "true" ? "是" : "否";
+                                    ta.WindowsAccount = node.Attributes["windowsAccount"].Value == "true" ? "Winsows凭据" : "用户名与密码";
+                                    ta.Forever = node.Attributes["forever"].Value == "true" ? "是" : "否";
+                                    ta.AutoCheck = node.Attributes["autoCheck"].Value == "true" ? "是" : "否";
+                                    ta.UserName = node.Attributes["userName"].Value;
+                                    ta.Password = node.Attributes["password"].Value;
                                     break;
                                 }
                             case "Temp":
@@ -75,6 +117,12 @@ namespace TDS2
                                     temp.Name = "Temp";
                                     temp.NetPath = node.Attributes["netPath"].Value;
                                     temp.LocalPath = node.Attributes["localPath"].Value;
+                                    temp.AutoMapping = node.Attributes["autoMapping"].Value == "true" ? "是" : "否";
+                                    temp.WindowsAccount = node.Attributes["windowsAccount"].Value == "true" ? "Winsows凭据" : "用户名与密码";
+                                    temp.Forever = node.Attributes["forever"].Value == "true" ? "是" : "否";
+                                    temp.AutoCheck = node.Attributes["autoCheck"].Value == "true" ? "是" : "否";
+                                    temp.UserName = node.Attributes["userName"].Value;
+                                    temp.Password = node.Attributes["password"].Value;
                                     break;
                                 }
                             case "Vector":
@@ -82,6 +130,12 @@ namespace TDS2
                                     vector.Name = "Vector";
                                     vector.NetPath = node.Attributes["netPath"].Value;
                                     vector.LocalPath = node.Attributes["localPath"].Value;
+                                    vector.AutoMapping = node.Attributes["autoMapping"].Value == "true" ? "是" : "否";
+                                    vector.WindowsAccount = node.Attributes["windowsAccount"].Value == "true" ? "Winsows凭据" : "用户名与密码";
+                                    vector.Forever = node.Attributes["forever"].Value == "true" ? "是" : "否";
+                                    vector.AutoCheck = node.Attributes["autoCheck"].Value == "true" ? "是" : "否";
+                                    vector.UserName = node.Attributes["userName"].Value;
+                                    vector.Password = node.Attributes["password"].Value;
                                     break;
                                 }
                             default:
