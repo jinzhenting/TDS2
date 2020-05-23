@@ -1,12 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Pathss>
-  <ZFile netPath="\\nrl\Z_file" localPath="L:"></ZFile>
-  <NewData netPath="\\nr\New_data" localPath="V:"></NewData>
-  <HistoryData netPath="\\nrl\History_data" localPath="O:"></HistoryData>
-  <OldData netPath="\\nrl\Old_data" localPath="P:"></OldData>
-  <MyAttach netPath="\\nr\My_attach" localPath="X:"></MyAttach>
-  <DST netPath="\\nrl\DST" localPath="S:"></DST>
-  <Ta netPath="\\nrl\Ta" localPath="U:"></Ta>
-  <Temp netPath="\\nrl\dg_temp" localPath="U:"></Temp>
-  <Vector netPath="\\nrl\Vector" localPath="H:"></Vector>
+  <ZFile netPath="\\nrl\Z_file" localPath="L:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
+  </ZFile>
+  <NewData netPath="\\nr\New_data" localPath="V:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
+  </NewData>
+  <HistoryData netPath="\\nrl\History_data" localPath="O:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
+  </HistoryData>
+  <OldData netPath="\\nrl\Old_data" localPath="P:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
+  </OldData>
+  <MyAttach netPath="\\nr\My_attach" localPath="X:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
+  </MyAttach>
+  <DST netPath="\\nrl\DST" localPath="S:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
+  </DST>
+  <Ta netPath="\\nrl\Ta" localPath="Y:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
+  </Ta>
+  <Temp netPath="\\nrl\dg_temp" localPath="Z:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
+  </Temp>
+  <Vector netPath="\\nrl\Vector" localPath="H:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
+  </Vector>
+  <Soft netPath="\\nrl\Soft" localPath="K:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
+  </Soft>
+  <NrxAttach netPath="\\NRL\Nrx_attach" localPath="N:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
+  </NrxAttach>
+  <Order netPath="\\NRL\Order" localPath="R:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
+  </Order>
+  <EMBDesign netPath="\\NRL\EMBDesign" localPath="U:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
+  </EMBDesign>
+  <O2CWork netPath="\\NRZ\O2C_work" localPath="T:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
+  </O2CWork>
 </Pathss>
