@@ -113,6 +113,20 @@ namespace TDS2
             if (openFileDialog.ShowDialog() == DialogResult.OK) aiFileTextBox.Text = openFileDialog.FileName;
         }
 
+        private void AppSettingsForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.O:
+                    {
+                        if (e.Control) Close();
+                        break;
+                    }
+                default:
+                    break;
+            }
+        }
+
         ///
 
 

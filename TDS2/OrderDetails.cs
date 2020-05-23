@@ -9,7 +9,7 @@ namespace TDS2
 {
     public partial class OrderDetails : Form
     {
-        public OrderDetails(DataRow orderRow, DiskList diskList)
+        public OrderDetails(DataRow orderRow)
         {
             InitializeComponent();
 

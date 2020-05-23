@@ -38,5 +38,20 @@ namespace TDS2
                 return;
             }
         }
+
+        private void AppHelpForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F1:
+                    {
+                        Close();
+                        break;
+                    }
+                default:
+                    break;
+            }
+
+        }
     }
 }

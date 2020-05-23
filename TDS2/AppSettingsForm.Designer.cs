@@ -471,12 +471,14 @@
             this.Controls.Add(this.settingsTabControl);
             this.Controls.Add(this.disksCancelButton);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(500, 400);
             this.Name = "AppSettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "选项";
             this.Load += new System.EventHandler(this.AppSettingsForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AppSettingsForm_KeyDown);
             this.appUpTabPage.ResumeLayout(false);
             this.appUpTabPage.PerformLayout();
             this.filesOpenTabPage.ResumeLayout(false);

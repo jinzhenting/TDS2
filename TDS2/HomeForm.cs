@@ -44,12 +44,7 @@ namespace TDS2
         /// 订单文件列表集
         /// </summary>
         private List<List<string>> filesList = new List<List<string>>();
-
-        /// <summary>
-        /// 网盘集
-        /// </summary>
-        private DiskList diskList = new DiskList();
-
+        
         /// <summary>
         /// 订单列表原图容器
         /// </summary>
@@ -72,6 +67,30 @@ namespace TDS2
 
 
         #region 窗口动作
+    
+        /// <summary>
+        /// 窗口按键检测
+        /// </summary>
+        private void HomeForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            /// 有部分快捷键在程序菜单中实现
+            /// 有部分快捷键在列表按键检测中实现
+            switch (e.KeyCode)
+            {
+                case Keys.F5:
+                    {
+                        OrderSearch();
+                        break;
+                    }
+                case Keys.Escape:
+                    {
+                        if (searchBackgroundWorker.IsBusy) searchBackgroundWorker.CancelAsync();
+                        break;
+                    }
+                default:
+                    break;
+            }
+        }
 
         /// <summary>
         /// 窗口初始化配置
@@ -175,47 +194,7 @@ namespace TDS2
         /// 列表双击
         /// </summary>
         private void orderListView_DoubleClick(object sender, EventArgs e) { OpenOrderDetails(); }
-
-        /// <summary>
-        /// 列表快捷键
-        /// </summary>
-        private void orderListView_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.Enter:
-                case Keys.Space:
-                    {
-                        if (e.Control)
-                        {
-                            if (selectedItemIndex != -1) OrderCheck();
-                        }
-                        else OpenOrderDetails();
-                        break;
-                    }
-                case Keys.F5:
-                    {
-                        OrderSearch();
-                        break;
-                    }
-                case Keys.Escape:
-                    {
-                        if (searchBackgroundWorker.IsBusy) searchBackgroundWorker.CancelAsync();
-                        break;
-                    }
-                case Keys.C:
-                    {
-                        if (e.Control)
-                        {
-                            if (selectedItem) Clipboard.SetText((string)orderTable.Rows[selectedItemIndex]["订单号"]);
-                        }
-                        break;
-                    }
-                default:
-                    break;
-            }
-        }
-
+        
         /// <summary>
         /// 列表选择项目改变时
         /// </summary>
@@ -496,7 +475,7 @@ namespace TDS2
         /// </summary>
         private void orderSesrchButton_Click(object sender, EventArgs e)
         {
-            if (searchTextBox.Text == "" || searchTextBox.Text == "在此输入带号")
+            if (searchTextBox.Text.Replace(" ", "") == "" || searchTextBox.Text == "在此输入带号")
             {
                 searchTextBox.Text = "在此输入带号";
                 searchTextBox.Focus();
@@ -901,7 +880,7 @@ namespace TDS2
         {
             if (orderListView.SelectedItems.Count > 0)
             {
-                OrderDetails orderDetails = new OrderDetails(orderTable.Rows[selectedItemIndex], diskList);
+                OrderDetails orderDetails = new OrderDetails(orderTable.Rows[selectedItemIndex]);
                 orderDetails.ShowDialog();
             }
         }
@@ -916,10 +895,42 @@ namespace TDS2
                 MessageBox.Show("该订单不包含任何文件", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            OrderCheckForm orderCheckForm = new OrderCheckForm(orderTable.Rows[selectedItemIndex], diskList);
+            OrderCheckForm orderCheckForm = new OrderCheckForm(orderTable.Rows[selectedItemIndex]);
             orderCheckForm.ShowDialog();
         }
 
+        /// <summary>
+        /// 列表快捷键
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void orderListView_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+                case Keys.Space:
+                    {
+                        if (e.Control)
+                        {
+                            if (selectedItemIndex != -1) OrderCheck();
+                        }
+                        else OpenOrderDetails();
+                        break;
+                    }
+                case Keys.C:
+                    {
+                        if (e.Control)
+                        {
+                            if (selectedItem) Clipboard.SetText((string)orderTable.Rows[selectedItemIndex]["订单号"]);
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+
+        }
         #endregion 列表功能
 
 
@@ -988,6 +999,7 @@ namespace TDS2
             if (orderTable == null || orderTable.Rows.Count == 0) return;
             searchBackgroundWorker.ReportProgress(Percents.Get(1, orderTable.Rows.Count), "数据处理中...");// 进度传出
             SqlFunction.Table2Standard(orderTable);// 数据转换到规范模式
+            Image UnImage = ImageZoom.Zoom(Image.FromFile(@"Image\UnImage.png"), 256, 256);
             ///
             for (int i = 0; i < orderTable.Rows.Count; i++)// 遍历订单库
             {
@@ -1016,6 +1028,7 @@ namespace TDS2
                                 Bitmap bmp = new Bitmap(str);
                                 images.Add(ImageZoom.Zoom(bmp, 256, 256));
                                 unImage = false;
+                                bmp.Dispose();
                                 break;
                             }
                             catch// 图片加载出错时，可能是编码有问题，静默跳过，遍历下一个
@@ -1024,7 +1037,7 @@ namespace TDS2
                             }
                         }
                     }
-                    if (unImage) images.Add(Image.FromFile(@"Image\UnImage.png"));// 如果没有匹配到图片，加载缺失图片
+                    if (unImage) images.Add(UnImage);// 如果没有匹配到图片，加载缺失图片
                 }
                 #endregion 加载缩略图
 
@@ -1111,40 +1124,7 @@ namespace TDS2
 
 
         #region 程序菜单
-
-        private void homeMenuStrip_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            switch (e.KeyChar)
-            {
-                case 'u':
-                case 'U':
-                    {
-                        userMenuItem.Select();
-                        userMenuItem.ShowDropDown();
-                        homeMenuStrip.Focus();
-                        break;
-                    }
-                case 't':
-                case 'T':
-                    {
-                        toolsMenuItem.Select();
-                        toolsMenuItem.ShowDropDown();
-                        homeMenuStrip.Focus();
-                        break;
-                    }
-                case 'h':
-                case 'H':
-                    {
-                        appHelpMenuItem.Select();
-                        appHelpMenuItem.ShowDropDown();
-                        homeMenuStrip.Focus();
-                        break;
-                    }
-                default:
-                    return;
-            }
-        }
-
+        
         /// <summary>
         /// 选项菜单
         /// </summary>
@@ -1333,6 +1313,5 @@ namespace TDS2
         }
 
         #endregion 程序操作功能
-
     }
 }

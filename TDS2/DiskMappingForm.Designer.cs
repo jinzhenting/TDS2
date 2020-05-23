@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.zFileLabel = new System.Windows.Forms.Label();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.diskListView = new System.Windows.Forms.ListView();
@@ -41,25 +42,27 @@
             this.log = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.exitButton = new System.Windows.Forms.Button();
             this.mappingBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.mappingButton = new System.Windows.Forms.Button();
             this.breakButton = new System.Windows.Forms.Button();
-            this.selectAllButton = new System.Windows.Forms.Button();
-            this.reSelectButton = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.diskProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.diskProgressLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.breakBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.mappingTimer = new System.Windows.Forms.Timer(this.components);
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.ModifyButton = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // zFileLabel
             // 
             this.zFileLabel.AutoSize = true;
-            this.zFileLabel.Location = new System.Drawing.Point(9, 7);
+            this.zFileLabel.Location = new System.Drawing.Point(7, 7);
             this.zFileLabel.Name = "zFileLabel";
             this.zFileLabel.Size = new System.Drawing.Size(32, 17);
             this.zFileLabel.TabIndex = 52;
@@ -71,7 +74,6 @@
             this.diskListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.diskListView.CheckBoxes = true;
             this.diskListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.name,
             this.url,
@@ -83,11 +85,13 @@
             this.log});
             this.diskListView.FullRowSelect = true;
             this.diskListView.GridLines = true;
+            this.diskListView.HideSelection = false;
             this.diskListView.Location = new System.Drawing.Point(-1, 31);
             this.diskListView.MultiSelect = false;
             this.diskListView.Name = "diskListView";
             this.diskListView.Size = new System.Drawing.Size(986, 472);
             this.diskListView.TabIndex = 99;
+            this.diskListView.TabStop = false;
             this.diskListView.UseCompatibleStateImageBehavior = false;
             this.diskListView.View = System.Windows.Forms.View.Details;
             // 
@@ -150,18 +154,19 @@
             this.mappingBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.mappingBackgroundWorker_ProgressChanged);
             this.mappingBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.mappingBackgroundWorker_RunWorkerCompleted);
             // 
-            // numericUpDown1
+            // numericUpDown
             // 
-            this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown1.Location = new System.Drawing.Point(881, 4);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(60, 23);
-            this.numericUpDown1.TabIndex = 102;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.numericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDown.Location = new System.Drawing.Point(881, 4);
+            this.numericUpDown.Name = "numericUpDown";
+            this.numericUpDown.Size = new System.Drawing.Size(60, 23);
+            this.numericUpDown.TabIndex = 102;
+            this.numericUpDown.Value = new decimal(new int[] {
             5,
             0,
             0,
             0});
+            this.numericUpDown.ValueChanged += new System.EventHandler(this.numericUpDown_ValueChanged);
             // 
             // label1
             // 
@@ -188,7 +193,7 @@
             // mappingButton
             // 
             this.mappingButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.mappingButton.Location = new System.Drawing.Point(741, 509);
+            this.mappingButton.Location = new System.Drawing.Point(743, 509);
             this.mappingButton.Name = "mappingButton";
             this.mappingButton.Size = new System.Drawing.Size(75, 23);
             this.mappingButton.TabIndex = 105;
@@ -199,35 +204,13 @@
             // breakButton
             // 
             this.breakButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.breakButton.Location = new System.Drawing.Point(822, 509);
+            this.breakButton.Location = new System.Drawing.Point(823, 509);
             this.breakButton.Name = "breakButton";
             this.breakButton.Size = new System.Drawing.Size(75, 23);
             this.breakButton.TabIndex = 106;
             this.breakButton.Text = "断开";
             this.breakButton.UseVisualStyleBackColor = true;
             this.breakButton.Click += new System.EventHandler(this.breakButton_Click);
-            // 
-            // selectAllButton
-            // 
-            this.selectAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.selectAllButton.Location = new System.Drawing.Point(6, 509);
-            this.selectAllButton.Name = "selectAllButton";
-            this.selectAllButton.Size = new System.Drawing.Size(75, 23);
-            this.selectAllButton.TabIndex = 107;
-            this.selectAllButton.Text = "全选";
-            this.selectAllButton.UseVisualStyleBackColor = true;
-            this.selectAllButton.Click += new System.EventHandler(this.selectAllButton_Click);
-            // 
-            // reSelectButton
-            // 
-            this.reSelectButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.reSelectButton.Location = new System.Drawing.Point(87, 509);
-            this.reSelectButton.Name = "reSelectButton";
-            this.reSelectButton.Size = new System.Drawing.Size(75, 23);
-            this.reSelectButton.TabIndex = 108;
-            this.reSelectButton.Text = "反选";
-            this.reSelectButton.UseVisualStyleBackColor = true;
-            this.reSelectButton.Click += new System.EventHandler(this.reSelectButton_Click);
             // 
             // statusStrip1
             // 
@@ -259,31 +242,71 @@
             this.breakBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.breakBackgroundWorker_ProgressChanged);
             this.breakBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.breakBackgroundWorker_RunWorkerCompleted);
             // 
+            // mappingTimer
+            // 
+            this.mappingTimer.Interval = 300000;
+            this.mappingTimer.Tick += new System.EventHandler(this.mappingTimer_Tick);
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.deleteButton.Location = new System.Drawing.Point(168, 509);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteButton.TabIndex = 110;
+            this.deleteButton.Text = "删除";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
+            // ModifyButton
+            // 
+            this.ModifyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ModifyButton.Location = new System.Drawing.Point(87, 509);
+            this.ModifyButton.Name = "ModifyButton";
+            this.ModifyButton.Size = new System.Drawing.Size(75, 23);
+            this.ModifyButton.TabIndex = 111;
+            this.ModifyButton.Text = "修改";
+            this.ModifyButton.UseVisualStyleBackColor = true;
+            this.ModifyButton.Click += new System.EventHandler(this.ModifyButton_Click);
+            // 
+            // addButton
+            // 
+            this.addButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.addButton.Location = new System.Drawing.Point(6, 509);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(75, 23);
+            this.addButton.TabIndex = 112;
+            this.addButton.Text = "新建";
+            this.addButton.UseVisualStyleBackColor = true;
+            // 
             // DiskMappingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.exitButton;
             this.ClientSize = new System.Drawing.Size(984, 561);
+            this.Controls.Add(this.addButton);
+            this.Controls.Add(this.ModifyButton);
+            this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.reSelectButton);
-            this.Controls.Add(this.selectAllButton);
             this.Controls.Add(this.breakButton);
             this.Controls.Add(this.mappingButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numericUpDown);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.diskListView);
             this.Controls.Add(this.zFileLabel);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "DiskMappingForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "磁盘映射";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DiskMappingForm_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DiskMappingForm_KeyDown);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -302,19 +325,21 @@
         private System.Windows.Forms.ColumnHeader autoCheck;
         private System.Windows.Forms.Button exitButton;
         private System.ComponentModel.BackgroundWorker mappingBackgroundWorker;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDown;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ColumnHeader log;
         private System.Windows.Forms.Button mappingButton;
         private System.Windows.Forms.Button breakButton;
-        private System.Windows.Forms.Button selectAllButton;
-        private System.Windows.Forms.Button reSelectButton;
         private System.Windows.Forms.ColumnHeader forever;
         private System.Windows.Forms.ColumnHeader connectAccount;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripProgressBar diskProgressBar;
         private System.Windows.Forms.ToolStripStatusLabel diskProgressLabel;
         private System.ComponentModel.BackgroundWorker breakBackgroundWorker;
+        private System.Windows.Forms.Timer mappingTimer;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button ModifyButton;
+        private System.Windows.Forms.Button addButton;
     }
 }

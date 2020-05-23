@@ -61,6 +61,12 @@
     <Compile Include="DiskMappingForm.Designer.cs">
       <DependentUpon>DiskMappingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DiskModifyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DiskModifyForm.Designer.cs">
+      <DependentUpon>DiskModifyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DoubleBufferListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -74,6 +80,7 @@
     <Compile Include="FilesSortForm.Designer.cs">
       <DependentUpon>FilesSortForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileSystem.cs" />
     <Compile Include="MessageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DiskMappingForm.resx">
       <DependentUpon>DiskMappingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DiskModifyForm.resx">
+      <DependentUpon>DiskModifyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FilesSortForm.resx">
       <DependentUpon>FilesSortForm.cs</DependentUpon>

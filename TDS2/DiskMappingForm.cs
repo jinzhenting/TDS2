@@ -37,127 +37,32 @@ namespace TDS2
 
             ///
 
-            DiskList disks = new DiskList();// 获取文件系统
+            LoadListView();
+            MappingStart();
+            mappingTimer.Start();
+        }
 
-            ListViewItem zFile = new ListViewItem();// ZFlie
-            zFile.Text = disks.ZFlie.Name;
-            zFile.SubItems.Add(disks.ZFlie.NetPath);
-            zFile.SubItems.Add(disks.ZFlie.LocalPath);
-            zFile.SubItems.Add(disks.ZFlie.AutoMapping);
-            zFile.SubItems.Add(disks.ZFlie.WindowsAccount);
-            zFile.SubItems.Add(disks.ZFlie.Forever);
-            zFile.SubItems.Add(disks.ZFlie.AutoCheck);
-            zFile.SubItems.Add("");
-            zFile.SubItems.Add(disks.ZFlie.UserName);
-            zFile.SubItems.Add(disks.ZFlie.Password);
-            diskListView.Items.Add(zFile);
-
-            ListViewItem newData = new ListViewItem();// 
-            newData.Text = disks.NewData.Name;
-            newData.SubItems.Add(disks.NewData.NetPath);
-            newData.SubItems.Add(disks.NewData.LocalPath);
-            newData.SubItems.Add(disks.NewData.AutoMapping);
-            newData.SubItems.Add(disks.NewData.WindowsAccount);
-            newData.SubItems.Add(disks.NewData.Forever);
-            newData.SubItems.Add(disks.NewData.AutoCheck);
-            newData.SubItems.Add("");
-            newData.SubItems.Add(disks.NewData.UserName);
-            newData.SubItems.Add(disks.NewData.Password);
-            diskListView.Items.Add(newData);
-
-            ListViewItem historyData = new ListViewItem();// 
-            historyData.Text = disks.HistoryData.Name;
-            historyData.SubItems.Add(disks.HistoryData.NetPath);
-            historyData.SubItems.Add(disks.HistoryData.LocalPath);
-            historyData.SubItems.Add(disks.HistoryData.AutoMapping);
-            historyData.SubItems.Add(disks.HistoryData.WindowsAccount);
-            historyData.SubItems.Add(disks.HistoryData.Forever);
-            historyData.SubItems.Add(disks.HistoryData.AutoCheck);
-            historyData.SubItems.Add("");
-            historyData.SubItems.Add(disks.HistoryData.UserName);
-            historyData.SubItems.Add(disks.HistoryData.Password);
-            diskListView.Items.Add(historyData);
-
-            ListViewItem oldData = new ListViewItem();// 
-            oldData.Text = disks.OldData.Name;
-            oldData.SubItems.Add(disks.OldData.NetPath);
-            oldData.SubItems.Add(disks.OldData.LocalPath);
-            oldData.SubItems.Add(disks.OldData.AutoMapping);
-            oldData.SubItems.Add(disks.OldData.WindowsAccount);
-            oldData.SubItems.Add(disks.OldData.Forever);
-            oldData.SubItems.Add(disks.OldData.AutoCheck);
-            oldData.SubItems.Add("");
-            oldData.SubItems.Add(disks.OldData.UserName);
-            oldData.SubItems.Add(disks.OldData.Password);
-            diskListView.Items.Add(oldData);
-
-            ListViewItem myAttach = new ListViewItem();// 
-            myAttach.Text = disks.MyAttach.Name;
-            myAttach.SubItems.Add(disks.MyAttach.NetPath);
-            myAttach.SubItems.Add(disks.MyAttach.LocalPath);
-            myAttach.SubItems.Add(disks.MyAttach.AutoMapping);
-            myAttach.SubItems.Add(disks.MyAttach.WindowsAccount);
-            myAttach.SubItems.Add(disks.MyAttach.Forever);
-            myAttach.SubItems.Add(disks.MyAttach.AutoCheck);
-            myAttach.SubItems.Add("");
-            myAttach.SubItems.Add(disks.MyAttach.UserName);
-            myAttach.SubItems.Add(disks.MyAttach.Password);
-            diskListView.Items.Add(myAttach);
-
-            ListViewItem dst = new ListViewItem();// 
-            dst.Text = disks.DST.Name;
-            dst.SubItems.Add(disks.DST.NetPath);
-            dst.SubItems.Add(disks.DST.LocalPath);
-            dst.SubItems.Add(disks.DST.AutoMapping);
-            dst.SubItems.Add(disks.DST.WindowsAccount);
-            dst.SubItems.Add(disks.DST.Forever);
-            dst.SubItems.Add(disks.DST.AutoCheck);
-            dst.SubItems.Add("");
-            dst.SubItems.Add(disks.DST.UserName);
-            dst.SubItems.Add(disks.DST.Password);
-            diskListView.Items.Add(dst);
-
-            ListViewItem ta = new ListViewItem();// 
-            ta.Text = disks.Ta.Name;
-            ta.SubItems.Add(disks.Ta.NetPath);
-            ta.SubItems.Add(disks.Ta.LocalPath);
-            ta.SubItems.Add(disks.Ta.AutoMapping);
-            ta.SubItems.Add(disks.Ta.WindowsAccount);
-            ta.SubItems.Add(disks.Ta.Forever);
-            ta.SubItems.Add(disks.Ta.AutoCheck);
-            ta.SubItems.Add("");
-            ta.SubItems.Add(disks.Ta.UserName);
-            ta.SubItems.Add(disks.Ta.Password);
-            diskListView.Items.Add(ta);
-
-            ListViewItem temp = new ListViewItem();// 
-            temp.Text = disks.Temp.Name;
-            temp.SubItems.Add(disks.Temp.NetPath);
-            temp.SubItems.Add(disks.Temp.LocalPath);
-            temp.SubItems.Add(disks.Temp.AutoMapping);
-            temp.SubItems.Add(disks.Temp.WindowsAccount);
-            temp.SubItems.Add(disks.Temp.Forever);
-            temp.SubItems.Add(disks.Temp.AutoCheck);
-            temp.SubItems.Add("");
-            temp.SubItems.Add(disks.Temp.UserName);
-            temp.SubItems.Add(disks.Temp.Password);
-            diskListView.Items.Add(temp);
-
-            ListViewItem vector = new ListViewItem();// 
-            vector.Text = disks.Vector.Name;
-            vector.SubItems.Add(disks.Vector.NetPath);
-            vector.SubItems.Add(disks.Vector.LocalPath);
-            vector.SubItems.Add(disks.Vector.AutoMapping);
-            vector.SubItems.Add(disks.Vector.WindowsAccount);
-            vector.SubItems.Add(disks.Vector.Forever);
-            vector.SubItems.Add(disks.Vector.AutoCheck);
-            vector.SubItems.Add("");
-            vector.SubItems.Add(disks.Vector.UserName);
-            vector.SubItems.Add(disks.Vector.Password);
-            diskListView.Items.Add(vector);
-
-            ///
-
+        /// <summary>
+        /// 重新载入列表
+        /// </summary>
+        private void LoadListView()
+        {
+            if (diskListView.Items.Count > 0) diskListView.Items.Clear();
+            foreach (Disk disk in DiskList.Get())// 遍历磁盘列表到ListView
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = disk.Name;
+                item.SubItems.Add(disk.NetPath);
+                item.SubItems.Add(disk.LocalPath);
+                item.SubItems.Add(disk.AutoMapping);
+                item.SubItems.Add(disk.WindowsAccount);
+                item.SubItems.Add(disk.Forever);
+                item.SubItems.Add(disk.AutoCheck);
+                item.SubItems.Add("");
+                item.SubItems.Add(disk.UserName);
+                item.SubItems.Add(disk.Password);
+                diskListView.Items.Add(item);
+            }
         }
 
         private void mappingBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -173,27 +78,40 @@ namespace TDS2
                     e.Cancel = true;
                     return;
                 }
-
+                
                 mappingBackgroundWorker.ReportProgress(Percents.Get(1, dataTable.Rows.Count), "正在映射：" + dataTable.Rows[i][0].ToString());// 进度传出
 
-                string localPath = dataTable.Rows[i][2].ToString();
-                string netPath = dataTable.Rows[i][1].ToString();
-                string userName = dataTable.Rows[i][8].ToString();
-                string password = dataTable.Rows[i][9].ToString();
-                uint constflags = userName == "" ? (uint)0 : (uint)0;
+                string autoMapping = dataTable.Rows[i][3].ToString();
+                if (autoMapping == "否")
+                {
+                    logs[i] = "未启用自动映射 - " + DateTime.Now.ToString();
+                    continue;
+                }
 
+                string autoCheck = dataTable.Rows[i][6].ToString();
+                if (autoCheck == "否")
+                {
+                    logs[i] = "未启用断开检测 - " + DateTime.Now.ToString();
+                    continue;
+                }
+
+                string localPath = dataTable.Rows[i][2].ToString();
                 if (Directory.Exists(localPath))
                 {
                     logs[i] = "盘符已存在，跳过映射 - " + DateTime.Now.ToString();
                     continue;
                 }
 
+                string netPath = dataTable.Rows[i][1].ToString();
                 if (!Directory.Exists(netPath))
                 {
-                    logs[i] =  "网络位置无法访问，跳过映射 - "+ DateTime.Now.ToString();
+                    logs[i] = "网络位置无法访问，跳过映射 - " + DateTime.Now.ToString();
                     continue;
                 }
-                
+
+                string userName = dataTable.Rows[i][8].ToString();
+                string password = dataTable.Rows[i][9].ToString();
+                uint constflags = userName == "" ? (uint)0 : (uint)0;
                 logs[i] = Mapping(localPath, netPath, userName, password, constflags);// 映射
             }
 
@@ -230,39 +148,15 @@ namespace TDS2
             diskProgressLabel.Text = "映射完成";
             diskProgressBar.Value = 100;
         }
-
-        /// <summary>
-        /// 全选按钮
-        /// </summary>
-        private void selectAllButton_Click(object sender, EventArgs e)
-        {
-            if (diskListView != null && diskListView.Items.Count > 0) foreach (ListViewItem item in diskListView.Items) item.Checked = true;
-        }
-
-        /// <summary>
-        /// 反选按钮
-        /// </summary>
-        private void reSelectButton_Click(object sender, EventArgs e)
-        {
-            if (diskListView != null && diskListView.Items.Count > 0) foreach (ListViewItem item in diskListView.Items) item.Checked = !item.Checked;
-        }
-
+        
         /// <summary>
         /// 映射按钮
         /// </summary>
         private void mappingButton_Click(object sender, EventArgs e)
         {
-            if (!mappingBackgroundWorker.IsBusy)
-            {
-                DataTable dataTable= ToTable(diskListView);// 类型转换，ListView是引用类型，不能在异进程中访问
-                mappingBackgroundWorker.RunWorkerAsync(dataTable);
-                mappingButton.Enabled = breakButton.Enabled = false;
-            }
+            MappingStart();
         }
-
-
-
-
+        
         //foreach (string str in SyetemDiskList.GetFree())
         //{
         //    zFileComboBox.Items.Add(str);
@@ -302,7 +196,7 @@ namespace TDS2
             try
             {
                 if (userName == "") userName = password = null;
-                 NETRESOURCE NetRESOURCE = new NETRESOURCE();
+                NETRESOURCE NetRESOURCE = new NETRESOURCE();
                 NetRESOURCE.dwScope = 2;
                 NetRESOURCE.dwType = 1;
                 NetRESOURCE.dwDisplayType = 3;
@@ -311,7 +205,7 @@ namespace TDS2
                 NetRESOURCE.RemoteName = netPath;
                 NetRESOURCE.Provider = null;
                 uint mapping = WNetAddConnection2(NetRESOURCE, password, userName, constflags);// 映射
-                if (mapping == constflags) return  "映射完成 - "+ DateTime.Now.ToString();
+                if (mapping == constflags) return "映射完成 - " + DateTime.Now.ToString();
                 else return "映射失败 - " + DateTime.Now.ToString();
             }
             catch (Exception ex)
@@ -347,6 +241,7 @@ namespace TDS2
         {
             e.Cancel = true;
             Hide();
+            StartPosition = FormStartPosition.Manual;
         }
 
         /// <summary>
@@ -427,45 +322,35 @@ namespace TDS2
         /// <param name="e"></param>
         private void breakButton_Click(object sender, EventArgs e)
         {
-            if (!breakBackgroundWorker.IsBusy)
-            {
-                DataTable dataTable = ToTable(diskListView);// 类型转换，ListView是引用类型，不能在异进程中访问
-                breakBackgroundWorker.RunWorkerAsync(dataTable);
-                mappingButton.Enabled = breakButton.Enabled = false;
-            }
+            if (breakBackgroundWorker.IsBusy) return;
+            DataTable dataTable = ToTable(diskListView);// 类型转换，ListView是引用类型，不能跨进程访问
+            breakBackgroundWorker.RunWorkerAsync(dataTable);
+            mappingButton.Enabled = breakButton.Enabled = false;
         }
-        
+
         /// <summary>
         /// ListView转TataTable
         /// </summary>
         /// <param name="ListView">传入的ListView</param>
         /// <param name="datatable">传出的TataTable</param>
-        public static DataTable ToTable(ListView ListView)
+        private DataTable ToTable(ListView listView)
         {
             try
             {
-                if (ListView == null || ListView.Items.Count == 0)
+                if (listView == null || listView.Items.Count == 0)
                 {
                     MessageBox.Show("ListView无数据", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
-                DataTable dataTable = new DataTable();
-                int x, y;
-                // 表头
-                for (x = 0; x < ListView.Items[0].SubItems.Count; x++)
-                {
-                    dataTable.Columns.Add(ListView.Items[0].SubItems[x].Name.Trim(), typeof(string));
-                }
 
-                // 行
+                DataTable dataTable = new DataTable();
+                ListViewItem columnsName = listView.Items[0];// 取第一项目获取表头，因为隐藏了2列，直接在ListView上无法获取正确列数
+                foreach (ListViewItem.ListViewSubItem subItems in columnsName.SubItems) dataTable.Columns.Add(subItems.Name.Trim(), typeof(string));
                 DataRow datarow;
-                for (x = 0; x < ListView.Items.Count; x++)
+                foreach (ListViewItem item in listView.Items)
                 {
                     datarow = dataTable.NewRow();
-                    for (y = 0; y < ListView.Items[x].SubItems.Count; y++)
-                    {
-                        datarow[y] = ListView.Items[x].SubItems[y].Text.Trim();
-                    }
+                    for (int i = 0; i < item.SubItems.Count; i++) datarow[i] = item.SubItems[i].Text.Trim();
                     dataTable.Rows.Add(datarow);
                 }
                 return dataTable;
@@ -475,6 +360,87 @@ namespace TDS2
                 MessageBox.Show("数据转换错误\r\n\r\n" + ex.ToString(), "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
+        }
+
+        /// <summary>
+        /// 定时映射
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mappingTimer_Tick(object sender, EventArgs e)
+        {
+            MappingStart();
+        }
+
+        /// <summary>
+        /// 执行后台映射
+        /// </summary>
+        private void MappingStart()
+        {
+            if (mappingBackgroundWorker.IsBusy) return;
+            mappingBackgroundWorker.RunWorkerAsync(ToTable(diskListView));// 类型转换，ListView是引用类型，不能跨进程访问
+            mappingButton.Enabled = breakButton.Enabled = false;
+        }
+
+        /// <summary>
+        /// 断开检测调整时
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void numericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDown.Value == 0) numericUpDown.Value = 1;
+            mappingTimer.Interval = (int)numericUpDown.Value * 1000 * 60;
+        }
+
+        /// <summary>
+        /// 窗口快捷键
+        /// </summary>
+        private void DiskMappingForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.D && e.Control) Hide();
+        }
+
+        /// <summary>
+        /// 修改按钮
+        /// </summary>
+        private void ModifyButton_Click(object sender, EventArgs e)
+        {
+            if (Selected())
+            {
+                ListViewItem sitem = diskListView.SelectedItems[0];
+                DiskModifyForm diskModifyForm = new DiskModifyForm(sitem.SubItems[0].Text, sitem.SubItems[1].Text, sitem.SubItems[2].Text, sitem.SubItems[3].Text, sitem.SubItems[4].Text, sitem.SubItems[5].Text, sitem.SubItems[6].Text, sitem.SubItems[8].Text, sitem.SubItems[9].Text);
+                diskModifyForm.ShowDialog();
+                if (diskModifyForm.DialogResult == DialogResult.OK) LoadListView();
+            }
+            else MessageBox.Show("请选中项目", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        /// <summary>
+        /// 是否选中项目
+        /// </summary>
+        /// <returns></returns>
+        private bool Selected()
+        {
+            if (diskListView == null) return false;
+            if (diskListView.Items.Count == 0) return false;
+            if (diskListView.SelectedItems.Count == 0) return false;
+            if (diskListView.SelectedItems.Count > 0) return true;
+            return false;
+        }
+
+        /// <summary>
+        /// 删除按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("删除后将无法恢复，是否继续？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK) return;
+            if (!Selected()) MessageBox.Show("请选中项目", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            ListViewItem sitem = diskListView.SelectedItems[0];
+            DiskList.Delete(sitem.SubItems[0].Text);
+            LoadListView();
         }
     }
 }

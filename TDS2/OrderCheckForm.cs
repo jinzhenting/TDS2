@@ -11,7 +11,7 @@ namespace TDS2
 {
     public partial class OrderCheckForm : Form
     {
-        public OrderCheckForm(DataRow orderRow, DiskList diskList)
+        public OrderCheckForm(DataRow orderRow)
         {
             InitializeComponent();
 

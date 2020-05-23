@@ -8,14 +8,13 @@ namespace TDS2
     {
         public EditorList()
         {
-            DiskList diskList = new DiskList();
             DataTable dataTable = SqlFunction.Select("SELECT username FROM UserTable WHERE dept='Z'");
             foreach (DataRow dataRow in dataTable.Rows)
             {
                 Editor editor = new Editor();
                 editor.Name = dataRow[0].ToString();
-                editor.EmbPath = Path.Combine(diskList.ZFlie.NetPath, dataRow[0].ToString(), "Emb");
-                editor.JpgPath = Path.Combine(diskList.ZFlie.NetPath, dataRow[0].ToString(), "Jpg_Dst");
+                editor.EmbPath = Path.Combine(FileSystem.ZFile(), dataRow[0].ToString(), "Emb");
+                editor.JpgPath = Path.Combine(FileSystem.ZFile(), dataRow[0].ToString(), "Jpg_Dst");
                 editors.Add(editor);
                 editorsName.Add(dataRow[0].ToString());
             }
@@ -37,8 +36,7 @@ namespace TDS2
         /// <returns></returns>
         public static string GetJpgFolder(string editor)
         {
-            DiskList diskList = new DiskList();
-            return Path.Combine(diskList.ZFlie.NetPath, editor, "Jpg_Dst");
+            return Path.Combine(FileSystem.ZFile(), editor, "Jpg_Dst");
         }
 
         /// <summary>
@@ -48,8 +46,7 @@ namespace TDS2
         /// <returns></returns>
         public static string GetEmbFolder(string editor)
         {
-            DiskList diskList = new DiskList();
-            return Path.Combine(diskList.ZFlie.NetPath, editor, "Emb");
+            return Path.Combine(FileSystem.ZFile(), editor, "Emb");
         }
 
         /// <summary>

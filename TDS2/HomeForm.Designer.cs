@@ -294,7 +294,6 @@
             this.homeMenuStrip.TabIndex = 2;
             this.homeMenuStrip.TabStop = true;
             this.homeMenuStrip.Text = "homeMenuStrip";
-            this.homeMenuStrip.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.homeMenuStrip_KeyPress);
             // 
             // userMenuItem
             // 
@@ -308,7 +307,7 @@
             // userProfileMenuItem
             // 
             this.userProfileMenuItem.Name = "userProfileMenuItem";
-            this.userProfileMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.userProfileMenuItem.Size = new System.Drawing.Size(147, 22);
             this.userProfileMenuItem.Text = "用户资料";
             this.userProfileMenuItem.Click += new System.EventHandler(this.userProfileMenuItem_Click);
             // 
@@ -364,7 +363,7 @@
             // appSettingsMenuItem
             // 
             this.appSettingsMenuItem.Name = "appSettingsMenuItem";
-            this.appSettingsMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.appSettingsMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.appSettingsMenuItem.Size = new System.Drawing.Size(170, 22);
             this.appSettingsMenuItem.Text = "选项(S)";
             this.appSettingsMenuItem.Click += new System.EventHandler(this.appSettingsMenuItem_Click);
@@ -909,6 +908,7 @@
             this.Controls.Add(this.homeTabControl);
             this.Controls.Add(this.homeMenuStrip);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.homeMenuStrip;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(1080, 768);
@@ -917,6 +917,7 @@
             this.Text = " ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HomeForm_FormClosing);
             this.Shown += new System.EventHandler(this.HomeForm_Shown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.HomeForm_KeyDown);
             this.orderContextMenuStrip.ResumeLayout(false);
             this.homeStatusStrip.ResumeLayout(false);
             this.homeStatusStrip.PerformLayout();
