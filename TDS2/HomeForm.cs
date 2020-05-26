@@ -60,6 +60,11 @@ namespace TDS2
         /// </summary>
         DiskMappingForm diskMappingForm = new DiskMappingForm();
 
+        /// <summary>
+        /// 消息窗口
+        /// </summary>
+        MessageForm messageForm = new MessageForm();
+
         #endregion 全局变量
 
 
@@ -67,7 +72,7 @@ namespace TDS2
 
 
         #region 窗口动作
-    
+
         /// <summary>
         /// 窗口按键检测
         /// </summary>
@@ -82,13 +87,20 @@ namespace TDS2
                         OrderSearch();
                         break;
                     }
+                case Keys.F2:
+                    {
+                        Message();
+                        break;
+                    }
                 case Keys.Escape:
                     {
                         if (searchBackgroundWorker.IsBusy) searchBackgroundWorker.CancelAsync();
                         break;
                     }
                 default:
-                    break;
+                    {
+                        break;
+                    }
             }
         }
 
@@ -605,7 +617,7 @@ namespace TDS2
 
             orderFilesMenuItem.Enabled = noSearchAndSelected;// {订单文件} 菜单
             orderCheckButton.Enabled = orderCheckMenuItem.Enabled = noSearchAndSelected && (user.Dept == "OA" || user.Dept == "QI" || user.Dept == "E");// {检查} 菜单
-            if (selectedItem)// 如果选中
+            if (selectedItem && thumbnailComboBox.Text == "缩略图")// 如果选中
             {
                 selectedItemIndex = orderListView.SelectedItems[0].Index;
                 progress = OrderProgress.Get(orderTable.Rows[selectedItemIndex]);// 获取带子进度
@@ -927,7 +939,9 @@ namespace TDS2
                         break;
                     }
                 default:
-                    break;
+                    {
+                        break;
+                    }
             }
 
         }
@@ -1236,6 +1250,15 @@ namespace TDS2
         #region 程序操作功能
 
         /// <summary>
+        /// 消息窗口
+        /// </summary>
+        private void Message()
+        {
+            messageForm.Show();
+            messageForm.Activate();
+        }
+
+        /// <summary>
         /// 程序升级
         /// </summary>
         /// <param name="bo">就否弹窗</param>
@@ -1306,11 +1329,6 @@ namespace TDS2
             appHelpForm.ShowDialog();
         }
 
-        private void Message()
-        {
-            MessageForm messageForm = new MessageForm();
-            messageForm.ShowDialog();
-        }
 
         #endregion 程序操作功能
     }

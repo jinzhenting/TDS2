@@ -303,14 +303,153 @@ namespace TDS2
             #endregion 未有字段
 
             otherListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.ColumnContent);
+
+            ///
+            
+            filesListView.Columns.Add("::");
+            filesListView.Columns[0].Width = 600;
+            for (int i = 0; i < files.Count; i++)
+            {
+                Image icon;
+                string extension = Path.GetExtension(files[i]).ToLower();
+                switch (extension)
+                {
+                    case ".jpg":
+                    case ".jpeg":
+                    case ".png":
+                    case ".gif":
+                    case ".bmp":
+                    case ".tif":
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(files[i]), 64, 64);
+                            break;
+                        }
+                    case ".ai":
+                    case ".eps":
+                    case ".svg":
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\ai.png"), 64, 64);
+                            break;
+                        }
+                    case ".psd":
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\psd.png"), 64, 64);
+                            break;
+                        }
+                    case ".cdr":
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\cdr.png"), 64, 64);
+                            break;
+                        }
+                    case ".doc":
+                    case ".docx":
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\doc.png"), 64, 64);
+                            break;
+                        }
+                    case ".ppt":
+                    case ".pptx":
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\ppt.png"), 64, 64);
+                            break;
+                        }
+                    case ".xls":
+                    case ".xlsx":
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\xls.png"), 64, 64);
+                            break;
+                        }
+                    case ".pdf":
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\pdf.png"), 64, 64);
+                            break;
+                        }
+                    case ".dst":
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\dst.png"), 64, 64);
+                            break;
+                        }
+                    case ".emb":
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\emb.png"), 64, 64);
+                            break;
+                        }
+                    case ".omf":
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\omf.png"), 64, 64);
+                            break;
+                        }
+                    case ".psf":
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\psf.png"), 64, 64);
+                            break;
+                        }
+                    case ".pxf":
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\pxf.png"), 64, 64);
+                            break;
+                        }
+                    default:
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\UnImage.png"), 64, 64);
+                            break;
+                        }
+                }
+                filesIconImageList.Images.Add(icon);
+                ListViewItem listViewItem = new ListViewItem();// 定义单个项目
+                listViewItem.ImageIndex = i;
+                listViewItem.Text = files[i];
+                filesListView.Items.Add(listViewItem);
+            }
+            filesListView.SmallImageList = filesIconImageList;
+            filesListView.LargeImageList = filesIconImageList;
         }
 
         /// <summary>
-        /// 关闭按钮
+        /// 选择项目时
         /// </summary>
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void filesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Close();
+            if (filesListView.SelectedItems.Count > 0)
+            {
+                string extension = Path.GetExtension(filesListView.SelectedItems[0].Text).ToLower();
+                switch (extension)
+                {
+                    case ".jpg":
+                    case ".jpeg":
+                    case ".png":
+                    case ".gif":
+                    case ".bmp":
+                    case ".tif":
+                        {
+                            orderPictureBox.Image = Image.FromFile(filesListView.SelectedItems[0].Text);
+                            Bitmap bmp = new Bitmap(filesListView.SelectedItems[0].Text);
+                            picturePanel.BackColor = bmp.GetPixel(bmp.Width - 1, bmp.Height - 1);
+                            break;
+                        }
+                    default:
+                        {
+                            orderPictureBox.Image = Image.FromFile(@"Image\UnImage.png");
+                            Bitmap bmp = new Bitmap(@"Image\UnImage.png");
+                            picturePanel.BackColor = bmp.GetPixel(bmp.Width - 1, bmp.Height - 1);
+                            break;
+                        }
+                }
+            }
         }
+
+        /// <summary>
+        /// 窗口快捷键
+        /// </summary>
+        private void OrderDetails_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) Close();
+            if (e.KeyCode == Keys.Escape) Close();
+            if (e.KeyCode == Keys.Space) Close();
+        }
+
+        ///
+
+
     }
 }

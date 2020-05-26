@@ -50,7 +50,6 @@
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.Size = new System.Drawing.Size(80, 23);
             this.userNameTextBox.TabIndex = 1;
-            this.userNameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.userNameTextBox_KeyDown);
             // 
             // userPasswordTextBox
             // 
@@ -60,7 +59,6 @@
             this.userPasswordTextBox.Size = new System.Drawing.Size(110, 23);
             this.userPasswordTextBox.TabIndex = 3;
             this.userPasswordTextBox.UseSystemPasswordChar = true;
-            this.userPasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.userPasswordTextBox_KeyDown);
             // 
             // loginButton
             // 
@@ -68,7 +66,7 @@
             this.loginButton.Location = new System.Drawing.Point(196, 228);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(80, 25);
-            this.loginButton.TabIndex = 1;
+            this.loginButton.TabIndex = 2;
             this.loginButton.Text = "登陆";
             this.loginButton.UseVisualStyleBackColor = true;
             this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
@@ -110,7 +108,6 @@
             this.mRadioButton.TabStop = true;
             this.mRadioButton.Text = "早班";
             this.mRadioButton.UseVisualStyleBackColor = true;
-            this.mRadioButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mRadioButton_KeyDown);
             // 
             // aRadioButton
             // 
@@ -122,7 +119,6 @@
             this.aRadioButton.TabStop = true;
             this.aRadioButton.Text = "中班";
             this.aRadioButton.UseVisualStyleBackColor = true;
-            this.aRadioButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.aRadioButton_KeyDown);
             // 
             // eRadioButton
             // 
@@ -134,7 +130,6 @@
             this.eRadioButton.TabStop = true;
             this.eRadioButton.Text = "晚班";
             this.eRadioButton.UseVisualStyleBackColor = true;
-            this.eRadioButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.eRadioButton_KeyDown);
             // 
             // scanerCheckBox
             // 
@@ -142,10 +137,9 @@
             this.scanerCheckBox.Location = new System.Drawing.Point(12, 231);
             this.scanerCheckBox.Name = "scanerCheckBox";
             this.scanerCheckBox.Size = new System.Drawing.Size(75, 21);
-            this.scanerCheckBox.TabIndex = 7;
+            this.scanerCheckBox.TabIndex = 1;
             this.scanerCheckBox.Text = "扫描电脑";
             this.scanerCheckBox.UseVisualStyleBackColor = true;
-            this.scanerCheckBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.scanerCheckBox_KeyDown);
             // 
             // panel1
             // 
@@ -174,6 +168,7 @@
             this.Controls.Add(this.userPictureBox);
             this.Controls.Add(this.loginButton);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(300, 300);
@@ -182,6 +177,7 @@
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "欢迎登陆TDS2系统";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.userPictureBox)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

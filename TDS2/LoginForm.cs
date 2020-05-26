@@ -115,52 +115,7 @@ namespace TDS2
         /// <summary>
         /// 按键检测
         /// </summary>
-        private void userNameTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter) Login();
-            if (e.KeyCode == Keys.Escape) Close();
-        }
-
-        /// <summary>
-        /// 按键检测
-        /// </summary>
-        private void userPasswordTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)Login();
-            if (e.KeyCode == Keys.Escape) Close();
-        }
-        
-        /// <summary>
-        /// 按键检测
-        /// </summary>
-        private void mRadioButton_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter) Login();
-            if (e.KeyCode == Keys.Escape) Close();
-        }
-        
-        /// <summary>
-        /// 按键检测
-        /// </summary>
-        private void aRadioButton_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter) Login();
-            if (e.KeyCode == Keys.Escape) Close();
-        }
-        
-        /// <summary>
-        /// 按键检测
-        /// </summary>
-        private void eRadioButton_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter) Login();
-            if (e.KeyCode == Keys.Escape) Close();
-        }
-
-        /// <summary>
-        /// 按键检测
-        /// </summary>
-        private void scanerCheckBox_KeyDown(object sender, KeyEventArgs e)
+        private void LoginForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) Login();
             if (e.KeyCode == Keys.Escape) Close();

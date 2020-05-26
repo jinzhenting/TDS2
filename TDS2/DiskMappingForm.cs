@@ -442,5 +442,15 @@ namespace TDS2
             DiskList.Delete(sitem.SubItems[0].Text);
             LoadListView();
         }
+
+        /// <summary>
+        /// 新建按钮
+        /// </summary>
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            DiskAddForm diskAddForm = new DiskAddForm();
+            diskAddForm.ShowDialog();
+            if (diskAddForm.DialogResult == DialogResult.OK) LoadListView();
+        }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace TDS2
@@ -37,6 +32,24 @@ namespace TDS2
                 Environment.Exit(0);
                 return;
             }
+        }
+
+        /// <summary>
+        /// 窗口快捷键
+        /// </summary>
+        private void MessagesForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F2) Hide();
+        }
+
+        /// <summary>
+        /// 重写关窗
+        /// </summary>
+        private void MessagesForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            Hide();
+            StartPosition = FormStartPosition.Manual;
         }
     }
 }

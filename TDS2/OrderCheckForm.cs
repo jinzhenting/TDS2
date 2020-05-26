@@ -130,8 +130,10 @@ namespace TDS2
                             break;
                         }
                     default:
-                        icon = ImageZoom.Zoom(Image.FromFile(@"Image\UnImage.png"), 64, 64);
-                        break;
+                        {
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\UnImage.png"), 64, 64);
+                            break;
+                        }
                 }
                 filesIconImageList.Images.Add(icon);
                 ListViewItem listViewItem = new ListViewItem();// 定义单个项目

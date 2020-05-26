@@ -65,7 +65,7 @@
             this.zFileLabel.Location = new System.Drawing.Point(7, 7);
             this.zFileLabel.Name = "zFileLabel";
             this.zFileLabel.Size = new System.Drawing.Size(32, 17);
-            this.zFileLabel.TabIndex = 52;
+            this.zFileLabel.TabIndex = 0;
             this.zFileLabel.Text = "列表";
             this.zFileLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -90,7 +90,7 @@
             this.diskListView.MultiSelect = false;
             this.diskListView.Name = "diskListView";
             this.diskListView.Size = new System.Drawing.Size(986, 472);
-            this.diskListView.TabIndex = 99;
+            this.diskListView.TabIndex = 4;
             this.diskListView.TabStop = false;
             this.diskListView.UseCompatibleStateImageBehavior = false;
             this.diskListView.View = System.Windows.Forms.View.Details;
@@ -142,7 +142,7 @@
             this.exitButton.Location = new System.Drawing.Point(903, 509);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(75, 23);
-            this.exitButton.TabIndex = 101;
+            this.exitButton.TabIndex = 10;
             this.exitButton.Text = "退出";
             this.exitButton.UseVisualStyleBackColor = true;
             // 
@@ -160,7 +160,7 @@
             this.numericUpDown.Location = new System.Drawing.Point(881, 4);
             this.numericUpDown.Name = "numericUpDown";
             this.numericUpDown.Size = new System.Drawing.Size(60, 23);
-            this.numericUpDown.TabIndex = 102;
+            this.numericUpDown.TabIndex = 2;
             this.numericUpDown.Value = new decimal(new int[] {
             5,
             0,
@@ -175,7 +175,7 @@
             this.label1.Location = new System.Drawing.Point(795, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 17);
-            this.label1.TabIndex = 103;
+            this.label1.TabIndex = 1;
             this.label1.Text = "断开检测间隔";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -186,7 +186,7 @@
             this.label2.Location = new System.Drawing.Point(947, 7);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 17);
-            this.label2.TabIndex = 104;
+            this.label2.TabIndex = 3;
             this.label2.Text = "分钟";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -196,7 +196,7 @@
             this.mappingButton.Location = new System.Drawing.Point(743, 509);
             this.mappingButton.Name = "mappingButton";
             this.mappingButton.Size = new System.Drawing.Size(75, 23);
-            this.mappingButton.TabIndex = 105;
+            this.mappingButton.TabIndex = 8;
             this.mappingButton.Text = "映射";
             this.mappingButton.UseVisualStyleBackColor = true;
             this.mappingButton.Click += new System.EventHandler(this.mappingButton_Click);
@@ -207,7 +207,7 @@
             this.breakButton.Location = new System.Drawing.Point(823, 509);
             this.breakButton.Name = "breakButton";
             this.breakButton.Size = new System.Drawing.Size(75, 23);
-            this.breakButton.TabIndex = 106;
+            this.breakButton.TabIndex = 9;
             this.breakButton.Text = "断开";
             this.breakButton.UseVisualStyleBackColor = true;
             this.breakButton.Click += new System.EventHandler(this.breakButton_Click);
@@ -220,7 +220,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 539);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(984, 22);
-            this.statusStrip1.TabIndex = 109;
+            this.statusStrip1.TabIndex = 11;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // diskProgressBar
@@ -253,7 +253,7 @@
             this.deleteButton.Location = new System.Drawing.Point(168, 509);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(75, 23);
-            this.deleteButton.TabIndex = 110;
+            this.deleteButton.TabIndex = 7;
             this.deleteButton.Text = "删除";
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
@@ -264,7 +264,7 @@
             this.ModifyButton.Location = new System.Drawing.Point(87, 509);
             this.ModifyButton.Name = "ModifyButton";
             this.ModifyButton.Size = new System.Drawing.Size(75, 23);
-            this.ModifyButton.TabIndex = 111;
+            this.ModifyButton.TabIndex = 6;
             this.ModifyButton.Text = "修改";
             this.ModifyButton.UseVisualStyleBackColor = true;
             this.ModifyButton.Click += new System.EventHandler(this.ModifyButton_Click);
@@ -275,9 +275,10 @@
             this.addButton.Location = new System.Drawing.Point(6, 509);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(75, 23);
-            this.addButton.TabIndex = 112;
+            this.addButton.TabIndex = 5;
             this.addButton.Text = "新建";
             this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // DiskMappingForm
             // 

@@ -55,6 +55,12 @@
     </Compile>
     <Compile Include="AppSettings.cs" />
     <Compile Include="Disk.cs" />
+    <Compile Include="DiskAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DiskAddForm.Designer.cs">
+      <DependentUpon>DiskAddForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DiskMappingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +157,9 @@
     </Compile>
     <EmbeddedResource Include="AppHelpForm.resx">
       <DependentUpon>AppHelpForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DiskAddForm.resx">
+      <DependentUpon>DiskAddForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DiskMappingForm.resx">
       <DependentUpon>DiskMappingForm.cs</DependentUpon>

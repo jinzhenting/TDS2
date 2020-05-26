@@ -62,9 +62,52 @@ namespace TDS2
         }
 
         /// <summary>
-        /// 保存
+        /// 新建
         /// </summary>
-        public static void Save(string diskName, string netPath, string localPath, string autoMapping, string windowsAccount, string forever, string autoCheck, string userName, string password)
+        public static void Add(string diskName, string netPath, string localPath, string autoMapping, string windowsAccount, string forever, string autoCheck, string userName, string password)
+        {
+            try
+            {
+                XmlDocument xml = new XmlDocument();
+                xml.Load(@"Documents\Disks.xml");
+                XmlNode rootNode = xml.DocumentElement;// 获得根节点
+                XmlNode node = xml.CreateNode("element", diskName, "");// 创建节点
+                node.InnerText = "";// 添加空白值，节点才能生成前后标签对，不然只有前标签
+                rootNode.AppendChild(node);// 添加节点
+                XmlElement element = (XmlElement)xml.SelectSingleNode(@"Paths/" + diskName);// 操作xml节点属性主要用XmlElement对象所以取到结点后要转类型
+                element.SetAttribute("netPath", netPath);// 添加属性
+                element.SetAttribute("localPath", localPath);// 添加属性
+                element.SetAttribute("autoMapping", autoMapping == "是" ? "true" : "false");
+                element.SetAttribute("windowsAccount", windowsAccount == "Windows凭据" ? "true" : "false");
+                element.SetAttribute("forever", forever == "固定" ? "true" : "false");
+                element.SetAttribute("autoCheck", autoCheck == "是" ? "true" : "false");
+                element.SetAttribute("userName", userName);
+                element.SetAttribute("password", password);
+                xml.Save(@"Documents\Disks.xml");
+                MessageBox.Show("保存成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show("无权限访问网络磁盘配置文件，请尝试使用管理员权限运行本程序，程序将自动退出，描述如下\r\n\r\n" + ex, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(0);
+            }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show("网络磁盘配置文件不存在，程序将自动退出，描述如下\r\n\r\n" + ex, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("访问网络磁盘配置文件时发生错误，程序将自动退出，描述如下\r\n\r\n" + ex, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(0);
+            }
+
+        }
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        public static void Modify(string diskName, string netPath, string localPath, string autoMapping, string windowsAccount, string forever, string autoCheck, string userName, string password)
         {
             try
             {

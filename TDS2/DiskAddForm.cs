@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace TDS2
 {
-    public partial class DiskModifyForm : Form
+    public partial class DiskAddForm : Form
     {
-        public DiskModifyForm(string diskName, string netPath, string localPath, string autoMapping, string windowsAccount, string forever, string autoCheck, string userName, string password)
+        public DiskAddForm()
         {
             InitializeComponent();
             try// 图标
@@ -34,35 +39,25 @@ namespace TDS2
             }
 
             ///
-            
-            nameLabel.Text = diskName;
-            netPathTextBox.Text = netPath;
+
             foreach (string freeDisk in SyetemDiskList.GetFree()) localPathComboBox.Items.Add(freeDisk);
-            localPathComboBox.Items.Add(localPath);
-            localPathComboBox.Text = localPath;
-            autoMappingComboBox.Text = autoMapping;
-            windowsAccountComboBox.Text = windowsAccount;
-            foreverComboBox.Text = forever;
-            autoCheckComboBox.Text = autoCheck;
-            userNameTextBox.Text = userName;
-            passwordTextBox.Text = password;
+
         }
 
-        /// <summary>
-        /// 取消按钮
-        /// </summary>
-        private void cencelButton_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        /// <summary>
-        /// 窗口按键检测
-        /// </summary>
-        private void DiskModifyForm_KeyDown(object sender, KeyEventArgs e)
+        private void DiskAddForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) Save();
             if (e.KeyCode == Keys.Escape) Close();
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
+        private void cencelButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         /// <summary>
@@ -70,9 +65,15 @@ namespace TDS2
         /// </summary>
         private void Save()
         {
-            if (netPathTextBox.Text=="")
+            if (nameTextBox.Text.Replace(" ", "") == "")
             {
-                MessageBox.Show("网络位置未选择", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("请输入磁盘名称", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (netPathTextBox.Text.Replace(" ", "") == "")
+            {
+                MessageBox.Show("请选择网络位置", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -82,36 +83,51 @@ namespace TDS2
                 return;
             }
 
+            if (localPathComboBox.Text == "")
+            {
+                MessageBox.Show("请选择盘符", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (autoMappingComboBox.Text == "")
+            {
+                MessageBox.Show("请选择是否自动映射", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (foreverComboBox.Text == "")
+            {
+                MessageBox.Show("请选择映射性质", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (autoCheckComboBox.Text == "")
+            {
+                MessageBox.Show("请选择是否自动检测", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (windowsAccountComboBox.Text == "")
+            {
+                MessageBox.Show("请选择是否网络认证方式", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (windowsAccountComboBox.Text == "用户名与密码")
             {
-                if (userNameTextBox.Text == "" || passwordTextBox.Text == "")
+                if (userNameTextBox.Text.Replace(" ", "") == "" || passwordTextBox.Text.Replace(" ", "") == "")
                 {
-                    MessageBox.Show("用户名或密码未填写", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("请填写用户名和密码", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
             else userNameTextBox.Text = passwordTextBox.Text = "";// 清空
 
-            DiskList.Modify(nameLabel.Text, netPathTextBox.Text, localPathComboBox.Text, autoMappingComboBox.Text, windowsAccountComboBox.Text, foreverComboBox.Text, autoCheckComboBox.Text, userNameTextBox.Text, passwordTextBox.Text);
+            DiskList.Add(nameTextBox.Text, netPathTextBox.Text, localPathComboBox.Text, autoMappingComboBox.Text, windowsAccountComboBox.Text, foreverComboBox.Text, autoCheckComboBox.Text, userNameTextBox.Text, passwordTextBox.Text);
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        /// <summary>
-        /// 保存按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void saveButton_Click(object sender, EventArgs e)
-        {
-            Save();
-        }
-
-        /// <summary>
-        /// 网络认证方式选择时
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void windowsAccountComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (windowsAccountComboBox.Text == "用户名与密码") userNameLabel.Visible = userNameTextBox.Visible = passwordLabel.Visible = passwordTextBox.Visible = true;// 显示
@@ -122,9 +138,6 @@ namespace TDS2
             }
         }
 
-        /// <summary>
-        /// 浏览网络位置按钮
-        /// </summary>
         private void netPathButton_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();

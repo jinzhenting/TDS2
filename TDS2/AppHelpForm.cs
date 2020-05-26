@@ -49,7 +49,9 @@ namespace TDS2
                         break;
                     }
                 default:
-                    break;
+                    {
+                        break;
+                    }
             }
 
         }

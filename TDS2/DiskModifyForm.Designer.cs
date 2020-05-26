@@ -55,7 +55,7 @@
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(7, 9);
+            this.nameLabel.Location = new System.Drawing.Point(7, 8);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(32, 17);
             this.nameLabel.TabIndex = 0;
@@ -68,7 +68,7 @@
             this.netPathTextBox.Location = new System.Drawing.Point(70, 7);
             this.netPathTextBox.Name = "netPathTextBox";
             this.netPathTextBox.Size = new System.Drawing.Size(227, 23);
-            this.netPathTextBox.TabIndex = 3;
+            this.netPathTextBox.TabIndex = 1;
             // 
             // netPathLabel
             // 
@@ -76,7 +76,7 @@
             this.netPathLabel.Location = new System.Drawing.Point(8, 10);
             this.netPathLabel.Name = "netPathLabel";
             this.netPathLabel.Size = new System.Drawing.Size(56, 17);
-            this.netPathLabel.TabIndex = 2;
+            this.netPathLabel.TabIndex = 0;
             this.netPathLabel.Text = "网络位置";
             // 
             // netPathButton
@@ -85,7 +85,7 @@
             this.netPathButton.Location = new System.Drawing.Point(303, 7);
             this.netPathButton.Name = "netPathButton";
             this.netPathButton.Size = new System.Drawing.Size(75, 23);
-            this.netPathButton.TabIndex = 4;
+            this.netPathButton.TabIndex = 2;
             this.netPathButton.Text = "浏览";
             this.netPathButton.UseVisualStyleBackColor = true;
             this.netPathButton.Click += new System.EventHandler(this.netPathButton_Click);
@@ -96,7 +96,7 @@
             this.localPathLabel.Location = new System.Drawing.Point(8, 40);
             this.localPathLabel.Name = "localPathLabel";
             this.localPathLabel.Size = new System.Drawing.Size(32, 17);
-            this.localPathLabel.TabIndex = 5;
+            this.localPathLabel.TabIndex = 3;
             this.localPathLabel.Text = "盘符";
             // 
             // localPathComboBox
@@ -106,7 +106,7 @@
             this.localPathComboBox.Location = new System.Drawing.Point(46, 36);
             this.localPathComboBox.Name = "localPathComboBox";
             this.localPathComboBox.Size = new System.Drawing.Size(50, 25);
-            this.localPathComboBox.TabIndex = 6;
+            this.localPathComboBox.TabIndex = 4;
             // 
             // autoMappingLabel
             // 
@@ -114,7 +114,7 @@
             this.autoMappingLabel.Location = new System.Drawing.Point(8, 71);
             this.autoMappingLabel.Name = "autoMappingLabel";
             this.autoMappingLabel.Size = new System.Drawing.Size(56, 17);
-            this.autoMappingLabel.TabIndex = 7;
+            this.autoMappingLabel.TabIndex = 5;
             this.autoMappingLabel.Text = "自动映射";
             // 
             // autoMappingComboBox
@@ -127,7 +127,7 @@
             this.autoMappingComboBox.Location = new System.Drawing.Point(70, 67);
             this.autoMappingComboBox.Name = "autoMappingComboBox";
             this.autoMappingComboBox.Size = new System.Drawing.Size(72, 25);
-            this.autoMappingComboBox.TabIndex = 8;
+            this.autoMappingComboBox.TabIndex = 6;
             // 
             // foreverComboBox
             // 
@@ -139,7 +139,7 @@
             this.foreverComboBox.Location = new System.Drawing.Point(70, 98);
             this.foreverComboBox.Name = "foreverComboBox";
             this.foreverComboBox.Size = new System.Drawing.Size(72, 25);
-            this.foreverComboBox.TabIndex = 10;
+            this.foreverComboBox.TabIndex = 8;
             // 
             // foreverLabel
             // 
@@ -147,7 +147,7 @@
             this.foreverLabel.Location = new System.Drawing.Point(8, 102);
             this.foreverLabel.Name = "foreverLabel";
             this.foreverLabel.Size = new System.Drawing.Size(56, 17);
-            this.foreverLabel.TabIndex = 9;
+            this.foreverLabel.TabIndex = 7;
             this.foreverLabel.Text = "映射性质";
             // 
             // windowsAccountLabel
@@ -182,7 +182,7 @@
             this.autoCheckComboBox.Location = new System.Drawing.Point(70, 129);
             this.autoCheckComboBox.Name = "autoCheckComboBox";
             this.autoCheckComboBox.Size = new System.Drawing.Size(72, 25);
-            this.autoCheckComboBox.TabIndex = 14;
+            this.autoCheckComboBox.TabIndex = 10;
             // 
             // autoCheckLabel
             // 
@@ -190,7 +190,7 @@
             this.autoCheckLabel.Location = new System.Drawing.Point(8, 133);
             this.autoCheckLabel.Name = "autoCheckLabel";
             this.autoCheckLabel.Size = new System.Drawing.Size(56, 17);
-            this.autoCheckLabel.TabIndex = 13;
+            this.autoCheckLabel.TabIndex = 9;
             this.autoCheckLabel.Text = "断开检测";
             // 
             // userNameTextBox
@@ -198,7 +198,7 @@
             this.userNameTextBox.Location = new System.Drawing.Point(58, 191);
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.Size = new System.Drawing.Size(112, 23);
-            this.userNameTextBox.TabIndex = 16;
+            this.userNameTextBox.TabIndex = 14;
             // 
             // userNameLabel
             // 
@@ -206,7 +206,7 @@
             this.userNameLabel.Location = new System.Drawing.Point(8, 194);
             this.userNameLabel.Name = "userNameLabel";
             this.userNameLabel.Size = new System.Drawing.Size(44, 17);
-            this.userNameLabel.TabIndex = 15;
+            this.userNameLabel.TabIndex = 13;
             this.userNameLabel.Text = "用户名";
             // 
             // passwordTextBox
@@ -214,7 +214,7 @@
             this.passwordTextBox.Location = new System.Drawing.Point(214, 191);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(112, 23);
-            this.passwordTextBox.TabIndex = 18;
+            this.passwordTextBox.TabIndex = 16;
             // 
             // passwordLabel
             // 
@@ -222,7 +222,7 @@
             this.passwordLabel.Location = new System.Drawing.Point(176, 194);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(32, 17);
-            this.passwordLabel.TabIndex = 17;
+            this.passwordLabel.TabIndex = 15;
             this.passwordLabel.Text = "密码";
             // 
             // panel1
@@ -249,18 +249,18 @@
             this.panel1.Controls.Add(this.foreverLabel);
             this.panel1.Controls.Add(this.windowsAccountLabel);
             this.panel1.Controls.Add(this.foreverComboBox);
-            this.panel1.Location = new System.Drawing.Point(-2, 33);
+            this.panel1.Location = new System.Drawing.Point(-2, 32);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(389, 222);
-            this.panel1.TabIndex = 19;
+            this.panel1.TabIndex = 1;
             // 
             // cencelButton
             // 
             this.cencelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cencelButton.Location = new System.Drawing.Point(302, 261);
+            this.cencelButton.Location = new System.Drawing.Point(302, 260);
             this.cencelButton.Name = "cencelButton";
             this.cencelButton.Size = new System.Drawing.Size(75, 23);
-            this.cencelButton.TabIndex = 19;
+            this.cencelButton.TabIndex = 3;
             this.cencelButton.Text = "取消";
             this.cencelButton.UseVisualStyleBackColor = true;
             this.cencelButton.Click += new System.EventHandler(this.cencelButton_Click);
@@ -268,10 +268,10 @@
             // saveButton
             // 
             this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.saveButton.Location = new System.Drawing.Point(221, 261);
+            this.saveButton.Location = new System.Drawing.Point(221, 260);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 20;
+            this.saveButton.TabIndex = 2;
             this.saveButton.Text = "保存";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);

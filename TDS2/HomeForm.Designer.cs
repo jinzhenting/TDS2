@@ -315,7 +315,7 @@
             // 
             this.appExitMenuItem.Name = "appExitMenuItem";
             this.appExitMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.appExitMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.appExitMenuItem.Size = new System.Drawing.Size(147, 22);
             this.appExitMenuItem.Text = "退出";
             this.appExitMenuItem.Click += new System.EventHandler(this.appExitMenuItem_Click);
             // 

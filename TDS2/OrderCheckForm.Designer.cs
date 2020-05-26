@@ -49,7 +49,7 @@
             this.filesListView.MultiSelect = false;
             this.filesListView.Name = "filesListView";
             this.filesListView.Size = new System.Drawing.Size(628, 368);
-            this.filesListView.TabIndex = 5;
+            this.filesListView.TabIndex = 1;
             this.filesListView.UseCompatibleStateImageBehavior = false;
             // 
             // label1
@@ -58,7 +58,7 @@
             this.label1.Location = new System.Drawing.Point(12, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(164, 17);
-            this.label1.TabIndex = 6;
+            this.label1.TabIndex = 0;
             this.label1.Text = "在列表中勾选需要打开的文件";
             // 
             // checkButton
@@ -68,7 +68,7 @@
             this.checkButton.Location = new System.Drawing.Point(431, 411);
             this.checkButton.Name = "checkButton";
             this.checkButton.Size = new System.Drawing.Size(100, 23);
-            this.checkButton.TabIndex = 7;
+            this.checkButton.TabIndex = 2;
             this.checkButton.Text = "打开 (Enter)";
             this.checkButton.UseVisualStyleBackColor = true;
             this.checkButton.Click += new System.EventHandler(this.checkButton_Click);
@@ -80,7 +80,7 @@
             this.cancelButton.Location = new System.Drawing.Point(537, 411);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(80, 23);
-            this.cancelButton.TabIndex = 8;
+            this.cancelButton.TabIndex = 3;
             this.cancelButton.Text = "退出 (Esc)";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
