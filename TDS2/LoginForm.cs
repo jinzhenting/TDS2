@@ -17,8 +17,8 @@ namespace TDS2
             InitializeComponent();
             try
             {
-                userPictureBox.ImageLocation = @"Image\Icon.png";
-                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Icon.ico"));
+                userPictureBox.ImageLocation = @"Image\Skin\Icon.png";
+                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Skin\Icon.ico"));
             }
             catch (UnauthorizedAccessException)
             {

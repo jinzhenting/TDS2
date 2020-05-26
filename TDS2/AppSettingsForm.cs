@@ -69,7 +69,7 @@ namespace TDS2
         {
             try// 图标
             {
-                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\AppSettings.ico"));
+                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Skin\AppSettings.ico"));
             }
             catch (UnauthorizedAccessException)
             {

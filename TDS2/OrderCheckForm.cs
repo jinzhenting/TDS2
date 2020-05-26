@@ -19,7 +19,7 @@ namespace TDS2
 
             try// 图标
             {
-                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Check.ico"));
+                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Skin\Check.ico"));
             }
             catch (UnauthorizedAccessException)
             {
@@ -131,7 +131,7 @@ namespace TDS2
                         }
                     default:
                         {
-                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\UnImage.png"), 64, 64);
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\UnImage.png"), 64, 64);
                             break;
                         }
                 }

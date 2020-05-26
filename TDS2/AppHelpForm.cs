@@ -17,7 +17,7 @@ namespace TDS2
             InitializeComponent();
             try// 图标
             {
-                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\AppHelp.ico"));
+                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Skin\AppHelp.ico"));
             }
             catch (UnauthorizedAccessException)
             {

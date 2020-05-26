@@ -152,15 +152,15 @@ namespace TDS2
             orderListView.View = View.LargeIcon; thumbnailComboBox.Text = "缩略图";// 订单列表显示样式
             try// 图标
             {
-                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Icon.ico"));
+                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Skin\Icon.ico"));
                 ///
-                sqlUpDataButton.Image = Image.FromFile(@"Image\UpData.png");
-                filesSortButton.Image = Image.FromFile(@"Image\FilesSort.png");
-                diskMappingButton.Image = Image.FromFile(@"Image\DiskMapping.png");
-                appSettingsButton.Image = Image.FromFile(@"Image\AppSettings.png");
-                userProfileButton.Image = Image.FromFile(@"Image\User.png");
-                appHelpButton.Image = Image.FromFile(@"Image\AppHelp.png");
-                messageFormButton.Image = Image.FromFile(@"Image\Message.png");
+                sqlUpDataButton.Image = Image.FromFile(@"Image\Skin\UpData.png");
+                filesSortButton.Image = Image.FromFile(@"Image\Skin\FilesSort.png");
+                diskMappingButton.Image = Image.FromFile(@"Image\Skin\DiskMapping.png");
+                appSettingsButton.Image = Image.FromFile(@"Image\Skin\AppSettings.png");
+                userProfileButton.Image = Image.FromFile(@"Image\Skin\User.png");
+                appHelpButton.Image = Image.FromFile(@"Image\Skin\AppHelp.png");
+                messageFormButton.Image = Image.FromFile(@"Image\Skin\Message.png");
             }
             catch (UnauthorizedAccessException)
             {
@@ -1013,7 +1013,7 @@ namespace TDS2
             if (orderTable == null || orderTable.Rows.Count == 0) return;
             searchBackgroundWorker.ReportProgress(Percents.Get(1, orderTable.Rows.Count), "数据处理中...");// 进度传出
             SqlFunction.Table2Standard(orderTable);// 数据转换到规范模式
-            Image UnImage = ImageZoom.Zoom(Image.FromFile(@"Image\UnImage.png"), 256, 256);
+            Image UnImage = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\UnImage.png"), 256, 256);
             ///
             for (int i = 0; i < orderTable.Rows.Count; i++)// 遍历订单库
             {

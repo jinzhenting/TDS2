@@ -40,7 +40,6 @@
             this.forever = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.autoCheck = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.log = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.exitButton = new System.Windows.Forms.Button();
             this.mappingBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
@@ -91,7 +90,6 @@
             this.diskListView.Name = "diskListView";
             this.diskListView.Size = new System.Drawing.Size(986, 472);
             this.diskListView.TabIndex = 4;
-            this.diskListView.TabStop = false;
             this.diskListView.UseCompatibleStateImageBehavior = false;
             this.diskListView.View = System.Windows.Forms.View.Details;
             // 
@@ -134,17 +132,6 @@
             // 
             this.log.Text = "日志";
             this.log.Width = 270;
-            // 
-            // exitButton
-            // 
-            this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.exitButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.exitButton.Location = new System.Drawing.Point(903, 509);
-            this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(75, 23);
-            this.exitButton.TabIndex = 10;
-            this.exitButton.Text = "退出";
-            this.exitButton.UseVisualStyleBackColor = true;
             // 
             // mappingBackgroundWorker
             // 
@@ -193,7 +180,7 @@
             // mappingButton
             // 
             this.mappingButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.mappingButton.Location = new System.Drawing.Point(743, 509);
+            this.mappingButton.Location = new System.Drawing.Point(823, 509);
             this.mappingButton.Name = "mappingButton";
             this.mappingButton.Size = new System.Drawing.Size(75, 23);
             this.mappingButton.TabIndex = 8;
@@ -204,7 +191,7 @@
             // breakButton
             // 
             this.breakButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.breakButton.Location = new System.Drawing.Point(823, 509);
+            this.breakButton.Location = new System.Drawing.Point(903, 509);
             this.breakButton.Name = "breakButton";
             this.breakButton.Size = new System.Drawing.Size(75, 23);
             this.breakButton.TabIndex = 9;
@@ -284,7 +271,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.exitButton;
             this.ClientSize = new System.Drawing.Size(984, 561);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.ModifyButton);
@@ -295,7 +281,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numericUpDown);
-            this.Controls.Add(this.exitButton);
             this.Controls.Add(this.diskListView);
             this.Controls.Add(this.zFileLabel);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -324,7 +309,6 @@
         private System.Windows.Forms.ColumnHeader disk;
         private System.Windows.Forms.ColumnHeader automapping;
         private System.Windows.Forms.ColumnHeader autoCheck;
-        private System.Windows.Forms.Button exitButton;
         private System.ComponentModel.BackgroundWorker mappingBackgroundWorker;
         private System.Windows.Forms.NumericUpDown numericUpDown;
         private System.Windows.Forms.Label label1;

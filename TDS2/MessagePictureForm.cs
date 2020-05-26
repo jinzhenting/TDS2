@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿
+using System;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace TDS2
 {
-    public partial class UpDataForm : Form
+    public partial class MessagePictureForm : Form
     {
-        public UpDataForm()
+        public MessagePictureForm()
         {
             InitializeComponent();
             try// 图标
             {
-                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Skin\UpData.ico"));
+                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Skin\FilesSort.ico"));
+                addPictureBox.Image = Image.FromFile(@"Image\Message\AddPicture.png");
             }
             catch (UnauthorizedAccessException)
             {
@@ -38,5 +35,19 @@ namespace TDS2
                 return;
             }
         }
+
+        /// <summary>
+        /// 图片路径
+        /// </summary>
+        private string picturePath;
+        /// <summary>
+        /// 图片路径
+        /// </summary>
+        public string PicturePath
+        {
+            get { return picturePath; }
+            set { picturePath = value; }
+        }
+        
     }
 }

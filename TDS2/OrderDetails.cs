@@ -17,7 +17,7 @@ namespace TDS2
 
             try// 图标
             {
-                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\OrderDetails.ico"));
+                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Skin\OrderDetails.ico"));
             }
             catch (UnauthorizedAccessException)
             {
@@ -58,7 +58,7 @@ namespace TDS2
                     break;
                 }
             }
-            if (unImage) orderPictureBox.Image = Image.FromFile(@"Image\UnImage.png");// 如果没有匹配到图片，加载缺失图片
+            if (unImage) orderPictureBox.Image = Image.FromFile(@"Image\Extension\UnImage.png");// 如果没有匹配到图片，加载缺失图片
 
             ///
 
@@ -391,7 +391,7 @@ namespace TDS2
                         }
                     default:
                         {
-                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\UnImage.png"), 64, 64);
+                            icon = ImageZoom.Zoom(Image.FromFile(@"Image\Extension\UnImage.png"), 64, 64);
                             break;
                         }
                 }
@@ -429,8 +429,8 @@ namespace TDS2
                         }
                     default:
                         {
-                            orderPictureBox.Image = Image.FromFile(@"Image\UnImage.png");
-                            Bitmap bmp = new Bitmap(@"Image\UnImage.png");
+                            orderPictureBox.Image = Image.FromFile(@"Image\Extension\UnImage.png");
+                            Bitmap bmp = new Bitmap(@"Image\Extension\UnImage.png");
                             picturePanel.BackColor = bmp.GetPixel(bmp.Width - 1, bmp.Height - 1);
                             break;
                         }

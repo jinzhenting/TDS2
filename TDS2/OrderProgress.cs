@@ -1,6 +1,5 @@
 ﻿
 using System.Data;
-using System.Windows.Forms;
 
 namespace TDS2
 {
@@ -27,7 +26,7 @@ namespace TDS2
             if ((row["订单类型"].ToString() == "新带" || row["订单类型"].ToString() == "收费改带" || row["订单类型"].ToString() == "免费改带" || row["订单类型"].ToString() == "估针" || row["订单类型"].ToString() == "试打版") && row["分带人"].ToString() != "" && row["发带人"].ToString() == "") return "待打版";// 
             if ((row["订单类型"].ToString() == "新带" || row["订单类型"].ToString() == "收费改带" || row["订单类型"].ToString() == "免费改带" || row["订单类型"].ToString() == "估针" || row["订单类型"].ToString() == "试打版") && row["分带人"].ToString() == "" && row["发带人"].ToString() == "") return "待分带";// 
             //if ((order.OrderClass == "新带" || order.OrderClass == "收费改带" || order.OrderClass == "免费改带" || order.OrderClass == "估针" || order.OrderClass == "试打版" || order.OrderClass == "矢量新图" || order.OrderClass == "矢量报价") && order.NrOutQc == "") return "待发带";// 以后改为
-            MessageBox.Show("带子进度异常", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //MessageBox.Show("带子进度异常", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return null;
         }
     }

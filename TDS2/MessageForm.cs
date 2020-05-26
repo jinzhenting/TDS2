@@ -12,7 +12,10 @@ namespace TDS2
             InitializeComponent();
             try// 图标
             {
-                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Message.ico"));
+                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Skin\Message.ico"));
+                addPictureBox.Image=Image.FromFile(@"Image\Message\AddPicture.png");
+                zooz2PictureBox.Image = Image.FromFile(@"Image\Message\TextZooz-.png");
+                zooz1PictureBox.Image = Image.FromFile(@"Image\Message\TextZooz+.png");
             }
             catch (UnauthorizedAccessException)
             {
@@ -50,6 +53,96 @@ namespace TDS2
             e.Cancel = true;
             Hide();
             StartPosition = FormStartPosition.Manual;
+        }
+        
+        /// <summary>
+        /// 定时查询
+        /// </summary>
+        private void getMessageTimer_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 发送按钮
+        /// </summary>
+        private void sendButton_Click(object sender, EventArgs e)
+        {
+            messageRichTextBox.Text += sendTextBox.Text;
+        }
+        private void sendButton_MouseMove(object sender, MouseEventArgs e)
+        {
+            sendButton.BackColor = Color.Green;
+            sendButton.FlatAppearance.BorderColor= Color.Green;
+            sendButton.ForeColor = Color.White; 
+        }
+        private void sendButton_MouseLeave(object sender, EventArgs e)
+        {
+            sendButton.BackColor = Color.WhiteSmoke;
+            sendButton.FlatAppearance.BorderColor = SystemColors.ScrollBar;
+            sendButton.ForeColor = Color.Black;
+            sendTextBox.Focus();
+        }
+
+        /// <summary>
+        /// 后台异步获取信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void getMessageBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 添加图片按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addPictureBox_Click(object sender, EventArgs e)
+        {
+            MessagePictureForm messagePictureForm = new MessagePictureForm();
+            messagePictureForm.ShowDialog();
+        }
+
+        private void addPictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            addPictureBox.Image = Image.FromFile(@"Image\Message\AddPictureOn.png");
+        }
+
+        private void addPictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            addPictureBox.Image = Image.FromFile(@"Image\Message\AddPicture.png");
+        }
+
+        private void zooz1PictureBox_Click(object sender, EventArgs e)
+        {
+            if (sendTextBox.Font.Size < 30) sendTextBox.Font = new Font(sendTextBox.Font.Name, sendTextBox.Font.Size + 1);
+        }
+
+        private void zooz1PictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            zooz1PictureBox.Image = Image.FromFile(@"Image\Message\TextZoozOn+.png");
+        }
+
+        private void zooz1PictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            zooz1PictureBox.Image = Image.FromFile(@"Image\Message\TextZooz+.png");
+        }
+
+        private void zooz2PictureBox_Click(object sender, EventArgs e)
+        {
+            if (sendTextBox.Font.Size > 7) sendTextBox.Font = new Font(sendTextBox.Font.Name, sendTextBox.Font.Size - 1);
+        }
+
+        private void zooz2PictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            zooz2PictureBox.Image = Image.FromFile(@"Image\Message\TextZoozOn-.png");
+        }
+
+        private void zooz2PictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            zooz2PictureBox.Image = Image.FromFile(@"Image\Message\TextZooz-.png");
         }
     }
 }

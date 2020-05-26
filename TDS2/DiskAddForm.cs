@@ -17,7 +17,7 @@ namespace TDS2
             InitializeComponent();
             try// 图标
             {
-                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\DiskMapping.ico"));
+                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Skin\DiskMapping.ico"));
             }
             catch (UnauthorizedAccessException)
             {
