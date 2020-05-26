@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Pathss>
+<Paths>
   <ZFile netPath="\\nrl\Z_file" localPath="L:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
   </ZFile>
   <NewData netPath="\\nr\New_data" localPath="V:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
@@ -28,4 +28,4 @@
   </EMBDesign>
   <O2CWork netPath="\\NRZ\O2C_work" localPath="T:" autoMapping="true" autoCheck="true" forever="false" windowsAccount="true" userName="" password="">
   </O2CWork>
-</Pathss>
+</Paths>
