@@ -9,7 +9,7 @@ namespace TDS2
     public static class SqlFunction
     {
         /// <summary>
-        /// 以带号查询
+        /// 以带号查询时Sql语句转换
         /// </summary>
         /// <param name="tape">带号</param>
         /// <returns></returns>
@@ -87,7 +87,7 @@ namespace TDS2
         }
 
         /// <summary>
-        /// 查询语句转换
+        /// 以列表查询时Sql语句转换
         /// </summary>
         /// <param name="dept">部门</param>
         /// <param name="progress">带子进度</param>
@@ -328,7 +328,7 @@ namespace TDS2
         }
 
         /// <summary>
-        /// 数据表标准化转换
+        /// 订单列表DataTable标准化转换
         /// </summary>
         /// <param name="newDataTable">新数据表</param>
         /// <param name="inTable">旧数据表</param>
@@ -549,7 +549,7 @@ namespace TDS2
         }
 
         /// <summary>
-        /// SELECT
+        /// SELECT语句返回DataTable
         /// </summary>
         /// <param name="select">SELECT * FROM 表 WHERE 列='值'</param>
         /// <returns>数据表</returns>
@@ -578,7 +578,7 @@ namespace TDS2
         }
 
         /// <summary>
-        /// UPDATE
+        /// UPDATE语句返回Bool
         /// </summary>
         /// <param name="up">UPDATE 表 SET 列='值', 列='值' WHERE 列='值'</param>
         /// <returns></returns>
@@ -603,7 +603,7 @@ namespace TDS2
         }
 
         /// <summary>
-        /// INSERT
+        /// INSERT语句返回Bool
         /// </summary>
         /// <param name="insert">INSERT INTO 表 (列,列,列) VALUES('值','值','值')</param>
         /// <returns></returns>
@@ -628,7 +628,7 @@ namespace TDS2
         }
 
         /// <summary>
-        /// DELETE
+        /// DELETE语句返回Bool
         /// </summary>
         /// <param name="delete">DELETE FROM 表名称 WHERE 列名称 = 值</param>
         /// <returns></returns>
@@ -653,7 +653,7 @@ namespace TDS2
         }
 
         /// <summary>
-        /// DROP TABLE
+        /// DROP TABLE语句返回Bool
         /// </summary>
         /// <param name="depot">图库名</param>
         /// <param name="drop">DROP TABLE 表名</param>
@@ -679,7 +679,7 @@ namespace TDS2
         }
 
         /// <summary>
-        /// CREATE TABLE
+        /// CREATE TABLE语句返回Bool
         /// </summary>
         /// <param name="create">CREATE TABLE 表(列 表配置, 列 表配置)</param>
         /// <returns></returns>

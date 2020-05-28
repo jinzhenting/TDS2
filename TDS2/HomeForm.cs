@@ -63,7 +63,7 @@ namespace TDS2
         /// <summary>
         /// 消息窗口
         /// </summary>
-        MessageForm messageForm = new MessageForm();
+        MessageForm messageForm;
 
         #endregion 全局变量
 
@@ -114,6 +114,7 @@ namespace TDS2
             AppSettings aAppSettings = new AppSettings();
             aAppSettings.GoUpdata(false);// 程序升级
             user = inUser;// 获取用户资料表
+            messageForm = new MessageForm(inUser); // 消息窗口
             SearchTimeInitialization();// 查询时间初始化
             OptionInitialization(user.Dept);// 带子进度按钮、订单类型按钮、订单紧急类别按钮 - 根据部门初始化
             ThemeInitialization();// 主题初始化
