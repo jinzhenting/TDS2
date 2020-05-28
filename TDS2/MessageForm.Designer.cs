@@ -70,6 +70,7 @@
             this.uesrListView.TabIndex = 0;
             this.uesrListView.UseCompatibleStateImageBehavior = false;
             this.uesrListView.View = System.Windows.Forms.View.Details;
+            this.uesrListView.SelectedIndexChanged += new System.EventHandler(this.uesrListView_SelectedIndexChanged);
             // 
             // columnHeader1
             // 

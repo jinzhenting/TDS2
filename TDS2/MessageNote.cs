@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TDS2
 {
-    public class MessageNotes
+    public class MessageNote
     {
         /// <summary>
         /// 发送人
@@ -112,11 +112,11 @@ namespace TDS2
         /// <summary>
         /// 读取时间
         /// </summary>
-        private DateTime readTime;
+        private string readTime;
         /// <summary>
         /// 读取时间
         /// </summary>
-        public DateTime ReadTime
+        public string ReadTime
         {
             get { return readTime; }
             set { readTime = value; }
@@ -138,11 +138,11 @@ namespace TDS2
         /// <summary>
         /// 读取时间
         /// </summary>
-        private DateTime completeTime;
+        private string completeTime;
         /// <summary>
         /// 读取时间
         /// </summary>
-        public DateTime CompleteTime
+        public string CompleteTime
         {
             get { return completeTime; }
             set { completeTime = value; }

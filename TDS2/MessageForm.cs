@@ -44,11 +44,6 @@ namespace TDS2
             getMessageTimer.Start();// 开启自动获取消息
         }
         
-
-
-        好友头像的类型加载出错
-
-
         /// <summary>
         /// 获取好友列表
         /// </summary>
@@ -56,36 +51,42 @@ namespace TDS2
         {
             if (uesrListView != null) uesrListView.Items.Clear();
             if (userImageList != null) userImageList.Images.Clear();
-            DataTable deptTable = SqlFunction.Select("SELECT dept FROM UserTable");// 先加载部门好友
-            for (int i = 0; i < deptTable.Rows.Count; i++)
-            {
-                string name = deptTable.Rows[i][0].ToString().ToUpper();
-                if (DeptRepeat(name)) continue;
-                ListViewItem listViewItem = new ListViewItem();// 定义单个项目
-                listViewItem.ImageIndex = i;
-                listViewItem.Text = name;
-                uesrListView.Items.Add(listViewItem);
-                ///
-                Bitmap bmp = new Bitmap(@"Image\Message\DeptOn.png");
-                userImageList.Images.Add(ImageZoom.Zoom(bmp, 48, 48));
-                bmp.Dispose();
-            }
 
-            DataTable dataTable = SqlFunction.Select("SELECT username FROM UserTable");// 再加载个人好友
-            for (int i = 0; i < dataTable.Rows.Count; i++)
-            {
-                string name = dataTable.Rows[i][0].ToString().ToUpper();
-                ListViewItem listViewItem = new ListViewItem();// 定义单个项目
-                listViewItem.ImageIndex = i;
-                listViewItem.Text = name;
-                uesrListView.Items.Add(listViewItem);
-                ///
-                Bitmap bmp = new Bitmap(@"Image\Message\UserOn.png");
-                userImageList.Images.Add(ImageZoom.Zoom(bmp, 48, 48));
-                bmp.Dispose();
-            }
+            int count = 0;// 好友计数
+
+            DataTable deptTable = SqlFunction.Select("SELECT dept FROM UserTable ORDER BY dept");// 先加载部门好友
+            if (deptTable != null) for (int i = 0; i < deptTable.Rows.Count; i++)
+                {
+                    string name = deptTable.Rows[i][0].ToString().ToUpper();
+                    if (DeptRepeat(name)) continue;
+                    ListViewItem listViewItem = new ListViewItem();// 定义单个项目
+                    listViewItem.ImageIndex = count;
+                    listViewItem.Text = name;
+                    uesrListView.Items.Add(listViewItem);
+                    count++;
+                    ///
+                    Bitmap bmp = new Bitmap(@"Image\Message\DeptOn.png");
+                    userImageList.Images.Add(ImageZoom.Zoom(bmp, 48, 48));
+                    bmp.Dispose();
+                }
+
+            DataTable dataTable = SqlFunction.Select("SELECT username FROM UserTable ORDER BY username");// 再加载个人好友 Cast(username AS INT)
+            if (dataTable != null) for (int i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    string name = dataTable.Rows[i][0].ToString().ToUpper();
+                    ListViewItem listViewItem = new ListViewItem();// 定义单个项目
+                    listViewItem.ImageIndex = count;
+                    listViewItem.Text = name;
+                    uesrListView.Items.Add(listViewItem);
+                    count++;
+                    ///
+                    Bitmap bmp = new Bitmap(@"Image\Message\UserOn.png");
+                    userImageList.Images.Add(ImageZoom.Zoom(bmp, 48, 48));
+                    bmp.Dispose();
+                }
 
             uesrListView.SmallImageList = userImageList;
+            uesrListView.Sort();
         }
 
         /// <summary>
@@ -136,7 +137,7 @@ namespace TDS2
         /// <summary>
         /// 消息集
         /// </summary>
-        private List<MessageNotes> messagesList = new List<MessageNotes>();
+        private List<MessageNote> messagesNotes = new List<MessageNote>();
 
         #endregion 全局变量
 
@@ -168,8 +169,35 @@ namespace TDS2
         /// </summary>
         private void getMessageBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            //string sql = "SELECT * FROM MessageNotes WHERE ReceiveUser='" + user.UserName + "' OR ReceiveDepartment='" + user.Dept + "'";
-            //messageTable = SqlFunction.Select(sql);
+            string sql = "SELECT * FROM MessageNotes WHERE ReceiveUser='" + user.UserName + "' OR ReceiveDepartment='" + user.Dept + "'";
+            messageTable = SqlFunction.Select(sql);
+
+            ///
+
+            if (messageTable == null || messageTable.Rows.Count == 0)
+            {
+                getMessageBackgroundWorker.ReportProgress(100, "无任何消息：" + DateTime.Now.ToString());// 进度传出
+                return;
+            }
+
+            for (int i = 0; i < messageTable.Rows.Count; i++)// 拆解消息
+            {
+                MessageNote messageNote = new MessageNote();
+                messageNote.SendUser = messageTable.Rows[i]["SendUser"].ToString();
+                messageNote.SendTime = messageTable.Rows[i]["SendTime"].ToString();
+                messageNote.SendComputer = messageTable.Rows[i]["SendComputer"].ToString();
+                messageNote.ReceiveUser = messageTable.Rows[i]["ReceiveUser"].ToString();
+                messageNote.ReceiveDepartment = messageTable.Rows[i]["ReceiveDepartment"].ToString();
+                messageNote.OrderTape = messageTable.Rows[i]["OrderTape"].ToString();
+                string[] content = messageTable.Rows[i]["MessageContent"].ToString().Split(';');
+                foreach (string str in content) messageNote.MessageContent.Add(str);
+                messageNote.Reading = (int)messageTable.Rows[i]["MessageContent"]== 1 ? true : false;
+                messageNote.ReadTime = messageTable.Rows[i]["ReadTime"].ToString();
+                messageNote.Complete = (int)messageTable.Rows[i]["Complete"] == 1 ? true : false;
+                messageNote.CompleteTime = messageTable.Rows[i]["CompleteTime"].ToString();
+                messagesNotes.Add(messageNote);
+            }
+            MessageBox.Show(messagesNotes.ToString());
         }
 
         /// <summary>
@@ -202,22 +230,7 @@ namespace TDS2
                 messageLabel.Text = "已取消后台获取消息";
                 return;
             }
-
-            ///
-
-            if (messageTable==null||messageTable.Rows.Count==0) {
-
-                messageProgressBar.Value = 100;
-                messageLabel.Text = "无任何消息：" + DateTime.Now.ToString();
-                return;
-            }
-
-            for(int i = 0; i < messageTable.Rows.Count; i++)
-            {
-                MessageNotes messageNotes = new MessageNotes();
-                messagesList.Add(messageNotes);
-            }
-
+            
             messageProgressBar.Value = 100;
             messageLabel.Text = "消息刷新时间：" + DateTime.Now.ToString();
         }
@@ -306,5 +319,13 @@ namespace TDS2
         }
 
         #endregion 按钮
+
+        /// <summary>
+        /// 选择好友时
+        /// </summary>
+        private void uesrListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

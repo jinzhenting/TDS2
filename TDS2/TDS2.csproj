@@ -99,7 +99,7 @@
     <Compile Include="MessagePictureForm.Designer.cs">
       <DependentUpon>MessagePictureForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MessageNotes.cs" />
+    <Compile Include="MessageNote.cs" />
     <Compile Include="OrderCheckForm.cs">
       <SubType>Form</SubType>
     </Compile>
