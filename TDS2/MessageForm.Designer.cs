@@ -45,6 +45,7 @@
             this.messageProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.messageLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.userImageList = new System.Windows.Forms.ImageList(this.components);
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -61,10 +62,13 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.uesrListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.uesrListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
+            this.columnHeader1,
+            this.columnHeader2});
             this.uesrListView.FullRowSelect = true;
             this.uesrListView.GridLines = true;
+            this.uesrListView.HideSelection = false;
             this.uesrListView.Location = new System.Drawing.Point(1, 0);
+            this.uesrListView.MultiSelect = false;
             this.uesrListView.Name = "uesrListView";
             this.uesrListView.Size = new System.Drawing.Size(229, 537);
             this.uesrListView.TabIndex = 0;
@@ -74,8 +78,8 @@
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "好友列表";
-            this.columnHeader1.Width = 210;
+            this.columnHeader1.Text = "::";
+            this.columnHeader1.Width = 140;
             // 
             // sendButton
             // 
@@ -232,6 +236,10 @@
             this.userImageList.ImageSize = new System.Drawing.Size(48, 48);
             this.userImageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "::";
+            // 
             // MessageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -281,5 +289,6 @@
         private System.Windows.Forms.ToolStripStatusLabel messageLabel;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ImageList userImageList;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }

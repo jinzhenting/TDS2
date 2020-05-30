@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.orderPictureBox = new System.Windows.Forms.PictureBox();
             this.picturePanel = new System.Windows.Forms.Panel();
-            this.filesIconImageList = new System.Windows.Forms.ImageList(this.components);
             this.filesListView = new DoubleBufferListView();
+            this.filesIconImageList = new System.Windows.Forms.ImageList(this.components);
             this.otherListView = new DoubleBufferListView();
             this.orderListView = new DoubleBufferListView();
             ((System.ComponentModel.ISupportInitialize)(this.orderPictureBox)).BeginInit();
@@ -47,7 +47,7 @@
             this.orderPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.orderPictureBox.Location = new System.Drawing.Point(15, 14);
             this.orderPictureBox.Name = "orderPictureBox";
-            this.orderPictureBox.Size = new System.Drawing.Size(741, 360);
+            this.orderPictureBox.Size = new System.Drawing.Size(739, 360);
             this.orderPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.orderPictureBox.TabIndex = 0;
             this.orderPictureBox.TabStop = false;
@@ -63,14 +63,8 @@
             this.picturePanel.Controls.Add(this.orderPictureBox);
             this.picturePanel.Location = new System.Drawing.Point(8, 8);
             this.picturePanel.Name = "picturePanel";
-            this.picturePanel.Size = new System.Drawing.Size(772, 540);
+            this.picturePanel.Size = new System.Drawing.Size(770, 540);
             this.picturePanel.TabIndex = 0;
-            // 
-            // filesIconImageList
-            // 
-            this.filesIconImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.filesIconImageList.ImageSize = new System.Drawing.Size(64, 64);
-            this.filesIconImageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // filesListView
             // 
@@ -81,10 +75,16 @@
             this.filesListView.Location = new System.Drawing.Point(-1, 389);
             this.filesListView.MultiSelect = false;
             this.filesListView.Name = "filesListView";
-            this.filesListView.Size = new System.Drawing.Size(772, 150);
+            this.filesListView.Size = new System.Drawing.Size(770, 150);
             this.filesListView.TabIndex = 0;
             this.filesListView.UseCompatibleStateImageBehavior = false;
             this.filesListView.SelectedIndexChanged += new System.EventHandler(this.filesListView_SelectedIndexChanged);
+            // 
+            // filesIconImageList
+            // 
+            this.filesIconImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.filesIconImageList.ImageSize = new System.Drawing.Size(64, 64);
+            this.filesIconImageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // otherListView
             // 
@@ -95,7 +95,7 @@
             this.otherListView.Location = new System.Drawing.Point(8, 554);
             this.otherListView.MultiSelect = false;
             this.otherListView.Name = "otherListView";
-            this.otherListView.Size = new System.Drawing.Size(772, 128);
+            this.otherListView.Size = new System.Drawing.Size(770, 128);
             this.otherListView.TabIndex = 1;
             this.otherListView.TabStop = false;
             this.otherListView.UseCompatibleStateImageBehavior = false;
@@ -107,10 +107,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.orderListView.FullRowSelect = true;
             this.orderListView.GridLines = true;
-            this.orderListView.Location = new System.Drawing.Point(786, 8);
+            this.orderListView.Location = new System.Drawing.Point(784, 8);
             this.orderListView.MultiSelect = false;
             this.orderListView.Name = "orderListView";
-            this.orderListView.Size = new System.Drawing.Size(240, 674);
+            this.orderListView.Size = new System.Drawing.Size(242, 674);
             this.orderListView.TabIndex = 2;
             this.orderListView.TabStop = false;
             this.orderListView.UseCompatibleStateImageBehavior = false;

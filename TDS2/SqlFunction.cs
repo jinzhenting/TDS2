@@ -564,7 +564,6 @@ namespace TDS2
                 sqlconnection.Open();
                 sqldataadapter.SelectCommand = sqlcommand;
                 DataTable datatable = new DataTable();
-                if (datatable.Rows.Count > 0) datatable.Clear();
                 sqldataadapter.Fill(datatable);
                 sqlconnection.Close();
                 sqlconnection.Dispose();

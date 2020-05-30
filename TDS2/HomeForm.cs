@@ -44,7 +44,7 @@ namespace TDS2
         /// 订单文件列表集
         /// </summary>
         private List<List<string>> filesList = new List<List<string>>();
-        
+
         /// <summary>
         /// 订单列表原图容器
         /// </summary>
@@ -207,7 +207,7 @@ namespace TDS2
         /// 列表双击
         /// </summary>
         private void orderListView_DoubleClick(object sender, EventArgs e) { OpenOrderDetails(); }
-        
+
         /// <summary>
         /// 列表选择项目改变时
         /// </summary>
@@ -1139,7 +1139,7 @@ namespace TDS2
 
 
         #region 程序菜单
-        
+
         /// <summary>
         /// 选项菜单
         /// </summary>

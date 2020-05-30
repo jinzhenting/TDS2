@@ -1,4 +1,16 @@
-﻿using System;
+﻿
+/*
+ * 进度
+ * 
+ * 好友列表和聊天列表分开设计，节省资源
+ * 开发一个聊天记录容器，每个聊天中的好友生成一个独立的容器显示内容，支持文本和图片功能，不同类型的信息用标签标识，发送和接收时分开处理
+ * 记录保存在本地，登陆系统时加载记录
+ * 记录最后一条信息的发送人的发送时间，查询新信息时只查询此时间后的，节省资源，点聊天记录时才查询更多记录
+ * 
+*/
+
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -6,7 +18,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace TDS2
-{
+{    
     public partial class MessageForm : Form
     {
         #region 窗口动作
@@ -14,9 +26,9 @@ namespace TDS2
         public MessageForm(User inUser)
         {
             InitializeComponent();
-            try// 图标
+            try
             {
-                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Skin\Message.ico"));
+                Icon = new Icon(Path.Combine(Application.StartupPath, @"Image\Skin\Message.ico"));// 图标
                 addPictureBox.Image = Image.FromFile(@"Image\Message\AddPicture.png");
                 zooz2PictureBox.Image = Image.FromFile(@"Image\Message\TextZooz-.png");
                 zooz1PictureBox.Image = Image.FromFile(@"Image\Message\TextZooz+.png");
@@ -62,6 +74,7 @@ namespace TDS2
                     ListViewItem listViewItem = new ListViewItem();// 定义单个项目
                     listViewItem.ImageIndex = count;
                     listViewItem.Text = name;
+                    listViewItem.SubItems.Add("群聊");
                     uesrListView.Items.Add(listViewItem);
                     count++;
                     ///
@@ -70,13 +83,14 @@ namespace TDS2
                     bmp.Dispose();
                 }
 
-            DataTable dataTable = SqlFunction.Select("SELECT username FROM UserTable ORDER BY username");// 再加载个人好友 Cast(username AS INT)
+            DataTable dataTable = SqlFunction.Select("SELECT username FROM UserTable ORDER BY CAST(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(UPPER(username), 'OA','1') , 'Z','200'), 'E','30000'), 'NRIT','4000000'), 'NRI','4000000'), 'A','5000000') AS INT)");// 再加载个人好友// 查询时直接排序
             if (dataTable != null) for (int i = 0; i < dataTable.Rows.Count; i++)
                 {
                     string name = dataTable.Rows[i][0].ToString().ToUpper();
                     ListViewItem listViewItem = new ListViewItem();// 定义单个项目
                     listViewItem.ImageIndex = count;
                     listViewItem.Text = name;
+                    listViewItem.SubItems.Add("");
                     uesrListView.Items.Add(listViewItem);
                     count++;
                     ///
@@ -130,10 +144,15 @@ namespace TDS2
         private User user;
 
         /// <summary>
-        /// 消息DataTable表
+        /// 订单号
         /// </summary>
-        private DataTable messageTable = new DataTable();
+        private string orderTape;
 
+        /// <summary>
+        /// 基本后接收时间
+        /// </summary>
+        private DateTime lastGetTime;
+        
         /// <summary>
         /// 消息集
         /// </summary>
@@ -160,7 +179,6 @@ namespace TDS2
         private void Get()
         {
             if (getMessageBackgroundWorker.IsBusy) return;// 后台是否进行中
-            if (messageTable != null) messageTable.Clear();// 清空消息表
             getMessageBackgroundWorker.RunWorkerAsync();
         }
 
@@ -169,35 +187,39 @@ namespace TDS2
         /// </summary>
         private void getMessageBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            string sql = "SELECT * FROM MessageNotes WHERE ReceiveUser='" + user.UserName + "' OR ReceiveDepartment='" + user.Dept + "'";
-            messageTable = SqlFunction.Select(sql);
+            //string sql;
+            //if (lastGetTime != null) sql = @"SELECT * FROM MessageNotes WHERE ReceiveUser='" + user.UserName + "' OR ReceiveDepartment='" + user.Dept + " WHERE SendTime>" + lastGetTime + "'";
+            //else sql = @"SELECT * FROM MessageNotes WHERE ReceiveUser='" + user.UserName + "' OR ReceiveDepartment='" + user.Dept + "'";
+
+            DataTable messageTable1 = SqlFunction.Select(@"SELECT * FROM MessageNotes WHERE ReceiveUser='" + user.UserName + "' OR ReceiveDepartment='" + user.Dept + "'");
 
             ///
 
-            if (messageTable == null || messageTable.Rows.Count == 0)
+            if (messageTable1.Rows.Count == 0)
             {
                 getMessageBackgroundWorker.ReportProgress(100, "无任何消息：" + DateTime.Now.ToString());// 进度传出
                 return;
             }
 
-            for (int i = 0; i < messageTable.Rows.Count; i++)// 拆解消息
+            for (int i = 0; i < messageTable1.Rows.Count; i++)// 拆解消息
             {
                 MessageNote messageNote = new MessageNote();
-                messageNote.SendUser = messageTable.Rows[i]["SendUser"].ToString();
-                messageNote.SendTime = messageTable.Rows[i]["SendTime"].ToString();
-                messageNote.SendComputer = messageTable.Rows[i]["SendComputer"].ToString();
-                messageNote.ReceiveUser = messageTable.Rows[i]["ReceiveUser"].ToString();
-                messageNote.ReceiveDepartment = messageTable.Rows[i]["ReceiveDepartment"].ToString();
-                messageNote.OrderTape = messageTable.Rows[i]["OrderTape"].ToString();
-                string[] content = messageTable.Rows[i]["MessageContent"].ToString().Split(';');
+                messageNote.SendUser = messageTable1.Rows[i]["SendUser"].ToString();
+                messageNote.SendTime = messageTable1.Rows[i]["SendTime"].ToString();
+                messageNote.SendComputer = messageTable1.Rows[i]["SendComputer"].ToString();
+                messageNote.ReceiveUser = messageTable1.Rows[i]["ReceiveUser"].ToString();
+                messageNote.ReceiveDepartment = messageTable1.Rows[i]["ReceiveDepartment"].ToString();
+                messageNote.OrderTape = messageTable1.Rows[i]["OrderTape"].ToString();
+                string[] content = messageTable1.Rows[i]["MessageContent"].ToString().Split(';');
                 foreach (string str in content) messageNote.MessageContent.Add(str);
-                messageNote.Reading = (int)messageTable.Rows[i]["MessageContent"]== 1 ? true : false;
-                messageNote.ReadTime = messageTable.Rows[i]["ReadTime"].ToString();
-                messageNote.Complete = (int)messageTable.Rows[i]["Complete"] == 1 ? true : false;
-                messageNote.CompleteTime = messageTable.Rows[i]["CompleteTime"].ToString();
+                messageNote.Reading = Convert.ToBoolean(messageTable1.Rows[i]["Reading"]);
+                messageNote.ReadTime = messageTable1.Rows[i]["ReadTime"].ToString();
+                messageNote.Complete = Convert.ToBoolean(messageTable1.Rows[i]["Complete"]);
+                messageNote.CompleteTime = messageTable1.Rows[i]["CompleteTime"].ToString();
                 messagesNotes.Add(messageNote);
             }
-            MessageBox.Show(messagesNotes.ToString());
+            
+            getMessageBackgroundWorker.ReportProgress(100, "消息刷新时间：" + DateTime.Now.ToString());// 进度传出
         }
 
         /// <summary>
@@ -230,9 +252,6 @@ namespace TDS2
                 messageLabel.Text = "已取消后台获取消息";
                 return;
             }
-            
-            messageProgressBar.Value = 100;
-            messageLabel.Text = "消息刷新时间：" + DateTime.Now.ToString();
         }
 
         #endregion 后台
@@ -247,7 +266,20 @@ namespace TDS2
         /// </summary>
         private void sendButton_Click(object sender, EventArgs e)
         {
-            messageRichTextBox.Text += sendTextBox.Text;
+            string sendUser = user.UserName;
+            string sendTime = DateTime.Now.ToString();
+            string sendComputer = Environment.MachineName;
+            string receiveUser = null;
+            string receiveDepartment = null;
+            if (uesrListView.SelectedItems[0].SubItems[1].Text == "") receiveUser = uesrListView.SelectedItems[0].Text;
+            else receiveDepartment = uesrListView.SelectedItems[0].Text;
+            string tape = null;
+            if (orderTape != null) tape = orderTape;
+            string messageContent = sendTextBox.Text;
+            int reading = 0;
+            int complete = 0;
+
+            SqlFunction.Insert(@"INSERT INTO MessageNotes(SendUser, SendTime, SendComputer, ReceiveUser, ReceiveDepartment, OrderTape, MessageContent, Reading, Complete) VALUES('" + sendUser + "', '" + sendTime + "', '" + sendComputer + "', '" + receiveUser + "', '" + receiveDepartment + "', '" + tape + "', '" + messageContent + "', '" + reading + "', '" + complete + "')");
         }
         private void sendButton_MouseMove(object sender, MouseEventArgs e)
         {
@@ -325,7 +357,33 @@ namespace TDS2
         /// </summary>
         private void uesrListView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (uesrListView.SelectedItems.Count == 0) return;
 
+            string g = uesrListView.SelectedItems[0].SubItems[1].Text;
+            string userName = uesrListView.SelectedItems[0].Text;
+
+            foreach (MessageNote messageNote in messagesNotes)
+            {
+                if (g == "群聊")
+                {
+                    if (messageNote.ReceiveDepartment == userName)
+                    {
+                        foreach (string msg in messageNote.MessageContent) { messageRichTextBox.Text = msg + System.Environment.NewLine; }
+                    }
+                }
+                else
+                {
+                    if (messageNote.ReceiveUser == userName)
+                    {
+                        foreach (string msg in messageNote.MessageContent) { messageRichTextBox.Text = msg + System.Environment.NewLine; }
+                    }
+                }
+            }
         }
+
+        ///
+
+
+
     }
 }
