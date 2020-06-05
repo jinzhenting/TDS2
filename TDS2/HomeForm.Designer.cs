@@ -96,6 +96,9 @@
             this.orderReturnButton = new System.Windows.Forms.Button();
             this.orderCheckButton = new System.Windows.Forms.Button();
             this.searchTabPage = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.appHelpButton = new System.Windows.Forms.Button();
             this.homeMenuPanel = new System.Windows.Forms.Panel();
             this.sqlUpDataButton = new System.Windows.Forms.Button();
@@ -106,12 +109,14 @@
             this.searchBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.userProfileButton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.orderContextMenuStrip.SuspendLayout();
             this.homeStatusStrip.SuspendLayout();
             this.homeMenuStrip.SuspendLayout();
             this.homeTabControl.SuspendLayout();
             this.orderTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.orderListTrackBar)).BeginInit();
+            this.searchTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // orderContextMenuStrip
@@ -456,7 +461,7 @@
             this.orderTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.orderTabPage.Size = new System.Drawing.Size(1179, 615);
             this.orderTabPage.TabIndex = 0;
-            this.orderTabPage.Text = " 订单页      ";
+            this.orderTabPage.Text = " 订单页 ";
             this.orderTabPage.UseVisualStyleBackColor = true;
             // 
             // sqlComboBox
@@ -468,6 +473,7 @@
             "新数据",
             "旧数据"});
             this.sqlComboBox.Location = new System.Drawing.Point(1093, 6);
+            this.sqlComboBox.MaxDropDownItems = 20;
             this.sqlComboBox.Name = "sqlComboBox";
             this.sqlComboBox.Size = new System.Drawing.Size(80, 25);
             this.sqlComboBox.TabIndex = 55;
@@ -511,6 +517,7 @@
             "矢量新图",
             "矢量报价"});
             this.orderClassComboBox.Location = new System.Drawing.Point(607, 6);
+            this.orderClassComboBox.MaxDropDownItems = 20;
             this.orderClassComboBox.Name = "orderClassComboBox";
             this.orderClassComboBox.Size = new System.Drawing.Size(100, 25);
             this.orderClassComboBox.TabIndex = 47;
@@ -531,6 +538,7 @@
             "已发带",
             "已取消"});
             this.orderProgressComboBox.Location = new System.Drawing.Point(445, 6);
+            this.orderProgressComboBox.MaxDropDownItems = 20;
             this.orderProgressComboBox.Name = "orderProgressComboBox";
             this.orderProgressComboBox.Size = new System.Drawing.Size(80, 25);
             this.orderProgressComboBox.TabIndex = 46;
@@ -559,6 +567,7 @@
             "长时 - 2至3天",
             "超长时 - 4至6天"});
             this.orderEndComboBox.Location = new System.Drawing.Point(786, 6);
+            this.orderEndComboBox.MaxDropDownItems = 20;
             this.orderEndComboBox.Name = "orderEndComboBox";
             this.orderEndComboBox.Size = new System.Drawing.Size(120, 25);
             this.orderEndComboBox.TabIndex = 45;
@@ -774,13 +783,44 @@
             // 
             // searchTabPage
             // 
+            this.searchTabPage.Controls.Add(this.label5);
+            this.searchTabPage.Controls.Add(this.label4);
+            this.searchTabPage.Controls.Add(this.label3);
+            this.searchTabPage.Controls.Add(this.label2);
             this.searchTabPage.Location = new System.Drawing.Point(4, 26);
             this.searchTabPage.Name = "searchTabPage";
             this.searchTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.searchTabPage.Size = new System.Drawing.Size(1179, 615);
             this.searchTabPage.TabIndex = 1;
-            this.searchTabPage.Text = " 高级搜索        ";
+            this.searchTabPage.Text = " 高级搜索与报表 ";
             this.searchTabPage.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(426, 233);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(137, 17);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "* 搜索结果导出各类表格";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(426, 209);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(137, 17);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "* 搜索结果生成各类报表";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(426, 185);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(185, 17);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "* 订单所有字段的多条件综合搜索";
             // 
             // appHelpButton
             // 
@@ -891,6 +931,15 @@
             this.userProfileButton.UseVisualStyleBackColor = true;
             this.userProfileButton.Click += new System.EventHandler(this.userProfileButton_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(427, 162);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(92, 17);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "高级搜索与报表";
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -927,6 +976,8 @@
             this.orderTabPage.ResumeLayout(false);
             this.orderTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.orderListTrackBar)).EndInit();
+            this.searchTabPage.ResumeLayout(false);
+            this.searchTabPage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1011,5 +1062,9 @@
         private System.Windows.Forms.ComboBox sqlComboBox;
         private System.Windows.Forms.ToolStripMenuItem sqlUpDataMenuItem;
         private System.Windows.Forms.Button userProfileButton;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label5;
     }
 }

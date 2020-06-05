@@ -31,11 +31,6 @@ namespace TDS2
         private DataTable orderTable = new DataTable();
 
         /// <summary>
-        /// 选中的订单索引
-        /// </summary>
-        private int selectedItemIndex;
-
-        /// <summary>
         /// 是否选中订单
         /// </summary>
         private bool selectedItem;
@@ -150,6 +145,7 @@ namespace TDS2
             if (user.LogShift == "E") Text = "欢迎使用TDS2系统  |  用户：" + user.UserName.ToUpper() + "  |  班次：晚班";//标题
             else if (user.LogShift == "A") Text = "欢迎使用TDS2系统  |  用户：" + user.UserName.ToUpper() + "  |  班次：中班";
             else if (user.LogShift == "M") Text = "欢迎使用TDS2系统  |  用户：" + user.UserName.ToUpper() + "  |  班次：早班";
+            Text += "  |  " + Weather.Get();
             orderListView.View = View.LargeIcon; thumbnailComboBox.Text = "缩略图";// 订单列表显示样式
             try// 图标
             {
@@ -353,12 +349,12 @@ namespace TDS2
         /// <summary>
         /// 复制订单号菜单
         /// </summary>
-        private void orderCopyNameMenuItem_Click(object sender, EventArgs e) { Clipboard.SetText(orderTable.Rows[selectedItemIndex]["订单号"].ToString()); }
+        private void orderCopyNameMenuItem_Click(object sender, EventArgs e) { Clipboard.SetText(orderTable.Rows[orderListView.SelectedItems[0].Index]["订单号"].ToString()); }
 
         /// <summary>
         /// 复制客户编号菜单
         /// </summary>
-        private void orderCopyCustomerMenuItem_Click(object sender, EventArgs e) { Clipboard.SetText(orderTable.Rows[selectedItemIndex]["客户"].ToString()); }
+        private void orderCopyCustomerMenuItem_Click(object sender, EventArgs e) { Clipboard.SetText(orderTable.Rows[orderListView.SelectedItems[0].Index]["客户"].ToString()); }
 
         /// <summary>
         /// 接带菜单
@@ -620,16 +616,15 @@ namespace TDS2
             orderCheckButton.Enabled = orderCheckMenuItem.Enabled = noSearchAndSelected && (user.Dept == "OA" || user.Dept == "QI" || user.Dept == "E");// {检查} 菜单
             if (selectedItem && thumbnailComboBox.Text == "缩略图")// 如果选中
             {
-                selectedItemIndex = orderListView.SelectedItems[0].Index;
-                progress = OrderProgress.Get(orderTable.Rows[selectedItemIndex]);// 获取带子进度
+                progress = OrderProgress.Get(orderTable.Rows[orderListView.SelectedItems[0].Index]);// 获取带子进度
 
                 ///
 
                 #region 动态生成 {订单文件} 的子菜单
                 if (orderFilesMenuItem.DropDownItems.Count > 0) orderFilesMenuItem.DropDownItems.Clear();// 清空 {订单文件} 的菜单
-                if (filesList[selectedItemIndex].Count > 0)// 如果选中的订单文件列表数量大于0，获取订单关联文件的列表
+                if (filesList[orderListView.SelectedItems[0].Index].Count > 0)// 如果选中的订单文件列表数量大于0，获取订单关联文件的列表
                 {
-                    foreach (string fileName in filesList[selectedItemIndex])
+                    foreach (string fileName in filesList[orderListView.SelectedItems[0].Index])
                     {
                         ToolStripMenuItem files = new ToolStripMenuItem();// 在 {订单文件} 菜单下，每个文件生成一个以文件命名的子菜单
                         files.Name = fileName;
@@ -692,7 +687,6 @@ namespace TDS2
             }
             else
             {
-                selectedItemIndex = -1;
                 progress = "";
             }
 
@@ -843,7 +837,11 @@ namespace TDS2
         /// </summary>
         private void OrderDeliver()
         {
-            MessageBox.Show("功能未完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            if (orderListView.SelectedItems.Count > 0)
+            {
+                OrderDeliverForm orderDeliverForm = new OrderDeliverForm(orderTable.Rows[orderListView.SelectedItems[0].Index]);
+                orderDeliverForm.ShowDialog();
+            }
         }
 
         /// <summary>
@@ -893,7 +891,7 @@ namespace TDS2
         {
             if (orderListView.SelectedItems.Count > 0)
             {
-                OrderDetails orderDetails = new OrderDetails(orderTable.Rows[selectedItemIndex]);
+                OrderDetails orderDetails = new OrderDetails(orderTable.Rows[orderListView.SelectedItems[0].Index]);
                 orderDetails.ShowDialog();
             }
         }
@@ -903,12 +901,12 @@ namespace TDS2
         /// </summary>
         private void OrderCheck()
         {
-            if (filesList[selectedItemIndex].Count == 0)
+            if (filesList[orderListView.SelectedItems[0].Index].Count == 0)
             {
                 MessageBox.Show("该订单不包含任何文件", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            OrderCheckForm orderCheckForm = new OrderCheckForm(orderTable.Rows[selectedItemIndex]);
+            OrderCheckForm orderCheckForm = new OrderCheckForm(orderTable.Rows[orderListView.SelectedItems[0].Index]);
             orderCheckForm.ShowDialog();
         }
 
@@ -926,16 +924,21 @@ namespace TDS2
                     {
                         if (e.Control)
                         {
-                            if (selectedItemIndex != -1) OrderCheck();
+                            if (orderListView.SelectedItems[0].Index != -1) OrderCheck();// 订单详细
                         }
                         else OpenOrderDetails();
                         break;
                     }
-                case Keys.C:
+                case Keys.F3:
+                    {
+                        OrderDeliver();// 分带
+                        break;
+                    }
+                case Keys.C://复制
                     {
                         if (e.Control)
                         {
-                            if (selectedItem) Clipboard.SetText((string)orderTable.Rows[selectedItemIndex]["订单号"]);
+                            if (selectedItem) Clipboard.SetText((string)orderTable.Rows[orderListView.SelectedItems[0].Index]["订单号"]);
                         }
                         break;
                     }
@@ -946,6 +949,7 @@ namespace TDS2
             }
 
         }
+
         #endregion 列表功能
 
 
@@ -1132,6 +1136,7 @@ namespace TDS2
 
             MenuPermission();// 订单菜单和按钮启停分配
         }
+
         #endregion 异步查询
 
 
@@ -1318,7 +1323,8 @@ namespace TDS2
         /// </summary>
         private void UserManage()
         {
-            MessageBox.Show("功能未完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            UserManageForm userManageForm = new UserManageForm();
+            userManageForm.ShowDialog();
         }
 
         /// <summary>

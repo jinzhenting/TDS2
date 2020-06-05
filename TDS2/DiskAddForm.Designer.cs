@@ -179,6 +179,7 @@
             this.localPathComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.localPathComboBox.FormattingEnabled = true;
             this.localPathComboBox.Location = new System.Drawing.Point(46, 36);
+            this.localPathComboBox.MaxDropDownItems = 30;
             this.localPathComboBox.Name = "localPathComboBox";
             this.localPathComboBox.Size = new System.Drawing.Size(50, 25);
             this.localPathComboBox.TabIndex = 4;

@@ -100,7 +100,6 @@ namespace TDS2
                 }
 
             uesrListView.SmallImageList = userImageList;
-            uesrListView.Sort();
         }
 
         /// <summary>

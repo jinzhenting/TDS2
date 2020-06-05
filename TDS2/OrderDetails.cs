@@ -126,11 +126,6 @@ namespace TDS2
             EmbManager.SubItems.Add(orderRow["分带人"].ToString());
             orderListView.Items.Add(EmbManager);
 
-            ListViewItem OrderDifficulty = new ListViewItem();// 打版难度
-            OrderDifficulty.Text = "打版难度";
-            OrderDifficulty.SubItems.Add(orderRow["打版难度"].ToString());
-            orderListView.Items.Add(OrderDifficulty);
-
             ListViewItem EmbClass = new ListViewItem();// 图案风格
             EmbClass.Text = "图案风格";
             EmbClass.SubItems.Add(orderRow["图案风格"].ToString());
@@ -146,38 +141,41 @@ namespace TDS2
             OrderReturnFormat.SubItems.Add(orderRow["返回文件格式"].ToString());
             orderListView.Items.Add(OrderReturnFormat);
             
-            #region 未有字段
-            ListViewItem EmbWidth = new ListViewItem();// 版带宽
-            EmbWidth.Text = "版带宽";
-            EmbWidth.SubItems.Add("数据库无此字段");
-            orderListView.Items.Add(EmbWidth);
-
-            ListViewItem EmbHeight = new ListViewItem();// 版带高
-            EmbHeight.Text = "版带高";
-            EmbHeight.SubItems.Add("数据库无此字段");
-            orderListView.Items.Add(EmbHeight);
-
-            ListViewItem EmbPosition = new ListViewItem();// 面料或位置
-            EmbPosition.Text = "面料或位置";
-            EmbPosition.SubItems.Add("数据库无此字段");
-            orderListView.Items.Add(EmbPosition);
-
+            ListViewItem OrderDifficulty = new ListViewItem();// 打版难度
+            OrderDifficulty.Text = "打版难度";
+            OrderDifficulty.SubItems.Add(orderRow["打版难度"].ToString());
+            orderListView.Items.Add(OrderDifficulty);
+            
             ListViewItem OrderQuoteName = new ListViewItem();// 估针编号
             OrderQuoteName.Text = "估针编号";
-            OrderQuoteName.SubItems.Add("数据库无此字段");
+            OrderQuoteName.SubItems.Add(orderRow["估针编号"].ToString());
             orderListView.Items.Add(OrderQuoteName);
 
             ListViewItem OrderQuoteCount = new ListViewItem();// 估针针数
             OrderQuoteCount.Text = "估针针数";
-            OrderQuoteCount.SubItems.Add("数据库无此字段");
+            OrderQuoteCount.SubItems.Add(orderRow["估针针数始"].ToString()+"-"+ orderRow["估针针数终"].ToString());
             orderListView.Items.Add(OrderQuoteCount);
 
             ListViewItem OrderQuoteZ = new ListViewItem();// 估针打版师
             OrderQuoteZ.Text = "估针打版师";
-            OrderQuoteZ.SubItems.Add("数据库无此字段");
+            OrderQuoteZ.SubItems.Add(orderRow["估针打版师"].ToString());
             orderListView.Items.Add(OrderQuoteZ);
-            #endregion 未有字段
 
+            ListViewItem EmbWidth = new ListViewItem();// 版带宽
+            EmbWidth.Text = "版带宽";
+            EmbWidth.SubItems.Add(orderRow["版带宽"].ToString());
+            orderListView.Items.Add(EmbWidth);
+
+            ListViewItem EmbHeight = new ListViewItem();// 版带高
+            EmbHeight.Text = "版带高";
+            EmbHeight.SubItems.Add(orderRow["版带高"].ToString());
+            orderListView.Items.Add(EmbHeight);
+
+            ListViewItem EmbPosition = new ListViewItem();// 面料或位置
+            EmbPosition.Text = "面料或位置";
+            EmbPosition.SubItems.Add(orderRow["面料或位置"].ToString());
+            orderListView.Items.Add(EmbPosition);
+            
             ListViewItem EmbOriginalZ = new ListViewItem();// 原打版师
             EmbOriginalZ.Text = "原版打版师";
             EmbOriginalZ.SubItems.Add(orderRow["原版打版师"].ToString());
@@ -279,6 +277,7 @@ namespace TDS2
             orderListView.Items.Add(NrOutTime);
 
             orderListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.ColumnContent);
+
             ///
 
             otherListView.Columns.Add("::");
@@ -289,18 +288,16 @@ namespace TDS2
             OrderDescription.Text = "订单说明";
             OrderDescription.SubItems.Add(orderRow["订单说明"].ToString());
             otherListView.Items.Add(OrderDescription);
-
-            #region 未有字段
+            
             ListViewItem zDescription = new ListViewItem();// 打版师
             zDescription.Text = "打版师注意事项";
-            zDescription.SubItems.Add("数据库无此字段");
+            zDescription.SubItems.Add(orderRow["打版师注意事项"].ToString());
             otherListView.Items.Add(zDescription);
 
             ListViewItem eDescription = new ListViewItem();// 车版师
             eDescription.Text = "车版师注意事项";
-            eDescription.SubItems.Add("数据库无此字段");
+            eDescription.SubItems.Add(orderRow["车版师注意事项"].ToString());
             otherListView.Items.Add(eDescription);
-            #endregion 未有字段
 
             otherListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.ColumnContent);
 

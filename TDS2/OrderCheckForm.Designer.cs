@@ -35,6 +35,7 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.loadFilesBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.filesIconImageList = new System.Windows.Forms.ImageList(this.components);
+            this.extensionButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // filesListView
@@ -97,6 +98,16 @@
             this.filesIconImageList.ImageSize = new System.Drawing.Size(64, 64);
             this.filesIconImageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // extensionButton
+            // 
+            this.extensionButton.Location = new System.Drawing.Point(496, 7);
+            this.extensionButton.Name = "extensionButton";
+            this.extensionButton.Size = new System.Drawing.Size(120, 23);
+            this.extensionButton.TabIndex = 4;
+            this.extensionButton.Text = "文件格式关联设置";
+            this.extensionButton.UseVisualStyleBackColor = true;
+            this.extensionButton.Click += new System.EventHandler(this.extensionButton_Click);
+            // 
             // OrderCheckForm
             // 
             this.AcceptButton = this.checkButton;
@@ -104,6 +115,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.extensionButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.checkButton);
             this.Controls.Add(this.label1);
@@ -127,5 +139,6 @@
         private System.Windows.Forms.Button cancelButton;
         private System.ComponentModel.BackgroundWorker loadFilesBackgroundWorker;
         private System.Windows.Forms.ImageList filesIconImageList;
+        private System.Windows.Forms.Button extensionButton;
     }
 }

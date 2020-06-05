@@ -30,19 +30,28 @@ namespace TDS2
             sql += " UPPER(Urgency) 紧急类别,";// 转大写
             sql += " RNT 最迟返回时间,";
             sql += " UPPER(LEFT(Mark_pc, 1)) 订单电脑,";// 转大写 // 截取左1字符
-            sql += " Class 打版难度,";
             sql += " UPPER(DS) 返回文件格式,";// 转大写
             sql += " Remind_time 订单重新提醒时间,";
             sql += " Last_modi_time 订单修改时间,";
             sql += " TimeSpent 订单接发总用时,";
             sql += " Quantity 订单含版带数,";
             sql += " Description 订单说明,";
+            sql += " zDescription 打版师注意事项,";
+            sql += " eDescription 车版师注意事项,";
             sql += " UPPER(InQC) 接带人,";// 转大写
             sql += " UPPER(In_Shift) 接带班次,";// 转大写
             sql += " CD 接带计算机,";
             sql += " Record_in_time 接带时间,";
             sql += " UPPER(Manager) 分带人,";// 转大写
             sql += " OrderType 图案风格,";
+            sql += " Class 打版难度,";
+            sql += " OrderQuoteName 估针编号,";
+            sql += " OrderQuoteCount1 估针针数始,";
+            sql += " OrderQuoteCount2 估针针数终,";
+            sql += " OrderQuoteZ 估针打版师,";
+            sql += " EmbWidth 版带宽,";
+            sql += " EmbHeight 版带高,";
+            sql += " EmbPosition 面料或位置,";
             sql += " UPPER(V) 版带版本,";// 转大写
             sql += " UPPER(Editfrom) 改带利用版本,";// 转大写
             sql += " UPPER(Z) 打版师,";// 转大写
@@ -111,19 +120,28 @@ namespace TDS2
             sql += " UPPER(Urgency) 紧急类别,";// 转大写
             sql += " RNT 最迟返回时间,";
             sql += " UPPER(LEFT(Mark_pc, 1)) 订单电脑,";// 转大写 // 截取左1字符
-            sql += " Class 打版难度,";
             sql += " UPPER(DS) 返回文件格式,";// 转大写
             sql += " Remind_time 订单重新提醒时间,";
             sql += " Last_modi_time 订单修改时间,";
             sql += " TimeSpent 订单接发总用时,";
             sql += " Quantity 订单含版带数,";
             sql += " Description 订单说明,";
+            sql += " zDescription 打版师注意事项,";
+            sql += " eDescription 车版师注意事项,";
             sql += " UPPER(InQC) 接带人,";// 转大写
             sql += " UPPER(In_Shift) 接带班次,";// 转大写
             sql += " CD 接带计算机,";
             sql += " Record_in_time 接带时间,";
             sql += " UPPER(Manager) 分带人,";// 转大写
             sql += " OrderType 图案风格,";
+            sql += " Class 打版难度,";
+            sql += " OrderQuoteName 估针编号,";
+            sql += " OrderQuoteCount1 估针针数始,";
+            sql += " OrderQuoteCount2 估针针数终,";
+            sql += " OrderQuoteZ 估针打版师,";
+            sql += " EmbWidth 版带宽,";
+            sql += " EmbHeight 版带高,";
+            sql += " EmbPosition 面料或位置,";
             sql += " UPPER(V) 版带版本,";// 转大写
             sql += " UPPER(Editfrom) 改带利用版本,";// 转大写
             sql += " UPPER(Z) 打版师,";// 转大写
@@ -164,7 +182,7 @@ namespace TDS2
             {
                 case "待分带":
                     {
-                        sql += " AND (Mode='O' OR Mode='E' OR Mode='F' OR Mode='Q' OR Mode='T') AND Manager IS NULL AND Z IS NULL AND OutQC IS NULL";// 带子进度 待分带
+                        sql += " AND (Mode='O' OR Mode='E' OR Mode='F' OR Mode='Q' OR Mode='T') AND (Manager IS NULL OR Manager='')";// 带子进度 待分带
                         break;
                     }
                 case "待打版":
@@ -392,7 +410,7 @@ namespace TDS2
 
                 ///
 
-                switch (Convert.ToString(row["紧急类别"]))// 紧急类别
+                switch (Convert.ToString(row["紧急类别"]).ToUpper())// 紧急类别
                 {
                     case "RUSH EDITING":// 订单类型 急改
                         {
@@ -424,7 +442,7 @@ namespace TDS2
                             row["紧急类别"] = "一般 - 17:00时前";
                             break;
                         }
-                    case "24 HOURS'":// 订单类型 正常
+                    case "24 HOURS":// 订单类型 正常
                         {
                             row["紧急类别"] = "正常 - 24小时内";
                             break;
@@ -441,7 +459,7 @@ namespace TDS2
                         }
                     default:
                         {
-                            row["紧急类别"] = "";
+                            //row["紧急类别"] = "";
                             break;
                         }
                 }

@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
@@ -106,6 +110,12 @@
     <Compile Include="OrderCheckForm.Designer.cs">
       <DependentUpon>OrderCheckForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OrderDeliverForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrderDeliverForm.Designer.cs">
+      <DependentUpon>OrderDeliverForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OrderEForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +158,12 @@
     <Compile Include="SqlConnection.cs" />
     <Compile Include="SqlFunction.cs" />
     <Compile Include="OrderFiles.cs" />
+    <Compile Include="MessagePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MessagePanel.Designer.cs">
+      <DependentUpon>MessagePanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UpDataForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,12 +172,19 @@
     </Compile>
     <Compile Include="User.cs" />
     <Compile Include="ThumbnailProvider.cs" />
+    <Compile Include="UserManageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManageForm.Designer.cs">
+      <DependentUpon>UserManageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserProfileForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserProfileForm.Designer.cs">
       <DependentUpon>UserProfileForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Weather.cs" />
     <EmbeddedResource Include="AppHelpForm.resx">
       <DependentUpon>AppHelpForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -193,6 +216,9 @@
     <EmbeddedResource Include="OrderCheckForm.resx">
       <DependentUpon>OrderCheckForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OrderDeliverForm.resx">
+      <DependentUpon>OrderDeliverForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OrderDetails.resx">
       <DependentUpon>OrderDetails.cs</DependentUpon>
     </EmbeddedResource>
@@ -211,8 +237,14 @@
     <EmbeddedResource Include="AppSettingsForm.resx">
       <DependentUpon>AppSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MessagePanel.resx">
+      <DependentUpon>MessagePanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UpDataForm.resx">
       <DependentUpon>UpDataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManageForm.resx">
+      <DependentUpon>UserManageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserProfileForm.resx">
       <DependentUpon>UserProfileForm.cs</DependentUpon>

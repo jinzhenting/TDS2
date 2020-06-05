@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.uesrListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.sendButton = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.messageRichTextBox = new System.Windows.Forms.RichTextBox();
@@ -45,7 +46,6 @@
             this.messageProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.messageLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.userImageList = new System.Windows.Forms.ImageList(this.components);
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -70,7 +70,7 @@
             this.uesrListView.Location = new System.Drawing.Point(1, 0);
             this.uesrListView.MultiSelect = false;
             this.uesrListView.Name = "uesrListView";
-            this.uesrListView.Size = new System.Drawing.Size(229, 537);
+            this.uesrListView.Size = new System.Drawing.Size(234, 537);
             this.uesrListView.TabIndex = 0;
             this.uesrListView.UseCompatibleStateImageBehavior = false;
             this.uesrListView.View = System.Windows.Forms.View.Details;
@@ -80,6 +80,10 @@
             // 
             this.columnHeader1.Text = "::";
             this.columnHeader1.Width = 140;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "::";
             // 
             // sendButton
             // 
@@ -235,10 +239,6 @@
             this.userImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.userImageList.ImageSize = new System.Drawing.Size(48, 48);
             this.userImageList.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "::";
             // 
             // MessageForm
             // 

@@ -195,6 +195,17 @@ namespace TDS2
 
         }
 
+        /// <summary>
+        /// 文件格式关联设置按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void extensionButton_Click(object sender, EventArgs e)
+        {
+            AppSettingsForm settingForm = new AppSettingsForm();
+            settingForm.ShowDialog();
+        }
+
         ///
 
 
