@@ -29,18 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("打版师列表");
             this.picturePanel = new System.Windows.Forms.Panel();
+            this.filesListView = new DoubleBufferListView();
             this.orderPictureBox = new System.Windows.Forms.PictureBox();
             this.filesIconImageList = new System.Windows.Forms.ImageList(this.components);
             this.deliverButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.difficultyRadioButtonA = new System.Windows.Forms.RadioButton();
+            this.difficultyRadioButtonB = new System.Windows.Forms.RadioButton();
+            this.difficultyRadioButtonC = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.quoteCountComboBox1 = new System.Windows.Forms.ComboBox();
+            this.quoteCountComboBox2 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -48,7 +50,9 @@
             this.zListView = new DoubleBufferListView();
             this.messageListView = new DoubleBufferListView();
             this.otherListView = new DoubleBufferListView();
-            this.filesListView = new DoubleBufferListView();
+            this.doubleBufferListView1 = new DoubleBufferListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.statisticsButton = new System.Windows.Forms.Button();
             this.picturePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.orderPictureBox)).BeginInit();
             this.panel1.SuspendLayout();
@@ -64,10 +68,24 @@
             this.picturePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picturePanel.Controls.Add(this.filesListView);
             this.picturePanel.Controls.Add(this.orderPictureBox);
-            this.picturePanel.Location = new System.Drawing.Point(8, 8);
+            this.picturePanel.Location = new System.Drawing.Point(8, 133);
             this.picturePanel.Name = "picturePanel";
-            this.picturePanel.Size = new System.Drawing.Size(758, 559);
-            this.picturePanel.TabIndex = 0;
+            this.picturePanel.Size = new System.Drawing.Size(645, 600);
+            this.picturePanel.TabIndex = 1;
+            // 
+            // filesListView
+            // 
+            this.filesListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.filesListView.FullRowSelect = true;
+            this.filesListView.GridLines = true;
+            this.filesListView.Location = new System.Drawing.Point(-1, 449);
+            this.filesListView.MultiSelect = false;
+            this.filesListView.Name = "filesListView";
+            this.filesListView.Size = new System.Drawing.Size(646, 150);
+            this.filesListView.TabIndex = 0;
+            this.filesListView.UseCompatibleStateImageBehavior = false;
+            this.filesListView.SelectedIndexChanged += new System.EventHandler(this.filesListView_SelectedIndexChanged);
             // 
             // orderPictureBox
             // 
@@ -77,7 +95,7 @@
             this.orderPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.orderPictureBox.Location = new System.Drawing.Point(15, 14);
             this.orderPictureBox.Name = "orderPictureBox";
-            this.orderPictureBox.Size = new System.Drawing.Size(727, 378);
+            this.orderPictureBox.Size = new System.Drawing.Size(614, 420);
             this.orderPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.orderPictureBox.TabIndex = 0;
             this.orderPictureBox.TabStop = false;
@@ -90,23 +108,25 @@
             // 
             // deliverButton
             // 
-            this.deliverButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.deliverButton.Location = new System.Drawing.Point(772, 644);
+            this.deliverButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.deliverButton.Location = new System.Drawing.Point(915, 483);
             this.deliverButton.Name = "deliverButton";
-            this.deliverButton.Size = new System.Drawing.Size(110, 40);
-            this.deliverButton.TabIndex = 6;
+            this.deliverButton.Size = new System.Drawing.Size(100, 40);
+            this.deliverButton.TabIndex = 8;
             this.deliverButton.Text = "分发 (Enter)";
             this.deliverButton.UseVisualStyleBackColor = true;
+            this.deliverButton.Click += new System.EventHandler(this.deliverButton_Click);
             // 
             // cancelButton
             // 
-            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.Location = new System.Drawing.Point(888, 644);
+            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelButton.Location = new System.Drawing.Point(1021, 483);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(139, 40);
-            this.cancelButton.TabIndex = 7;
+            this.cancelButton.Size = new System.Drawing.Size(120, 40);
+            this.cancelButton.TabIndex = 9;
             this.cancelButton.Text = "取消分发 (Back)";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // label1
             // 
@@ -117,38 +137,38 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "打版难度";
             // 
-            // radioButton1
+            // difficultyRadioButtonA
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(70, 9);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(34, 21);
-            this.radioButton1.TabIndex = 1;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "A";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.difficultyRadioButtonA.AutoSize = true;
+            this.difficultyRadioButtonA.Location = new System.Drawing.Point(70, 9);
+            this.difficultyRadioButtonA.Name = "difficultyRadioButtonA";
+            this.difficultyRadioButtonA.Size = new System.Drawing.Size(34, 21);
+            this.difficultyRadioButtonA.TabIndex = 1;
+            this.difficultyRadioButtonA.TabStop = true;
+            this.difficultyRadioButtonA.Text = "A";
+            this.difficultyRadioButtonA.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // difficultyRadioButtonB
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(113, 9);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(34, 21);
-            this.radioButton2.TabIndex = 2;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "B";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.difficultyRadioButtonB.AutoSize = true;
+            this.difficultyRadioButtonB.Location = new System.Drawing.Point(113, 9);
+            this.difficultyRadioButtonB.Name = "difficultyRadioButtonB";
+            this.difficultyRadioButtonB.Size = new System.Drawing.Size(34, 21);
+            this.difficultyRadioButtonB.TabIndex = 2;
+            this.difficultyRadioButtonB.TabStop = true;
+            this.difficultyRadioButtonB.Text = "B";
+            this.difficultyRadioButtonB.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // difficultyRadioButtonC
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(156, 9);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(34, 21);
-            this.radioButton3.TabIndex = 3;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "C";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.difficultyRadioButtonC.AutoSize = true;
+            this.difficultyRadioButtonC.Location = new System.Drawing.Point(156, 9);
+            this.difficultyRadioButtonC.Name = "difficultyRadioButtonC";
+            this.difficultyRadioButtonC.Size = new System.Drawing.Size(34, 21);
+            this.difficultyRadioButtonC.TabIndex = 3;
+            this.difficultyRadioButtonC.TabStop = true;
+            this.difficultyRadioButtonC.Text = "C";
+            this.difficultyRadioButtonC.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -159,10 +179,10 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "估针数";
             // 
-            // comboBox1
+            // quoteCountComboBox1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.quoteCountComboBox1.FormattingEnabled = true;
+            this.quoteCountComboBox1.Items.AddRange(new object[] {
             "1000",
             "2000",
             "3000",
@@ -183,16 +203,16 @@
             "18000",
             "19000",
             "20000"});
-            this.comboBox1.Location = new System.Drawing.Point(58, 7);
-            this.comboBox1.MaxDropDownItems = 50;
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(75, 25);
-            this.comboBox1.TabIndex = 1;
+            this.quoteCountComboBox1.Location = new System.Drawing.Point(58, 7);
+            this.quoteCountComboBox1.MaxDropDownItems = 50;
+            this.quoteCountComboBox1.Name = "quoteCountComboBox1";
+            this.quoteCountComboBox1.Size = new System.Drawing.Size(132, 25);
+            this.quoteCountComboBox1.TabIndex = 1;
             // 
-            // comboBox2
+            // quoteCountComboBox2
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.quoteCountComboBox2.FormattingEnabled = true;
+            this.quoteCountComboBox2.Items.AddRange(new object[] {
             "1000",
             "2000",
             "3000",
@@ -213,16 +233,16 @@
             "18000",
             "19000",
             "20000"});
-            this.comboBox2.Location = new System.Drawing.Point(165, 7);
-            this.comboBox2.MaxDropDownItems = 50;
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(80, 25);
-            this.comboBox2.TabIndex = 3;
+            this.quoteCountComboBox2.Location = new System.Drawing.Point(58, 38);
+            this.quoteCountComboBox2.MaxDropDownItems = 50;
+            this.quoteCountComboBox2.Name = "quoteCountComboBox2";
+            this.quoteCountComboBox2.Size = new System.Drawing.Size(170, 25);
+            this.quoteCountComboBox2.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(139, 11);
+            this.label3.Location = new System.Drawing.Point(32, 42);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(20, 17);
             this.label3.TabIndex = 2;
@@ -234,27 +254,27 @@
             this.panel1.BackColor = System.Drawing.SystemColors.Window;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.radioButton1);
-            this.panel1.Controls.Add(this.radioButton2);
-            this.panel1.Controls.Add(this.radioButton3);
-            this.panel1.Location = new System.Drawing.Point(772, 209);
+            this.panel1.Controls.Add(this.difficultyRadioButtonA);
+            this.panel1.Controls.Add(this.difficultyRadioButtonB);
+            this.panel1.Controls.Add(this.difficultyRadioButtonC);
+            this.panel1.Location = new System.Drawing.Point(915, 357);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(255, 40);
-            this.panel1.TabIndex = 3;
+            this.panel1.Size = new System.Drawing.Size(242, 40);
+            this.panel1.TabIndex = 6;
             // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.SystemColors.Window;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.comboBox1);
+            this.panel2.Controls.Add(this.quoteCountComboBox1);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.comboBox2);
+            this.panel2.Controls.Add(this.quoteCountComboBox2);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(772, 255);
+            this.panel2.Location = new System.Drawing.Point(915, 403);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(255, 40);
-            this.panel2.TabIndex = 4;
+            this.panel2.Size = new System.Drawing.Size(242, 74);
+            this.panel2.TabIndex = 7;
             // 
             // zImageList
             // 
@@ -266,13 +286,14 @@
             // 
             this.zListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.zListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.zListView.FullRowSelect = true;
             this.zListView.GridLines = true;
-            this.zListView.Location = new System.Drawing.Point(772, 301);
+            this.zListView.Location = new System.Drawing.Point(661, 188);
             this.zListView.MultiSelect = false;
             this.zListView.Name = "zListView";
-            this.zListView.Size = new System.Drawing.Size(255, 337);
-            this.zListView.TabIndex = 5;
+            this.zListView.Size = new System.Drawing.Size(246, 541);
+            this.zListView.TabIndex = 4;
             this.zListView.UseCompatibleStateImageBehavior = false;
             // 
             // messageListView
@@ -280,65 +301,87 @@
             this.messageListView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.messageListView.FullRowSelect = true;
             this.messageListView.GridLines = true;
-            this.messageListView.Location = new System.Drawing.Point(772, 8);
+            this.messageListView.Location = new System.Drawing.Point(915, 133);
             this.messageListView.MultiSelect = false;
             this.messageListView.Name = "messageListView";
-            this.messageListView.Size = new System.Drawing.Size(255, 195);
-            this.messageListView.TabIndex = 2;
+            this.messageListView.Size = new System.Drawing.Size(242, 218);
+            this.messageListView.TabIndex = 5;
             this.messageListView.TabStop = false;
             this.messageListView.UseCompatibleStateImageBehavior = false;
             this.messageListView.View = System.Windows.Forms.View.Details;
             // 
             // otherListView
             // 
-            this.otherListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.otherListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.otherListView.FullRowSelect = true;
             this.otherListView.GridLines = true;
-            this.otherListView.Location = new System.Drawing.Point(8, 573);
+            this.otherListView.Location = new System.Drawing.Point(8, 7);
             this.otherListView.MultiSelect = false;
             this.otherListView.Name = "otherListView";
-            this.otherListView.Size = new System.Drawing.Size(758, 111);
-            this.otherListView.TabIndex = 1;
+            this.otherListView.Size = new System.Drawing.Size(1149, 120);
+            this.otherListView.TabIndex = 0;
             this.otherListView.TabStop = false;
             this.otherListView.UseCompatibleStateImageBehavior = false;
             this.otherListView.View = System.Windows.Forms.View.Details;
             // 
-            // filesListView
+            // doubleBufferListView1
             // 
-            this.filesListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.doubleBufferListView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.filesListView.FullRowSelect = true;
-            this.filesListView.GridLines = true;
-            this.filesListView.Location = new System.Drawing.Point(-1, 408);
-            this.filesListView.MultiSelect = false;
-            this.filesListView.Name = "filesListView";
-            this.filesListView.Size = new System.Drawing.Size(758, 150);
-            this.filesListView.TabIndex = 0;
-            this.filesListView.UseCompatibleStateImageBehavior = false;
-            this.filesListView.SelectedIndexChanged += new System.EventHandler(this.filesListView_SelectedIndexChanged);
+            this.doubleBufferListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.doubleBufferListView1.FullRowSelect = true;
+            this.doubleBufferListView1.GridLines = true;
+            this.doubleBufferListView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem2});
+            this.doubleBufferListView1.Location = new System.Drawing.Point(659, 133);
+            this.doubleBufferListView1.MultiSelect = false;
+            this.doubleBufferListView1.Name = "doubleBufferListView1";
+            this.doubleBufferListView1.Size = new System.Drawing.Size(250, 600);
+            this.doubleBufferListView1.TabIndex = 2;
+            this.doubleBufferListView1.TabStop = false;
+            this.doubleBufferListView1.UseCompatibleStateImageBehavior = false;
+            this.doubleBufferListView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "::";
+            this.columnHeader1.Width = 151;
+            // 
+            // statisticsButton
+            // 
+            this.statisticsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.statisticsButton.Location = new System.Drawing.Point(823, 144);
+            this.statisticsButton.Name = "statisticsButton";
+            this.statisticsButton.Size = new System.Drawing.Size(75, 25);
+            this.statisticsButton.TabIndex = 3;
+            this.statisticsButton.Text = "分发统计";
+            this.statisticsButton.UseVisualStyleBackColor = true;
+            this.statisticsButton.Click += new System.EventHandler(this.statisticsButton_Click);
             // 
             // OrderDeliverForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1034, 691);
+            this.ClientSize = new System.Drawing.Size(1164, 741);
+            this.Controls.Add(this.statisticsButton);
             this.Controls.Add(this.zListView);
             this.Controls.Add(this.messageListView);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.otherListView);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.deliverButton);
             this.Controls.Add(this.picturePanel);
+            this.Controls.Add(this.doubleBufferListView1);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.MinimumSize = new System.Drawing.Size(600, 480);
+            this.MinimumSize = new System.Drawing.Size(1180, 780);
             this.Name = "OrderDeliverForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "分带";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OrderDeliverForm_KeyDown);
             this.Resize += new System.EventHandler(this.OrderDeliverForm_Resize);
             this.picturePanel.ResumeLayout(false);
@@ -361,17 +404,20 @@
         private System.Windows.Forms.Button deliverButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton difficultyRadioButtonA;
+        private System.Windows.Forms.RadioButton difficultyRadioButtonB;
+        private System.Windows.Forms.RadioButton difficultyRadioButtonC;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox quoteCountComboBox1;
+        private System.Windows.Forms.ComboBox quoteCountComboBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private DoubleBufferListView messageListView;
         private DoubleBufferListView zListView;
         private System.Windows.Forms.ImageList zImageList;
+        private DoubleBufferListView doubleBufferListView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.Button statisticsButton;
     }
 }

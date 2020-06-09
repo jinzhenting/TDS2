@@ -35,9 +35,10 @@ namespace TDS2
             sql += " Last_modi_time 订单修改时间,";
             sql += " TimeSpent 订单接发总用时,";
             sql += " Quantity 订单含版带数,";
-            sql += " Description 订单说明,";
+            sql += " Description 打带说明,";
             sql += " zDescription 打版师注意事项,";
             sql += " eDescription 车版师注意事项,";
+            sql += " otherSuggest 建议及其他,";
             sql += " UPPER(InQC) 接带人,";// 转大写
             sql += " UPPER(In_Shift) 接带班次,";// 转大写
             sql += " CD 接带计算机,";
@@ -125,9 +126,10 @@ namespace TDS2
             sql += " Last_modi_time 订单修改时间,";
             sql += " TimeSpent 订单接发总用时,";
             sql += " Quantity 订单含版带数,";
-            sql += " Description 订单说明,";
+            sql += " Description 打带说明,";
             sql += " zDescription 打版师注意事项,";
             sql += " eDescription 车版师注意事项,";
+            sql += " otherSuggest 建议及其他,";
             sql += " UPPER(InQC) 接带人,";// 转大写
             sql += " UPPER(In_Shift) 接带班次,";// 转大写
             sql += " CD 接带计算机,";
@@ -340,6 +342,94 @@ namespace TDS2
 
             if (user.Dept == "Z") sql += " AND Z='" + user.UserName + "'";// 打版师只能查询自己的带子
 
+            ///
+
+            return sql;
+        }
+
+
+        /// <summary>
+        /// 查询分带统计时Sql语句转换
+        /// </summary>
+        /// <param name="dept">部门</param>
+        /// <param name="progress">带子进度</param>
+        /// <param name="class_">带子类型</param>
+        /// <param name="end">带子紧急类别</param>
+        /// <returns>Sql语句</returns>
+        public static string StatisticsSelect(string timeStatr, string timeEnd, string sqlDataTable)
+        {
+            string sql = "SELECT";
+
+            ///
+
+            sql += " UPPER(sTape) 订单号,";// 转大写
+            sql += " T_in_time 接单时间,";
+            sql += " sYear 接单年,";
+            sql += " sMonth 接单月,";
+            sql += " sDate 接单日,";
+            sql += " UPPER(Code) 客户,";// 转大写
+            sql += " sOrder 客户的订单号,";
+            sql += " UPPER(Mode) 订单类型,";
+            sql += " UPPER(Urgency) 紧急类别,";// 转大写
+            sql += " RNT 最迟返回时间,";
+            sql += " UPPER(LEFT(Mark_pc, 1)) 订单电脑,";// 转大写 // 截取左1字符
+            sql += " UPPER(DS) 返回文件格式,";// 转大写
+            sql += " Remind_time 订单重新提醒时间,";
+            sql += " Last_modi_time 订单修改时间,";
+            sql += " TimeSpent 订单接发总用时,";
+            sql += " Quantity 订单含版带数,";
+            sql += " Description 打带说明,";
+            sql += " zDescription 打版师注意事项,";
+            sql += " eDescription 车版师注意事项,";
+            sql += " otherSuggest 建议及其他,";
+            sql += " UPPER(InQC) 接带人,";// 转大写
+            sql += " UPPER(In_Shift) 接带班次,";// 转大写
+            sql += " CD 接带计算机,";
+            sql += " Record_in_time 接带时间,";
+            sql += " UPPER(Manager) 分带人,";// 转大写
+            sql += " OrderType 图案风格,";
+            sql += " Class 打版难度,";
+            sql += " OrderQuoteName 估针编号,";
+            sql += " OrderQuoteCount1 估针针数始,";
+            sql += " OrderQuoteCount2 估针针数终,";
+            sql += " OrderQuoteZ 估针打版师,";
+            sql += " EmbWidth 版带宽,";
+            sql += " EmbHeight 版带高,";
+            sql += " EmbPosition 面料或位置,";
+            sql += " UPPER(V) 版带版本,";// 转大写
+            sql += " UPPER(Editfrom) 改带利用版本,";// 转大写
+            sql += " UPPER(Z) 打版师,";// 转大写
+            sql += " UPPER(OZ) 原版打版师,";// 转大写
+            sql += " CPZClass 打版师级别,";
+            sql += " PointedZ 优秀打版师,";
+            sql += " UPPER(Z_Shift) 打版班次,";// 转大写
+            sql += " Z_time1 打版开始时间,";
+            sql += " Z_time2 打版完成时间,";
+            sql += " ZS_H 打版师针数,";
+            sql += " RealS_W 总针数,";
+            sql += " ChargeS 收费针数,";
+            sql += " UPPER(Sewout) 是否车版,";// 转大写
+            sql += " UPPER(E) 车版师,";// 转大写
+            sql += " E_time 车版完成时间,";
+            sql += " EM 车版机器编号,";
+            sql += " UPPER(QI) 质检员,";// 转大写
+            sql += " QualityProblemLevel 质量问题等级,";
+            sql += " RevisionCount 重新车版次数,";
+            sql += " UPPER(OA) 扫描人,";// 转大写
+            sql += " OA_time 扫描完成时间,";
+            sql += " UPPER(OutQC) 发带人,";// 转大写
+            sql += " UPPER(Out_shift) 发带班次,";// 转大写
+            sql += " Record_out_time 发带时间";
+
+            ///
+
+            if (sqlDataTable == "新数据") sql += " FROM TDS WHERE";
+            else sql += " FROM TDS_H WHERE";
+
+            ///
+
+            sql += " Record_in_time>='" + timeStatr + "' and Record_in_time<='" + timeEnd + "'";// 接带时间
+            
             ///
 
             return sql;

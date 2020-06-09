@@ -22,9 +22,8 @@ namespace TDS2
                 string cond_txt = HeWeather6["HeWeather6"][0]["now"]["cond_txt"].ToString();
                 string tmp = HeWeather6["HeWeather6"][0]["now"]["tmp"].ToString();
                 int tmp1 = Convert.ToInt32(tmp);
-                string vis = HeWeather6["HeWeather6"][0]["now"]["vis"].ToString();
-                int vis1 = tmp1 + Convert.ToInt32(vis);
-                return city + "天气：" + cond_txt + "  |  室外温度：" + tmp1 + "-" + vis1 + "℃";
+                string hum = HeWeather6["HeWeather6"][0]["now"]["hum"].ToString();
+                return city + "：" + cond_txt + "  |  室外温度：" + tmp1 + "℃" + "  |  相对湿度：" + hum + "%";
             }
             catch (Exception)
             {

@@ -123,6 +123,18 @@
       <DependentUpon>OrderEForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OrderProgress.cs" />
+    <Compile Include="OrderZForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrderZForm.Designer.cs">
+      <DependentUpon>OrderZForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrderZStatisticsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrderZStatisticsForm.Designer.cs">
+      <DependentUpon>OrderZStatisticsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SyetemDiskList.cs" />
     <Compile Include="OrderDetails.cs">
       <SubType>Form</SubType>
@@ -224,6 +236,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OrderEForm.resx">
       <DependentUpon>OrderEForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrderZForm.resx">
+      <DependentUpon>OrderZForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrderZStatisticsForm.resx">
+      <DependentUpon>OrderZStatisticsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

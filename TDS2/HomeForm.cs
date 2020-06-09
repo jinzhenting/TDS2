@@ -374,7 +374,7 @@ namespace TDS2
         /// <summary>
         /// 发带菜单
         /// </summary>
-        private void orderReturnMenuItem_Click(object sender, EventArgs e) { OrderDeliver(); }
+        private void orderReturnMenuItem_Click(object sender, EventArgs e) { OrderReturn(); }
 
         /// <summary>
         /// 打版菜单
@@ -713,21 +713,21 @@ namespace TDS2
             ///
 
             orderDeliverButton.Enabled = orderDeliverMenuItem.Enabled = noSearchAndSelected && (user.Dept == "OA" || user.Dept == "A") && progress == "待分带";// 分带
-            if (orderDeliverMenuItem.DropDownItems.Count == 0)
-            {
-                ToolStripMenuItem distribution2Editors = new ToolStripMenuItem();// 在 {分带} 菜单下生成一个 {到打版师} 的子菜单
-                distribution2Editors.Name = "distribution2Editors";
-                distribution2Editors.Text = "到打版师";
-                orderDeliverMenuItem.DropDownItems.Add(distribution2Editors);
-                foreach (Editor editors in editorList.Editors)
-                {
-                    ToolStripMenuItem editor = new ToolStripMenuItem();// 为每个 {版师} 菜单生成一个 {内部格式文件夹}子菜单
-                    editor.Name = editors.Name;
-                    editor.Text = editors.Name;
-                    //editor.Click += new EventHandler(Copy2EditorEmb_ItemClick);
-                    distribution2Editors.DropDownItems.Add(editor);
-                }
-            }
+            //if (orderDeliverMenuItem.DropDownItems.Count == 0)
+            //{
+            //    ToolStripMenuItem distribution2Editors = new ToolStripMenuItem();// 在 {分带} 菜单下生成一个 {到打版师} 的子菜单
+            //    distribution2Editors.Name = "distribution2Editors";
+            //    distribution2Editors.Text = "到打版师";
+            //    orderDeliverMenuItem.DropDownItems.Add(distribution2Editors);
+            //    foreach (Editor editors in editorList.Editors)
+            //    {
+            //        ToolStripMenuItem editor = new ToolStripMenuItem();// 为每个 {版师} 菜单生成一个 {内部格式文件夹}子菜单
+            //        editor.Name = editors.Name;
+            //        editor.Text = editors.Name;
+            //        //editor.Click += new EventHandler(Copy2EditorEmb_ItemClick);
+            //        distribution2Editors.DropDownItems.Add(editor);
+            //    }
+            //}
 
             ///
 
@@ -820,8 +820,11 @@ namespace TDS2
         /// </summary>
         private void OrderE()
         {
-            OrderEForm orderEForm = new OrderEForm();
-            orderEForm.ShowDialog();
+            if (orderListView.SelectedItems.Count > 0)
+            {
+                OrderEForm orderEForm = new OrderEForm(orderTable.Rows[orderListView.SelectedItems[0].Index]);
+                orderEForm.ShowDialog();
+            }
         }
 
         /// <summary>
@@ -849,7 +852,11 @@ namespace TDS2
         /// </summary>
         private void OrderZ()
         {
-            MessageBox.Show("功能未完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            if (orderListView.SelectedItems.Count > 0)
+            {
+                OrderZForm orderZForm = new OrderZForm(orderTable.Rows[orderListView.SelectedItems[0].Index]);
+                orderZForm.ShowDialog();
+            }
         }
 
         /// <summary>
@@ -929,9 +936,20 @@ namespace TDS2
                         else OpenOrderDetails();
                         break;
                     }
+                    
                 case Keys.F3:
                     {
                         OrderDeliver();// 分带
+                        break;
+                    }
+                case Keys.F4:
+                    {
+                        OrderZ();// 打版
+                        break;
+                    }
+                case Keys.F6:
+                    {
+                        OrderE();// 车版
                         break;
                     }
                 case Keys.C://复制
@@ -1100,7 +1118,7 @@ namespace TDS2
                 if (orderTable == null || orderTable.Rows.Count == 0)// 如果没有结果
                 {
                     homeProgressBar.Value = 100;
-                    homeStatusLabel.Text = "没有符合查找条件的结果";
+                    homeStatusLabel.Text = "没有符合条件的结果";
                 }
                 else
                 {

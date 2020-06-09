@@ -284,9 +284,9 @@ namespace TDS2
             otherListView.Columns.Add("::");
             otherListView.Columns[0].Width = 100;
 
-            ListViewItem OrderDescription = new ListViewItem();// 订单说明
-            OrderDescription.Text = "订单说明";
-            OrderDescription.SubItems.Add(orderRow["订单说明"].ToString());
+            ListViewItem OrderDescription = new ListViewItem();// 打带说明
+            OrderDescription.Text = "打带说明";
+            OrderDescription.SubItems.Add(orderRow["打带说明"].ToString());
             otherListView.Items.Add(OrderDescription);
             
             ListViewItem zDescription = new ListViewItem();// 打版师
@@ -299,10 +299,15 @@ namespace TDS2
             eDescription.SubItems.Add(orderRow["车版师注意事项"].ToString());
             otherListView.Items.Add(eDescription);
 
-            otherListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.ColumnContent);
+            ListViewItem otherSuggest = new ListViewItem();// 车版师
+            otherSuggest.Text = "建议及其他";
+            otherSuggest.SubItems.Add(orderRow["建议及其他"].ToString());
+            otherListView.Items.Add(otherSuggest);
+
+            otherListView.Columns[1].Width = Width - 390;
 
             ///
-            
+
             filesListView.Columns.Add("::");
             filesListView.Columns[0].Width = 600;
             for (int i = 0; i < files.Count; i++)
@@ -443,6 +448,11 @@ namespace TDS2
             if (e.KeyCode == Keys.Enter) Close();
             if (e.KeyCode == Keys.Escape) Close();
             if (e.KeyCode == Keys.Space) Close();
+        }
+
+        private void OrderDetails_Resize(object sender, EventArgs e)
+        {
+            otherListView.Columns[1].Width = Width - 390;
         }
 
         ///

@@ -47,7 +47,7 @@
             this.orderPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.orderPictureBox.Location = new System.Drawing.Point(15, 14);
             this.orderPictureBox.Name = "orderPictureBox";
-            this.orderPictureBox.Size = new System.Drawing.Size(739, 360);
+            this.orderPictureBox.Size = new System.Drawing.Size(739, 368);
             this.orderPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.orderPictureBox.TabIndex = 0;
             this.orderPictureBox.TabStop = false;
@@ -63,7 +63,7 @@
             this.picturePanel.Controls.Add(this.orderPictureBox);
             this.picturePanel.Location = new System.Drawing.Point(8, 8);
             this.picturePanel.Name = "picturePanel";
-            this.picturePanel.Size = new System.Drawing.Size(770, 540);
+            this.picturePanel.Size = new System.Drawing.Size(770, 548);
             this.picturePanel.TabIndex = 0;
             // 
             // filesListView
@@ -72,7 +72,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.filesListView.FullRowSelect = true;
             this.filesListView.GridLines = true;
-            this.filesListView.Location = new System.Drawing.Point(-1, 389);
+            this.filesListView.Location = new System.Drawing.Point(-1, 397);
             this.filesListView.MultiSelect = false;
             this.filesListView.Name = "filesListView";
             this.filesListView.Size = new System.Drawing.Size(770, 150);
@@ -92,10 +92,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.otherListView.FullRowSelect = true;
             this.otherListView.GridLines = true;
-            this.otherListView.Location = new System.Drawing.Point(8, 554);
+            this.otherListView.Location = new System.Drawing.Point(8, 562);
             this.otherListView.MultiSelect = false;
             this.otherListView.Name = "otherListView";
-            this.otherListView.Size = new System.Drawing.Size(770, 128);
+            this.otherListView.Size = new System.Drawing.Size(770, 120);
             this.otherListView.TabIndex = 1;
             this.otherListView.TabStop = false;
             this.otherListView.UseCompatibleStateImageBehavior = false;
@@ -133,6 +133,7 @@
             this.Text = "订单详细";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OrderDetails_KeyDown);
+            this.Resize += new System.EventHandler(this.OrderDetails_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.orderPictureBox)).EndInit();
             this.picturePanel.ResumeLayout(false);
             this.ResumeLayout(false);

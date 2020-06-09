@@ -10,12 +10,11 @@ using System.Windows.Forms;
 
 namespace TDS2
 {
-    public partial class OrderDeliverForm : Form
+    public partial class OrderZForm : Form
     {
-        public OrderDeliverForm(DataRow orderRow)
+        public OrderZForm(DataRow orderRow)
         {
             InitializeComponent();
-
 
             ///
 
@@ -44,7 +43,9 @@ namespace TDS2
 
             ///
 
-            Text = "分发订单 - " + orderRow["订单号"];
+            Text = "订单 - " + orderRow["订单号"] + " - 的打版信息";
+
+            ///
 
             ///
 
@@ -169,7 +170,7 @@ namespace TDS2
             messageListView.Columns.Add("::");
             messageListView.Columns[0].Width = 100;
             messageListView.Columns.Add("::");
-            messageListView.Columns[1].Width = 137;
+            messageListView.Columns[1].Width = 150;
 
             ListViewItem OrderQuoteName = new ListViewItem();// 估针编号
             OrderQuoteName.Text = "估针编号";
@@ -235,68 +236,17 @@ namespace TDS2
 
             ///
 
-            switch (orderRow["打版难度"].ToString())
-            {
-                case "A":
-                    {
-                        difficultyRadioButtonA.Checked = true;
-                        break;
-                    }
-                case "B":
-                    {
-                        difficultyRadioButtonB.Checked = true;
-                        break;
-                    }
-                case "C":
-                    {
-                        difficultyRadioButtonC.Checked = true;
-                        break;
-                    }
-                default:
-                    {
-                        break;
-                    }
-            }
-
-            ///
-
-            quoteCountComboBox1.Text = orderRow["估针针数始"].ToString();
-            quoteCountComboBox2.Text = orderRow["估针针数终"].ToString();
-
-            ///
-
-            GetZList();
-
         }
 
         /// <summary>
-        /// 获取好友列表
+        /// 窗口快捷键
         /// </summary>
-        private void GetZList()
+        private void OrderZForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (zListView != null) zListView.Items.Clear();
-            if (zImageList != null) zImageList.Images.Clear();
-
-            DataTable dataTable = SqlFunction.Select("SELECT username FROM UserTable WHERE dept='Z' ORDER BY CAST(REPLACE(UPPER(username), 'Z','100') AS INT)");// 再加载个人好友// 查询时直接排序
-            if (dataTable != null) for (int i = 0; i < dataTable.Rows.Count; i++)
-                {
-                    string name = dataTable.Rows[i][0].ToString().ToUpper();
-                    ListViewItem listViewItem = new ListViewItem();// 定义单个项目
-                    listViewItem.ImageIndex = i;
-                    listViewItem.Text = name;
-                    zListView.Items.Add(listViewItem);
-                    ///
-                    Bitmap bmp = new Bitmap(@"Image\Message\UserOn.png");
-                    zImageList.Images.Add(ImageZoom.Zoom(bmp, 32, 32));
-                    bmp.Dispose();
-                }
-
-            zListView.LargeImageList = zImageList;
+            if (e.KeyCode == Keys.F4) Close();
+            if (e.KeyCode == Keys.Escape) Close();
         }
 
-        /// <summary>
-        /// 选择项目时
-        /// </summary>
         private void filesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (filesListView.SelectedItems.Count > 0)
@@ -327,58 +277,9 @@ namespace TDS2
             }
         }
 
-        private void OrderDeliverForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F3) Close();
-            if (e.KeyCode == Keys.Escape) Close();
-        }
-
-        private void OrderDeliverForm_Resize(object sender, EventArgs e)
+        private void OrderZForm_Resize(object sender, EventArgs e)
         {
             otherListView.Columns[1].Width = Width - 157;
-        }
-
-        /// <summary>
-        /// 分发按钮
-        /// </summary>
-        private void deliverButton_Click(object sender, EventArgs e)
-        {
-            if (difficultyRadioButtonA.Checked == false && difficultyRadioButtonB.Checked == false && difficultyRadioButtonC.Checked == false)
-            {
-                MessageBox.Show("请选择打版难度", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                return;
-            }
-
-            if (quoteCountComboBox1.Text == "" || quoteCountComboBox2.Text == "")
-            {
-                MessageBox.Show("请填写估针数", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                return;
-            }
-
-            if (zListView.SelectedItems.Count != 1)
-            {
-                MessageBox.Show("请选择打版师", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                return;
-            }
-
-
-        }
-
-        /// <summary>
-        /// 取消分发按钮
-        /// </summary>
-        private void cancelButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// 分发统计按钮
-        /// </summary>
-        private void statisticsButton_Click(object sender, EventArgs e)
-        {
-            OrderZStatisticsForm orderZStatisticsForm = new OrderZStatisticsForm();
-            orderZStatisticsForm.Show();
         }
     }
 }
