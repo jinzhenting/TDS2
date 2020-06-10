@@ -270,7 +270,7 @@ namespace TDS2
         }
 
         /// <summary>
-        /// 获取好友列表
+        /// 获取打版师列表
         /// </summary>
         private void GetZList()
         {

@@ -41,13 +41,16 @@
             this.orderTimeLabel1 = new System.Windows.Forms.Label();
             this.refreshButton = new System.Windows.Forms.Button();
             this.statisticsBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.doubleBufferListView2 = new DoubleBufferListView();
+            this.typeListView = new DoubleBufferListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.zListView = new DoubleBufferListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.zColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.countColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.stitchColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.endColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.histroyEfficiencyColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.todayEfficiencyColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.faultColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,7 +86,7 @@
             // 
             this.statisticsLabel.Name = "statisticsLabel";
             this.statisticsLabel.Size = new System.Drawing.Size(80, 17);
-            this.statisticsLabel.Text = "等待用记操作";
+            this.statisticsLabel.Text = "等待用户操作";
             // 
             // closeButton
             // 
@@ -98,23 +101,26 @@
             // 
             // orderStartDateTimePicker
             // 
-            this.orderStartDateTimePicker.Location = new System.Drawing.Point(71, 609);
+            this.orderStartDateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.orderStartDateTimePicker.Location = new System.Drawing.Point(65, 609);
             this.orderStartDateTimePicker.Name = "orderStartDateTimePicker";
             this.orderStartDateTimePicker.Size = new System.Drawing.Size(135, 23);
             this.orderStartDateTimePicker.TabIndex = 15;
             // 
             // orderEndDateTimePicker
             // 
+            this.orderEndDateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.orderEndDateTimePicker.Checked = false;
-            this.orderEndDateTimePicker.Location = new System.Drawing.Point(234, 609);
+            this.orderEndDateTimePicker.Location = new System.Drawing.Point(228, 609);
             this.orderEndDateTimePicker.Name = "orderEndDateTimePicker";
             this.orderEndDateTimePicker.Size = new System.Drawing.Size(135, 23);
             this.orderEndDateTimePicker.TabIndex = 16;
             // 
             // orderTimeLabel2
             // 
+            this.orderTimeLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.orderTimeLabel2.AutoSize = true;
-            this.orderTimeLabel2.Location = new System.Drawing.Point(210, 612);
+            this.orderTimeLabel2.Location = new System.Drawing.Point(204, 612);
             this.orderTimeLabel2.Name = "orderTimeLabel2";
             this.orderTimeLabel2.Size = new System.Drawing.Size(20, 17);
             this.orderTimeLabel2.TabIndex = 18;
@@ -122,8 +128,9 @@
             // 
             // orderTimeLabel1
             // 
+            this.orderTimeLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.orderTimeLabel1.AutoSize = true;
-            this.orderTimeLabel1.Location = new System.Drawing.Point(12, 612);
+            this.orderTimeLabel1.Location = new System.Drawing.Point(6, 612);
             this.orderTimeLabel1.Name = "orderTimeLabel1";
             this.orderTimeLabel1.Size = new System.Drawing.Size(56, 17);
             this.orderTimeLabel1.TabIndex = 17;
@@ -131,7 +138,7 @@
             // 
             // refreshButton
             // 
-            this.refreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.refreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.refreshButton.Location = new System.Drawing.Point(795, 609);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(100, 23);
@@ -148,23 +155,23 @@
             this.statisticsBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.statisticsBackgroundWorker_ProgressChanged);
             this.statisticsBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.statisticsBackgroundWorker_RunWorkerCompleted);
             // 
-            // doubleBufferListView2
+            // typeListView
             // 
-            this.doubleBufferListView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.typeListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.doubleBufferListView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.typeListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2});
-            this.doubleBufferListView2.FullRowSelect = true;
-            this.doubleBufferListView2.GridLines = true;
-            this.doubleBufferListView2.Location = new System.Drawing.Point(401, 7);
-            this.doubleBufferListView2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.doubleBufferListView2.MultiSelect = false;
-            this.doubleBufferListView2.Name = "doubleBufferListView2";
-            this.doubleBufferListView2.Size = new System.Drawing.Size(575, 595);
-            this.doubleBufferListView2.TabIndex = 7;
-            this.doubleBufferListView2.TabStop = false;
-            this.doubleBufferListView2.UseCompatibleStateImageBehavior = false;
+            this.typeListView.FullRowSelect = true;
+            this.typeListView.GridLines = true;
+            this.typeListView.Location = new System.Drawing.Point(529, 7);
+            this.typeListView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.typeListView.MultiSelect = false;
+            this.typeListView.Name = "typeListView";
+            this.typeListView.Size = new System.Drawing.Size(447, 595);
+            this.typeListView.TabIndex = 7;
+            this.typeListView.TabStop = false;
+            this.typeListView.UseCompatibleStateImageBehavior = false;
             // 
             // columnHeader2
             // 
@@ -176,39 +183,58 @@
             this.zListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.zListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
+            this.zColumnHeader,
+            this.countColumnHeader,
+            this.stitchColumnHeader,
+            this.endColumnHeader,
+            this.histroyEfficiencyColumnHeader,
+            this.todayEfficiencyColumnHeader,
+            this.faultColumnHeader});
             this.zListView.FullRowSelect = true;
             this.zListView.GridLines = true;
             this.zListView.Location = new System.Drawing.Point(9, 7);
             this.zListView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.zListView.MultiSelect = false;
             this.zListView.Name = "zListView";
-            this.zListView.Size = new System.Drawing.Size(386, 595);
+            this.zListView.Size = new System.Drawing.Size(514, 595);
             this.zListView.TabIndex = 6;
             this.zListView.UseCompatibleStateImageBehavior = false;
             this.zListView.View = System.Windows.Forms.View.Details;
             // 
-            // columnHeader1
+            // zColumnHeader
             // 
-            this.columnHeader1.Text = "打版师";
+            this.zColumnHeader.Text = "打版师";
+            this.zColumnHeader.Width = 50;
             // 
-            // columnHeader3
+            // countColumnHeader
             // 
-            this.columnHeader3.Text = "已分带子数";
-            this.columnHeader3.Width = 82;
+            this.countColumnHeader.Text = "已分带子数";
+            this.countColumnHeader.Width = 75;
             // 
-            // columnHeader4
+            // stitchColumnHeader
             // 
-            this.columnHeader4.Text = "已分针数";
-            this.columnHeader4.Width = 75;
+            this.stitchColumnHeader.Text = "已分针数";
+            this.stitchColumnHeader.Width = 65;
             // 
-            // columnHeader5
+            // endColumnHeader
             // 
-            this.columnHeader5.Text = "预计打版时间（分钟）";
-            this.columnHeader5.Width = 139;
+            this.endColumnHeader.Text = "预计完成时间";
+            this.endColumnHeader.Width = 90;
+            // 
+            // histroyEfficiencyColumnHeader
+            // 
+            this.histroyEfficiencyColumnHeader.Text = "历史效率";
+            this.histroyEfficiencyColumnHeader.Width = 65;
+            // 
+            // todayEfficiencyColumnHeader
+            // 
+            this.todayEfficiencyColumnHeader.Text = "当天效率";
+            this.todayEfficiencyColumnHeader.Width = 65;
+            // 
+            // faultColumnHeader
+            // 
+            this.faultColumnHeader.Text = "历史出错率";
+            this.faultColumnHeader.Width = 75;
             // 
             // OrderZStatisticsForm
             // 
@@ -222,7 +248,7 @@
             this.Controls.Add(this.orderTimeLabel1);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.doubleBufferListView2);
+            this.Controls.Add(this.typeListView);
             this.Controls.Add(this.zListView);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.KeyPreview = true;
@@ -241,14 +267,14 @@
         #endregion
 
         private DoubleBufferListView zListView;
-        private DoubleBufferListView doubleBufferListView2;
+        private DoubleBufferListView typeListView;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ImageList zImageList;
         private System.Windows.Forms.ImageList filesIconImageList;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader zColumnHeader;
+        private System.Windows.Forms.ColumnHeader countColumnHeader;
+        private System.Windows.Forms.ColumnHeader stitchColumnHeader;
+        private System.Windows.Forms.ColumnHeader endColumnHeader;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripProgressBar statisticsProgressBar;
         private System.Windows.Forms.ToolStripStatusLabel statisticsLabel;
@@ -259,5 +285,8 @@
         private System.Windows.Forms.Label orderTimeLabel1;
         private System.Windows.Forms.Button refreshButton;
         private System.ComponentModel.BackgroundWorker statisticsBackgroundWorker;
+        private System.Windows.Forms.ColumnHeader histroyEfficiencyColumnHeader;
+        private System.Windows.Forms.ColumnHeader todayEfficiencyColumnHeader;
+        private System.Windows.Forms.ColumnHeader faultColumnHeader;
     }
 }

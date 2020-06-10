@@ -15,7 +15,7 @@ namespace TDS2
         public OrderZStatisticsForm()
         {
             InitializeComponent();
-
+            orderStartDateTimePicker.Value = DateTime.Now.AddDays(-1);
             ///
 
             try// 图标
@@ -68,38 +68,75 @@ namespace TDS2
         private void Get()
         {
             if (statisticsBackgroundWorker.IsBusy) return;// 后台是否进行中
-            if (zListView.Items.Count >0) zListView.Items.Clear();// 清空
-            string sql = SqlFunction.StatisticsSelect(orderStartDateTimePicker.Value.ToString(), orderEndDateTimePicker.Value.ToString(), "新数据");
+            if (zListView.Items.Count > 0) zListView.Items.Clear();// 清空
+            if (typeListView.Items.Count > 0) zListView.Items.Clear();// 清空
+            
+            string sql = SqlFunction.StatisticsSelect(orderStartDateTimePicker.Value.ToString(), orderEndDateTimePicker.Value.ToString());
             statisticsBackgroundWorker.RunWorkerAsync(sql);
         }
 
         #endregion 数据查询
 
-        DataTable orderTable;
+        /// <summary>
+        /// 
+        /// </summary>
         private void statisticsBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             statisticsBackgroundWorker.ReportProgress(1, "查找中...");// 进度传出
-            orderTable = SqlFunction.Select(e.Argument as string);
-            if (orderTable == null || orderTable.Rows.Count == 0) return;
-            statisticsBackgroundWorker.ReportProgress(Percents.Get(1, orderTable.Rows.Count), "数据处理中...");// 进度传出
+            DataTable sqlTable = SqlFunction.Select(e.Argument as string);
+            if (sqlTable == null || sqlTable.Rows.Count == 0) return;// 无结果
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("打版师");
+            dataTable.Columns.Add("已分带子数");
+            dataTable.Columns.Add("已分针数");
+            dataTable.Columns.Add("预计完成时间");
+            dataTable.Columns.Add("历史效率");
+            dataTable.Columns.Add("当天效率");
+            dataTable.Columns.Add("历史出错率");
+
+            ///
+
+            for (int i = 0; i < sqlTable.Rows.Count; i++)
+            {
+                statisticsBackgroundWorker.ReportProgress(Percents.Get(i, sqlTable.Rows.Count), "数据处理中...");// 进度传出
+                ///
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    加载不出数据
 
 
+                    if (row["打版师"].ToString() == sqlTable.Rows[i]["打版师"].ToString())// 已有此打版师数据行
+                    {
+                        row["已分带子数"] = Convert.ToInt32(row["已分带子数"]) + 1;
+                        row["已分针数"] = Convert.ToInt32(row["已分针数"]) + (Convert.ToInt32(sqlTable.Rows[i]["估针数始"]) + Convert.ToInt32(sqlTable.Rows[i]["估针数终"]))/2;
+                    }
+                    else// 没有此打版师数据行
+                    {
+                        DataRow rows = dataTable.NewRow();
+                        rows["打版师"] = sqlTable.Rows[i]["打版师"];
+                        rows["已分带子数"] = 1;
+                        rows["已分针数"] = (Convert.ToInt32(sqlTable.Rows[i]["估针数始"]) + Convert.ToInt32(sqlTable.Rows[i]["估针数终"])) / 2;
+                    }
+                }
+            }
 
+            ///
 
-
-            储存过程
-
-
-
-
+            e.Result = dataTable;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void statisticsBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             statisticsProgressBar.Value = (e.ProgressPercentage < 101) ? e.ProgressPercentage : statisticsProgressBar.Value;
             statisticsLabel.Text = statisticsProgressBar.Value.ToString() + "% " + e.UserState as string;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void statisticsBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Error != null)// 异步出错
@@ -121,6 +158,7 @@ namespace TDS2
 
             else// 异步完成
             {
+                DataTable orderTable = e.Result as DataTable;
                 if (orderTable == null || orderTable.Rows.Count == 0)// 如果没有结果
                 {
                     statisticsProgressBar.Value = 100;
@@ -133,19 +171,13 @@ namespace TDS2
                     {
                         ListViewItem listViewItem = new ListViewItem();// 定义单个项目
                         listViewItem.ImageIndex = i;
-                        listViewItem.Text = orderTable.Rows[i]["订单号"].ToString();
-                        listViewItem.SubItems.Add(orderTable.Rows[i]["订单类型"].ToString());
-                        listViewItem.SubItems.Add(orderTable.Rows[i]["紧急类别"].ToString());
-                        listViewItem.SubItems.Add(orderTable.Rows[i]["最迟返回时间"].ToString());
-                        listViewItem.SubItems.Add(orderTable.Rows[i]["接带人"].ToString());
-                        listViewItem.SubItems.Add(orderTable.Rows[i]["接带时间"].ToString());
-                        listViewItem.SubItems.Add(orderTable.Rows[i]["分带人"].ToString());
-                        listViewItem.SubItems.Add(orderTable.Rows[i]["打版师"].ToString());
-                        listViewItem.SubItems.Add(orderTable.Rows[i]["车版师"].ToString());
-                        listViewItem.SubItems.Add(orderTable.Rows[i]["质检员"].ToString());
-                        listViewItem.SubItems.Add(orderTable.Rows[i]["扫描人"].ToString());
-                        listViewItem.SubItems.Add(orderTable.Rows[i]["发带人"].ToString());
-                        listViewItem.SubItems.Add(orderTable.Rows[i]["发带时间"].ToString());
+                        listViewItem.Text = orderTable.Rows[i]["打版师"].ToString();
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["已分带子数"].ToString());
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["已分针数"].ToString());
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["预计完成时间"].ToString());
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["历史效率"].ToString());
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["当天效率"].ToString());
+                        listViewItem.SubItems.Add(orderTable.Rows[i]["历史出错率"].ToString());
                         zListView.Items.Add(listViewItem);
                     }
                     statisticsProgressBar.Value = 100;
