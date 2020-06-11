@@ -46,11 +46,13 @@
             this.zListView = new DoubleBufferListView();
             this.zColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.countColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.endCountColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.stitchColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.endColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.timeColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.histroyEfficiencyColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.todayEfficiencyColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.faultColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.endStitchColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -164,11 +166,11 @@
             this.columnHeader2});
             this.typeListView.FullRowSelect = true;
             this.typeListView.GridLines = true;
-            this.typeListView.Location = new System.Drawing.Point(529, 7);
+            this.typeListView.Location = new System.Drawing.Point(9, 311);
             this.typeListView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.typeListView.MultiSelect = false;
             this.typeListView.Name = "typeListView";
-            this.typeListView.Size = new System.Drawing.Size(447, 595);
+            this.typeListView.Size = new System.Drawing.Size(967, 291);
             this.typeListView.TabIndex = 7;
             this.typeListView.TabStop = false;
             this.typeListView.UseCompatibleStateImageBehavior = false;
@@ -180,13 +182,15 @@
             // 
             // zListView
             // 
-            this.zListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.zListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.zListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.zColumnHeader,
             this.countColumnHeader,
+            this.endCountColumnHeader,
             this.stitchColumnHeader,
-            this.endColumnHeader,
+            this.endStitchColumnHeader,
+            this.timeColumnHeader,
             this.histroyEfficiencyColumnHeader,
             this.todayEfficiencyColumnHeader,
             this.faultColumnHeader});
@@ -196,7 +200,7 @@
             this.zListView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.zListView.MultiSelect = false;
             this.zListView.Name = "zListView";
-            this.zListView.Size = new System.Drawing.Size(514, 595);
+            this.zListView.Size = new System.Drawing.Size(967, 296);
             this.zListView.TabIndex = 6;
             this.zListView.UseCompatibleStateImageBehavior = false;
             this.zListView.View = System.Windows.Forms.View.Details;
@@ -211,15 +215,20 @@
             this.countColumnHeader.Text = "已分带子数";
             this.countColumnHeader.Width = 75;
             // 
+            // endCountColumnHeader
+            // 
+            this.endCountColumnHeader.Text = "完成带子数";
+            this.endCountColumnHeader.Width = 75;
+            // 
             // stitchColumnHeader
             // 
             this.stitchColumnHeader.Text = "已分针数";
             this.stitchColumnHeader.Width = 65;
             // 
-            // endColumnHeader
+            // timeColumnHeader
             // 
-            this.endColumnHeader.Text = "预计完成时间";
-            this.endColumnHeader.Width = 90;
+            this.timeColumnHeader.Text = "预计完成时间";
+            this.timeColumnHeader.Width = 90;
             // 
             // histroyEfficiencyColumnHeader
             // 
@@ -234,7 +243,12 @@
             // faultColumnHeader
             // 
             this.faultColumnHeader.Text = "历史出错率";
-            this.faultColumnHeader.Width = 75;
+            this.faultColumnHeader.Width = 80;
+            // 
+            // endStitchColumnHeader
+            // 
+            this.endStitchColumnHeader.Text = "完成针数";
+            this.endStitchColumnHeader.Width = 65;
             // 
             // OrderZStatisticsForm
             // 
@@ -254,7 +268,7 @@
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "OrderZStatisticsForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "分发统计";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OrderZStatisticsForm_KeyDown);
             this.statusStrip1.ResumeLayout(false);
@@ -274,7 +288,7 @@
         private System.Windows.Forms.ColumnHeader zColumnHeader;
         private System.Windows.Forms.ColumnHeader countColumnHeader;
         private System.Windows.Forms.ColumnHeader stitchColumnHeader;
-        private System.Windows.Forms.ColumnHeader endColumnHeader;
+        private System.Windows.Forms.ColumnHeader timeColumnHeader;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripProgressBar statisticsProgressBar;
         private System.Windows.Forms.ToolStripStatusLabel statisticsLabel;
@@ -288,5 +302,7 @@
         private System.Windows.Forms.ColumnHeader histroyEfficiencyColumnHeader;
         private System.Windows.Forms.ColumnHeader todayEfficiencyColumnHeader;
         private System.Windows.Forms.ColumnHeader faultColumnHeader;
+        private System.Windows.Forms.ColumnHeader endCountColumnHeader;
+        private System.Windows.Forms.ColumnHeader endStitchColumnHeader;
     }
 }

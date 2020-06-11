@@ -358,7 +358,8 @@ namespace TDS2
         /// <returns>Sql语句</returns>
         public static string StatisticsSelect(string timeStatr, string timeEnd)
         {
-            return "SELECT Z AS 打版师, sTape AS 带号, OrderQuoteCount1 AS 估针数始, OrderQuoteCount2 AS 估针数终 FROM TDS WHERE (Mode='O' OR Mode='E' OR Mode='F' OR Mode='Q' OR Mode='T') AND Manager IS NOT NULL AND Z IS NOT NULL AND OutQC IS NULL";
+            
+            return "SELECT Z AS 打版师, sTape AS 带号, OrderQuoteCount1 AS 估针数始, OrderQuoteCount2 AS 估针数终, OutQC AS 已完成 FROM TDS WHERE (Mode='O' OR Mode='E' OR Mode='F' OR Mode='Q' OR Mode='T') AND Manager IS NOT NULL AND Z IS NOT NULL AND Record_in_time>='" + timeStatr + "' AND Record_in_time<='" + timeEnd + "' ORDER BY CAST(REPLACE(UPPER(Z), 'Z','100') AS INT)";
         }
 
         /// <summary>
