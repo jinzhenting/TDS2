@@ -112,6 +112,13 @@ namespace TDS2
                     if (row["打版师"].ToString().ToUpper() == sqlTable.Rows[i]["打版师"].ToString().ToUpper())// 已有此打版师数据行
                     {
                         row["已分带子数"] = Convert.ToInt32(row["已分带子数"]) + 1;
+
+
+
+                        做到这里，完成带子娄和完成针数没做完
+
+
+
                         int statr = sqlTable.Rows[i]["估针数始"].ToString() == "" ? 0 : Convert.ToInt32(sqlTable.Rows[i]["估针数始"]);
                         int end = sqlTable.Rows[i]["估针数终"].ToString() == "" ? 0 : Convert.ToInt32(sqlTable.Rows[i]["估针数终"]);
                         row["已分针数"] = Convert.ToInt32(row["已分针数"]) + (statr + end) / 2;
@@ -126,7 +133,7 @@ namespace TDS2
                     rows["打版师"] = sqlTable.Rows[i]["打版师"].ToString().ToUpper();
                     rows["已分带子数"] = 1;
 
-                    做到这里
+                    做到这里，完成带子娄和完成针数没做完
 
 
 
